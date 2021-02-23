@@ -1,0 +1,192 @@
+:root
+{
+    --nav-width: 200px;
+    --nav-height: 25px;
+    --nav-padding: 10px;
+    --nav-headerColor: #b5d9f8;
+    --nav-currentPageColor: #3483cf;
+    --nav-buttonColor: #6bb1f3;
+    --nav-buttonHoverColor: #5f9cd3;
+
+    --nav-storeCategoryTitle: #6bb1f3;
+}
+
+body
+{
+    margin: 0;
+}
+
+footer
+{
+    position: absolute;
+    bottom: 0;
+}
+
+.subContainer
+{
+    margin: 5px;
+}
+
+/************************************
+ *        Menu de navigation
+ ************************************/
+
+nav
+{
+    display: flex;
+    justify-content: center;
+    background-color: var(--nav-headerColor);
+}
+
+nav > nav
+{
+    width: var(--nav-width);
+    height: var(--nav-height);
+    margin: auto 10px;
+    align-items: center;
+    position: relative;
+    background-color: var(--nav-buttonColor);
+    padding: var(--nav-padding);
+    cursor: pointer;
+}
+
+nav > p
+{
+    position: absolute;
+    width: 100%;
+    height: calc(var(--nav-height) + var(--nav-padding) * 2);
+    margin: 0;
+}
+
+nav > img
+{
+    position: absolute;
+    left: 5%;
+    height: 90%;
+}
+
+nav ul
+{
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    margin-top: calc(var(--nav-height) + var(--nav-padding) * 2);
+    top: 0;
+    padding: 0;
+    display: none;
+    font-size: 125%;
+    background-color: #cbd0d1;
+}
+
+nav > nav:hover > ul
+{
+    display: block;
+    cursor: pointer;
+}
+
+nav > nav:hover, nav ul > li:hover
+{
+    background-color: var(--nav-buttonHoverColor);
+}
+
+nav.mark::before
+{
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 4px solid var(--nav-currentPageColor);
+}
+
+nav input[type=checkbox]
+{
+    width: 20px;
+    height: 20px;
+}
+
+/************************************
+ *             Magasin
+ ************************************/
+
+.storeContainer
+{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.storeContainer > div.category
+{
+    background-color: var(--nav-storeCategoryTitle);
+}
+
+.storeContainer > div
+{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+}
+
+.storeContainer > div:nth-child(4n)
+{
+    border-right: 0;
+}
+
+.storeContainer div > button
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.storeContainer input[type="text"]
+{
+    max-width: 40px;
+    text-align: right;
+}
+
+.filter
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+    border: 1px solid black;
+    padding: 5px;
+    user-select: none;
+}
+
+.filter > img
+{
+    height: 25px;
+    transform: rotate(0);
+}
+
+.filter.opened > img:nth-of-type(2)
+{
+    transform: rotate(180deg);
+}
+
+.filter:hover
+{
+    background-color: rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.filterSelect
+{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: 50%;
+}
+
+.filterSelect > div
+{
+    padding: 10px 5px;
+}
+
+.filterSelect.hidden
+{
+    display: none;
+}
