@@ -37,8 +37,8 @@ else
                 <p onclick="redirect('profile.php')"></p>
                 Profil
                 <ul>
-                    <li id="shoppingcart" onclick="redirect('shoppingcart.php')">
-                        Panier d'achat
+                    <li id="modify" onclick="redirect('modify.php')">
+                        Modifier
                     </li>
                     <li id="inventory" onclick="redirect('inventory.php')">
                         Inventaire
@@ -47,6 +47,10 @@ else
                         Déconnexion
                     </li>
                 </ul>
+            </nav>
+            <nav id="shoppingcart" class="IconOnly">
+                <img src="./Icons/ShoppingCartIcon.png"/>
+                <p onclick="redirect('shoppingcart.php')"></p>
             </nav>
 HTML;
 }

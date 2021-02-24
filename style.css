@@ -4,8 +4,8 @@
     --nav-height: 25px;
     --nav-padding: 10px;
     --nav-headerColor: #b5d9f8;
-    --nav-currentPageColor: #3483cf;
-    --nav-buttonColor: #6bb1f3;
+    --nav-currentPageColor: #438edd;
+    --nav-buttonColor: #6fb4f5;
     --nav-buttonHoverColor: #5f9cd3;
 
     --nav-storeCategoryTitle: #6bb1f3;
@@ -50,6 +50,12 @@ nav > nav
     cursor: pointer;
 }
 
+nav > nav.IconOnly
+{
+    width: auto;
+    background-color: transparent;
+}
+
 nav > p
 {
     position: absolute;
@@ -63,6 +69,13 @@ nav > img
     position: absolute;
     left: 5%;
     height: 90%;
+}
+
+nav.IconOnly > img
+{
+    position: relative;
+    left: 0;
+    height: 100%;
 }
 
 nav ul
@@ -152,9 +165,20 @@ nav input[type=checkbox]
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
-    border: 1px solid black;
+    border-left: 0;
+    border-top: 0;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #4f4f4f;
     padding: 5px;
     user-select: none;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.filter.opened
+{
+    background-color: rgba(0,0,0,0.15);
 }
 
 .filter > img
@@ -170,7 +194,7 @@ nav input[type=checkbox]
 
 .filter:hover
 {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.25);
     cursor: pointer;
 }
 
@@ -189,4 +213,46 @@ nav input[type=checkbox]
 .filterSelect.hidden
 {
     display: none;
+}
+
+/************************************
+ *             Profil
+ ************************************/
+
+.profilePage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage
+{
+    width: 600px;
+    margin: 40px auto;
+    border: 1px solid black;
+    text-align: center;
+    border-top: 10px solid black;
+}
+
+.personalInfosContainer
+{
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.personalInfosContainer > p
+{
+    padding: 10px;
+    margin: 0;
+}
+
+fieldset
+{
+    width: 80%;
+    border: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    margin: 0;
+    padding: 20px;
+}
+
+fieldset > input[type=submit]
+{
+    grid-column-start: 2;
 }
