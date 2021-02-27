@@ -22,9 +22,19 @@
     --store-itemDetailsContainerHeaderBackgroundColor: var(--nav-borderTopCurrentPageColor);
     --store-itemDetailsImageContainerBackgroundColor: whitesmoke;
     --store-addToShoppingCartButtonColor: #9df39d;
-    --store-modifyShoppingCartButtonColor: #ffbda3;
-    --store-modifyShoppingCartClickedButtonColor: var(--store-addToShoppingCartButtonColor);
+    --store-modifyItemQuantityButtonColor: #ffbda3;
+    --store-modifyItemQuantityClickedButtonColor: var(--store-addToShoppingCartButtonColor);
+    --store-deleteFromShoppingCartButtonColor: #ff6d6d;
     /*#endregion Magasin*/
+
+    /*#region Popup*/
+    --popup-itemDetailsContainerWidth: 500px;
+    --popup-itemDetailsContainerHeight: 600px;
+    --popup-itemDetailsImageContainerHeight: 300px;
+    --popup-itemDetailsHeaderHeight: 30px;
+    --popup-itemDetailsBodyHeight: 224px;
+    --popup-itemDetailsFooterHeight: 30px;
+    /*#endregion Popup*/
 }
 
 body
@@ -279,21 +289,27 @@ div.shoppingCartColumn
     justify-content: center;
 }
 
-button.addToShoppingCart, button.modifyShoppingCart
+button.addToShoppingCart, button.modifyItemQuantity, button.deleteFromShoppingCart
 {
     width: 75px;
     margin-left: 10px;
     outline: none;
 }
 
-button.modifyShoppingCart
+button.modifyItemQuantity
 {
-    background-color: var(--store-modifyShoppingCartButtonColor);
-    border-color: var(--store-modifyShoppingCartButtonColor);
+    background-color: var(--store-modifyItemQuantityButtonColor);
+    border-color: var(--store-modifyItemQuantityButtonColor);
+}
+
+button.deleteFromShoppingCart
+{
+    background-color: var(--store-deleteFromShoppingCartButtonColor);
+    border-color: var(--store-deleteFromShoppingCartButtonColor);
 }
 
 
-button.addToShoppingCart, button.modifyShoppingCart.clicked
+button.addToShoppingCart, button.modifyItemQuantity.clicked
 {
     background-color: var(--store-addToShoppingCartButtonColor);
     border-color: var(--store-addToShoppingCartButtonColor);
@@ -370,19 +386,34 @@ input[type=number]::-webkit-outer-spin-button {
 .itemDetailsContainer
 {
     display: none;
+    position: relative;
 }
 
-.itemDetailsContainer .itemDetailsHeader
+.itemDetailsContainer.active
+{
+    display: block;
+    width: var(--popup-itemDetailsContainerWidth);
+    height: var(--popup-itemDetailsContainerHeight);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--store-itemDetailsContainerHeaderBackgroundColor);
+    background-color: var(--store-itemDetailsContainerBackgroundColor);
+    z-index: 10;
+}
+
+.itemDetailsHeader
 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid black;
     background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
     font-weight: bold;
     padding: 1px;
     padding-left: 5px;
 }
+
 
 .itemDetailsContainerExitButton
 {
@@ -404,9 +435,9 @@ input[type=number]::-webkit-outer-spin-button {
 .itemDetailsImageContainer
 {
     text-align: center;
-    height: 300px;
+    height: var(--popup-itemDetailsImageContainerHeight);
     background-color: var(--store-itemDetailsImageContainerBackgroundColor);
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--nav-borderTopCurrentPageColor);
 }
 
 .itemDetailsImageContainer > img
@@ -414,19 +445,45 @@ input[type=number]::-webkit-outer-spin-button {
     height: 100%;
 }
 
-.itemDetailsContainer.active
+.itemDetailsBodyContainer
 {
+    display: grid;
+    grid-template-columns: auto auto;
+    max-height: var(--popup-itemDetailsBodyHeight);
+    overflow-y: scroll;
+}
 
-    display: block;
-    width: 500px;
-    height: 600px;
-    position: fixed;
-    top: 50%;
+.itemDetailsBodyContainer > span
+{
+    border-bottom: 1px solid var(--nav-borderTopCurrentPageColor);
+    padding: 5px;
+}
+
+.itemDetailsBodyContainer > span:nth-of-type(2n + 1)
+{
+    border-right: 1px solid var(--nav-borderTopCurrentPageColor);
+    font-weight: bold;
+}
+
+.itemDetailsFooter
+{
+    position: absolute;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid black;
-    background-color: var(--store-itemDetailsContainerBackgroundColor);
-    z-index: 10;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
+}
+
+.itemDetailsStarbar
+{
+    background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
+}
+
+.itemDetailsStarbar img
+{
+    height: 20px;
 }
 
 #overlay

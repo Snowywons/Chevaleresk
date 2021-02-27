@@ -19,13 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout nouvelles pages">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Modification du tableau d'items et ajout de scripts js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modify.php" beforeDir="false" afterPath="$PROJECT_DIR$/modify.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/popupUtilities.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/shoppingcart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shoppingcart.php" beforeDir="false" afterPath="$PROJECT_DIR$/shoppingcart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
@@ -59,7 +58,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -74,7 +73,8 @@
       <workItem from="1614036742694" duration="22399000" />
       <workItem from="1614131286948" duration="26579000" />
       <workItem from="1614268523741" duration="3968000" />
-      <workItem from="1614351005295" duration="25402000" />
+      <workItem from="1614351005295" duration="31744000" />
+      <workItem from="1614443556457" duration="8050000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -97,7 +97,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614195780378</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Modification du tableau d'items et ajout de scripts js">
+      <created>1614386096658</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614386096658</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Modification du tableau d'items et ajout de scripts js">
+      <created>1614386133694</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614386133694</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,13 +133,14 @@
     <MESSAGE value="First Commit" />
     <MESSAGE value="Second Commit" />
     <MESSAGE value="Ajout nouvelles pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout nouvelles pages" />
+    <MESSAGE value="Modification du tableau d'items et ajout de scripts js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification du tableau d'items et ajout de scripts js" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614086923773">
+    <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="410" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614086923773" />
+    <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444760288" />
     <state x="686" y="214" key="FileChooserDialogImpl" timestamp="1614087073825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -134,25 +149,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="796" y="391" key="Github.ShareDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614087262947" />
-    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1614379016925">
+    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1614444902927">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614379016925" />
-    <state x="336" y="77" key="SettingsEditor" timestamp="1614086629508">
+    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444902927" />
+    <state x="336" y="77" key="SettingsEditor" timestamp="1614444801399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614086629508" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1614195783851">
+    <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1614386156477">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614195783851" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614386156477" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1614087087007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614087087007" />
-    <state x="532" y="237" key="run.anything.popup" timestamp="1614355528547">
+    <state x="532" y="237" key="run.anything.popup" timestamp="1614445535819">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614355528547" />
+    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614445535819" />
   </component>
 </project>

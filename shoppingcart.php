@@ -1,10 +1,11 @@
 <?php
 include_once "header.php";
-include_once "dbUtilities.php";
+include_once "dbConnect.php";
 include_once "filterUtilities.php";
 include_once "popupUtilities.php";
 
-$conn = connectDB("167.114.152.54", "dbchevalersk13", "chevalier13", "x7ad6a84");
+global $conn;
+
 $records = [];
 $myId = 1; //Id du joueur (à  récupérer dans la superglobal session)
 
@@ -16,15 +17,12 @@ if ($conn) {
     } catch (PDOException $e) { }
 }
 
-//var_dump($records);
-
 /*Important de construire un array de la forme adéquate*/
-$content = [];
+$idItems = [];
 foreach($records as $data) {
-    $temp = [$data[1], $data[0]];
-    array_push($content, $temp);
+    array_push($idItems, $data[1]);
 }
-CreateItemDetailsContainers($content);
+CreateItemDetailsContainers($idItems);
 
 
 echo <<<HTML
@@ -61,7 +59,8 @@ foreach ($records as $data) {
                     <button id='".$idItem."_removeItem' class='removeItem hidden'>-</button>
                     <input id='".$idItem."_itemQuantity' class='itemQuantity' type='number' value='$quantiteItem' disabled/>
                     <button id='".$idItem."_addItem' class='addItem hidden'>+</button>
-                    <button id='".$idItem."_modifyShoppingCart' class='modifyShoppingCart'>Modifier</button>
+                    <button id='".$idItem."_modifyItemQuantity' class='modifyItemQuantity'>Modifier</button>
+                    <button id='".$idItem."_deleteFromShoppingCart' class='deleteFromShoppingCart'>Supprimer</button>
                 </div>
           </div>";
 }

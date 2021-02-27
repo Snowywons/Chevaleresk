@@ -1,9 +1,9 @@
 let removeItemButtons = document.querySelectorAll(".removeItem");
 let addItemButtons = document.querySelectorAll(".addItem");
 let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
-let modifyShoppingCartButtons = document.querySelectorAll(".modifyShoppingCart");
+let modifyItemQuantityButtons = document.querySelectorAll(".modifyItemQuantity");
 
-modifyShoppingCartButtons.forEach((item)=> {
+modifyItemQuantityButtons.forEach((item)=> {
     item.addEventListener("click", ()=> {
         if (item.classList.contains("clicked"))
         {

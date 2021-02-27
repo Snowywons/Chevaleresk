@@ -18,12 +18,11 @@ if ($conn) {
 //var_dump($records);
 
 /*Important de construire un array de la forme adéquate*/
-$content = [];
+$idItems = [];
 foreach($records as $data) {
-    $temp = [$data[0], $data[1]];
-    array_push($content, $temp);
+    array_push($idItems, $data[0]);
 }
-CreateItemDetailsContainers($content);
+CreateItemDetailsContainers($idItems);
 
 
 echo <<<HTML
