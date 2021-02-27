@@ -1,4 +1,6 @@
 <?php
+include_once "sessionCheck.php";
+
 echo <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +13,11 @@ echo <<<HTML
 <body>
 <header>
     <nav>
+        <nav class="chevaleresk">
+            <img src="./Icons/ChevalereskIcon.png">
+            <p onclick="redirect('index.php')"></p>
+            Chevaleresk
+        </nav>
         <nav id="index">
             <p onclick="redirect('index.php')"></p>
             Magasin
@@ -33,7 +40,7 @@ else
 {
     echo <<<HTML
             <nav id="profile">
-                <img src="./Icons/ProfileIcon.png"/>
+<!--                <img src="./Icons/ProfileIcon.png"/>-->
                 <p onclick="redirect('profile.php')"></p>
                 Profil
                 <ul>

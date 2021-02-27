@@ -1,64 +1,73 @@
 <?php
-include_once "sessionCheck.php";
 include_once "header.php";
+include_once "dbUtilities.php";
+include_once "filterUtilities.php";
+include_once "popupUtilities.php";
 
-//Exemple de données provenant d'une bd
-$items = ["potion, exemple de text, 1000, 0", "diamant, exemple de text, 800, 0"];
+$conn = connectDB("167.114.152.54", "dbchevalersk13", "chevalier13", "x7ad6a84");
+$records = [];
+
+if ($conn) {
+    $query = "SELECT * FROM Items;";
+
+    try {
+        $records = $conn->query($query)->fetchall();
+    } catch (PDOException $e) { }
+}
+
+//var_dump($records);
+
+/*Important de construire un array de la forme adéquate*/
+$content = [];
+foreach($records as $data) {
+    $temp = [$data[0], $data[1]];
+    array_push($content, $temp);
+}
+CreateItemDetailsContainers($content);
+
 
 echo <<<HTML
-<main>
-<div class="subContainer">
+<main class="indexPage">
     <h1>Magasin</h1>
     
-    <div class="filter">
-        <img src="./Icons/FilterIcon.png">
-        <span>Voir les filtres</span>
-        <img src="./Icons/DownArrowIcon.png">
-    </div>
-    <div class="filterSelect hidden">
-        <div>
-            <label for="name">Nom</label>
-            <br>
-            <input type="text" name="name" id="name">
-        </div>
-        <div>
-            <label for="price">Prix</label>
-            <br>
-            <input type="text" name="price" id="price">
-        </div>
-        <div>
-            <label for="material">Matériel</label>
-            <br>
-            <input type="text" name="material" id="material">
-        </div>
-        <div>
-            <label for="color">Couleur</label>
-            <br>
-            <input type="text" name="color" id="color">
-        </div>
-    </div>
-    
-    <hr>
-    
-    <div class="storeContainer">
-        <div class="category">Objet</div>
-        <div class="category">Caractéristiques</div>
-        <div class="category">Prix</div>
-        <div class="category">Quantité</div>
 HTML;
 
-foreach ($items as $str) {
-    $data = explode(",", $str);
-    for ($i = 0; $i < count($data); $i += 4) {
-        echo "<div><img src='$data[$i]' alt='Image introuvable'/></div>";
-        echo "<div>" . $data[$i + 1] . "</div>";
-        echo "<div>" . $data[$i + 2] . "</div>";
-        echo "<div><button>-</button><input type='text' value='".$data[$i + 3]."'/><button>+</button></div>";
-    }
+CreateFilterSection();
+
+echo <<<HTML
+    <br>
+    <div class="storeContainer">
+        <div class="category">Item</div>
+        <div class="category">Prix unitaire ($)</div>
+        <div class="category">Quantité disponible</div>
+        <div class="category">Quantité souhaitée</div>
+HTML;
+
+foreach ($records as $data) {
+    $idItem = $data[0];
+    $nomItem = $data[1];
+    $quantiteStock = $data[2];
+    $prixItem = $data[3];
+    $photoItem = $data[4];
+    $codeType = $data[5];
+
+    echo "<div id='".$idItem."_preview' class='itemPreviewContainer'>
+                <img src='./Icons/ChevalereskIcon.png'/>
+                <div>" . $nomItem . "</div>
+          </div>";
+    echo "<div>" . $prixItem . "</div>";
+    echo "<div>" . $quantiteStock . "</div>";
+    echo "<div class='rightLastColumn'>
+                <div class='shoppingCartColumn'>
+                    <button id='".$idItem."_removeItem' class='removeItem'>-</button>
+                    <input id='".$idItem."_itemQuantity' class='itemQuantity' type='number' value='0'/>
+                    <button id='".$idItem."_addItem' class='addItem'>+</button>
+                    <button id='".$idItem."_addToShoppingCart' class='addToShoppingCart'>Ajouter</button>
+                </div>
+          </div>";
 }
 
 echo <<<HTML
-        </div>
     </div>
 </main>
 HTML;
@@ -66,5 +75,7 @@ HTML;
 include_once "footer.php";
 echo <<<HTML
     <script type="text/javascript" src="filter.js" defer></script>
+    <script type="text/javascript" src="popup.js" defer></script>
+    <script type="text/javascript" src="shoppingcart.js" defer></script>
 HTML;
 ?>

@@ -1,14 +1,30 @@
 :root
 {
+    /*#region Toutes les pages*/
+
+    /*#endregion Toutes les pages*/
+
+    /*#region Menu de navigation*/
     --nav-width: 200px;
     --nav-height: 25px;
     --nav-padding: 10px;
-    --nav-headerColor: #b5d9f8;
-    --nav-currentPageColor: #438edd;
-    --nav-buttonColor: #6fb4f5;
+    --nav-borderTopCurrentPagePixel: 4px;
+    --nav-headerBackgroundColor: #b5d9f8;
+    --nav-borderTopCurrentPageColor: #438edd;
     --nav-buttonHoverColor: #5f9cd3;
+    /*#endregion Menu de navigation*/
 
-    --nav-storeCategoryTitle: #6bb1f3;
+    /*#region Magasin*/
+    --store-categoryTitle: #6bb1f3;
+    --store-itemPreviewContainerHoverColor: rgba(95, 156, 211, 0.3);
+    --store-itemDetailsContainerBackgroundColor : var(--nav-headerBackgroundColor);
+    --store-itemDetailsContainerExitButtonBackgroundColor: red;
+    --store-itemDetailsContainerHeaderBackgroundColor: var(--nav-borderTopCurrentPageColor);
+    --store-itemDetailsImageContainerBackgroundColor: whitesmoke;
+    --store-addToShoppingCartButtonColor: #9df39d;
+    --store-modifyShoppingCartButtonColor: #ffbda3;
+    --store-modifyShoppingCartClickedButtonColor: var(--store-addToShoppingCartButtonColor);
+    /*#endregion Magasin*/
 }
 
 body
@@ -22,20 +38,81 @@ footer
     bottom: 0;
 }
 
-.subContainer
+.indexPage, .profilePage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage
 {
-    margin: 5px;
+
+    width: 600px;
+    margin: 40px auto;
+    text-align: center;
 }
 
-/************************************
- *        Menu de navigation
- ************************************/
+.modifyPage, .registerPage
+{
+    width: 400px;
+}
+
+.indexPage, .inventoryPage, .shoppingcartPage
+{
+    width: 98%;
+}
+
+/*#region Menu de navigation*/
+header
+{
+    position: relative;
+}
+
+header::before, nav.mark::before
+{
+    z-index: 1;
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: calc(var(--nav-borderTopCurrentPagePixel) / 2) solid var(--nav-borderTopCurrentPageColor);
+}
+
+nav.mark::before
+{
+    border-bottom: var(--nav-borderTopCurrentPagePixel) solid var(--nav-borderTopCurrentPageColor);
+}
+
+nav:hover.mark::before
+{
+    border-color: transparent;
+}
 
 nav
 {
     display: flex;
     justify-content: center;
-    background-color: var(--nav-headerColor);
+    background-color: var(--nav-headerBackgroundColor);
+    user-select: none;
+}
+
+nav > nav.chevaleresk
+{
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    color: var(--nav-borderTopCurrentPageColor);
+    font-weight: bold;
+    font-size: 28px;
+    margin: 0;
+}
+
+nav.chevaleresk:hover
+{
+    background-color: transparent;
+}
+
+@media screen and (max-width:1100px)
+{
+    nav.chevaleresk
+    {
+        display: none;
+    }
 }
 
 nav > nav
@@ -45,7 +122,6 @@ nav > nav
     margin: auto 10px;
     align-items: center;
     position: relative;
-    background-color: var(--nav-buttonColor);
     padding: var(--nav-padding);
     cursor: pointer;
 }
@@ -67,7 +143,7 @@ nav > p
 nav > img
 {
     position: absolute;
-    left: 5%;
+    left: -5px;
     height: 90%;
 }
 
@@ -100,16 +176,7 @@ nav > nav:hover > ul
 nav > nav:hover, nav ul > li:hover
 {
     background-color: var(--nav-buttonHoverColor);
-}
-
-nav.mark::before
-{
-    content: " ";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 4px solid var(--nav-currentPageColor);
+    z-index: 1;
 }
 
 nav input[type=checkbox]
@@ -117,57 +184,134 @@ nav input[type=checkbox]
     width: 20px;
     height: 20px;
 }
+/*#endregion Menu de navigation*/
 
-/************************************
- *             Magasin
- ************************************/
-
-.storeContainer
+/*#region Magasin, Inventaire*/
+div.storeContainer
 {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto 250px 250px 400px;
+    align-content: center;
+    grid-column-gap: 5px;
 }
 
-.storeContainer > div.category
+/*Propre à l'inventaire*/
+main.inventoryPage div.storeContainer
 {
-    background-color: var(--nav-storeCategoryTitle);
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
-.storeContainer > div
+/*Propre à l'inventaire*/
+main.shoppingcartPage div.storeContainer
 {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+div.storeContainer > div.category
+{
+    background-color: var(--store-categoryTitle);
+    font-weight: bold;
+}
+
+div.storeContainer > div
+{
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid var(--nav-borderTopCurrentPageColor);
     text-align: center;
     padding: 5px;
-    position: relative;
 }
 
-.storeContainer > div:nth-child(4n)
+/*À ajuster selon le nombre de colonnes du tableau*/
+div.storeContainer > div:nth-child(n + 9), /*Propre au magasin*/
+main.inventoryPage div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
+main.shoppingcartPage div.storeContainer > div:nth-child(n + 7) /*Propre au panier d'achat*/
+{
+    border-top: 1px solid var(--nav-borderTopCurrentPageColor);
+}
+
+div.storeContainer > div.rightLastColumn
 {
     border-right: 0;
 }
 
-.storeContainer div > button
+.storeContainer button
 {
-    margin-left: 10px;
-    margin-right: 10px;
+    user-select: none;
 }
 
-.storeContainer input[type="text"]
+button.removeItem, button.addItem
+{
+    display: block;
+    margin: 0 10px;
+}
+
+button.removeItem.hidden, button.addItem.hidden
+{
+    display: none;
+}
+
+div.storeContainer input.itemQuantity
 {
     max-width: 40px;
     text-align: right;
 }
 
+div.itemPreviewContainer
+{
+    user-select: none;
+}
+
+div.itemPreviewContainer:hover
+{
+    background-color: var(--store-itemPreviewContainerHoverColor);
+    cursor: pointer;
+}
+
+div.shoppingCartColumn
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.addToShoppingCart, button.modifyShoppingCart
+{
+    width: 75px;
+    margin-left: 10px;
+    outline: none;
+}
+
+button.modifyShoppingCart
+{
+    background-color: var(--store-modifyShoppingCartButtonColor);
+    border-color: var(--store-modifyShoppingCartButtonColor);
+}
+
+
+button.addToShoppingCart, button.modifyShoppingCart.clicked
+{
+    background-color: var(--store-addToShoppingCartButtonColor);
+    border-color: var(--store-addToShoppingCartButtonColor);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+/*#region Filtre*/
 .filter
 {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
-    border-left: 0;
-    border-top: 0;
-    border-right: 1px;
+    border: 0;
     border-bottom: 1px;
     border-style: solid;
     border-color: #4f4f4f;
@@ -187,7 +331,7 @@ nav input[type=checkbox]
     transform: rotate(0);
 }
 
-.filter.opened > img:nth-of-type(2)
+.filter.opened > img
 {
     transform: rotate(180deg);
 }
@@ -200,14 +344,14 @@ nav input[type=checkbox]
 
 .filterSelect
 {
+    position: relative;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 50%;
-}
-
-.filterSelect > div
-{
-    padding: 10px 5px;
+    grid-template-columns: auto 20px;
+    width: 150px;
+    padding: 5px;
+    text-align: left;
+    align-items: baseline;
+    background-color: var(--nav-headerBackgroundColor);
 }
 
 .filterSelect.hidden
@@ -215,19 +359,99 @@ nav input[type=checkbox]
     display: none;
 }
 
-/************************************
- *             Profil
- ************************************/
-
-.profilePage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage
+.filterSelect label
 {
-    width: 600px;
-    margin: 40px auto;
-    border: 1px solid black;
-    text-align: center;
-    border-top: 10px solid black;
+    padding: 5px 0;
 }
 
+/*#endregion Filtre*/
+
+/*#region Détails de l'item (Popup)*/
+.itemDetailsContainer
+{
+    display: none;
+}
+
+.itemDetailsContainer .itemDetailsHeader
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+    background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
+    font-weight: bold;
+    padding: 1px;
+    padding-left: 5px;
+}
+
+.itemDetailsContainerExitButton
+{
+    font-size: medium;
+}
+
+.itemDetailsContainerExitButton:focus, .itemDetailsContainerExitButton:active
+{
+    outline: none;
+}
+
+.itemDetailsContainerExitButton:hover
+{
+    background-color: red;
+    color: whitesmoke;
+    border-color: red;
+}
+
+.itemDetailsImageContainer
+{
+    text-align: center;
+    height: 300px;
+    background-color: var(--store-itemDetailsImageContainerBackgroundColor);
+    border-bottom: 1px solid black;
+}
+
+.itemDetailsImageContainer > img
+{
+    height: 100%;
+}
+
+.itemDetailsContainer.active
+{
+
+    display: block;
+    width: 500px;
+    height: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: var(--store-itemDetailsContainerBackgroundColor);
+    z-index: 10;
+}
+
+#overlay
+{
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+#overlay.active
+{
+    opacity: 1;
+    pointer-events: all;
+    z-index: 9;
+}
+/*#endregion Détails de l'item (Popup)*/
+
+/*#endregion Magasin*/
+
+/*#region Profil*/
 .personalInfosContainer
 {
     display: grid;
@@ -241,18 +465,30 @@ nav input[type=checkbox]
     margin: 0;
 }
 
+/*À voir avec l'équipe ce qui convient le mieux*/
 fieldset
 {
-    width: 80%;
+    position: relative;
+    /*width: 80%;*/
     border: 0;
     display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 10px;
+    grid-template-columns: auto 150px;
+    grid-gap: 5px;
     margin: 0;
-    padding: 20px;
+    /*padding: 20px;*/
+    text-align: left;
+}
+
+fieldset > label, fieldset input
+{
+    grid-column: 2 span;
 }
 
 fieldset > input[type=submit]
 {
     grid-column-start: 2;
+    height: 35px;
+    width: 150px;
 }
+
+/*#endregion Profil*/
