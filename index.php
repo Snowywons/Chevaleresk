@@ -1,10 +1,12 @@
 <?php
 include_once "header.php";
+include_once "dbConnect.php";
 include_once "dbUtilities.php";
 include_once "filterUtilities.php";
 include_once "popupUtilities.php";
 
-$conn = connectDB("167.114.152.54", "dbchevalersk13", "chevalier13", "x7ad6a84");
+global $conn;
+
 $records = [];
 
 if ($conn) {
@@ -76,5 +78,6 @@ echo <<<HTML
     <script type="text/javascript" src="filter.js" defer></script>
     <script type="text/javascript" src="popup.js" defer></script>
     <script type="text/javascript" src="shoppingcart.js" defer></script>
+    <script type="text/javascript" src="evaluation.js" defer></script>
 HTML;
 ?>

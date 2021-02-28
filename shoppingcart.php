@@ -75,5 +75,6 @@ echo <<<HTML
     <script type="text/javascript" src="filter.js" defer></script>
     <script type="text/javascript" src="popup.js" defer></script>
     <script type="text/javascript" src="shoppingcart.js" defer></script>
+    <script type="text/javascript" src="evaluation.js" defer></script>
 HTML;
 ?>

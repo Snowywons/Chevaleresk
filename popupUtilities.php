@@ -123,7 +123,8 @@ function CreateItemDetailsContainers($idItems)
                 <img src='./Icons/StarIcon.png'>
                 <img src='./Icons/StarIcon.png'>
             </div>
-            <button class='itemDetailsContainerEvaluationButton'>Voir les évaluations</button>
+            <button id='".$idItem."_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
+            Voir les évaluations</button>
             
         </div>
       </div>";
