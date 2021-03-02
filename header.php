@@ -22,6 +22,10 @@ echo <<<HTML
             <p onclick="redirect('index.php')"></p>
             Magasin
         </nav>
+        <nav id="evaluations">
+            <p onclick="redirect('evaluations.php')"></p>
+            Évaluations
+        </nav>
 HTML;
 if (!isset($_SESSION["Logged"]) || !$_SESSION["Logged"])
 {

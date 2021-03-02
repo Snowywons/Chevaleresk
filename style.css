@@ -1,7 +1,14 @@
 :root
 {
     /*#region Toutes les pages*/
-
+    --col-lightBlue: #b5d9f8;
+    --col-ocean: #5f9cd3;
+    --col-oceanFog: rgba(95, 156, 211, 0.3);
+    --col-sky: #6bb1f3;
+    --col-darkBlue: #438edd;
+    --col-lightGreen: #9df39d;
+    --col-skin: #ffbda3;
+    --col-lightRed: #ff6d6d;
     /*#endregion Toutes les pages*/
 
     /*#region Menu de navigation*/
@@ -9,22 +16,22 @@
     --nav-height: 25px;
     --nav-padding: 10px;
     --nav-borderTopCurrentPagePixel: 4px;
-    --nav-headerBackgroundColor: #b5d9f8;
-    --nav-borderTopCurrentPageColor: #438edd;
-    --nav-buttonHoverColor: #5f9cd3;
+    --nav-headerBackgroundColor: var(--col-lightBlue);
+    --nav-borderTopCurrentPageColor: var(--col-darkBlue);
+    --nav-buttonHoverColor: var(--col-ocean);
     /*#endregion Menu de navigation*/
 
     /*#region Magasin*/
-    --store-categoryTitle: #6bb1f3;
-    --store-itemPreviewContainerHoverColor: rgba(95, 156, 211, 0.3);
-    --store-itemDetailsContainerBackgroundColor : var(--nav-headerBackgroundColor);
+    --store-categoryTitle: var(--col-sky);
+    --store-itemPreviewContainerHoverColor: var(--col-oceanFog);
+    --store-itemDetailsContainerBackgroundColor : var(--col-lightBlue);
     --store-itemDetailsContainerExitButtonBackgroundColor: red;
-    --store-itemDetailsContainerHeaderBackgroundColor: var(--nav-borderTopCurrentPageColor);
+    --store-itemDetailsContainerHeaderBackgroundColor: var(--col-darkBlue);
     --store-itemDetailsImageContainerBackgroundColor: whitesmoke;
-    --store-addToShoppingCartButtonColor: #9df39d;
-    --store-modifyItemQuantityButtonColor: #ffbda3;
-    --store-modifyItemQuantityClickedButtonColor: var(--store-addToShoppingCartButtonColor);
-    --store-deleteFromShoppingCartButtonColor: #ff6d6d;
+    --store-addToShoppingCartButtonColor: var(--col-lightGreen);
+    --store-modifyItemQuantityButtonColor: var(--col-skin);
+    --store-modifyItemQuantityClickedButtonColor: var(--col-lightGreen);
+    --store-deleteFromShoppingCartButtonColor: var(--col-lightRed);
     /*#endregion Magasin*/
 
     /*#region Popup*/
@@ -37,7 +44,8 @@
     /*#endregion Popup*/
 
     /*#region Évaluations*/
-    --evaluation-evaluationContainerBackgroundColor: var(--nav-headerBackgroundColor);
+    --evaluations-evaluationPreviewContainerHoverColor: var(--col-oceanFog);
+    --evaluations-evaluationItemImageContainerBackgroundColor: var(--col-lightBlue);
     /*#endregion Évaluations*/
 }
 
@@ -48,11 +56,10 @@ body
 
 footer
 {
-    position: absolute;
-    bottom: 0;
+
 }
 
-.indexPage, .profilePage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage, .evaluationPage
+.indexPage, .profilePage, .loginPage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage, .evaluationsPage
 {
 
     width: 600px;
@@ -60,12 +67,12 @@ footer
     text-align: center;
 }
 
-.modifyPage, .registerPage
+.loginPage, .modifyPage, .registerPage
 {
     width: 400px;
 }
 
-.indexPage, .inventoryPage, .shoppingcartPage, .evaluationPage
+.indexPage, .inventoryPage, .shoppingcartPage, .evaluationsPage
 {
     width: 98%;
 }
@@ -200,6 +207,68 @@ nav input[type=checkbox]
 }
 /*#endregion Menu de navigation*/
 
+/*#region Filtre*/
+.filter
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+    border: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: #4f4f4f;
+    padding: 5px;
+    user-select: none;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.filter.opened
+{
+    background-color: rgba(0,0,0,0.15);
+}
+
+.filter > img
+{
+    height: 25px;
+    transform: rotate(0);
+}
+
+.filter.opened > img
+{
+    transform: rotate(180deg);
+}
+
+.filter:hover
+{
+    background-color: rgba(0,0,0,0.25);
+    cursor: pointer;
+}
+
+.filterSelect
+{
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 20px;
+    width: 150px;
+    padding: 5px;
+    text-align: left;
+    align-items: baseline;
+    background-color: var(--nav-headerBackgroundColor);
+}
+
+.filterSelect.hidden
+{
+    display: none;
+}
+
+.filterSelect label
+{
+    padding: 5px 0;
+}
+
+/*#endregion Filtre*/
+
 /*#region Magasin, Inventaire*/
 div.storeContainer
 {
@@ -300,6 +369,13 @@ button.addToShoppingCart, button.modifyItemQuantity, button.deleteFromShoppingCa
     outline: none;
 }
 
+button.addToShoppingCart:hover,
+button.modifyItemQuantity:hover,
+button.deleteFromShoppingCart:hover
+{
+    cursor: pointer;
+}
+
 button.modifyItemQuantity
 {
     background-color: var(--store-modifyItemQuantityButtonColor);
@@ -324,67 +400,7 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-/*#region Filtre*/
-.filter
-{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 150px;
-    border: 0;
-    border-bottom: 1px;
-    border-style: solid;
-    border-color: #4f4f4f;
-    padding: 5px;
-    user-select: none;
-    background-color: rgba(0,0,0,0.1);
-}
-
-.filter.opened
-{
-    background-color: rgba(0,0,0,0.15);
-}
-
-.filter > img
-{
-    height: 25px;
-    transform: rotate(0);
-}
-
-.filter.opened > img
-{
-    transform: rotate(180deg);
-}
-
-.filter:hover
-{
-    background-color: rgba(0,0,0,0.25);
-    cursor: pointer;
-}
-
-.filterSelect
-{
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 20px;
-    width: 150px;
-    padding: 5px;
-    text-align: left;
-    align-items: baseline;
-    background-color: var(--nav-headerBackgroundColor);
-}
-
-.filterSelect.hidden
-{
-    display: none;
-}
-
-.filterSelect label
-{
-    padding: 5px 0;
-}
-
-/*#endregion Filtre*/
+/*#endregion Magasin*/
 
 /*#region Détails de l'item (Popup)*/
 .itemDetailsContainer
@@ -457,6 +473,11 @@ input[type=number]::-webkit-outer-spin-button {
     overflow-y: scroll;
 }
 
+.itemDetailsBodyContainer::-webkit-scrollbar
+{
+    display: none;
+}
+
 .itemDetailsBodyContainer > span
 {
     border-bottom: 1px solid var(--nav-borderTopCurrentPageColor);
@@ -510,9 +531,25 @@ input[type=number]::-webkit-outer-spin-button {
 }
 /*#endregion Détails de l'item (Popup)*/
 
-/*#endregion Magasin*/
-
 /*#region Évaluation*/
+div.itemEvaluationsContainer
+{
+    display: flex;
+}
+
+div.itemEvaluationPreviewContainer
+{
+    user-select: none;
+    margin: 10px 10px 10px 0;
+    border: 1px solid var(--col-darkBlue);
+}
+
+div.itemEvaluationPreviewContainer:hover
+{
+    background-color: var(--evaluations-evaluationPreviewContainerHoverColor);
+    cursor: pointer;
+}
+
 div.evaluationContainer
 {
     display: grid;
@@ -524,8 +561,8 @@ div.evaluationContainer
 div.evaluationItemImageContainer
 {
     grid-row-start: span 9000;
-    background-color: var(--evaluation-evaluationContainerBackgroundColor);
-    border: 1px solid var(--nav-borderTopCurrentPageColor);
+    background-color: var(--evaluations-evaluationItemImageContainerBackgroundColor);
+    border: 1px solid var(--col-darkBlue);
 }
 
 div.playerEvaluationContainer
@@ -539,7 +576,7 @@ div.playerEvaluationContainer
 
 div.playerEvaluationContainer
 {
-    border: 1px solid var(--nav-borderTopCurrentPageColor);
+    border: 1px solid var(--col-darkBlue);
 }
 
 div.playerEvaluationContainer ~ div.playerEvaluationContainer
@@ -590,7 +627,18 @@ div.playerEvaluationContainer textarea:focus
 {
     outline: none;
     border-width: 0;
-    background-color: var(--nav-headerBackgroundColor);
+    background-color: var(--col-lightBlue);
+}
+
+div.evaluationsListButtonContainer
+{
+    text-align: left;
+    padding-bottom: 10px;
+}
+button.evaluationsListButton
+{
+    /*position: absolute;*/
+    /*left: 0;*/
 }
 /*#endregion Évaluation*/
 
@@ -615,7 +663,7 @@ fieldset
     /*width: 80%;*/
     border: 0;
     display: grid;
-    grid-template-columns: auto 150px;
+    grid-template-columns: auto 100px;
     grid-gap: 5px;
     margin: 0;
     /*padding: 20px;*/
@@ -627,11 +675,23 @@ fieldset > label, fieldset input
     grid-column: 2 span;
 }
 
+fieldset > input[type=submit]:hover
+{
+    cursor: pointer;
+}
+
 fieldset > input[type=submit]
 {
+    background-color: var(--col-lightBlue);
+    border-color: var(--col-lightBlue);
+    outline: none;
     grid-column-start: 2;
-    height: 35px;
-    width: 150px;
+    height: 25px;
+    width: 100px;
 }
 
 /*#endregion Profil*/
+
+/*region Autres*/
+
+/*endregion Autres*/
