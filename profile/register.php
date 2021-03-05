@@ -41,7 +41,7 @@ echo <<<HTML
             <input type="text" id="password" name="motDePasse" value="">
             <label for="passwordConfirm">Confirmation du mot de passe</label>
             <input type="text" id="passwordConfirm" name="" value="" >
-            <input type="submit" value="Submit">
+            <input type="submit" value="Enregistrer">
         </fieldset>
     </form>
 </main>

@@ -2,12 +2,12 @@
 
 function CreateFilterSection() {
     echo <<<HTML
-    <div class="filter">
+    <div class="filterContainer">
 <!--        <img src="./Icons/FilterIcon.png">-->
         <span>Voir les filtres</span>
         <img src="../icons/DownArrowIcon.png">
     </div>
-    <div class="filterSelect hidden">
+    <div class="filters hidden">
             <label for="potion">Potion</label>
             <input type="checkbox" id="potion" name="potion">
             <label for="armure">Armure</label>

@@ -1,13 +1,12 @@
-let removeItemButtons = document.querySelectorAll(".removeItem");
-let addItemButtons = document.querySelectorAll(".addItem");
+//Les inputs(number) de la quantité ajoutée (shopping cart)
 let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
-let modifyItemQuantityButtons = document.querySelectorAll(".modifyItemQuantity");
 
-modifyItemQuantityButtons.forEach((item)=> {
-    item.addEventListener("click", (e)=> {
+//Bouton Modifier
+let modifyItemQuantityButtons = document.querySelectorAll(".modifyButton");
+modifyItemQuantityButtons.forEach((item) => {
+    item.addEventListener("click", (e) => {
         e.preventDefault();
-        if (item.classList.contains("clicked"))
-        {
+        if (item.classList.contains("clicked")) {
             hiddeButton(item);
             let itemQuantityInput = getItemQuantityInput(item);
             if (itemQuantityInput) {
@@ -15,30 +14,31 @@ modifyItemQuantityButtons.forEach((item)=> {
                 if (!count || count < 0) count = 0;
                 itemQuantityInput.value = count;
             }
-        }
-        else
-        {
+        } else {
             showButton(item);
         }
     })
 });
 
-removeItemButtons.forEach((item)=> {
-    item.addEventListener("click", (e)=> {
+//Bouton Diminuer
+let removeItemButtons = document.querySelectorAll(".removeItem");
+removeItemButtons.forEach((item) => {
+    item.addEventListener("click", (e) => {
         e.preventDefault();
         removeItem(item);
     })
 });
 
-addItemButtons.forEach((item)=> {
-    item.addEventListener("click", (e)=> {
+//Bouton Ajouter
+let addItemButtons = document.querySelectorAll(".addItem");
+addItemButtons.forEach((item) => {
+    item.addEventListener("click", (e) => {
         e.preventDefault();
         addItem(item);
     })
 });
 
-function showButton(from)
-{
+function showButton(from) {
     let array = Array.prototype.slice.call(removeItemButtons);
     let troncId = from.id.split('_')[0];
     let formatId = troncId + "_removeItem";
@@ -64,11 +64,9 @@ function showButton(from)
     }
 
     from.classList.add("clicked");
-    from.innerHTML = "Confirmer";
 }
 
-function hiddeButton(from)
-{
+function hiddeButton(from) {
     let array = Array.prototype.slice.call(removeItemButtons);
     let troncId = from.id.split('_')[0];
     let formatId = troncId + "_removeItem";
@@ -94,11 +92,9 @@ function hiddeButton(from)
     }
 
     from.classList.remove("clicked");
-    from.innerHTML = "Modifier";
 }
 
-function addItem(from)
-{
+function addItem(from) {
     let itemQuantityInput = getItemQuantityInput(from);
     if (itemQuantityInput) {
         let count = parseInt(itemQuantityInput.value);
@@ -107,8 +103,7 @@ function addItem(from)
     }
 }
 
-function removeItem(from)
-{
+function removeItem(from) {
     let itemQuantityInput = getItemQuantityInput(from);
     if (itemQuantityInput) {
         let count = parseInt(itemQuantityInput.value);
@@ -117,8 +112,7 @@ function removeItem(from)
     }
 }
 
-function getItemQuantityInput(from)
-{
+function getItemQuantityInput(from) {
     let array = Array.prototype.slice.call(itemQuantityInputs);
     let troncId = from.id.split('_')[0];
     let formatId = troncId + "_itemQuantity";

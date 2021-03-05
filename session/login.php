@@ -15,7 +15,7 @@ echo "
             <input type='text' id='alias' name='alias' value='$alias'>
             <label for='password'>Mot de passe</label>
             <input type='password' id='password' name='motDePasse' value=''>
-            <input type='submit' value='Submit'>
+            <input type='submit' value='Connecter'>
         </fieldset>
     </form>
     <a href='" .$root."profile/register.php'>S'inscrire</a>

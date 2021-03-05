@@ -22,7 +22,7 @@ $balance = $myInfosArray[3];
 
 echo <<<HTML
     <main class='profile'>
-        <h1>Mes informations</h1>
+        <h1>Informations</h1>
         <form action="">
             <fieldset>
                 <label for="alias">Alias</label>
@@ -31,7 +31,7 @@ echo <<<HTML
                 <input type="text" id="firstName" name="firstName" value="$firstName" disabled>
                 <label for="lastName">Last name:</label>
                 <input type="text" id="lastName" name="lastName" value="$lastName" disabled>
-                <label for="balance">Solde</label>
+                <label for="balance">Solde (écus)</label>
                 <input type="text" id="balance" name="balance" value="$balance" disabled>
             </fieldset>
         </form>

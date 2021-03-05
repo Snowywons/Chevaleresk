@@ -9,9 +9,15 @@ include_once $root."utilities/popupUtilities.php";
 
 global $conn;
 
-$myId = 1; //Id du joueur (à  récupérer dans la superglobal session)
-$records = executeQuery("SELECT * FROM Inventaires WHERE idJoueur=$myId;");
+if (isset($_GET["idJoueur"])) {
+    $idPlayer = $_GET["idJoueur"];
+} else {
+    $idPlayer = 1; //Id du joueur (à  récupérer dans la superglobal session)
+}
+$records = executeQuery("SELECT * FROM Joueurs WHERE idJoueur=$idPlayer;")[0];
+$alias = $records[1];
 
+$records = executeQuery("SELECT * FROM Inventaires WHERE idJoueur=$idPlayer;");
 /*Important de construire un array de la forme adéquate*/
 $idItems = [];
 foreach($records as $data) {
@@ -22,7 +28,7 @@ CreateItemDetailsContainers($idItems);
 
 echo <<<HTML
 <main class="inventory">
-    <h1>Inventaire</h1>
+    <h1>Inventaire de $alias</h1>
     
 HTML;
 

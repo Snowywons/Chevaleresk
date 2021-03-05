@@ -9,7 +9,7 @@ global $conn;
 $records = executeQuery("SELECT * FROM Joueurs;");
 
 echo <<<HTML
-    <h1 style="background-color: deeppink">PAGE DISPONIBLE SEULEMENT POUR LES ADMINISTRATEURS</h1>
+    <h1 style="background-color: deeppink">PAGE ACCESSIBLE SEULEMENT PAR LES ADMINISTRATEURS</h1>
     <main class='list'>
         <h1>Mes informations</h1>
         
@@ -18,7 +18,7 @@ echo <<<HTML
         <div class="category">Alias</div>
         <div class="category">Nom</div>
         <div class="category">Prénom</div>
-        <div class="category">Balance</div>
+        <div class="category">Solde (écus)</div>
         <div class="category">Actions</div>
 HTML;
 
@@ -37,13 +37,13 @@ foreach ($records as $player) {
             <div>$balance</div>
             <div class='adminActionsContainer'>
                 <div class='adminButtonsContainer'>
-                    <button id='".$idPlayer."_inventoryButton' class='adminInventoryButton'>
+                    <button id='".$idPlayer."_inventoryButton' class='inventoryButton'>
                         <img src='".$root."/icons/EyeIcon.png'/>
                     </button>
-                    <button id='".$idPlayer."_modifyButton' class='adminModifyButton'>
+                    <button id='".$idPlayer."_modifyButton' class='modifyButton'>
                         <img src='".$root."/icons/EditIcon.png'/>
                     </button>
-                    <button id='".$idPlayer."_deleteButton' class='adminDeleteButton'>
+                    <button id='".$idPlayer."_deleteButton' class='deleteButton'>
                         <img src='".$root."/icons/DeleteIcon.png'/>
                     </button>
                 </div>

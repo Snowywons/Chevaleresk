@@ -119,7 +119,7 @@ function CreateItemDetailsContainers($idItems)
         echo "
         </div>
         <div class='itemDetailsFooter'>
-            <div class='itemDetailsStarbar'>
+            <div class='itemStarbar'>
                 <img src='/Chevaleresk/icons/StarIcon.png'>
                 <img src='/Chevaleresk/icons/StarIcon.png'>
             </div>

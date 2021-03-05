@@ -1,26 +1,26 @@
 //Bouton Inventaire
-let adminInventoryButtons = document.querySelectorAll(".adminInventoryButton");
-adminInventoryButtons.forEach((item)=> {
+let inventoryButtons = document.querySelectorAll(".inventoryButton");
+inventoryButtons.forEach((item)=> {
     item.addEventListener("click", (e)=> {
         let troncId = item.id.split('_')[0];
-        redirect("./inventory.php?idPlayer=" + troncId);
+        redirect("./inventory.php?idJoueur=" + troncId);
     });
 });
 
 //Bouton Modifier
-let adminModifyButtons = document.querySelectorAll(".adminModifyButton");
-adminModifyButtons.forEach((item)=> {
+let modifyButtons = document.querySelectorAll(".modifyButton");
+modifyButtons.forEach((item)=> {
     item.addEventListener("click", (e)=> {
         let troncId = item.id.split('_')[0];
-        redirect("./modify-profile.php?idPlayer=" + troncId);
+        redirect("./modify-profile.php?idJoueur=" + troncId);
     });
 });
 
 //Bouton Supprimer
-let adminDeleteButtons = document.querySelectorAll(".adminDeleteButton");
-adminDeleteButtons.forEach((item)=> {
+let deleteButtons = document.querySelectorAll(".deleteButton");
+deleteButtons.forEach((item)=> {
     item.addEventListener("click", (e)=> {
         let troncId = item.id.split('_')[0];
-        redirect("./delete-profile.php?idPlayer=" + troncId);
+        redirect("./delete-profile.php?idJoueur=" + troncId);
     });
 });

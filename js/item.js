@@ -7,7 +7,7 @@ adminItemButtonsContainers.forEach((item)=> {
 });
 
 //Bouton Modifier
-let adminModifyButtons = document.querySelectorAll(".adminModifyButton");
+let adminModifyButtons = document.querySelectorAll(".modifyButton");
 adminModifyButtons.forEach((item)=> {
     item.addEventListener("click", (e)=> {
         let troncId = item.id.split('_')[0];
@@ -16,7 +16,7 @@ adminModifyButtons.forEach((item)=> {
 });
 
 //Bouton Supprimer
-let adminDeleteButtons = document.querySelectorAll(".adminDeleteButton");
+let adminDeleteButtons = document.querySelectorAll(".deleteButton");
 adminDeleteButtons.forEach((item)=> {
     item.addEventListener("click", (e)=> {
         let troncId = item.id.split('_')[0];
@@ -25,7 +25,7 @@ adminDeleteButtons.forEach((item)=> {
 });
 
 //Conteneur/Bouton Ajouter
-let adminAddItemContainers = document.querySelectorAll(".adminAddItemContainer");
+let adminAddItemContainers = document.querySelectorAll(".addItemContainer");
 adminAddItemContainers.forEach((item)=> {
     item.addEventListener("click", ()=> {
         redirect("./add-item.php");
