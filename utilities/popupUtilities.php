@@ -21,7 +21,7 @@ function CreateItemDetailsContainers($idItems)
         }
 
         $nomItem = $data[0];
-        $photoItem = "./Icons/ChevalereskIcon.png"; //devrait être $data[1]
+        $photoItem = "/Chevaleresk/icons/ChevalereskIcon.png"; //devrait être $data[1]
         $codeType = $data[2];
 
         if ($conn) {
@@ -120,10 +120,10 @@ function CreateItemDetailsContainers($idItems)
         </div>
         <div class='itemDetailsFooter'>
             <div class='itemDetailsStarbar'>
-                <img src='./Icons/StarIcon.png'>
-                <img src='./Icons/StarIcon.png'>
+                <img src='/Chevaleresk/icons/StarIcon.png'>
+                <img src='/Chevaleresk/icons/StarIcon.png'>
             </div>
-            <button id='".$idItem."_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
+            <button id='" .$idItem."_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
             Voir les évaluations</button>
             
         </div>

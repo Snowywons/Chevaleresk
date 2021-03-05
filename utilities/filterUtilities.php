@@ -5,7 +5,7 @@ function CreateFilterSection() {
     <div class="filter">
 <!--        <img src="./Icons/FilterIcon.png">-->
         <span>Voir les filtres</span>
-        <img src="./Icons/DownArrowIcon.png">
+        <img src="../icons/DownArrowIcon.png">
     </div>
     <div class="filterSelect hidden">
             <label for="potion">Potion</label>

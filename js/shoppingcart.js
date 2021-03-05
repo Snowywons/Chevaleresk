@@ -4,7 +4,8 @@ let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
 let modifyItemQuantityButtons = document.querySelectorAll(".modifyItemQuantity");
 
 modifyItemQuantityButtons.forEach((item)=> {
-    item.addEventListener("click", ()=> {
+    item.addEventListener("click", (e)=> {
+        e.preventDefault();
         if (item.classList.contains("clicked"))
         {
             hiddeButton(item);
@@ -23,13 +24,15 @@ modifyItemQuantityButtons.forEach((item)=> {
 });
 
 removeItemButtons.forEach((item)=> {
-    item.addEventListener("click", ()=> {
+    item.addEventListener("click", (e)=> {
+        e.preventDefault();
         removeItem(item);
     })
 });
 
 addItemButtons.forEach((item)=> {
-    item.addEventListener("click", ()=> {
+    item.addEventListener("click", (e)=> {
+        e.preventDefault();
         addItem(item);
     })
 });

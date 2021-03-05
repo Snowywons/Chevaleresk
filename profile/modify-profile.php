@@ -1,6 +1,7 @@
 <?php
-include_once "sessionCheck.php";
-include_once "header.php";
+$root = "../";
+
+include_once $root."master/header.php";
 
 //Exemple d'information reçu de la bd
 $myInfosString = "JPaul61, Leblanc, Jean-Paul, 100, Password12345";
@@ -13,7 +14,7 @@ $balance = $myInfosArray[3];
 $password = $myInfosArray[4];
 
 echo <<<HTML
-<main class="modifyPage">
+<main class="modify-profile">
     <h1>Modifier mes informations</h1>
     
     <form action="">
@@ -32,5 +33,6 @@ echo <<<HTML
 </main>
 HTML;
 
-include_once "footer.php";
+include_once $root."master/footer.php";
+
 ?>

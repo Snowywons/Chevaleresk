@@ -1,5 +1,7 @@
 <?php
 
+$conn = connectDB("167.114.152.54", "dbchevalersk13", "chevalier13", "x7ad6a84");
+
 function hostConnect($host, $username, $password) {
     try {
         $conn = new PDO("mysql:host=$host", $username, $password);

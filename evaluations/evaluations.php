@@ -1,8 +1,13 @@
 <?php
-include_once "header.php";
-include_once "dbConnect.php";
-include_once "dbUtilities.php";
-include_once "filterUtilities.php";
+if (!defined("ROOT"))
+    define("ROOT", $_SERVER['DOCUMENT_ROOT']."/Chevaleresk/");
+
+$root = "../";
+
+include_once $root."master/header.php";
+include_once $root."utilities/dbUtilities.php";
+include_once $root."utilities/filterUtilities.php";
+
 
 global $conn;
 
@@ -22,7 +27,7 @@ if (count($records) > 0)
 }
 
 echo <<<HTML
-<main class="evaluationsPage">
+<main class="evaluations">
     <h1>Évaluations</h1>
 HTML;
 
@@ -37,12 +42,12 @@ if ($idItem == null)
         $idItem = $data[0];
         $nomItem = $data[1];
         echo "
-            <div id='".$idItem."_showEvaluations' class='itemEvaluationPreviewContainer'>
-                <img src='./Icons/ChevalereskIcon.png'/>
+            <div id='".$idItem. "_showEvaluations' class='itemEvaluationPreviewContainer'>
+                <img src='".$root."icons/ChevalereskIcon.png'/>
                 <div>" . $nomItem . "</div>
                 <div class='itemDetailsStarbar'>
-                    <img src='./Icons/StarIcon.png'>
-                    <img src='./Icons/StarIcon.png'>
+                    <img src='".$root."icons/StarIcon.png'>
+                    <img src='".$root."icons/StarIcon.png'>
                 </div>
             </div>";
     }
@@ -57,11 +62,11 @@ else {
         
         <div class='evaluationContainer'>
             <div class='evaluationItemImageContainer'>
-                <img src='./Icons/ChevalereskIcon.png'/>
+                <img src='".$root."icons/ChevalereskIcon.png'/>
                 <div>" . $nomItem . "</div>
                 <div class='itemDetailsStarbar'>
-                    <img src='./Icons/StarIcon.png'>
-                    <img src='./Icons/StarIcon.png'>
+                    <img src='".$root."icons/StarIcon.png'>
+                    <img src='".$root."icons/StarIcon.png'>
                 </div>
             </div>";
 
@@ -71,7 +76,7 @@ else {
         $starsCount = intval($data[1]);
         $starBar = "";
         for ($i = 0; $i < $starsCount; $i++)
-            $starBar .= "<img src='./Icons/StarIcon.png'>";
+            $starBar .= "<img src='".$root."icons/StarIcon.png'>";
         echo "
             <div class='playerEvaluationContainer'>
                 <div>$starBar</div>
@@ -82,7 +87,7 @@ else {
 
     echo <<<HTML
         <div class='playerEvaluationContainer'>
-            <div class="starBar"><img src='./Icons/StarIcon.png'></div>
+            <div class="starBar"><img src='$root/icons/StarIcon.png'></div>
             <form action="" method="post">
                 <textarea placeholder="Nouveau commentaire"></textarea>
                 <input type="submit">
@@ -94,10 +99,9 @@ HTML;
 
 echo "</main>";
 
-include_once "footer.php";
+include_once $root."master/footer.php";
 
-echo <<<HTML
-    <script type="text/javascript" src="filter.js" defer></script>
-    <script type="text/javascript" src="evaluation.js" defer></script>
-HTML;
+echo "
+    <script type='text/javascript' src='".$root."js/filter.js' defer></script>
+    <script type='text/javascript' src='".$root."js/evaluations.js' defer></script>";
 ?>

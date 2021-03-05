@@ -1,6 +1,8 @@
 <?php
-include_once "sessionCheck.php";
-include_once "header.php";
+
+$root = "../";
+
+include_once $root."master/header.php";
 
 //Exemple d'information envoyé à la bd
 $myInfosString = "JPaul61, Leblanc, Jean-Paul, 100, Password12345";
@@ -22,7 +24,7 @@ if (isset($_POST["prenomJoueur"]))
 
 
 echo <<<HTML
-<main class="registerPage">
+<main class="register">
     <h1>Inscription</h1>
     
     <form action="" method="post">
@@ -45,5 +47,6 @@ echo <<<HTML
 </main>
 HTML;
 
-include_once "footer.php";
+include_once $root."master/footer.php";
+
 ?>

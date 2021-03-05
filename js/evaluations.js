@@ -4,7 +4,7 @@ const itemEvaluationPreviewContainers = document.querySelectorAll(".itemEvaluati
 
 showEvaluationsButtons.forEach((item)=> {
     item.addEventListener("click", ()=> {
-        document.location.href = "./evaluations.php?idItem=" + item.id.split('_')[0];
+        document.location.href = "../evaluations/evaluations.php?idItem=" + item.id.split('_')[0];
     })
 });
 

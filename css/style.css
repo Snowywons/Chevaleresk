@@ -24,6 +24,7 @@
     /*#region Magasin*/
     --store-categoryTitle: var(--col-sky);
     --store-itemPreviewContainerHoverColor: var(--col-oceanFog);
+    --store-addItemPreviewContainerBackgroundColor: var(--col-oceanFog);
     --store-itemDetailsContainerBackgroundColor : var(--col-lightBlue);
     --store-itemDetailsContainerExitButtonBackgroundColor: red;
     --store-itemDetailsContainerHeaderBackgroundColor: var(--col-darkBlue);
@@ -47,6 +48,10 @@
     --evaluations-evaluationPreviewContainerHoverColor: var(--col-oceanFog);
     --evaluations-evaluationItemImageContainerBackgroundColor: var(--col-lightBlue);
     /*#endregion Évaluations*/
+
+    /*#region Profil*/
+    --profile-adminInventoryButtonColor: var(--col-lightBlue);
+    /*#endregion Profil*/
 }
 
 body
@@ -54,27 +59,36 @@ body
     margin: 0;
 }
 
-footer
+main.login,
+main.register,
+main.profile,
+main.modify-profile,
+main.delete-profile,
+main.add-item,
+main.modify-item,
+main.delete-item
 {
-
+    width: 400px;
+    margin: 40px auto;
+    text-align: center;
 }
 
-.indexPage, .profilePage, .loginPage, .modifyPage, .inventoryPage, .shoppingcartPage, .registerPage, .evaluationsPage
+main.list
 {
-
     width: 600px;
     margin: 40px auto;
     text-align: center;
 }
 
-.loginPage, .modifyPage, .registerPage
-{
-    width: 400px;
-}
-
-.indexPage, .inventoryPage, .shoppingcartPage, .evaluationsPage
+main.index,
+main.store,
+main.inventory,
+main.evaluations,
+main.shopping-cart
 {
     width: 98%;
+    margin: 40px auto;
+    text-align: center;
 }
 
 /*#region Menu de navigation*/
@@ -194,6 +208,11 @@ nav > nav:hover > ul
     cursor: pointer;
 }
 
+nav > nav:hover > ul.hidden
+{
+    display: none;
+}
+
 nav > nav:hover, nav ul > li:hover
 {
     background-color: var(--nav-buttonHoverColor);
@@ -214,18 +233,18 @@ nav input[type=checkbox]
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
-    border: 0;
-    border-bottom: 1px;
-    border-style: solid;
-    border-color: #4f4f4f;
     padding: 5px;
     user-select: none;
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--col-lightBlue);
+
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--col-lightBlue);
 }
 
 .filter.opened
 {
-    background-color: rgba(0,0,0,0.15);
+    /*background-color: rgba(0,0,0,0.15);*/
 }
 
 .filter > img
@@ -241,8 +260,12 @@ nav input[type=checkbox]
 
 .filter:hover
 {
-    background-color: rgba(0,0,0,0.25);
     cursor: pointer;
+}
+
+.filter:active
+{
+    border-style: inset;
 }
 
 .filterSelect
@@ -250,7 +273,7 @@ nav input[type=checkbox]
     position: relative;
     display: grid;
     grid-template-columns: auto 20px;
-    width: 150px;
+    width: 154px;
     padding: 5px;
     text-align: left;
     align-items: baseline;
@@ -266,10 +289,9 @@ nav input[type=checkbox]
 {
     padding: 5px 0;
 }
-
 /*#endregion Filtre*/
 
-/*#region Magasin, Inventaire*/
+/*#region Magasin*/
 div.storeContainer
 {
     display: grid;
@@ -278,15 +300,15 @@ div.storeContainer
     grid-column-gap: 5px;
 }
 
-/*Propre à l'inventaire*/
-main.inventoryPage div.storeContainer
+/*Présentation du tableau dans l'inventaire*/
+main.inventory div.storeContainer
 {
     display: grid;
     grid-template-columns: auto auto;
 }
 
-/*Propre à l'inventaire*/
-main.shoppingcartPage div.storeContainer
+/*Présentation du tableau dans le panier d'achat*/
+main.shopping-cart div.storeContainer
 {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -311,8 +333,8 @@ div.storeContainer > div
 
 /*À ajuster selon le nombre de colonnes du tableau*/
 div.storeContainer > div:nth-child(n + 9), /*Propre au magasin*/
-main.inventoryPage div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
-main.shoppingcartPage div.storeContainer > div:nth-child(n + 7) /*Propre au panier d'achat*/
+main.inventory div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
+main.shopping-cart div.storeContainer > div:nth-child(n + 7) /*Propre au panier d'achat*/
 {
     border-top: 1px solid var(--nav-borderTopCurrentPageColor);
 }
@@ -346,6 +368,7 @@ div.storeContainer input.itemQuantity
 
 div.itemPreviewContainer
 {
+    position: relative;
     user-select: none;
 }
 
@@ -362,34 +385,68 @@ div.shoppingCartColumn
     justify-content: center;
 }
 
-button.addToShoppingCart, button.modifyItemQuantity, button.deleteFromShoppingCart
+button.addToShoppingCart,
+button.modifyItemQuantity,
+button.deleteFromShoppingCart
 {
     width: 75px;
     margin-left: 10px;
     outline: none;
 }
 
+button.adminInventoryButton,
+button.adminModifyButton,
+button.adminDeleteButton
+{
+    width: 30px;
+    height: 25px;
+    outline: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+button.adminInventoryButton > img,
+button.adminModifyButton > img,
+button.adminDeleteButton > img
+{
+    height: 100%;
+}
+
 button.addToShoppingCart:hover,
 button.modifyItemQuantity:hover,
-button.deleteFromShoppingCart:hover
+button.deleteFromShoppingCart:hover,
+button.adminInventoryButton:hover,
+button.adminModifyButton:hover,
+button.adminDeleteButton:hover
 {
     cursor: pointer;
 }
 
-button.modifyItemQuantity
+button.adminInventoryButton
+{
+    background-color: var(--profile-adminInventoryButtonColor);
+    border-color: var(--profile-adminInventoryButtonColor);
+}
+
+button.modifyItemQuantity,
+button.adminModifyButton
 {
     background-color: var(--store-modifyItemQuantityButtonColor);
     border-color: var(--store-modifyItemQuantityButtonColor);
 }
 
-button.deleteFromShoppingCart
+button.deleteFromShoppingCart,
+button.adminDeleteButton
 {
     background-color: var(--store-deleteFromShoppingCartButtonColor);
     border-color: var(--store-deleteFromShoppingCartButtonColor);
 }
 
 
-button.addToShoppingCart, button.modifyItemQuantity.clicked
+button.addToShoppingCart,
+button.modifyItemQuantity.clicked
 {
     background-color: var(--store-addToShoppingCartButtonColor);
     border-color: var(--store-addToShoppingCartButtonColor);
@@ -399,6 +456,47 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
+
+/*#region Administrateurs seulement*/
+div.adminButtonsContainer
+{
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 2px;
+}
+
+div.adminAddItemContainer
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 150px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--col-lightGreen);
+    padding: 5px;
+    user-select: none;
+    background-color: var(--col-lightGreen);
+}
+
+div.adminAddItemContainer > img
+{
+    height: 25px;
+    transform: rotate(0);
+}
+
+div.adminAddItemContainer:hover
+{
+    cursor: pointer;
+}
+
+div.adminAddItemContainer:active
+{
+    border-style: inset;
+}
+/*#endregion Administrateurs seulement*/
 
 /*#endregion Magasin*/
 
@@ -640,37 +738,79 @@ button.evaluationsListButton
     /*position: absolute;*/
     /*left: 0;*/
 }
+
 /*#endregion Évaluation*/
 
 /*#region Profil*/
-.personalInfosContainer
+
+/*#region Admin*/
+div.playerInfosContainer
 {
     display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
+    grid-template-columns: 96px 100px 100px 100px 100px 104px;
+    width: 100%;
 }
 
-.personalInfosContainer > p
+div.playerInfosContainer > div.category
 {
-    padding: 10px;
-    margin: 0;
+    background-color: var(--store-categoryTitle);
+    font-weight: bold;
 }
 
-/*À voir avec l'équipe ce qui convient le mieux*/
-fieldset
+div.playerInfosContainer > div
+{
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid var(--nav-borderTopCurrentPageColor);
+    text-align: center;
+    padding: 5px;
+}
+
+div.playerInfosContainer > div:nth-child(n + 9)
+{
+    border-top: 1px solid var(--nav-borderTopCurrentPageColor);
+}
+
+div.adminActionsContainer
 {
     position: relative;
-    /*width: 80%;*/
+}
+/*#endregion Admin*/
+
+/*.personalInfosContainer*/
+/*{*/
+/*    display: grid;*/
+/*    grid-template-columns: auto auto;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.personalInfosContainer > p*/
+/*{*/
+/*    padding: 10px;*/
+/*    margin: 0;*/
+/*}*/
+/*#endregion Profil*/
+
+/*#region Form et Fieldset*/
+fieldset, .addItemInfosContainer
+{
+    position: relative;
     border: 0;
     display: grid;
     grid-template-columns: auto 100px;
     grid-gap: 5px;
     margin: 0;
-    /*padding: 20px;*/
     text-align: left;
 }
 
-fieldset > label, fieldset input
+fieldset > div.addItemInfosContainer
+{
+    grid-column: span 2;
+}
+
+fieldset label, fieldset input, fieldset select, fieldset textarea
 {
     grid-column: 2 span;
 }
@@ -690,8 +830,24 @@ fieldset > input[type=submit]
     width: 100px;
 }
 
-/*#endregion Profil*/
+div.addItemPreviewContainer
+{
+    text-align: center;
+    background-color: var(--store-addItemPreviewContainerBackgroundColor);
+    grid-column: 2 span;
+}
+
+form input.itemQuantity
+{
+    max-width: 40px;
+    text-align: right;
+}
+
+/*#endregion Form et Fieldset*/
 
 /*region Autres*/
-
+.hidden
+{
+    display: none;
+}
 /*endregion Autres*/

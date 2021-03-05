@@ -1,31 +1,15 @@
 <?php
-include_once "sessionCheck.php";
-include_once "header.php";
-include_once "dbUtilities.php";
+if (!defined("ROOT"))
+    define("ROOT", $_SERVER['DOCUMENT_ROOT']."/Chevaleresk/");
 
-/****************************************************************************************************
- * Pour exemple seulement
- ****************************************************************************************************/
-$debug = false; //Mettre à true pour faire des test
+$root = "../";
 
-if ($debug) {
-    $conn = connectDB("167.114.152.54", "dbchevalersk13", "chevalier13", "x7ad6a84");
-    $records = [];
+include_once $root."master/header.php";
+include_once $root."utilities/dbUtilities.php";
 
-    if ($conn) {
-        echo "Connexion établie";
-        $query = "SELECT * FROM Joueurs;";
+global $conn;
 
-        try {
-            $records = $conn->query($query)->fetchall();
-        } catch (PDOException $e) { }
-    }
-
-    var_dump($records);
-}
-
-/****************************************************************************************************/
-
+$records = executeQuery("SELECT * FROM Joueurs;");
 
 //Exemple d'information reçu de la bd
 $myInfosString = "JPaul61, Leblanc, Jean-Paul, 100, Password12345";
@@ -37,7 +21,7 @@ $firstName = $myInfosArray[2];
 $balance = $myInfosArray[3];
 
 echo <<<HTML
-    <main class='profilePage'>
+    <main class='profile'>
         <h1>Mes informations</h1>
         <form action="">
             <fieldset>
@@ -54,5 +38,6 @@ echo <<<HTML
     </main>
 HTML;
 
-include_once "footer.php";
+include_once $root."master/footer.php";
+
 ?>
