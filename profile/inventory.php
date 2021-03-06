@@ -24,6 +24,7 @@ foreach($records as $data) {
     array_push($idItems, $data[1]);
 }
 CreateItemDetailsContainers($idItems);
+CreateOverlay();
 
 
 echo <<<HTML

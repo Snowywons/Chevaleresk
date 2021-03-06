@@ -67,9 +67,8 @@ echo <<<HTML
             <label for="quantite">Quantité</label>
             <input type="number" id="quantite" name="quantite" value="$quantite">
                     
-            <label for="price">Prix de 0 à 1000$</label>
-            <input type="range" id="price" name="price" min="0" max="1000">
-            <input type="number" id="vprice" name="vprice" value="$prix">
+            <label for="price">Prix unitaire (écus)</label>
+            <input type="number" id="price" name="price" value="$prix">
             
             <label for="picture">Image</label>
 HTML;
@@ -94,12 +93,12 @@ echo "
 //TEMPORAIRE
 echo "<script>";
 echo <<<JS
-let input = document.querySelectorAll("input[type='range']")[0];
-let vInput = document.getElementById("vprice");
-
-input.addEventListener("input", ()=> {
-    vInput.value = input.value;
-})
+// let input = document.querySelectorAll("input[type='range']")[0];
+// let vInput = document.getElementById("vprice");
+//
+// input.addEventListener("input", ()=> {
+//     vInput.value = input.value;
+// })
 
 let select = document.getElementById("types");
 

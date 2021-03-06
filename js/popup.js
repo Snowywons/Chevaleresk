@@ -1,11 +1,20 @@
 //Les Conteneurs des détails des items (popups)
 let itemDetailsContainers = document.querySelectorAll(".itemDetailsContainer");
+let itemDeleteConfirmationContainers = document.querySelectorAll(".itemDeleteConfirmationContainer");
 
 //Conteneur/Bouton (frame) pour ouvrir un popup
 let itemPreviewContainers = document.querySelectorAll(".itemPreviewContainer");
 itemPreviewContainers.forEach((item)=> {
     item.addEventListener("click", ()=> {
-        openContainer(item);
+        openContainer(item, "details", itemDetailsContainers);
+    })
+});
+
+//Bouton pour ouvrir une confirmation (popup)
+let deleteButtons = document.querySelectorAll(".deleteButton");
+deleteButtons.forEach((item)=> {
+    item.addEventListener("click", ()=> {
+        openContainer(item, "delete", itemDeleteConfirmationContainers);
     })
 });
 
@@ -21,11 +30,11 @@ itemDetailsContainerExitButtons.forEach((item)=> {
     })
 });
 
-function openContainer(from)
+function openContainer(from, groupName, linkContainers)
 {
-    let array = Array.prototype.slice.call(itemDetailsContainers);
+    let array = Array.prototype.slice.call(linkContainers);
     let troncId = from.id.split('_')[0];
-    let formatId = troncId + "_details";
+    let formatId = troncId + "_" + groupName;
     let itemDetailsContainer = array.find(element => element.id === formatId);
     if (itemDetailsContainer) {
         itemDetailsContainer.classList.add("active");
@@ -36,6 +45,9 @@ function openContainer(from)
 function closeContainers()
 {
     itemDetailsContainers.forEach((item) => {
+        item.classList.remove("active");
+    })
+    itemDeleteConfirmationContainers.forEach((item) => {
         item.classList.remove("active");
     })
 

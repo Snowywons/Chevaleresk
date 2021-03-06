@@ -17,10 +17,10 @@ modifyButtons.forEach((item)=> {
 });
 
 //Bouton Supprimer
-let deleteButtons = document.querySelectorAll(".deleteButton");
-deleteButtons.forEach((item)=> {
-    item.addEventListener("click", (e)=> {
-        let troncId = item.id.split('_')[0];
-        redirect("./delete-profile.php?idJoueur=" + troncId);
-    });
-});
+// let deleteButtons = document.querySelectorAll(".deleteButton");
+// deleteButtons.forEach((item)=> {
+//     item.addEventListener("click", (e)=> {
+//         let troncId = item.id.split('_')[0];
+//         redirect("./delete-profile.php?idJoueur=" + troncId);
+//     });
+// });

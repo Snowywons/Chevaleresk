@@ -3,15 +3,23 @@ $root = "../";
 
 include_once $root . "master/header.php";
 include_once $root . "utilities/dbUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
 
 global $conn;
 
 $records = executeQuery("SELECT * FROM Joueurs;");
 
+$idJoueurs = [];
+foreach ($records as $data) {
+    array_push($idJoueurs, $data[0]);
+}
+CreateItemDeleteConfirmationContainers($idJoueurs);
+CreateOverlay();
+
 echo <<<HTML
     <h1 style="background-color: deeppink">PAGE ACCESSIBLE SEULEMENT PAR LES ADMINISTRATEURS</h1>
-    <main class='list'>
-        <h1>Mes informations</h1>
+    <main class='administration'>
+        <h1>Gestionnaire</h1>
         
         <div class='playerInfosContainer'>
         <div class="category">ID</div>
@@ -37,14 +45,14 @@ foreach ($records as $player) {
             <div>$balance</div>
             <div class='adminActionsContainer'>
                 <div class='adminButtonsContainer'>
-                    <button id='".$idPlayer."_inventoryButton' class='inventoryButton'>
-                        <img src='".$root."/icons/EyeIcon.png'/>
+                    <button id='" . $idPlayer . "_inventoryButton' class='inventoryButton'>
+                        <img src='" . $root . "/icons/EyeIcon.png'/>
                     </button>
-                    <button id='".$idPlayer."_modifyButton' class='modifyButton'>
-                        <img src='".$root."/icons/EditIcon.png'/>
+                    <button id='" . $idPlayer . "_modifyButton' class='modifyButton'>
+                        <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
-                    <button id='".$idPlayer."_deleteButton' class='deleteButton'>
-                        <img src='".$root."/icons/DeleteIcon.png'/>
+                    <button id='" . $idPlayer . "_deleteButton' class='deleteButton'>
+                        <img src='" . $root . "/icons/DeleteIcon.png'/>
                     </button>
                 </div>
             </div>";
@@ -57,6 +65,7 @@ echo "
 include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='".$root."js/profiles.js' defer></script>";
+    <script type='text/javascript' src='" . $root . "js/profiles.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/popup.js' defer></script>";
 
 ?>

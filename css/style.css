@@ -45,6 +45,7 @@
     --popup-itemDetailsHeaderHeight: 30px;
     --popup-itemDetailsBodyHeight: 224px;
     --popup-itemDetailsFooterHeight: 30px;
+    --popup-itemDeleteConfirmationContainerWidth: 400px;
     /*#endregion Popup*/
 
     /*#region Évaluations*/
@@ -76,7 +77,7 @@ main.delete-item
     text-align: center;
 }
 
-main.list
+main.administration
 {
     width: 600px;
     margin: 40px auto;
@@ -151,6 +152,11 @@ nav.chevaleresk:hover
     {
         display: none;
     }
+}
+
+nav > nav#administration
+{
+    background-color: var(--col-lightRed);
 }
 
 nav > nav
@@ -458,6 +464,7 @@ button.deleteButton > img
     height: 100%;
 }
 
+button.pay:hover,
 button.addToShoppingCart:hover,
 button.inventoryButton:hover,
 button.modifyButton:hover,
@@ -557,13 +564,15 @@ div.addItemContainer:active
 /*#endregion Magasin*/
 
 /*#region Détails de l'item (Popup)*/
-.itemDetailsContainer
+.itemDetailsContainer,
+.itemDeleteConfirmationContainer
 {
     display: none;
     position: relative;
 }
 
-.itemDetailsContainer.active
+.itemDetailsContainer.active,
+.itemDeleteConfirmationContainer.active
 {
     display: block;
     width: var(--popup-itemDetailsContainerWidth);
@@ -575,6 +584,20 @@ div.addItemContainer:active
     border: 1px solid var(--store-itemDetailsContainerHeaderBackgroundColor);
     background-color: var(--store-itemDetailsContainerBackgroundColor);
     z-index: 10;
+}
+
+div.itemDeleteConfirmationContainer.active
+{
+    width: var(--popup-itemDeleteConfirmationContainerWidth);
+    height: auto;
+    text-align: center;
+}
+
+div.confirmationButtonsContainer
+{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
 }
 
 .itemDetailsHeader

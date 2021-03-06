@@ -21,7 +21,7 @@ function CreateItemDetailsContainers($idItems)
         }
 
         $nomItem = $data[0];
-        $photoItem = "/Chevaleresk/icons/ChevalereskIcon.png"; //devrait être $data[1]
+        $photoItem = "../icons/ChevalereskIcon.png"; //devrait être $data[1]
         $codeType = $data[2];
 
         if ($conn) {
@@ -120,8 +120,8 @@ function CreateItemDetailsContainers($idItems)
         </div>
         <div class='itemDetailsFooter'>
             <div class='itemStarbar'>
-                <img src='/Chevaleresk/icons/StarIcon.png'>
-                <img src='/Chevaleresk/icons/StarIcon.png'>
+                <img src='../icons/StarIcon.png'>
+                <img src='../icons/StarIcon.png'>
             </div>
             <button id='" .$idItem."_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
             Voir les évaluations</button>
@@ -129,6 +129,44 @@ function CreateItemDetailsContainers($idItems)
         </div>
       </div>";
     }
+}
 
+function CreateItemDeleteConfirmationContainers($idItems){
+    global $conn;
+
+    foreach ($idItems as $idItem) {
+
+        $data = [];
+
+        if ($conn) {
+            $query = "SELECT nomItem, photoItem, codeType FROM Items WHERE idItem = $idItem;";
+            try {
+                $data = $conn->query($query)->fetchall()[0];
+            } catch (PDOException $e) { }
+        }
+
+        $nomItem = $data[0];
+
+        /*Création des pages de confirmation de suppression pour chaque item*/
+        echo "
+        <div id='" . $idItem . "_delete' class='itemDeleteConfirmationContainer'>
+            <div class='itemDetailsHeader'>
+                  <span>Attention!</span>
+                  <button class='itemDetailsContainerExitButton'>x</button>
+            </div>
+            <br>
+            <div>
+                Êtes-vous sûr de vouloir supprimer cet item?
+            </div>
+            <div class='confirmationButtonsContainer'>
+                <button>Annuler</button>
+                <button>Confirmer</button>
+            </div>
+        </div>";
+    }
+}
+
+function CreateOverlay()
+{
     echo "<div id='overlay'></div>";
 }

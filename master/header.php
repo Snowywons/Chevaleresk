@@ -16,7 +16,7 @@ $loginPageLink = $root."session/login.php";
 $logoutPageLink = $root."session/logout.php";
 
 $profilePageLink = $root."profile/profile.php";
-$listPageLink = $root."profile/list.php";
+$administrationPageLink = $root."profile/administration.php";
 $modifyProfilePageLink = $root."profile/modify-profile.php";
 $inventoryPageLink = $root."profile/inventory.php";
 $registerPageLink = $root."profile/register.php";
@@ -81,9 +81,9 @@ HTML;
 else
 {
     echo <<<HTML
-            <nav id="list">
-                <p onclick="redirect('$listPageLink')"></p>
-                Liste des joueurs
+            <nav id="administration">
+                <p onclick="redirect('$administrationPageLink')"></p>
+                Administration
             </nav>
             <nav id="profile">
                 <p onclick="redirect('$profilePageLink')"></p>

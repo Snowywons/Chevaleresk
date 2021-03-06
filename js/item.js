@@ -16,13 +16,13 @@ adminModifyButtons.forEach((item)=> {
 });
 
 //Bouton Supprimer
-let adminDeleteButtons = document.querySelectorAll(".deleteButton");
-adminDeleteButtons.forEach((item)=> {
-    item.addEventListener("click", (e)=> {
-        let troncId = item.id.split('_')[0];
-        redirect("./delete-item.php?idItem=" + troncId);
-    });
-});
+// let adminDeleteButtons = document.querySelectorAll(".deleteButton");
+// adminDeleteButtons.forEach((item)=> {
+//     item.addEventListener("click", (e)=> {
+//         let troncId = item.id.split('_')[0];
+//         redirect("./delete-item.php?idItem=" + troncId);
+//     });
+// });
 
 //Conteneur/Bouton Ajouter
 let adminAddItemContainers = document.querySelectorAll(".addItemContainer");

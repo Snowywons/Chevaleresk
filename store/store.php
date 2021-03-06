@@ -16,6 +16,8 @@ foreach($records as $data) {
     array_push($idItems, $data[0]);
 }
 CreateItemDetailsContainers($idItems);
+CreateItemDeleteConfirmationContainers($idItems);
+CreateOverlay();
 
 
 echo <<<HTML
