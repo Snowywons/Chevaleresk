@@ -1,65 +1,117 @@
-:root
-{
-    /*#region Toutes les pages*/
-    --col-lightBlue: #b5d9f8;
-    --col-ocean: #5f9cd3;
-    --col-oceanFog: rgba(95, 156, 211, 0.3);
-    --col-sky: #6bb1f3;
-    --col-darkBlue: #438edd;
-    --col-lightGreen: #9df39d;
+:root {
+    /*#region Couleurs*/
+    --col-lightBlue: #b5d9f8; /*Inutilisé*/
+    --col-ocean: #5f9cd3; /*Inutilisé*/
+    --col-oceanFog: rgba(95, 156, 211, 0.3); /*Inutilisé*/
+    --col-sky: #6bb1f3; /*Inutilisé*/
+    --col-darkBlue: #438edd; /*Inutilisé*/
+    --col-lime: #9effd7;
+    --col-grass: #39c995;
+    --col-forestFog: rgba(57, 201, 147, 0.3);
     --col-skin: #ffbda3;
-    --col-sun: #ffb340;
     --col-lightRed: #ff6d6d;
     --col-gray: #d3d3d3;
-    /*#endregion Toutes les pages*/
+    /*#endregion Couleurs*/
 
-    /*#region Menu de navigation*/
+    /*#region Navigation*/
     --nav-width: 200px;
     --nav-height: 25px;
     --nav-padding: 10px;
-    --nav-borderTopCurrentPagePixel: 4px;
-    --nav-headerBackgroundColor: var(--col-lightBlue);
-    --nav-borderTopCurrentPageColor: var(--col-darkBlue);
-    --nav-buttonHoverColor: var(--col-ocean);
-    /*#endregion Menu de navigation*/
+    --nav-margin: auto 10px;
+    --nav-borderTopCurrentPageWidth: 4px;
+    --nav-headerBackgroundColor: var(--col-lime);
+    --nav-borderTopCurrentPageColor: var(--col-grass);
+    --nav-buttonHoverColor: var(--col-grass);
+    --nav-dropdownListBackgroundColor: var(--col-gray);
+    --nav-dropdownListFontSize: 125%;
+    --nav-titleFontSize: 28px;
+    --nav-administrationButtonBackgroundColor: var(--col-lightRed);
+    /*#endregion Navigation*/
 
     /*#region Magasin*/
-    --store-categoryTitle: var(--col-sky);
+    --store-categoryBackgroundColor: var(--col-grass);
     --store-categoryTotalBackgroundColor: var(--col-gray);
-    --store-itemPreviewContainerHoverColor: var(--col-oceanFog);
-    --store-addItemPreviewContainerBackgroundColor: var(--col-oceanFog);
-    --store-itemDetailsContainerBackgroundColor : var(--col-lightBlue);
-    --store-itemDetailsContainerExitButtonBackgroundColor: red;
-    --store-itemDetailsContainerHeaderBackgroundColor: var(--col-darkBlue);
-    --store-itemDetailsImageContainerBackgroundColor: whitesmoke;
-    --store-addToShoppingCartButtonColor: var(--col-lightGreen);
-    --store-modifyItemQuantityButtonColor: var(--col-skin);
-    --store-deleteFromShoppingCartButtonColor: var(--col-lightRed);
-    --store-ActiveButtonColor: var(--col-gray);
+    --store-frameCaseBorderColor: var(--col-grass);
+
+    --store-itemPreviewContainerHoverColor: var(--col-forestFog);
+
+    --store-addItemContainerBackgroundColor: var(--col-lime);
+    --store-addItemContainerBorderColor: var(--col-lime);
+
+    --store-shoppingCartTotalContainerBackgroundColor: var(--col-gray);
+    --store-shoppingCartTotalContainerBorderColor: black;
+    --store-shoppingCartTotalContainerTotalLineBorderColor: black;
+
+    --store-payButtonBackgroundColor: var(--col-lime);
+    --store-payButtonBorderColor: var(--col-lime);
+
+    --store-addButtonBackgroundColor: var(--col-lime);
+    --store-addButtonBorderColor: var(--col-lime);
+    --store-modifyButtonBackgroundColor: var(--col-skin);
+    --store-modifyButtonBorderColor: var(--col-skin);
+    --store-deleteButtonBackgroundColor: var(--col-lightRed);
+    --store-deleteButtonBorderColor: var(--col-lightRed);
+    --store-activeButtonBackgroundColor: var(--col-gray);
+    --store-activeButtonBorderColor: var(--col-gray);
     /*#endregion Magasin*/
 
+    /*#region Filtre*/
+    --store-filterContainerBackgroundColor: var(--col-lime);
+    --store-filterContainerBorderColor: var(--col-lime);
+    --store-filtersBackgroundColor: var(--col-lime);
+    /*#endregion Filtre*/
+
     /*#region Popup*/
-    --popup-itemDetailsContainerWidth: 500px;
-    --popup-itemDetailsContainerHeight: 600px;
-    --popup-itemDetailsImageContainerHeight: 300px;
-    --popup-itemDetailsHeaderHeight: 30px;
-    --popup-itemDetailsBodyHeight: 224px;
-    --popup-itemDetailsFooterHeight: 30px;
-    --popup-itemDeleteConfirmationContainerWidth: 400px;
+    --popup-itemDetailsContainerBackgroundColor: var(--col-lime);
+    --popup-itemDetailsContainerBorderColor: var(--col-grass);
+
+    --popup-itemDetailsContainerExitButtonHoverBackgroundColor: var(--col-lightRed);
+    --popup-itemDetailsContainerExitButtonHoverBorderColor: var(--col-lightRed);
+    --popup-itemDetailsContainerExitButtonHoverTextColor: whitesmoke;
+
+    --popup-itemDetailsContainerHeaderBackgroundColor: var(--col-grass);
+    --popup-itemDetailsImageContainerBackgroundColor: whitesmoke;
+    --popup-itemDetailsImageContainerBorderColor: var(--col-grass);
+    --popup-itemDetailsBodyContainerInfosBorderColor: var(--col-grass);
+    --popup-itemDetailsFooterBackgroundColor: var(--col-grass);
+    --popup-itemDetailsContainerEvaluationButtonBackgroundColor: var(--col-lime);
+    --popup-itemDetailsContainerEvaluationButtonBorderColor: var(--col-lime);
+
+    --popup-itemDeleteConfirmationContainerBackgroundColor: whitesmoke;
+    --popup-cancelButtonBackgroundColor: var(--col-lightRed);
+    --popup-cancelButtonBorderColor: var(--col-lightRed);
+    --popup-confirmButtonBackgroundColor: var(--col-lime);
+    --popup-confirmButtonBorderColor: var(--col-lime);
+
+    --popup-overlayBackgroundColor: rgba(0, 0, 0, 0.35);
     /*#endregion Popup*/
 
     /*#region Évaluations*/
-    --evaluations-evaluationPreviewContainerHoverColor: var(--col-oceanFog);
-    --evaluations-evaluationItemImageContainerBackgroundColor: var(--col-lightBlue);
+    --evaluations-evaluationPreviewContainerHoverColor: var(--col-forestFog);
+    --evaluations-evaluationPreviewContainerBorderColor: var(--col-grass);
+    --evaluations-evaluationItemContainerBackgroundColor: var(--col-grass);
+    --evaluations-evaluationItemContainerBorderColor: var(--col-grass);
+    --evaluations-evaluationItemImageContainerBackgroundColor: var(--col-lime);
+    --evaluations-itemStarbarContainerBackgroundColor: var(--col-grass);
+    --evaluations-playerEvaluationContainerBorderColor: var(--col-grass);
+    --evaluations-playerEvaluationContainerTextareaBackgroundColor: var(--col-lime);
+    --evaluations-evaluationsListButtonBackgroundColor: var(--col-lime);
+    --evaluations-evaluationsListButtonBorderColor: var(--col-lime);
     /*#endregion Évaluations*/
 
     /*#region Profil*/
-    --profile-adminInventoryButtonColor: var(--col-lightBlue);
+    --profile-inventoryButtonBackgroundColor: var(--col-lime);
+    --profile-inventoryButtonBorderColor: var(--col-lime);
     /*#endregion Profil*/
+
+    /*#region Form et Fieldset*/
+    --fieldset-inputSubmitBackgroundColor: var(--col-lime);
+    --fieldset-inputSubmitBorderColor: var(--col-lime);
+    --fieldset-addItemPreviewContainerBackgroundColor: var(--col-forestFog);
+    /*#endregion Form et Fieldset*/
 }
 
-body
-{
+body {
     margin: 0;
 }
 
@@ -70,15 +122,13 @@ main.modify-profile,
 main.delete-profile,
 main.add-item,
 main.modify-item,
-main.delete-item
-{
+main.delete-item {
     width: 400px;
     margin: 40px auto;
     text-align: center;
 }
 
-main.administration
-{
+main.administration {
     width: 600px;
     margin: 40px auto;
     text-align: center;
@@ -88,118 +138,101 @@ main.index,
 main.store,
 main.inventory,
 main.evaluations,
-main.shopping-cart
-{
+main.shopping-cart {
     width: 98%;
     margin: 40px auto;
     text-align: center;
 }
 
-/*#region Menu de navigation*/
-header
-{
+/*#region Navigation*/
+header {
     position: relative;
 }
 
-header::before, nav.mark::before
-{
+header::before, nav.mark::before {
     z-index: 1;
     content: " ";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    border-bottom: calc(var(--nav-borderTopCurrentPagePixel) / 2) solid var(--nav-borderTopCurrentPageColor);
+    border-bottom: calc(var(--nav-borderTopCurrentPageWidth) / 2) solid var(--nav-borderTopCurrentPageColor);
 }
 
-nav.mark::before
-{
-    border-bottom: var(--nav-borderTopCurrentPagePixel) solid var(--nav-borderTopCurrentPageColor);
+nav.mark::before {
+    border-bottom: var(--nav-borderTopCurrentPageWidth) solid var(--nav-borderTopCurrentPageColor);
 }
 
-nav:hover.mark::before
-{
+nav:hover.mark::before {
     border-color: transparent;
 }
 
-nav
-{
+nav {
     display: flex;
     justify-content: center;
     background-color: var(--nav-headerBackgroundColor);
     user-select: none;
 }
 
-nav > nav.chevaleresk
-{
+nav > nav.title {
     background-color: transparent;
     position: absolute;
     left: 0;
     color: var(--nav-borderTopCurrentPageColor);
     font-weight: bold;
-    font-size: 28px;
+    font-size: var(--nav-titleFontSize);
     margin: 0;
 }
 
-nav.chevaleresk:hover
-{
+nav.title:hover {
     background-color: transparent;
 }
 
-@media screen and (max-width:1100px)
-{
-    nav.chevaleresk
-    {
+nav > nav#administration {
+    background-color: var(--nav-administrationButtonBackgroundColor);
+}
+
+@media screen and (max-width: 1600px) {
+    nav.title {
         display: none;
     }
 }
 
-nav > nav#administration
-{
-    background-color: var(--col-lightRed);
-}
-
-nav > nav
-{
+nav > nav {
     width: var(--nav-width);
     height: var(--nav-height);
-    margin: auto 10px;
+    margin: var(--nav-margin);
     align-items: center;
     position: relative;
     padding: var(--nav-padding);
     cursor: pointer;
 }
 
-nav > nav.IconOnly
-{
-    width: auto;
-    background-color: transparent;
-}
-
-nav > p
-{
+nav > p {
     position: absolute;
     width: 100%;
     height: calc(var(--nav-height) + var(--nav-padding) * 2);
     margin: 0;
 }
 
-nav > img
-{
+nav > img {
     position: absolute;
     left: -5px;
     height: 90%;
 }
 
-nav.IconOnly > img
-{
+nav > nav.iconOnly {
+    width: auto;
+    background-color: transparent;
+}
+
+nav.iconOnly > img {
     position: relative;
     left: 0;
     height: 100%;
 }
 
-nav ul
-{
+nav ul {
     position: absolute;
     width: 100%;
     overflow: auto;
@@ -207,81 +240,61 @@ nav ul
     top: 0;
     padding: 0;
     display: none;
-    font-size: 125%;
-    background-color: #cbd0d1;
+    font-size: var(--nav-dropdownListFontSize);
+    background-color: var(--nav-dropdownListBackgroundColor);
 }
 
-nav > nav:hover > ul
-{
+nav > nav:hover > ul {
     display: block;
     cursor: pointer;
 }
 
-nav > nav:hover > ul.hidden
-{
+nav > nav:hover > ul.hidden {
     display: none;
 }
 
-nav > nav:hover, nav ul > li:hover
-{
+nav > nav:hover, nav ul > li:hover {
     background-color: var(--nav-buttonHoverColor);
     z-index: 1;
 }
 
-nav input[type=checkbox]
-{
-    width: 20px;
-    height: 20px;
-}
-/*#endregion Menu de navigation*/
+/*#endregion Navigation*/
 
 /*#region Filtre*/
-.filterContainer
-{
+div.filterContainer {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
     padding: 5px;
     user-select: none;
-    background-color: var(--col-lightBlue);
+    background-color: var(--store-filterContainerBackgroundColor);
 
     border-width: 2px;
     border-style: outset;
-    border-color: var(--col-lightBlue);
+    border-color: var(--store-filterContainerBorderColor);
 }
 
-.filterContainer.opened
-{
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
-}
-
-.filterContainer > img
-{
+div.filterContainer > img {
     height: 25px;
     transform: rotate(0);
 }
 
-.filterContainer.opened > img
-{
+div.filterContainer.opened > img {
     transform: rotate(180deg);
 }
 
-.filterContainer:hover
-{
+div.filterContainer:hover {
     cursor: pointer;
 }
 
-.filterContainer:active
-{
+div.filterContainer:active, div.filterContainer.opened {
     border-style: inset;
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBackgroundColor);
 }
 
-.filters
-{
+div.filters {
     position: relative;
     display: grid;
     grid-template-columns: auto 20px;
@@ -289,23 +302,23 @@ nav input[type=checkbox]
     padding: 5px;
     text-align: left;
     align-items: baseline;
-    background-color: var(--nav-headerBackgroundColor);
+    background-color: var(--store-filtersBackgroundColor);
 }
 
-.filters.hidden
-{
+div.filters.hidden {
     display: none;
 }
 
-.filters label
-{
+div.filters label {
     padding: 5px 0;
 }
+
 /*#endregion Filtre*/
 
 /*#region Magasin*/
-div.storeContainer
-{
+
+/*Présentation par défaut*/
+div.storeContainer {
     display: grid;
     grid-template-columns: auto 250px 250px 400px;
     align-content: center;
@@ -313,47 +326,41 @@ div.storeContainer
 }
 
 /*Présentation du tableau dans l'inventaire*/
-main.inventory div.storeContainer
-{
+main.inventory div.storeContainer {
     display: grid;
     grid-template-columns: auto auto;
 }
 
 /*Présentation du tableau dans le panier d'achat*/
-main.shopping-cart div.storeContainer
-{
+main.shopping-cart div.storeContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-main.shopping-cart div.shoppingCartTotalContainer
-{
+main.shopping-cart div.shoppingCartTotalContainer {
     display: grid;
     grid-template-columns: auto 200px;
     text-align: right;
-    background-color: var(--col-gray);
-    border: 1px dashed black;
+    background-color: var(--store-shoppingCartTotalContainerBackgroundColor);
+    border: 1px dashed var(--store-shoppingCartTotalContainerBorderColor);
     padding: 10px;
 }
 
-div.shoppingCartTotalContainer .totalLigne
-{
-    border: 1px dashed black;
+div.shoppingCartTotalContainer div.totalLigne {
+    border: 1px dashed var(--store-shoppingCartTotalContainerTotalLineBorderColor);
 }
 
-div.storeContainer > div.category
-{
-    background-color: var(--store-categoryTitle);
+div.storeContainer > div.category {
+    background-color: var(--store-categoryBackgroundColor);
     font-weight: bold;
 }
 
-div.storeContainer > div
-{
+div.storeContainer > div {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid var(--nav-borderTopCurrentPageColor);
+    border-right: 2px solid var(--store-frameCaseBorderColor);
     text-align: center;
     padding: 5px;
 }
@@ -363,65 +370,42 @@ div.storeContainer > div:nth-child(n + 9), /*Propre au magasin*/
 main.inventory div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
 main.shopping-cart div.storeContainer > div:nth-child(n + 7) /*Propre au panier d'achat*/
 {
-    border-top: 1px solid var(--nav-borderTopCurrentPageColor);
+    border-top: 1px solid var(--store-frameCaseBorderColor);
 }
 
-div.storeContainer > div.rightLastColumn
-{
+div.storeContainer > div.rightLastColumn {
     border-right: 0;
 }
 
-.storeContainer button
-{
+.storeContainer button {
     user-select: none;
 }
 
-button.pay
-{
-    width: 100px;
-    height: 30px;
-    background-color: var(--col-lightGreen);
-    border-color: var(--col-lightGreen);
-    outline: none;
-}
-
-button.pay:active
-{
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
-}
-
-button.removeItem, button.addItem
-{
+button.removeItem, button.addItem {
     display: block;
     margin: 0 10px;
 }
 
-button.removeItem.hidden, button.addItem.hidden
-{
+button.removeItem.hidden, button.addItem.hidden {
     display: none;
 }
 
-div.storeContainer input.itemQuantity
-{
+div.storeContainer input.itemQuantity {
     max-width: 40px;
     text-align: right;
 }
 
-div.itemPreviewContainer
-{
+div.itemPreviewContainer {
     position: relative;
     user-select: none;
 }
 
-div.itemPreviewContainer:hover
-{
+div.itemPreviewContainer:hover {
     background-color: var(--store-itemPreviewContainerHoverColor);
     cursor: pointer;
 }
 
-div.shoppingCartActionsContainer
-{
+div.shoppingCartActionsContainer {
     position: relative;
     display: grid;
     grid-template-columns: auto 75px;
@@ -429,25 +413,32 @@ div.shoppingCartActionsContainer
     height: 28px;
 }
 
-div.shoppingCartQuantityContainer
-{
+div.shoppingCartQuantityContainer {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-button.addToShoppingCart
-{
+button.addToShoppingCart {
     width: 75px;
     height: 25px;
     margin-left: 10px;
     outline: none;
+    background-color: var(--store-addButtonBackgroundColor);
+    border-color: var(--store-addButtonBorderColor);
+}
+
+button.pay {
+    width: 100px;
+    height: 30px;
+    outline: none;
+    background-color: var(--store-payButtonBackgroundColor);
+    border-color: var(--store-payButtonBorderColor);
 }
 
 button.inventoryButton,
 button.modifyButton,
-button.deleteButton
-{
+button.deleteButton {
     width: 30px;
     height: 25px;
     outline: none;
@@ -457,10 +448,24 @@ button.deleteButton
     margin: 0;
 }
 
+button.inventoryButton {
+    background-color: var(--profile-inventoryButtonBackgroundColor);
+    border-color: var(--profile-inventoryButtonBorderColor);
+}
+
+button.modifyButton {
+    background-color: var(--store-modifyButtonBackgroundColor);
+    border-color: var(--store-modifyButtonBorderColor);
+}
+
+button.deleteButton {
+    background-color: var(--store-deleteButtonBackgroundColor);
+    border-color: var(--store-deleteButtonBorderColor);
+}
+
 button.inventoryButton > img,
 button.modifyButton > img,
-button.deleteButton > img
-{
+button.deleteButton > img {
     height: 100%;
 }
 
@@ -468,49 +473,18 @@ button.pay:hover,
 button.addToShoppingCart:hover,
 button.inventoryButton:hover,
 button.modifyButton:hover,
-button.deleteButton:hover
-{
+button.deleteButton:hover {
     cursor: pointer;
 }
 
-button.inventoryButton
-{
-    background-color: var(--profile-adminInventoryButtonColor);
-    border-color: var(--profile-adminInventoryButtonColor);
-}
-
-button.modifyButton
-{
-    background-color: var(--store-modifyItemQuantityButtonColor);
-    border-color: var(--store-modifyItemQuantityButtonColor);
-}
-
-button.modifyButton.clicked
-{
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
-}
-
-button.deleteButton
-{
-    background-color: var(--store-deleteFromShoppingCartButtonColor);
-    border-color: var(--store-deleteFromShoppingCartButtonColor);
-}
-
-
 button.addToShoppingCart:active,
+button.pay:active,
 button.inventoryButton:active,
 button.modifyButton:active,
-button.deleteButton:active
-{
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
-}
-
-button.addToShoppingCart
-{
-    background-color: var(--store-addToShoppingCartButtonColor);
-    border-color: var(--store-addToShoppingCartButtonColor);
+button.modifyButton.clicked,
+button.deleteButton:active {
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -518,9 +492,8 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-/*#region Administrateurs seulement*/
-div.adminButtonsContainer
-{
+/*#region Admin stuff*/
+div.adminButtonsContainer {
     text-align: right;
     position: absolute;
     right: 0;
@@ -528,347 +501,358 @@ div.adminButtonsContainer
     padding: 2px;
 }
 
-div.addItemContainer
-{
+div.addItemContainer {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
     border-width: 2px;
     border-style: outset;
-    border-color: var(--col-lightGreen);
+    border-color: var(--store-addItemContainerBorderColor);
     padding: 5px;
     user-select: none;
-    background-color: var(--col-lightGreen);
+    background-color: var(--store-addItemContainerBackgroundColor);
 }
 
-div.addItemContainer > img
-{
+div.addItemContainer > img {
     height: 25px;
     transform: rotate(0);
 }
 
-div.addItemContainer:hover
-{
+div.addItemContainer:hover {
     cursor: pointer;
 }
 
-div.addItemContainer:active
-{
+div.addItemContainer:active {
     border-style: inset;
-    background-color: var(--store-ActiveButtonColor);
-    border-color: var(--store-ActiveButtonColor);
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
 }
-/*#endregion Administrateurs seulement*/
+
+/*#endregion Admin stuff*/
 
 /*#endregion Magasin*/
 
-/*#region Détails de l'item (Popup)*/
-.itemDetailsContainer,
-.itemDeleteConfirmationContainer
-{
+/*#region Popup*/
+div.itemDetailsContainer,
+div.itemDeleteConfirmationContainer {
     display: none;
     position: relative;
 }
 
-.itemDetailsContainer.active,
-.itemDeleteConfirmationContainer.active
-{
+div.itemDetailsContainer.active,
+div.itemDeleteConfirmationContainer.active {
     display: block;
-    width: var(--popup-itemDetailsContainerWidth);
-    height: var(--popup-itemDetailsContainerHeight);
+    width: 500px;
+    height: 600px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid var(--store-itemDetailsContainerHeaderBackgroundColor);
-    background-color: var(--store-itemDetailsContainerBackgroundColor);
+    border: 1px solid var(--popup-itemDetailsContainerBorderColor);
+    background-color: var(--popup-itemDetailsContainerBackgroundColor);
     z-index: 10;
 }
 
-div.itemDeleteConfirmationContainer.active
-{
-    width: var(--popup-itemDeleteConfirmationContainerWidth);
+div.itemDeleteConfirmationContainer.active {
+    width: 400px;
     height: auto;
     text-align: center;
+    background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);
 }
 
-div.confirmationButtonsContainer
-{
+div.confirmationButtonsContainer {
     display: flex;
     justify-content: space-evenly;
     padding: 10px;
 }
 
-.itemDetailsHeader
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
-    font-weight: bold;
-    padding: 1px;
-    padding-left: 5px;
-}
-
-
-.itemDetailsContainerExitButton
-{
-    font-size: medium;
-}
-
-.itemDetailsContainerExitButton:focus,
-.itemDetailsContainerExitButton:active
-{
+div.confirmationButtonsContainer button.cancelButton {
+    background-color: var(--popup-cancelButtonBackgroundColor);
+    border-color: var(--popup-cancelButtonBorderColor);
     outline: none;
 }
 
-.itemDetailsContainerExitButton:hover
-{
-    background-color: red;
-    color: whitesmoke;
-    border-color: red;
+div.confirmationButtonsContainer button.confirmButton {
+    background-color: var(--popup-confirmButtonBackgroundColor);
+    border-color: var(--popup-confirmButtonBorderColor);
+    outline: none;
 }
 
-.itemDetailsImageContainer
-{
+div.confirmationButtonsContainer button.cancelButton:active,
+div.confirmationButtonsContainer button.confirmButton:active {
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
+}
+
+div.confirmationButtonsContainer button.cancelButton:hover,
+div.confirmationButtonsContainer button.confirmButton:hover {
+    cursor: pointer;
+}
+
+div.itemDetailsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--popup-itemDetailsContainerHeaderBackgroundColor);
+    font-weight: bold;
+    padding: 2px 2px 3px 5px;
+}
+
+button.itemDetailsContainerExitButton {
+    font-size: medium;
+    outline: none;
+    border-color: transparent;
+}
+
+button.itemDetailsContainerExitButton:focus,
+button.itemDetailsContainerExitButton:active {
+    outline: none;
+}
+
+button.itemDetailsContainerExitButton:hover {
+    cursor: pointer;
+    color: var(--popup-itemDetailsContainerExitButtonHoverTextColor);
+    background-color: var(--popup-itemDetailsContainerExitButtonHoverBackgroundColor);
+    border-color: var(--popup-itemDetailsContainerExitButtonHoverBorderColor);
+}
+
+div.itemDetailsImageContainer {
     text-align: center;
-    height: var(--popup-itemDetailsImageContainerHeight);
-    background-color: var(--store-itemDetailsImageContainerBackgroundColor);
-    border-bottom: 1px solid var(--nav-borderTopCurrentPageColor);
+    height: 300px;
+    background-color: var(--popup-itemDetailsImageContainerBackgroundColor);
+    border-bottom: 1px solid var(--popup-itemDetailsImageContainerBorderColor);
 }
 
-.itemDetailsImageContainer > img
-{
+div.itemDetailsImageContainer > img {
     height: 100%;
 }
 
-.itemDetailsBodyContainer
-{
+div.itemDetailsBodyContainer {
     display: grid;
     grid-template-columns: auto auto;
-    max-height: var(--popup-itemDetailsBodyHeight);
+    max-height: 224px;
     overflow-y: scroll;
 }
 
-.itemDetailsBodyContainer::-webkit-scrollbar
-{
+div.itemDetailsBodyContainer::-webkit-scrollbar {
     display: none;
 }
 
-.itemDetailsBodyContainer > span
-{
-    border-bottom: 1px solid var(--nav-borderTopCurrentPageColor);
+div.itemDetailsBodyContainer > span {
+    border-bottom: 1px solid var(--popup-itemDetailsBodyContainerInfosBorderColor);
     padding: 5px;
 }
 
-.itemDetailsBodyContainer > span:nth-of-type(2n + 1)
-{
-    border-right: 1px solid var(--nav-borderTopCurrentPageColor);
+div.itemDetailsBodyContainer > span:nth-of-type(2n + 1) {
+    border-right: 1px solid var(--popup-itemDetailsBodyContainerInfosBorderColor);
     font-weight: bold;
 }
 
-.itemDetailsFooter
-{
+div.itemDetailsFooter {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
     text-align: center;
-    background-color: var(--store-itemDetailsContainerHeaderBackgroundColor);
+    background-color: var(--popup-itemDetailsFooterBackgroundColor);
+    padding: 5px 0;
 }
 
-#overlay
-{
+button.itemDetailsContainerEvaluationButton {
+    background-color: var(--popup-itemDetailsContainerEvaluationButtonBackgroundColor);
+    border-color: var(--popup-itemDetailsContainerEvaluationButtonBorderColor);
+    outline: none;
+    height: 25px;
+}
+
+button.itemDetailsContainerEvaluationButton:hover {
+    cursor: pointer;
+}
+
+button.itemDetailsContainerEvaluationButton:active {
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
+}
+
+div#overlay {
     opacity: 0;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--popup-overlayBackgroundColor);
     pointer-events: none;
 }
 
-#overlay.active
-{
+div#overlay.active {
     opacity: 1;
     pointer-events: all;
     z-index: 9;
 }
-/*#endregion Détails de l'item (Popup)*/
 
-/*#region Évaluation*/
-div.itemEvaluationsContainer
-{
+/*#endregion Popup*/
+
+/*#region Évaluations*/
+div.itemEvaluationsContainer {
     display: flex;
 }
 
-div.itemEvaluationPreviewContainer
-{
+div.itemEvaluationPreviewContainer {
     user-select: none;
     margin: 10px 10px 10px 0;
-    border: 1px solid var(--col-darkBlue);
+    border: 1px solid var(--evaluations-evaluationPreviewContainerBorderColor);
 }
 
-div.itemEvaluationPreviewContainer:hover
-{
+div.itemEvaluationPreviewContainer:hover {
     background-color: var(--evaluations-evaluationPreviewContainerHoverColor);
     cursor: pointer;
 }
 
-div.evaluationContainer
-{
+div.evaluationContainer {
     display: grid;
     grid-template-columns: 200px auto;
     grid-column-gap: 5px;
     height: 100%;
 }
 
-div.evaluationItemImageContainer
-{
+div.evaluationItemImageContainer {
     background-color: var(--evaluations-evaluationItemImageContainerBackgroundColor);
 }
 
-div.evaluationItemContainer
-{
+div.evaluationItemContainer {
     grid-row-start: span 9000;
-    border: 1px solid var(--col-darkBlue);
-    background-color: var(--col-darkBlue);
+    border: 1px solid var(--evaluations-evaluationItemContainerBorderColor);
+    background-color: var(--evaluations-evaluationItemContainerBackgroundColor);
 }
 
-.itemStarbarContainer
-{
-    background-color: var(--col-darkBlue);
+div.itemStarbarContainer {
+    background-color: var(--evaluations-itemStarbarContainerBackgroundColor);
     padding: 5px;
     text-align: left;
 }
 
-.itemStarbar
-{
-}
-
-.itemStarbar img
-{
+div.itemStarbar img {
+    padding: 2px;
     height: 20px;
 }
 
-div.playerEvaluationContainer
-{
+div.playerEvaluationContainer {
     position: relative;
     grid-column-start: 2;
     min-height: 100px;
     text-align: left;
-    padding: 5px;
+    padding: 5px 5px 0 5px;
+    /*padding: 0;*/
+    border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
 }
 
-div.playerEvaluationContainer
-{
-    border: 1px solid var(--col-darkBlue);
-}
-
-div.playerEvaluationContainer ~ div.playerEvaluationContainer
-{
+div.playerEvaluationContainer ~ div.playerEvaluationContainer {
     border-top: 0;
 }
 
-div.playerEvaluationContainer > div:nth-of-type(3)
-{
+div.playerEvaluationContainer > div:nth-of-type(3) {
     position: absolute;
     bottom: 5px;
 }
 
-div.playerEvaluationContainer img
-{
+div.playerEvaluationContainer img {
     height: 20px;
 }
 
-div.playerEvaluationContainer:last-child
-{
+div.playerEvaluationContainer:last-child {
     height: 200px;
     padding: 0;
 }
 
-div.playerEvaluationContainer div.starBar
-{
-    padding: 5px;
-    height: 25px;
-}
-
-div.playerEvaluationContainer form
-{
+div.playerEvaluationContainer form {
     height: 100%;
     padding: 0;
     margin: 0;
 }
 
-div.playerEvaluationContainer textarea
-{
+div.playerEvaluationContainer fieldset {
+    padding: 0;
+    margin: 0;
+}
+
+div.playerEvaluationContainer textarea {
     width: 100%;
-    height: 165px;
+    height: 172px;
     border-width: 0 0 0 0;
     box-sizing: border-box;
     resize: none;
 }
 
-div.playerEvaluationContainer textarea:focus
-{
+div.playerEvaluationContainer textarea:focus {
     outline: none;
     border-width: 0;
-    background-color: var(--col-lightBlue);
+    background-color: var(--evaluations-playerEvaluationContainerTextareaBackgroundColor);
 }
 
-div.evaluationsListButtonContainer
-{
+div.evaluationsListButtonContainer {
     text-align: left;
     padding-bottom: 10px;
 }
-button.evaluationsListButton
-{
+
+button.evaluationsListButton {
+    background-color: var(--evaluations-evaluationsListButtonBackgroundColor);
+    border-color: var(--evaluations-evaluationsListButtonBorderColor);
+    outline: none;
+    height: 25px;
 }
 
-/*#endregion Évaluation*/
+button.evaluationsListButton:active {
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
+}
+
+button.evaluationsListButton:hover {
+    cursor: pointer;
+}
+
+/*#endregion Évaluations*/
 
 /*#region Profil*/
-div.playerInfosContainer
-{
+div.playerInfosContainer {
     display: grid;
     grid-template-columns: 96px 100px 100px 100px 100px 104px;
     width: 100%;
 }
 
-div.playerInfosContainer > div.category
-{
-    background-color: var(--store-categoryTitle);
+div.playerInfosContainer > div.category {
+    background-color: var(--store-categoryBackgroundColor);
     font-weight: bold;
 }
 
-div.playerInfosContainer > div
-{
+div.playerInfosContainer > div {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid var(--nav-borderTopCurrentPageColor);
+    border-right: 2px solid var(--store-frameCaseBorderColor);
     text-align: center;
     padding: 5px;
 }
 
-div.playerInfosContainer > div:nth-child(n + 9)
-{
-    border-top: 1px solid var(--nav-borderTopCurrentPageColor);
+div.playerInfosContainer > div:nth-child(6n + 1) {
+    border-left: 2px solid var(--store-frameCaseBorderColor);
 }
 
-div.adminActionsContainer
-{
+div.playerInfosContainer > div:nth-child(n + 9) {
+    border-top: 1px solid var(--store-frameCaseBorderColor);
+}
+
+div.adminActionsContainer {
     position: relative;
 }
+
 /*#endregion Profil*/
 
 /*#region Form et Fieldset*/
-fieldset, .addItemInfosContainer
-{
+fieldset, .addItemInfosContainer {
     position: relative;
     border: 0;
     display: grid;
@@ -878,40 +862,39 @@ fieldset, .addItemInfosContainer
     text-align: left;
 }
 
-fieldset > div.addItemInfosContainer
-{
+fieldset > div.addItemInfosContainer {
     grid-column: span 2;
 }
 
-fieldset label, fieldset input, fieldset select, fieldset textarea
-{
+fieldset label, fieldset input, fieldset select, fieldset textarea {
     grid-column: 2 span;
 }
 
-fieldset > input[type=submit]:hover
-{
+fieldset > input[type=submit]:hover {
     cursor: pointer;
 }
 
-fieldset > input[type=submit]
-{
-    background-color: var(--col-lightBlue);
-    border-color: var(--col-lightBlue);
+fieldset > input[type=submit] {
+    background-color: var(--fieldset-inputSubmitBackgroundColor);
+    border-color: var(--fieldset-inputSubmitBorderColor);
     outline: none;
     grid-column-start: 2;
     height: 25px;
     width: 100px;
 }
 
-div.addItemPreviewContainer
-{
+fieldset > input[type=submit]:active {
+    background-color: var(--store-activeButtonBackgroundColor);
+    border-color: var(--store-activeButtonBorderColor);
+}
+
+fieldset > div.addItemPreviewContainer {
     text-align: center;
-    background-color: var(--store-addItemPreviewContainerBackgroundColor);
+    background-color: var(--fieldset-addItemPreviewContainerBackgroundColor);
     grid-column: 2 span;
 }
 
-form input.itemQuantity
-{
+form input.itemQuantity {
     max-width: 40px;
     text-align: right;
 }
@@ -919,8 +902,8 @@ form input.itemQuantity
 /*#endregion Form et Fieldset*/
 
 /*region Autres*/
-.hidden
-{
+.hidden {
     display: none;
 }
+
 /*endregion Autres*/

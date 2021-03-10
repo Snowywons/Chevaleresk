@@ -68,7 +68,7 @@ function CreateItemDetailsContainers($idItems)
 
                 echo "
                         <span>Effet</span><span>$effetPotion</span>
-                        <span>Durée</span><span>$dureePotion</span>";
+                        <span>Durée (secondes)</span><span>$dureePotion</span>";
                 break;
 
             //Armures
@@ -159,8 +159,8 @@ function CreateItemDeleteConfirmationContainers($idItems){
                 Êtes-vous sûr de vouloir supprimer cet item?
             </div>
             <div class='confirmationButtonsContainer'>
-                <button>Annuler</button>
-                <button>Confirmer</button>
+                <button class='cancelButton'>Annuler</button>
+                <button class='confirmButton'>Confirmer</button>
             </div>
         </div>";
     }

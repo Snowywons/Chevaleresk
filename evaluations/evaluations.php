@@ -119,10 +119,12 @@ if ($itemId == null) {
 
     echo <<<HTML
         <div class='playerEvaluationContainer'>
-            <div class="starBar"><img src='$root/icons/StarIcon.png'></div>
+            <div class="itemStarbar"><img src='$root/icons/StarIcon.png'></div>
             <form action="" method="post">
-                <textarea placeholder="Nouveau commentaire"></textarea>
-                <input type="submit">
+                <fieldset>
+                    <textarea placeholder="Nouveau commentaire"></textarea>
+                    <input type="submit">
+                </fieldset>
             </form>
         </div>
     </div>

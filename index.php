@@ -12,9 +12,8 @@ echo "
 <main class='index'>
     <h1>Chevaleresk… des items pour des chevaliers…</h1>
     <img src='" . $root . "icons/ChevalereskIcon.png'>
-    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    At consequuntur ducimus ratione similique totam. A amet atque dolorem ea, eius fuga harum 
-    illum impedit, iste iusto molestias sunt, suscipit ut!</div>
+    <div>Bienvenue sur votre site favori d'échange d'items médiévales.
+    Inscrivez-vous ou connectez-vous pour profiter de toutes les fonctionnalités du site!</div>
 </main>";
 
 include_once $root . "master/footer.php";
