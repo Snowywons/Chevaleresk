@@ -7,6 +7,7 @@
     --col-darkBlue: #438edd; /*Inutilisé*/
     --col-lime: #9effd7;
     --col-grass: #39c995;
+    --col-forest: #2dba86;
     --col-forestFog: rgba(57, 201, 147, 0.3);
     --col-skin: #ffbda3;
     --col-lightRed: #ff6d6d;
@@ -34,6 +35,7 @@
     --store-frameCaseBorderColor: var(--col-grass);
 
     --store-itemPreviewContainerHoverColor: var(--col-forestFog);
+    --store-itemIconContainerHoverColor: var(--col-forestFog);
 
     --store-addItemContainerBackgroundColor: var(--col-lime);
     --store-addItemContainerBorderColor: var(--col-lime);
@@ -261,7 +263,12 @@ nav > nav:hover, nav ul > li:hover {
 /*#endregion Navigation*/
 
 /*#region Filtre*/
-div.filterContainer {
+div.filterWrapper {
+    display: flex;
+    justify-content: start;
+}
+
+div.filterContainer, div.resetFilterContainer {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -275,7 +282,8 @@ div.filterContainer {
     border-color: var(--store-filterContainerBorderColor);
 }
 
-div.filterContainer > img {
+div.filterContainer > img,
+div.resetFilterContainer > img {
     height: 25px;
     transform: rotate(0);
 }
@@ -284,14 +292,23 @@ div.filterContainer.opened > img {
     transform: rotate(180deg);
 }
 
-div.filterContainer:hover {
+div.filterContainer:hover,
+div.resetFilterContainer:hover {
     cursor: pointer;
 }
 
-div.filterContainer:active, div.filterContainer.opened {
+div.filterContainer:active,
+div.filterContainer.opened,
+div.resetFilterContainer:active
+{
     border-style: inset;
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBackgroundColor);
+}
+
+div.resetFilterContainer {
+    width: 25px;
+    margin-left: 5px;
 }
 
 div.filters {
@@ -362,7 +379,7 @@ div.storeContainer > div {
     justify-content: center;
     border-right: 2px solid var(--store-frameCaseBorderColor);
     text-align: center;
-    padding: 5px;
+    padding: 8px;
 }
 
 /*À ajuster selon le nombre de colonnes du tableau*/
@@ -398,11 +415,34 @@ div.storeContainer input.itemQuantity {
 div.itemPreviewContainer {
     position: relative;
     user-select: none;
+    height: auto;
 }
 
 div.itemPreviewContainer:hover {
     background-color: var(--store-itemPreviewContainerHoverColor);
     cursor: pointer;
+}
+
+div.itemPreviewContainer div.itemIconContainer {
+    background-color: var(--store-itemIconContainerHoverColor);
+    height: 150px;
+    width: 150px;
+}
+
+div.itemPreviewContainer div.itemIconContainer img {
+    height: 100%;
+}
+
+div.itemPreviewContainer:hover div.itemIconContainer {
+    background-color: whitesmoke;
+}
+
+div.itemPreviewContainer div.titleContainer {
+    padding-top: 8px;
+    width: 150px;
+    text-overflow: ellipsis;
+    white-space: initial;
+    overflow: hidden;
 }
 
 div.shoppingCartActionsContainer {

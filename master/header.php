@@ -1,25 +1,26 @@
 <?php
-session_start();
 global $root;
 
-$indexPageLink = $root."index.php";
+include_once $root . "utilities/sessionUtilities.php";
 
-$storePageLink = $root."store/store.php";
-$addItemPageLink = $root."store/add-item.php";
-$modifyItemPageLink = $root."store/modify-item.php";
-$deleteItemPageLink = $root."store/delete-item.php";
-$shoppingCartPageLink = $root."store/shopping-cart.php";
+$indexPageLink = $root . "index.php";
 
-$evaluationsPageLink = $root."evaluations/evaluations.php";
+$storePageLink = $root . "store/store.php";
+$addItemPageLink = $root . "store/add-item.php";
+$modifyItemPageLink = $root . "store/modify-item.php";
+$deleteItemPageLink = $root . "store/delete-item.php";
+$shoppingCartPageLink = $root . "store/shopping-cart.php";
 
-$loginPageLink = $root."session/login.php";
-$logoutPageLink = $root."session/logout.php";
+$evaluationsPageLink = $root . "evaluations/evaluations.php";
 
-$profilePageLink = $root."profile/profile.php";
-$administrationPageLink = $root."profile/administration.php";
-$modifyProfilePageLink = $root."profile/modify-profile.php";
-$inventoryPageLink = $root."profile/inventory.php";
-$registerPageLink = $root."profile/register.php";
+$loginPageLink = $root . "session/login.php";
+$logoutPageLink = $root . "session/logout.php";
+
+$profilePageLink = $root . "profile/profile.php";
+$administrationPageLink = $root . "profile/administration.php";
+$modifyProfilePageLink = $root . "profile/modify-profile.php";
+$inventoryPageLink = $root . "profile/inventory.php";
+$registerPageLink = $root . "profile/register.php";
 
 echo "
 <!DOCTYPE html>
@@ -27,16 +28,17 @@ echo "
 <head>
     <meta charset='UTF-8'>
     <title>Chevaleresk</title>
-    <link rel='stylesheet' type='text/css' href='".$root."css/style.css'>
-    <script type='text/javascript' src='".$root."js/functions.js'></script>
-    <script type='text/javascript' src='".$root."js/navbar.js' defer></script>
+    <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
+    <script type='text/javascript' src='" . $root . "js/functions.js'></script>
+    <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>
 </head>
 <body>
 <header>
     <nav>
         <nav class='title'>
-            <img src='".$root."icons/ChevalereskIcon.png'>";
+            <img src='" . $root . "icons/ChevalereskIcon.png'>";
 
+//Onglets par défaut
 echo <<<HTML
             <p onclick="redirect('$indexPageLink')"></p>
             Chevaleresk
@@ -65,8 +67,9 @@ echo <<<HTML
             Évaluations
         </nav>
 HTML;
-if (!isset($_SESSION["Logged"]) || !$_SESSION["Logged"])
-{
+
+//Onglets si l'usager N'EST PAS connecté
+if (!UserIsLogged()) {
     echo <<<HTML
             <nav id="login">
                 <p onclick="redirect('$loginPageLink')"></p>
@@ -77,36 +80,41 @@ if (!isset($_SESSION["Logged"]) || !$_SESSION["Logged"])
                 Inscription
             </nav>
 HTML;
-}
-else
+} else //Onglets si l'usager EST connecté
 {
-    echo <<<HTML
-            <nav id="administration">
-                <p onclick="redirect('$administrationPageLink')"></p>
-                Administration
-            </nav>
-            <nav id="profile">
-                <p onclick="redirect('$profilePageLink')"></p>
-                Profil
-                <ul>
-                    <li id="modify-profile" onclick="redirect('$modifyProfilePageLink')">
-                        Modifier
-                    </li>
-                    <li id="inventory" onclick="redirect('$inventoryPageLink')">
-                        Inventaire
-                    </li>
-                    <li id="logout" onclick="redirect('$logoutPageLink')">
-                        Déconnexion
-                    </li>
-                </ul>
-            </nav>
-            <nav id="shopping-cart" class="iconOnly">
+    //Onglets si l'usager EST un administrateur
+    if (UserIsAdmin()) {
+
+        echo <<<HTML
+        <nav id="administration">
+            <p onclick="redirect('$administrationPageLink')"></p>
+            Administration
+        </nav>
 HTML;
-    echo "
-    <img src='".$root."icons/ShoppingCartIcon.png'/>";
+    }
+
     echo <<<HTML
-                <p onclick="redirect('$shoppingCartPageLink')"></p>
-            </nav>
+        <nav id="profile">
+            <p onclick="redirect('$profilePageLink')"></p>
+            Profil
+            <ul>
+                <li id="modify-profile" onclick="redirect('$modifyProfilePageLink')">
+                    Modifier
+                </li>
+                <li id="inventory" onclick="redirect('$inventoryPageLink')">
+                    Inventaire
+                </li>
+                <li id="logout" onclick="redirect('$logoutPageLink')">
+                    Déconnexion
+                </li>
+            </ul>
+        </nav>
+        <nav id="shopping-cart" class="iconOnly">
+HTML;
+    echo "<img src='". $root . "icons/ShoppingCartIcon.png'/>";
+    echo <<<HTML
+            <p onclick="redirect('$shoppingCartPageLink')"></p>
+        </nav>
 HTML;
 }
 echo <<<HTML

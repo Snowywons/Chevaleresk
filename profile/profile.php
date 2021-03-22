@@ -1,7 +1,4 @@
 <?php
-if (!defined("ROOT"))
-    define("ROOT", $_SERVER['DOCUMENT_ROOT']."/Chevaleresk/");
-
 $root = "../";
 
 include_once $root."master/header.php";

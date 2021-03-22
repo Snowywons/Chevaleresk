@@ -1,48 +1,40 @@
 <?php
+/*
+ * $records est une array d'items de la forme suivante:
+ * [idItem,
+ *  nomItem,
+ *  quantiteStock,
+ *  prixItem,
+ *  codePhoto,
+ *  codeType]
+*/
 
-/******************************************
- *              À COMPLÉTER
- ******************************************/
-
-//Doit recevoir un array d'idItem, ex: [0, 2, 9, 18, 20]
-function CreateItemDetailsContainers($idItems)
+function CreateItemDetailsContainers($records)
 {
-    global $conn;
+    foreach ($records as $data) {
 
-    foreach ($idItems as $idItem) {
+        $idItem = $data[0];
+        $nomItem = $data[1];
+        $quantiteStock = $data[2];
+        $prixItem = $data[3];
+        $codePhoto = "../icons/$data[4].png";
+        $codeType = $data[5];
 
-        $data = [];
-
-        if ($conn) {
-            $query = "SELECT nomItem, photoItem, codeType FROM Items WHERE idItem = $idItem;";
-            try {
-                $data = $conn->query($query)->fetchall()[0];
-            } catch (PDOException $e) { }
-        }
-
-        $nomItem = $data[0];
-        $photoItem = "../icons/ChevalereskIcon.png"; //devrait être $data[1]
-        $codeType = $data[2];
-
-        if ($conn) {
-            $query = "SELECT nomType FROM TypesItem WHERE codeType='$codeType';";
-            try {
-                $data = $conn->query($query)->fetchall()[0];
-            } catch (PDOException $e) { }
-        }
-
-        $nomType = $data[0];
+        $nomType =
+            ($codeType == "AR" ? "Arme" :
+                ($codeType == "AM" ? "Armure" :
+                    ($codeType == "PO" ? "Potion" : "Ressource")));
 
         /*Création des pages de détails pour chaque item*/
         echo "
-      <div id='" . $idItem . "_details' class='itemDetailsContainer'>
+        <div id='" . $idItem . "_details' class='itemDetailsContainer'>
             <div class='itemDetailsHeader'>
                   <span>$nomItem</span>
                   <button class='itemDetailsContainerExitButton'>x</button>
             </div>
             
             <div class='itemDetailsImageContainer'>
-                <img src='$photoItem'/>
+                <img src='$codePhoto'/>
             </div>
             
             <div class='itemDetailsBodyContainer'>
@@ -51,64 +43,43 @@ function CreateItemDetailsContainers($idItems)
             ";
 
         //Détails de l'item basés sur son type
-        switch($codeType)
-        {
-            //Potions
-            case "PO":
+        switch ($codeType) {
 
-                if ($conn) {
-                    $query = "SELECT effetPotion, dureePotion FROM Potions P WHERE P.idItem = $idItem;";
-                    try {
-                        $data = $conn->query($query)->fetchall()[0];
-                    } catch (PDOException $e) { }
+            //Armes
+            case "AR":
+                $newData = GetWeaponById($idItem);
+                if (isset($newData) && count($newData) >= 4) {
+                    echo "<span>Efficacité</span><span>$newData[1]</span>
+                          <span>Genre</span><span>$newData[2]</span>
+                          <span>Description</span><span>$newData[3]</span>";
                 }
-
-                $effetPotion = $data[0];
-                $dureePotion = $data[1];
-
-                echo "
-                        <span>Effet</span><span>$effetPotion</span>
-                        <span>Durée (secondes)</span><span>$dureePotion</span>";
                 break;
 
             //Armures
-            case "AU":
-
-                if ($conn) {
-                    $query = "SELECT matiereArmure, poidsArmure, tailleArmure FROM Armures A WHERE A.idItem = $idItem;";
-                    try {
-                        $data = $conn->query($query)->fetchall()[0];
-                    } catch (PDOException $e) { }
+            case "AM":
+                $newData = GetArmorById($idItem);
+                if (isset($newData) && count($newData) >= 4) {
+                    echo "<span>Matière</span><span>$newData[1]</span>
+                          <span>Poids</span><span>$newData[2]</span>
+                          <span>Taille</span><span>$newData[3]</span>";
                 }
-
-                $matiereArmure = $data[0];
-                $poidsArmure = $data[1];
-                $tailleArmure = $data[2];
-
-                echo "
-                        <span>Matière</span><span>$matiereArmure</span>
-                        <span>Poids</span><span>$poidsArmure</span>
-                        <span>Taille</span><span>$tailleArmure</span>";
                 break;
 
-            //Armes
-            case "AE":
-
-                if ($conn) {
-                    $query = "SELECT efficaciteArme, genreArme, descriptionArme FROM Armes A WHERE A.idItem = $idItem;";
-                    try {
-                        $data = $conn->query($query)->fetchall()[0];
-                    } catch (PDOException $e) { }
+            //Potions
+            case "PO":
+                $newData = GetPotionById($idItem);
+                if (isset($newData) && count($newData) >= 3) {
+                    echo "<span>Effet</span><span>$newData[1]</span>
+                          <span>Durée (secondes)</span><span>$newData[2]</span>";
                 }
+                break;
 
-                $efficaciteArme = $data[0];
-                $genreArme = $data[1];
-                $descriptionArme = $data[2];
-
-                echo "
-                        <span>Efficacité</span><span>$efficaciteArme</span>
-                        <span>Genre</span><span>$genreArme</span>
-                        <span>Description</span><span>$descriptionArme</span>";
+            //Potions
+            case "RS":
+                $newData = GetRessourceById($idItem);
+                if (isset($newData) && count($newData) >= 2) {
+                    echo "<span>Description</span><span>$newData[1]</span>";
+                }
                 break;
 
             //Autres
@@ -123,29 +94,18 @@ function CreateItemDetailsContainers($idItems)
                 <img src='../icons/StarIcon.png'>
                 <img src='../icons/StarIcon.png'>
             </div>
-            <button id='" .$idItem."_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
+            <button id='" . $idItem . "_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
             Voir les évaluations</button>
-            
         </div>
       </div>";
     }
 }
 
-function CreateItemDeleteConfirmationContainers($idItems){
-    global $conn;
+function CreateItemDeleteConfirmationContainers($records)
+{
+    foreach ($records as $data) {
 
-    foreach ($idItems as $idItem) {
-
-        $data = [];
-
-        if ($conn) {
-            $query = "SELECT nomItem, photoItem, codeType FROM Items WHERE idItem = $idItem;";
-            try {
-                $data = $conn->query($query)->fetchall()[0];
-            } catch (PDOException $e) { }
-        }
-
-        $nomItem = $data[0];
+        $idItem = $data[0];
 
         /*Création des pages de confirmation de suppression pour chaque item*/
         echo "

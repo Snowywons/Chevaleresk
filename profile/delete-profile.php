@@ -1,5 +1,5 @@
 <?php
 $root = "../";
 
-header("location: ".$root."profile/list.php");
+header("location: " . $root . "profile/list.php");
 ?>

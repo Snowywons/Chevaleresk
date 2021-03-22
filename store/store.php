@@ -1,103 +1,55 @@
 <?php
 $root = "../";
 
-include_once $root."master/header.php";
-include_once $root."utilities/dbUtilities.php";
-include_once $root."utilities/filterUtilities.php";
-include_once $root."utilities/popupUtilities.php";
+include_once $root . "master/header.php";
+include_once $root . "utilities/sessionUtilities.php";
+include_once $root . "utilities/dbUtilities.php";
+include_once $root . "utilities/filterUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
+include_once $root . "db/itemsDT.php";
+include_once $root . "db/weaponsDT.php";
+include_once $root . "db/armorsDT.php";
+include_once $root . "db/potionsDT.php";
+include_once $root . "db/ressourcesDT.php";
+include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
-$records = executeQuery("SELECT * FROM Items;");
-
-/*Important de construire un array de la forme adéquate*/
-$idItems = [];
-foreach($records as $data) {
-    array_push($idItems, $data[0]);
-}
-CreateItemDetailsContainers($idItems);
-CreateItemDeleteConfirmationContainers($idItems);
+//Création des conteneurs cachés et du overlay
+$records = GetAllItems();
+CreateItemDetailsContainers($records);
+CreateItemDeleteConfirmationContainers($records);
 CreateOverlay();
 
+//---------------------------------------------------------------------------------------------------------------------
+echo "
+    <main class='store'>
+        <h1>Magasin</h1>";
 
-echo <<<HTML
-<h1 style="background-color: deeppink">BOUTONS AJOUT, MODIF, SUPP DISPONIBLES SEULEMENT POUR LES ADMINISTRATEURS</h1>
-<main class="store">
-    <h1>Magasin</h1>
-    
-HTML;
-
-//DEVRAIT SEULEMENT ÊTRE DISPO POUR LES ADMINISTRATEURS
-echo <<<HTML
-    <div class="addItemContainer">
-        <span>Ajouter un item</span>
-        <img src="../icons/PlusIcon.png">
-    </div>
-    <br>
-HTML;
-
-
-CreateFilterSection();
-
-
-echo <<<HTML
-    <br>
-    <div class="storeContainer">
-        <div class="category">Item</div>
-        <div class="category">Prix unitaire (écus)</div>
-        <div class="category">Quantité disponible</div>
-        <div class="category rightLastColumn">Quantité souhaitée</div>
-HTML;
-
-foreach ($records as $data) {
-    $idItem = $data[0];
-    $nomItem = $data[1];
-    $quantiteStock = $data[2];
-    $prixItem = $data[3];
-    $photoItem = $data[4];
-    $codeType = $data[5];
-
-    echo "<div id='".$idItem. "_preview' class='itemPreviewContainer'>
-                <!-- DEVRAIT SEULEMENT ÊTRE DISPO POUR LES ADMINISTRATEURS -->
-                <div class='adminButtonsContainer'>
-                    <button id='".$idItem."_modifyButton' class='modifyButton'>
-                        <img src='".$root."/icons/EditIcon.png'/>
-                    </button>
-                    <button id='".$idItem."_deleteButton' class='deleteButton'>
-                        <img src='".$root."/icons/DeleteIcon.png'/>
-                    </button>
-                </div>
-                
-                <img src='".$root."/icons/ChevalereskIcon.png'/>
-                <div>" . $nomItem . "</div>
-          </div>";
-    echo "<div>" . $prixItem . "</div>";
-    echo "<div>" . $quantiteStock . "</div>";
-    echo "<div class='rightLastColumn'>
-                <div class='shoppingCartActionsContainer'>
-                <div class='shoppingCartQuantityContainer'>
-                        <button id='".$idItem."_removeItem' class='removeItem'>-</button>
-                        <input id='".$idItem."_itemQuantity' class='itemQuantity' type='number' value='0'/>
-                        <button id='".$idItem."_addItem' class='addItem'>+</button>
-                    </div>
-                    <div class='adminButtonsContainer'>
-                        <button id='".$idItem."_addToShoppingCart' class='addToShoppingCart'>Ajouter</button>
-                    </div>
-                </div>
-          </div>";
+if (UserIsAdmin()) {
+    echo "
+        <div class='addItemContainer'>
+            <span>Ajouter un item</span>
+            <img src='../icons/PlusIcon.png'>
+        </div>
+        <br>";
 }
 
-echo <<<HTML
-    </div>
-</main>
-HTML;
+CreateFilterSection();
+$records = isset($_SESSION["filters"]) ? GetFilteredItems($_SESSION["filters"]) : GetAllItems();
 
-include_once $root."master/footer.php";
+echo "<div id='storeReference'>";
+echo CreateStoreContainer($records);
+echo "</div></main>";
+//---------------------------------------------------------------------------------------------------------------------
+
+include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='".$root."js/filter.js' defer></script>
-    <script type='text/javascript' src='".$root."js/popup.js' defer></script>
-    <script type='text/javascript' src='".$root."js/shoppingcart.js' defer></script>
-    <script type='text/javascript' src='".$root."js/item.js' defer></script>
-    <script type='text/javascript' src='".$root."js/evaluations.js' defer></script>";
+    <script type='text/javascript' src='" . $root . "js/filters.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/store.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/itemPreviewButtons.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
 ?>

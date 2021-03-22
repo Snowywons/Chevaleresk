@@ -3,5 +3,8 @@ session_start();
 
 $root = "../";
 
-$_SESSION["Logged"] = true;
+$_SESSION["logged"] = true;
+$_SESSION["admin"] = true;
+$_SESSION["filters"] = "'AR','AM','PO','RS'";
+
 header("location: ".$root."store/store.php");

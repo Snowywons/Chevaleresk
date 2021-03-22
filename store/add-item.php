@@ -22,6 +22,7 @@ echo <<<HTML
                 <option value="arme">Arme</option>
                 <option value="armure">Armure</option>
                 <option value="potion">Potion</option>
+                <option value="ressource">Ressource</option>
             </select>
             
             <!-- Arme -->
@@ -59,7 +60,13 @@ echo <<<HTML
                 <label for="duree">Durée (secondes)</label>
                 <input type="number" id="duree" name="duree" value="0">
             </div>
-            
+
+            <!-- Ressource -->
+            <div id='ressourceInfos' class="addItemInfosContainer hidden">
+                <label for='description'>Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
             <label for="quantite">Quantité</label>
             <input type="number" id="quantite" name="quantite" value="0">
                     

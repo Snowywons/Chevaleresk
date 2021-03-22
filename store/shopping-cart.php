@@ -1,11 +1,10 @@
 <?php
-
 $root = "../";
 
-include_once $root."master/header.php";
-include_once $root."utilities/dbUtilities.php";
-include_once $root."utilities/filterUtilities.php";
-include_once $root."utilities/popupUtilities.php";
+include_once $root . "master/header.php";
+include_once $root . "utilities/dbUtilities.php";
+include_once $root . "utilities/filterUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
 
 global $conn;
 
@@ -14,7 +13,7 @@ $records = executeQuery("SELECT * FROM PaniersJoueur WHERE idJoueur=$myId;");
 
 /*Important de construire un array de la forme adéquate*/
 $idItems = [];
-foreach($records as $data) {
+foreach ($records as $data) {
     array_push($idItems, $data[1]);
 }
 CreateItemDetailsContainers($idItems);
@@ -47,8 +46,8 @@ foreach ($records as $data) {
     $prixItem = "PRIX ITEM";
 
     echo "
-    <div id='".$idItem. "_preview' class='itemPreviewContainer'>
-        <img src='".$root."icons/ChevalereskIcon.png'/>
+    <div id='" . $idItem . "_preview' class='itemPreviewContainer'>
+        <img src='" . $root . "icons/ChevalereskIcon.png'/>
         <div>" . $nomItem . "</div>
     </div>
     
@@ -58,17 +57,17 @@ foreach ($records as $data) {
                 <div class='shoppingCartActionsContainer'>
                     <!-- Ajouter, Diminuer -->
                     <div class='shoppingCartQuantityContainer'>
-                        <button id='".$idItem."_removeItem' class='removeItem hidden'>-</button>
-                        <input id='".$idItem."_itemQuantity' class='itemQuantity' type='number' value='$quantiteItem' disabled/>
-                        <button id='".$idItem."_addItem' class='addItem hidden'>+</button>
+                        <button id='" . $idItem . "_removeItem' class='removeItem hidden'>-</button>
+                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantiteItem' disabled/>
+                        <button id='" . $idItem . "_addItem' class='addItem hidden'>+</button>
                     </div>
                     <!-- Modifier, Supprimer -->
                     <div class='adminButtonsContainer'>
-                        <button id='".$idItem."_modifyButton' class='modifyButton'>
-                            <img src='".$root."/icons/EditIcon.png'/>
+                        <button id='" . $idItem . "_modifyButton' class='modifyButton'>
+                            <img src='" . $root . "/icons/EditIcon.png'/>
                         </button>
-                        <button id='".$idItem."_deleteButton' class='deleteButton'>
-                            <img src='".$root."/icons/DeleteIcon.png'/>
+                        <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                            <img src='" . $root . "/icons/DeleteIcon.png'/>
                         </button>
                     </div>
                 </div>
@@ -88,12 +87,12 @@ echo <<<HTML
 </main>
 HTML;
 
-include_once $root."master/footer.php";
+include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='".$root."js/filter.js' defer></script>
-    <script type='text/javascript' src='".$root."js/popup.js' defer></script>
-    <script type='text/javascript' src='".$root."js/shoppingcart.js' defer></script>
-    <script type='text/javascript' src='".$root."js/evaluations.js' defer></script>";
+    <script type='text/javascript' src='" . $root . "js/filter.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/popup.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
 
 ?>

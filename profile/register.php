@@ -1,5 +1,4 @@
 <?php
-
 $root = "../";
 
 include_once $root."master/header.php";
