@@ -21,25 +21,31 @@ if (isset($_POST["nomJoueur"]))
 if (isset($_POST["prenomJoueur"]))
     $lastName = $_POST["prenomJoueur"];
 
+    
 
 echo <<<HTML
 <main class="register">
     <h1>Inscription</h1>
     
-    <form action="" method="post">
+    <form action="register.php" method="post">
         <fieldset>
 <!--            <label for="picture">Photo</label>-->
 <!--            <input type="file" id="picture" name="photoJoueur" value="">-->
             <label for="alias">Alias</label>
-            <input type="text" id="alias" name="aliasJoueur" value="$alias">
+            <input type="text" id="alias" name="aliasJoueur" value="$alias" onblur="notEmpty('alias')">
+            <div id="aliasValidation" style="color:red"></div>
             <label for="lastName">Nom</label>
-            <input type="text" id="lastName" name="nomJoueur" value="$lastName">
+            <input type="text" id="lastName" name="nomJoueur" value="$lastName" onblur="notEmpty('lastName')">
+            <div id="lastNameValidation" style = "color:red"></div>
             <label for="firstName">Prenom</label>
-            <input type="text" id="firstName" name="prenomJoueur" value="$firstName">
+            <input type="text" id="firstName" name="prenomJoueur" value="$firstName" onblur="notEmpty('firstName')">
+            <div id="firstNameValidation" style = "color:red"></div>
             <label for="password">Mot de passe</label>
-            <input type="text" id="password" name="motDePasse" value="">
+            <input type="password" id="password" name="motDePasse" value="" onblur="notEmpty('password')">
+            <div id="passwordValidation" style = "color:red"></div>
             <label for="passwordConfirm">Confirmation du mot de passe</label>
-            <input type="text" id="passwordConfirm" name="" value="" >
+            <input type="password" id="passwordConfirm" name="" value="" onblur="PasswordConfirm()">
+            <div id="confirmValidation" style = "color:red"></div>
             <input type="submit" value="Enregistrer">
         </fieldset>
     </form>

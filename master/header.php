@@ -31,6 +31,7 @@ echo "
     <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
     <script type='text/javascript' src='" . $root . "js/functions.js'></script>
     <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/formValidation.js'></script>
 </head>
 <body>
 <header>
