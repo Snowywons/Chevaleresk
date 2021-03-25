@@ -19,19 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples 2">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples et cleaning de code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/shopping-cartsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/shopping-cartsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filters.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/shoppingcart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/filterUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/filterUtilities.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +98,7 @@
       <workItem from="1616423090687" duration="1814000" />
       <workItem from="1616500643100" duration="16092000" />
       <workItem from="1616626475119" duration="11588000" />
-      <workItem from="1616678727741" duration="20666000" />
+      <workItem from="1616678727741" duration="29348000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -209,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616680421608</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Ajout multiples et cleaning de code">
+      <created>1616702816511</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1616702816511</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,7 +245,8 @@
     <MESSAGE value="Ajout AJAX" />
     <MESSAGE value="Ajout multiples" />
     <MESSAGE value="Ajout multiples 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples 2" />
+    <MESSAGE value="Ajout multiples et cleaning de code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples et cleaning de code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -277,10 +281,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616680454566">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616702821905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616680454566" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616702821905" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616641819457">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

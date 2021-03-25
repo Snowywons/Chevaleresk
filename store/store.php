@@ -19,9 +19,9 @@ global $conn;
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
-CreateItemDeleteConfirmationContainers($records);
+CreateItemDeleteConfirmationContainers($records, "store");
 CreateNotificationContainer();
-CreateOverlay();
+CreateOverlay();;
 
 //---------------------------------------------------------------------------------------------------------------------
 echo "

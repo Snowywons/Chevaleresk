@@ -49,6 +49,22 @@ if (isset($_POST["submit"])) {
         exit;
     }
 
+    //Sur la suppression d'un item du panier
+    if ($_POST["submit"] == "deleteFromShoppingCart") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $alias = $_SESSION["alias"];
+        $idItem = $_POST["idItem"];
+
+        echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
+        exit;
+    }
+
     //Sur le paiement du panier du joueur
     if ($_POST["submit"] == "payShoppingCart") {
 

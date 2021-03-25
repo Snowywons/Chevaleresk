@@ -11,6 +11,8 @@
 
 function CreateItemDetailsContainers($records)
 {
+    echo "<div>";
+
     foreach ($records as $data) {
 
         $idItem = $data[0];
@@ -86,7 +88,7 @@ function CreateItemDetailsContainers($records)
                 break;
         }
 
-    echo "
+        echo "
             </div>
         </div>
         <div class='popupFooterContainer'>
@@ -101,10 +103,14 @@ function CreateItemDetailsContainers($records)
         </div>
       </div>";
     }
+
+    echo "</div>";
 }
 
-function CreateItemDeleteConfirmationContainers($records)
+function CreateItemDeleteConfirmationContainers($records, $target)
 {
+    echo "<div>";
+
     foreach ($records as $data) {
 
         $idItem = $data[0];
@@ -118,24 +124,33 @@ function CreateItemDeleteConfirmationContainers($records)
             </div>
             <div class='popupBodyContainer'>
                 <br>
-                <div>
-                    Êtes-vous sûr de vouloir supprimer cet item?
+                <div>";
+
+        if ($target === "store")
+            echo "Êtes-vous sûr de vouloir supprimer cet item de la base de données?";
+        else if ($target === "shopping-cart")
+            echo "Êtes-vous sûr de vouloir supprimer cet item de votre panier?";
+
+        echo "
                 </div>
             </div>
             <div class='popupFooterContainer'>
                 <div class='confirmationButtonsContainer'>
-                    <button class='cancelButton'>Annuler</button>
-                    <button class='confirmButton'>Confirmer</button>
+                    <button class='deleteCancelButton cancelButton'>Annuler</button>
+                    <button id='" . $idItem . "_" . $target . "DeleteConfirmButton' 
+                            class='deleteConfirmButton confirmButton'>Confirmer</button>
                 </div>
             </div>
         </div>";
     }
+
+    echo "</div>";
 }
 
 function CreateNotificationContainer()
 {
-        /*Création du conteneur de notification*/
-        echo "
+    /*Création du conteneur de notification*/
+    echo "
         <div id='notificationContainer' class='popupContainer notificationContainer'>
             <div class='popupHeaderContainer'>
                 <span>Notification</span>

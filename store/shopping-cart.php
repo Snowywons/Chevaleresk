@@ -22,6 +22,7 @@ $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
+CreateItemDeleteConfirmationContainers($records, "shopping-cart");
 CreateNotificationContainer();
 CreateOverlay();
 

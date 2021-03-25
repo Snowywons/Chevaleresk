@@ -15,28 +15,37 @@ function UpdateAllPopups() {
     //Les conteneurs de classe (itemPreviewContainer) permettent d'ouvrir un popup de détails d'item
     let itemPreviewContainers = document.querySelectorAll(".itemPreviewContainer");
     itemPreviewContainers.forEach((item) => {
-        item.addEventListener("click", () => {
-            let siblingContainerId = GetSiblingContainerId(item.id, "itemDetailsContainer");
-            OpenPopup(siblingContainerId);
-        })
+        if (item.getAttribute('listener') !== 'true') {
+            item.addEventListener("click", () => {
+                let siblingContainerId = GetSiblingContainerId(item.id, "itemDetailsContainer");
+                OpenPopup(siblingContainerId);
+            });
+            item.setAttribute('listener', 'true');
+        }
     });
 
     //Les boutons de classe (deleteButton) permettent d'ouvrir un popup de confirmation de suppression
     let deleteButtons = document.querySelectorAll(".deleteButton");
     deleteButtons.forEach((item) => {
-        item.addEventListener("click", () => {
-            let siblingContainerId = GetSiblingContainerId(item.id, "itemDeleteConfirmationContainer");
-            OpenPopup(siblingContainerId);
-        })
+        if (item.getAttribute('listener') !== 'true') {
+            item.addEventListener("click", () => {
+                let siblingContainerId = GetSiblingContainerId(item.id, "itemDeleteConfirmationContainer");
+                OpenPopup(siblingContainerId);
+            });
+            item.setAttribute('listener', 'true');
+        }
     });
 
     //Les boutons de classe (popupExitButton) permettent de fermer tous les popups
     let itemDetailsContainerExitButtons = document.querySelectorAll(".popupExitButton");
     itemDetailsContainerExitButtons.forEach((item) => {
-        item.addEventListener("click", () => {
-            let siblingContainerId = GetParentNode(item, 1, "popupContainer").id;
-            ClosePopup(siblingContainerId);
-        })
+        if (item.getAttribute('listener') !== 'true') {
+            item.addEventListener("click", () => {
+                let siblingContainerId = GetParentNode(item, 1, "popupContainer").id;
+                ClosePopup(siblingContainerId);
+            });
+            item.setAttribute('listener', 'true');
+        }
     });
 }
 

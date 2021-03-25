@@ -627,7 +627,8 @@ div.confirmationButtonsContainer button.confirmButton {
 }
 
 div.confirmationButtonsContainer button.cancelButton:active,
-div.confirmationButtonsContainer button.confirmButton:active {
+div.confirmationButtonsContainer button.confirmButton:active,
+button.popupExitButton:active {
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
 }
@@ -646,18 +647,18 @@ div.popupHeaderContainer {
     padding: 2px 2px 3px 5px;
 }
 
-button.popupExitBtton {
+button.popupExitButton {
     font-size: medium;
     outline: none;
     border-color: transparent;
 }
 
-button.popupExitBtton:focus,
-button.popupExitBtton:active {
+button.popupExitButton:focus,
+button.popupExitButton:active {
     outline: none;
 }
 
-button.popupExitBtton:hover {
+button.popupExitButton:hover {
     cursor: pointer;
     color: var(--popup-itemDetailsContainerExitButtonHoverTextColor);
     background-color: var(--popup-itemDetailsContainerExitButtonHoverBackgroundColor);
