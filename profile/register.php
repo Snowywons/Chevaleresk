@@ -1,15 +1,13 @@
 <?php
 $root = "../";
-
-include_once $root."master/header.php";
-
-//Exemple d'information envoyé à la bd
-$myInfosString = "JPaul61, Leblanc, Jean-Paul, 100, Password12345";
+include_once $root."db/playersDT.php";
 
 //$picture = "";
 $alias = "";
 $firstName = "";
 $lastName = "";
+$password ="";
+$passwordConfirm = "";
 
 //Récupérer les informations du client (sauf pdw) en cas d'invalidité du formulaire
 //if (isset($_POST["photoJoueur"]))
@@ -20,8 +18,23 @@ if (isset($_POST["nomJoueur"]))
     $firstName = $_POST["nomJoueur"];
 if (isset($_POST["prenomJoueur"]))
     $lastName = $_POST["prenomJoueur"];
+if(isset($_POST["motDePasse"]))
+    $password = $_POST["motDePasse"];
+if(isset($_POST["motDePasseVal"]))
+    $passwordConfirm = $_POST["motDePasseVal"];
 
+if($alias && 
+   $firstName && 
+   $lastName && 
+   $password && 
+   $passwordConfirm && 
+   $password === $passwordConfirm &&
+   GetPlayerByAlias($alias) === NULL){        
+    CreatePlayer($alias, $firstName, $lastName, $password);
+    header("location:profile.php");     
+} else {
     
+include_once $root."master/header.php";
 
 echo <<<HTML
 <main class="register">
@@ -42,7 +55,7 @@ echo <<<HTML
             <input type="password" id="password" name="motDePasse" value="" onblur="notEmpty('password')">
             <div id="passwordValidation" style = "color:red"></div>
             <label for="passwordConfirm">Confirmation du mot de passe</label>
-            <input type="password" id="passwordConfirm" name="" value="" onblur="PasswordConfirm()">
+            <input type="password" id="passwordConfirm" name="motDePasseVal" value="" onblur="PasswordConfirm()">
             <div id="confirmValidation" style = "color:red"></div>
             <input type="submit" value="Enregistrer">
         </fieldset>
@@ -51,5 +64,5 @@ echo <<<HTML
 HTML;
 
 include_once $root."master/footer.php";
-
+}
 ?>

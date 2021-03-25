@@ -11,7 +11,7 @@ function PasswordConfirm()
     let confirmBox = document.getElementById("confirmValidation");
     let password = document.getElementById("password");
     let confirmation = document.getElementById("passwordConfirm")
-    if (password !== confirmation)
+    if (password.value !== confirmation.value)
     {
         confirmBox.innerHTML = "Le mot de passe et sa confirmation doivent correspondre."
         
