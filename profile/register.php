@@ -29,8 +29,6 @@ echo <<<HTML
     
     <form action="register.php" method="post">
         <fieldset>
-<!--            <label for="picture">Photo</label>-->
-<!--            <input type="file" id="picture" name="photoJoueur" value="">-->
             <label for="alias">Alias</label>
             <input type="text" id="alias" name="aliasJoueur" value="$alias" onblur="notEmpty('alias')">
             <div id="aliasValidation" style="color:red"></div>

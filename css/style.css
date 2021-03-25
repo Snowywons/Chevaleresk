@@ -351,7 +351,8 @@ main.inventory div.storeContainer {
 /*Présentation du tableau dans le panier d'achat*/
 main.shopping-cart div.storeContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+    grid-template-columns: auto 250px 250px 400px;
 }
 
 main.shopping-cart div.shoppingCartTotalContainer {
@@ -385,7 +386,7 @@ div.storeContainer > div {
 /*À ajuster selon le nombre de colonnes du tableau*/
 div.storeContainer > div:nth-child(n + 9), /*Propre au magasin*/
 main.inventory div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
-main.shopping-cart div.storeContainer > div:nth-child(n + 7) /*Propre au panier d'achat*/
+main.shopping-cart div.storeContainer > div:nth-child(n + 9) /*Propre au panier d'achat*/
 {
     border-top: 1px solid var(--store-frameCaseBorderColor);
 }
@@ -430,6 +431,7 @@ div.itemPreviewContainer div.itemIconContainer {
 }
 
 div.itemPreviewContainer div.itemIconContainer img {
+    width: 100%;
     height: 100%;
 }
 

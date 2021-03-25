@@ -6,6 +6,7 @@ include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
 include_once $root . "utilities/popupUtilities.php";
+include_once $root . "db/playersDT.php";
 include_once $root . "db/itemsDT.php";
 include_once $root . "db/weaponsDT.php";
 include_once $root . "db/armorsDT.php";
@@ -14,6 +15,10 @@ include_once $root . "db/ressourcesDT.php";
 include_once $root . "store/storeUpdate.php";
 
 global $conn;
+
+//-------DEBUG
+
+//-------DEBUG
 
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();

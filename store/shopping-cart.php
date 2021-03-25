@@ -2,25 +2,29 @@
 $root = "../";
 
 include_once $root . "master/header.php";
+include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
 include_once $root . "utilities/popupUtilities.php";
+include_once $root . "db/playersDT.php";
+include_once $root . "db/itemsDT.php";
+include_once $root . "db/weaponsDT.php";
+include_once $root . "db/armorsDT.php";
+include_once $root . "db/potionsDT.php";
+include_once $root . "db/ressourcesDT.php";
+include_once $root . "db/shopping-cartsDT.php";
+include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
-$myId = 1; //Id du joueur (à  récupérer dans la superglobal session)
-$records = executeQuery("SELECT * FROM PaniersJoueur WHERE idJoueur=$myId;");
+$alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 
-/*Important de construire un array de la forme adéquate*/
-$idItems = [];
-foreach ($records as $data) {
-    array_push($idItems, $data[1]);
-}
-CreateItemDetailsContainers($idItems);
-CreateItemDeleteConfirmationContainers($idItems);
+//Création des conteneurs cachés et du overlay
+$records = GetAllItems();
+CreateItemDetailsContainers($records);
 CreateOverlay();
 
-
+//---------------------------------------------------------------------------------------------------------------------
 echo <<<HTML
 <main class="shopping-cart">
     <h1>Panier d'achat</h1>
@@ -28,51 +32,12 @@ echo <<<HTML
 HTML;
 
 CreateFilterSection();
+$records = isset($_SESSION["filters"]) ?
+    GetFilteredShoppingCartItemsByAlias($_SESSION["filters"], $alias) : GetAllShoppingCartItemsByAlias($alias);
 
-echo <<<HTML
-    <br>
-    <div class="storeContainer">
-        <div class="category">Item</div>
-        <div class="category">Prix unitaire ($)</div>
-        <div class="category rightLastColumn">Quantité ajoutée</div>
-HTML;
-
-foreach ($records as $data) {
-    $idJoueur = $data[0];
-    $idItem = $data[1];
-    $quantiteItem = $data[2];
-
-    $nomItem = "NOM ITEM";
-    $prixItem = "PRIX ITEM";
-
-    echo "
-    <div id='" . $idItem . "_preview' class='itemPreviewContainer'>
-        <img src='" . $root . "icons/ChevalereskIcon.png'/>
-        <div>" . $nomItem . "</div>
-    </div>
-    
-    <div>$prixItem</div>
-    
-    <div class='rightLastColumn'>
-                <div class='shoppingCartActionsContainer'>
-                    <!-- Ajouter, Diminuer -->
-                    <div class='shoppingCartQuantityContainer'>
-                        <button id='" . $idItem . "_removeItem' class='removeItem hidden'>-</button>
-                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantiteItem' disabled/>
-                        <button id='" . $idItem . "_addItem' class='addItem hidden'>+</button>
-                    </div>
-                    <!-- Modifier, Supprimer -->
-                    <div class='adminButtonsContainer'>
-                        <button id='" . $idItem . "_modifyButton' class='modifyButton'>
-                            <img src='" . $root . "/icons/EditIcon.png'/>
-                        </button>
-                        <button id='" . $idItem . "_deleteButton' class='deleteButton'>
-                            <img src='" . $root . "/icons/DeleteIcon.png'/>
-                        </button>
-                    </div>
-                </div>
-          </div>";
-}
+echo "<div id='storeReference'>";
+echo CreateShoppingCartStoreContainer($records);
+echo "</div>";
 
 echo <<<HTML
 </div>
@@ -86,13 +51,16 @@ echo <<<HTML
 </div>
 </main>
 HTML;
+//---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='" . $root . "js/filter.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/popup.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/filters.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/store.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/itemPreviewButtons.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
-
 ?>
+

@@ -1,5 +1,3 @@
-UpdateAllPopups()
-
 function UpdateAllPopups() {
 
 //Les Conteneurs des détails des items (popups)
@@ -57,3 +55,5 @@ function UpdateAllPopups() {
         overlay.classList.remove("active");
     }
 }
+
+UpdateAllPopups();

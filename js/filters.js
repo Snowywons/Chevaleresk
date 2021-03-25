@@ -29,18 +29,31 @@ resetFilterContainers.forEach((item) => {
             filters.classList.add("hidden");
         }
 
-        let filtersStr = GetFiltersString();
-        UpdateStoreContentOnFilter(filtersStr);
+        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
     })
 });
 
 let filters = document.querySelectorAll(".filters > input[type='checkbox']");
 filters.forEach((item) => {
     item.addEventListener("change", () => {
-        let filtersStr = GetFiltersString();
-        UpdateStoreContentOnFilter(filtersStr);
+        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
     })
 });
+
+function GetPostURL()
+{
+    let postURL = window.location.href.split(".php")[0].split('/');
+    postURL = postURL[postURL.length - 1];
+    postURL = "../store/" + postURL + "Update.php";
+    return postURL;
+}
+
+function GetPageName()
+{
+    let name = window.location.href.split(".php")[0].split('/');
+    name = name[name.length - 1];
+    return name;
+}
 
 function GetFiltersString()
 {
@@ -57,15 +70,15 @@ function GetFiltersString()
     return str;
 }
 
-function UpdateStoreContentOnFilter(filtersStr)
+function UpdateStoreContentOnFilter(sender, filtersStr)
 {
     let requete = new XMLHttpRequest();
     //OUVERTURE de la requête AJAX de type POST
-    requete.open('POST', "../store/storeUpdate.php?", true);
+    requete.open('POST', "../store/storeUpdate", true);
     //Construction du header
     requete.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     //ENVOIS de la requête
-    requete.send("filters=" + filtersStr);
+    requete.send("submit=setFilters" + "&sender=" + sender + "&filters=" + filtersStr);
 
     //Selon l'état de la requête
     requete.onreadystatechange = function () {

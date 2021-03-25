@@ -1,5 +1,3 @@
-UpdateAllItemPreviewButtons();
-
 function UpdateAllItemPreviewButtons() {
 
     //Conteneur des boutons Modifier et Supprimer
@@ -27,3 +25,5 @@ function UpdateAllItemPreviewButtons() {
         });
     });
 }
+
+UpdateAllItemPreviewButtons();
