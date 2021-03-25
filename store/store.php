@@ -20,6 +20,7 @@ global $conn;
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
 CreateItemDeleteConfirmationContainers($records);
+CreateNotificationContainer();
 CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -27,20 +27,19 @@ function CreateItemDetailsContainers($records)
 
         /*Création des pages de détails pour chaque item*/
         echo "
-        <div id='" . $idItem . "_details' class='itemDetailsContainer'>
-            <div class='itemDetailsHeader'>
+        <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
+            <div class='popupHeaderContainer'>
                   <span>$nomItem</span>
-                  <button class='itemDetailsContainerExitButton'>x</button>
+                  <button class='popupExitButton'>x</button>
             </div>
-            
-            <div class='itemDetailsImageContainer'>
-                <img src='$codePhoto'/>
-            </div>
-            
-            <div class='itemDetailsBodyContainer'>
-                <span>Nom</span><span>$nomItem</span>
-                <span>Type</span><span>$nomType</span>
-            ";
+            <div class='popupBodyContainer'>
+                <div class='itemDetailsImageContainer'>
+                    <img src='$codePhoto'/>
+                </div>
+                
+                <div class='itemDetailsBodyContainer'>
+                    <span>Nom</span><span>$nomItem</span>
+                    <span>Type</span><span>$nomType</span>";
 
         //Détails de l'item basés sur son type
         switch ($codeType) {
@@ -87,15 +86,18 @@ function CreateItemDetailsContainers($records)
                 break;
         }
 
-        echo "
-        </div>
-        <div class='itemDetailsFooter'>
-            <div class='itemStarbar'>
-                <img src='../icons/StarIcon.png'>
-                <img src='../icons/StarIcon.png'>
+    echo "
             </div>
-            <button id='" . $idItem . "_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
-            Voir les évaluations</button>
+        </div>
+        <div class='popupFooterContainer'>
+            <div class='itemDetailsFooter'>
+                <div class='itemStarbar'>
+                    <img src='../icons/StarIcon.png'>
+                    <img src='../icons/StarIcon.png'>
+                </div>
+                <button id='" . $idItem . "_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
+                Voir les évaluations</button>
+            </div>
         </div>
       </div>";
     }
@@ -109,21 +111,44 @@ function CreateItemDeleteConfirmationContainers($records)
 
         /*Création des pages de confirmation de suppression pour chaque item*/
         echo "
-        <div id='" . $idItem . "_delete' class='itemDeleteConfirmationContainer'>
-            <div class='itemDetailsHeader'>
+        <div id='" . $idItem . "_itemDeleteConfirmationContainer' class='popupContainer itemDeleteConfirmationContainer'>
+            <div class='popupHeaderContainer'>
                   <span>Attention!</span>
-                  <button class='itemDetailsContainerExitButton'>x</button>
+                  <button class='popupExitButton'>x</button>
             </div>
-            <br>
-            <div>
-                Êtes-vous sûr de vouloir supprimer cet item?
+            <div class='popupBodyContainer'>
+                <br>
+                <div>
+                    Êtes-vous sûr de vouloir supprimer cet item?
+                </div>
             </div>
-            <div class='confirmationButtonsContainer'>
-                <button class='cancelButton'>Annuler</button>
-                <button class='confirmButton'>Confirmer</button>
+            <div class='popupFooterContainer'>
+                <div class='confirmationButtonsContainer'>
+                    <button class='cancelButton'>Annuler</button>
+                    <button class='confirmButton'>Confirmer</button>
+                </div>
             </div>
         </div>";
     }
+}
+
+function CreateNotificationContainer()
+{
+        /*Création du conteneur de notification*/
+        echo "
+        <div id='notificationContainer' class='popupContainer notificationContainer'>
+            <div class='popupHeaderContainer'>
+                <span>Notification</span>
+                <button class='popupExitButton'>x</button>
+            </div>
+            <div class='popupBodyContainer'>
+                <br>
+                <div id='notificationMessageContainer'></div>
+                <br>
+            </div>
+            <div class='popupFooterContainer'>
+            </div>
+        </div>";
 }
 
 function CreateOverlay()

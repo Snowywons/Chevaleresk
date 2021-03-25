@@ -8,5 +8,16 @@ function SetStoreContainer(records) {
     UpdateAllPopups();
     UpdateAllItemPreviewButtons();
     UpdateAllAddToShoppingCartButtons();
-    UpdateAllShoppingCartButtons();
+    UpdateAllAddRemoveItemButtons();
+}
+
+function UpdateStoreContentOnFilter(sender, filtersStr) {
+    let request = "submit=setFilters" + "&sender=" + sender + "&filters=" + filtersStr;
+    ServerRequest("POST", "../store/storeUpdate", request,
+        (requete) => {
+            let records = JSON.parse(requete.responseText);
+            RemoveStoreContainer();
+            SetStoreContainer(records);
+        },
+        () => {}, false);
 }

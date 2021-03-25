@@ -22,6 +22,7 @@ $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
+CreateNotificationContainer();
 CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ echo <<<HTML
     <div>Total</div><div>-0</div>
     <div></div><div class="totalLigne"></div>
     <div>Solde restant</div><div>0</div>
-    <div></div><div><br><button class="pay">Payer</button></div>
+    <div></div><div><br><button id="payButton" class="pay">Payer</button></div>
 </div>
 </main>
 HTML;

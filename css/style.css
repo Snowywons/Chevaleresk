@@ -576,14 +576,12 @@ div.addItemContainer:active {
 /*#endregion Magasin*/
 
 /*#region Popup*/
-div.itemDetailsContainer,
-div.itemDeleteConfirmationContainer {
+div.popupContainer {
     display: none;
     position: relative;
 }
 
-div.itemDetailsContainer.active,
-div.itemDeleteConfirmationContainer.active {
+div.popupContainer.active {
     display: block;
     width: 500px;
     height: 600px;
@@ -596,7 +594,14 @@ div.itemDeleteConfirmationContainer.active {
     z-index: 10;
 }
 
-div.itemDeleteConfirmationContainer.active {
+div.popupContainer.itemDeleteConfirmationContainer.active {
+    width: 400px;
+    height: auto;
+    text-align: center;
+    background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);
+}
+
+div.popupContainer.notificationContainer.active {
     width: 400px;
     height: auto;
     text-align: center;
@@ -632,7 +637,7 @@ div.confirmationButtonsContainer button.confirmButton:hover {
     cursor: pointer;
 }
 
-div.itemDetailsHeader {
+div.popupHeaderContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -641,22 +646,30 @@ div.itemDetailsHeader {
     padding: 2px 2px 3px 5px;
 }
 
-button.itemDetailsContainerExitButton {
+button.popupExitBtton {
     font-size: medium;
     outline: none;
     border-color: transparent;
 }
 
-button.itemDetailsContainerExitButton:focus,
-button.itemDetailsContainerExitButton:active {
+button.popupExitBtton:focus,
+button.popupExitBtton:active {
     outline: none;
 }
 
-button.itemDetailsContainerExitButton:hover {
+button.popupExitBtton:hover {
     cursor: pointer;
     color: var(--popup-itemDetailsContainerExitButtonHoverTextColor);
     background-color: var(--popup-itemDetailsContainerExitButtonHoverBackgroundColor);
     border-color: var(--popup-itemDetailsContainerExitButtonHoverBorderColor);
+}
+
+div.popupBodyContainer {
+
+}
+
+div.popupFooterContainer {
+
 }
 
 div.itemDetailsImageContainer {

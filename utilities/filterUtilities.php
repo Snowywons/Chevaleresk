@@ -15,16 +15,16 @@ function CreateFilterSection()
     echo "
     <!-- Bouton de filtre -->
     <div class='filterWrapper'>
-        <div class='filterContainer'>
+        <div id='filterContainer' class='filterContainer'>
             <span>Voir les filtres</span>
             <img src='" . $root . "icons/DownArrowIcon.png'>
         </div>
-        <div class='resetFilterContainer'>
+        <div id='resetFilterContainer' class='resetFilterContainer'>
             <img src='" . $root . "/icons/resetIcon.png'>
         </div>
     </div>
     <!-- Filtre individuel -->
-    <div class='filters hidden'>
+    <div id='filters' class='filters hidden'>
         <label for='AR'>Arme</label>
         <input type='checkbox' id='AR' name='arme'" . ($all || $checkeds[0] ? "checked" : "") . ">
         <label for='AM'>Armure</label>

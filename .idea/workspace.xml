@@ -19,16 +19,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/playersDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/playersDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/formValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/formValidation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/shopping-cartsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/shopping-cartsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/shoppingcart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session/login-validate.php" beforeDir="false" afterPath="$PROJECT_DIR$/session/login-validate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/filterUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/filterUtilities.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,7 @@
       <workItem from="1616423090687" duration="1814000" />
       <workItem from="1616500643100" duration="16092000" />
       <workItem from="1616626475119" duration="11588000" />
-      <workItem from="1616678727741" duration="1628000" />
+      <workItem from="1616678727741" duration="20666000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -198,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616641779850</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Ajout multiples 2">
+      <created>1616680421608</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616680421608</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +241,8 @@
     <MESSAGE value="Commit final avant la remise du sprint 0" />
     <MESSAGE value="Ajout AJAX" />
     <MESSAGE value="Ajout multiples" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples" />
+    <MESSAGE value="Ajout multiples 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -265,10 +277,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616423200938">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616680454566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616423200938" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616680454566" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616641819457">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -277,9 +289,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616115137140" />
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1616648731968">
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1616702316547">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616648731968" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616702316547" />
   </component>
 </project>

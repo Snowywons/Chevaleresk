@@ -1,101 +1,44 @@
-let filterContainers = document.querySelectorAll(".filterContainer");
-filterContainers.forEach((item) => {
-    item.addEventListener("click", () => {
-        let filters = document.querySelectorAll(".filters")[0];
+//Récupération des différents conteneurs
+let filterContainer = document.getElementById("filterContainer");
+let filters = document.getElementById("filters");
+let inputs = document.querySelectorAll("#filters > input[type='checkbox']");
 
-        if (filters.classList.contains("hidden")) {
-            item.classList.add("opened");
-            filters.classList.remove("hidden");
-        } else {
-            item.classList.remove("opened");
-            filters.classList.add("hidden");
-        }
-    })
+//Permet d'ouvrir et de fermer le conteneur des inputs (filters)
+filterContainer.addEventListener("click", () => {
+    if (filters.classList.contains("hidden")) {
+        filterContainer.classList.add("opened");
+        filters.classList.remove("hidden");
+    } else {
+        filterContainer.classList.remove("opened");
+        filters.classList.add("hidden");
+    }
 });
 
-let resetFilterContainers = document.querySelectorAll(".resetFilterContainer");
-resetFilterContainers.forEach((item) => {
-    item.addEventListener("click", () => {
-        let filterContainer = document.querySelectorAll(".filterContainer")[0];
-        let filters = document.querySelectorAll(".filters")[0];
-        let inputs = document.querySelectorAll(".filters > input[type='checkbox']");
+//Permet de réinitialiser la sélection des filtres et de mettre à jour le contenu du store
+let resetFilterContainer = document.getElementById("resetFilterContainer");
+resetFilterContainer.addEventListener("click", () => {
+    inputs.forEach((item) => item.checked = true);
 
-        inputs.forEach((item) => {
-            item.checked = true;
-        });
+    if (!filterContainer.classList.contains("hidden")) {
+        filterContainer.classList.remove("opened");
+        filters.classList.add("hidden");
+    }
 
-        if (!filterContainer.classList.contains("hidden")) {
-            filterContainer.classList.remove("opened");
-            filters.classList.add("hidden");
-        }
-
-        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
-    })
+    UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
 });
 
-let filters = document.querySelectorAll(".filters > input[type='checkbox']");
-filters.forEach((item) => {
-    item.addEventListener("change", () => {
-        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
-    })
-});
+//Permet de mettre à jour le contenu du store lorsqu'un filtre est sélectionné
+inputs.forEach((item) =>
+    item.addEventListener("change", () =>
+        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString())));
 
-function GetPostURL()
-{
-    let postURL = window.location.href.split(".php")[0].split('/');
-    postURL = postURL[postURL.length - 1];
-    postURL = "../store/" + postURL + "Update.php";
-    return postURL;
-}
-
-function GetPageName()
-{
-    let name = window.location.href.split(".php")[0].split('/');
-    name = name[name.length - 1];
-    return name;
-}
-
-function GetFiltersString()
-{
+//Permet d'obtenir une chaine de caractères composée des filtres sélectionnés
+function GetFiltersString() {
     let str = "";
     let filters = document.querySelectorAll(".filters > input[type='checkbox']");
     for (let i = 0; i < filters.length; i++) {
-        str += "'";
-        if (filters[i].checked)
-            str += filters[i].id;
-        str += "'";
-        if (i < filters.length - 1)
-            str += ",";
+        str += filters[i].checked ? "'" + filters[i].id + "'" : "''";
+        if (i < filters.length - 1) str += ",";
     }
     return str;
-}
-
-function UpdateStoreContentOnFilter(sender, filtersStr)
-{
-    let requete = new XMLHttpRequest();
-    //OUVERTURE de la requête AJAX de type POST
-    requete.open('POST', "../store/storeUpdate", true);
-    //Construction du header
-    requete.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //ENVOIS de la requête
-    requete.send("submit=setFilters" + "&sender=" + sender + "&filters=" + filtersStr);
-
-    //Selon l'état de la requête
-    requete.onreadystatechange = function () {
-        switch (requete.readyState) {
-            // 0 requête non initialisée
-            // 1 connexion au serveur établie
-            // 2 requête reçue
-            // 3 requête en cours de traitement
-            case 4: // 4 requête terminée et réponse reçue
-                if (requete.responseText.trim() !== '')
-                {
-                    let records = JSON.parse(requete.responseText);
-
-                    RemoveStoreContainer();
-                    SetStoreContainer(records);
-                }
-                break;
-        }
-    };
 }

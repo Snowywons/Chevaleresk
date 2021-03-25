@@ -45,7 +45,20 @@ if (isset($_POST["submit"])) {
         $idItem = $_POST["idItem"];
         $quantity = $_POST["quantity"];
 
-        AddItemToShoppingCartByAlias($alias, $idItem, $quantity);
+        echo AddItemToShoppingCartByAlias($alias, $idItem, $quantity);
+        exit;
+    }
+
+    //Sur le paiement du panier du joueur
+    if ($_POST["submit"] == "payShoppingCart") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        echo PayShoppingCartByAlias($_SESSION["alias"]);
         exit;
     }
 }
@@ -100,7 +113,7 @@ function CreateStoreContainer($records)
                 <div class='shoppingCartActionsContainer'>
                     <div class='shoppingCartQuantityContainer'>
                         <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
-                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='0'/>
+                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='1'/>
                         <button id='" . $idItem . "_addItem' class='addItem'>+</button>
                     </div>
                     <div class='adminButtonsContainer'>

@@ -1,10 +1,23 @@
-function UpdateAllShoppingCartButtons() {
+//Permet de payer le contenu du panier du joueur connecté
+let payButton = document.getElementById("payButton");
+if (payButton)
+    payButton.addEventListener("click", () => {
+        ServerRequest("POST", "../store/storeUpdate", "submit=payShoppingCart",
+            (requete) =>
+            {
+                NotifyWithPopup(requete.responseText);
+                UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+            }, ()=> {});
+    });
+
+//Permet de mettre à jour tous les événements (click) liés aux boutons addItem et removeItem
+function UpdateAllAddRemoveItemButtons() {
 //Bouton Diminuer
     let removeItemButtons = document.querySelectorAll(".removeItem");
     removeItemButtons.forEach((item) => {
         item.addEventListener("click", (e) => {
             e.preventDefault();
-            removeItem(item);
+            RemoveItem(item);
         })
     });
 
@@ -13,7 +26,7 @@ function UpdateAllShoppingCartButtons() {
     addItemButtons.forEach((item) => {
         item.addEventListener("click", (e) => {
             e.preventDefault();
-            addItem(item);
+            AddItem(item);
         })
     });
 }
@@ -32,38 +45,28 @@ function UpdateAllAddToShoppingCartButtons() {
 
             if (quantity > 0) {
 
-                let requete = new XMLHttpRequest();
-                //OUVERTURE de la requête AJAX de type POST
-                requete.open('POST', "../store/storeUpdate.php", true);
-                //Construction du header
-                requete.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                //ENVOIS de la requête
-                requete.send("submit=" + "addToShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity);
-
-                //Selon l'état de la requête
-                requete.onreadystatechange = function () {
-                    switch (requete.readyState) {
-                        // 0 requête non initialisée
-                        // 1 connexion au serveur établie
-                        // 2 requête reçue
-                        // 3 requête en cours de traitement
-                        case 4: // 4 requête terminée et réponse reçue
-                            if (requete.responseText.trim() !== '') {
-
-                                //Si le joueur ne s'est pas authentifié
-                                if (requete.responseText === "notLogged")
-                                    window.location.href = "../session/login.php";
-                            }
-                            break;
-                    }
-                };
+                let request = "submit=" + "addToShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity;
+                ServerRequest("POST", "../store/storeUpdate", request,
+                    (requete) =>
+                    {
+                        if (requete.responseText === "notLogged")
+                        {
+                            window.location.href = "../session/login.php";
+                        } else {
+                            NotifyWithPopup(requete.responseText);
+                            itemQuantityInput.value = 1;
+                        }
+                    }, ()=> {});
+            } else {
+                NotifyWithPopup("Quantité invalide");
+                itemQuantityInput.value = 1;
             }
         })
     });
 }
 
-function addItem(from) {
-    let itemQuantityInput = getItemQuantityInput(from);
+function AddItem(from) {
+    let itemQuantityInput = GetItemQuantityInput(from);
     if (itemQuantityInput) {
         let count = parseInt(itemQuantityInput.value);
         if (!count) count = 0;
@@ -71,8 +74,8 @@ function addItem(from) {
     }
 }
 
-function removeItem(from) {
-    let itemQuantityInput = getItemQuantityInput(from);
+function RemoveItem(from) {
+    let itemQuantityInput = GetItemQuantityInput(from);
     if (itemQuantityInput) {
         let count = parseInt(itemQuantityInput.value);
         if (itemQuantityInput.value > 0)
@@ -80,7 +83,7 @@ function removeItem(from) {
     }
 }
 
-function getItemQuantityInput(from) {
+function GetItemQuantityInput(from) {
     let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
     let array = Array.prototype.slice.call(itemQuantityInputs);
     let troncId = from.id.split('_')[0];
@@ -91,5 +94,6 @@ function getItemQuantityInput(from) {
     return null;
 }
 
-UpdateAllShoppingCartButtons();
+//Exécution des fonctions à l'ouverture
+UpdateAllAddRemoveItemButtons();
 UpdateAllAddToShoppingCartButtons();
