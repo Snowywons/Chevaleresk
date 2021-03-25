@@ -1,97 +1,65 @@
-//Les inputs(number) de la quantité ajoutée (shopping cart)
-let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
-
-//Bouton Modifier
-let modifyItemQuantityButtons = document.querySelectorAll(".modifyButton");
-modifyItemQuantityButtons.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (item.classList.contains("clicked")) {
-            hiddeButton(item);
-            let itemQuantityInput = getItemQuantityInput(item);
-            if (itemQuantityInput) {
-                let count = parseInt(itemQuantityInput.value);
-                if (!count || count < 0) count = 0;
-                itemQuantityInput.value = count;
-            }
-        } else {
-            showButton(item);
-        }
-    })
-});
-
+function UpdateAllShoppingCartButtons() {
 //Bouton Diminuer
-let removeItemButtons = document.querySelectorAll(".removeItem");
-removeItemButtons.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        e.preventDefault();
-        removeItem(item);
-    })
-});
+    let removeItemButtons = document.querySelectorAll(".removeItem");
+    removeItemButtons.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            removeItem(item);
+        })
+    });
 
 //Bouton Ajouter
-let addItemButtons = document.querySelectorAll(".addItem");
-addItemButtons.forEach((item) => {
-    item.addEventListener("click", (e) => {
-        e.preventDefault();
-        addItem(item);
-    })
-});
-
-function showButton(from) {
-    let array = Array.prototype.slice.call(removeItemButtons);
-    let troncId = from.id.split('_')[0];
-    let formatId = troncId + "_removeItem";
-    let removeItemButton = array.find(element => element.id === formatId);
-    if (removeItemButton) {
-        removeItemButton.classList.remove("hidden");
-    }
-
-    array = Array.prototype.slice.call(addItemButtons);
-    troncId = from.id.split('_')[0];
-    formatId = troncId + "_addItem";
-    let addItemButton = array.find(element => element.id === formatId);
-    if (addItemButton) {
-        addItemButton.classList.remove("hidden");
-    }
-
-    array = Array.prototype.slice.call(itemQuantityInputs);
-    troncId = from.id.split('_')[0];
-    formatId = troncId + "_itemQuantity";
-    let itemQuantity = array.find(element => element.id === formatId);
-    if (itemQuantity) {
-        itemQuantity.disabled = false;
-    }
-
-    from.classList.add("clicked");
+    let addItemButtons = document.querySelectorAll(".addItem");
+    addItemButtons.forEach((item) => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            addItem(item);
+        })
+    });
 }
 
-function hiddeButton(from) {
-    let array = Array.prototype.slice.call(removeItemButtons);
-    let troncId = from.id.split('_')[0];
-    let formatId = troncId + "_removeItem";
-    let removeItemButton = array.find(element => element.id === formatId);
-    if (removeItemButton) {
-        removeItemButton.classList.add("hidden");
-    }
+function UpdateAllAddToShoppingCartButtons() {
+    let addToShoppingCartButtons = document.querySelectorAll(".addToShoppingCart");
+    let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
+    addToShoppingCartButtons.forEach((item) => {
+        item.addEventListener("click", (e) => {
 
-    array = Array.prototype.slice.call(addItemButtons);
-    troncId = from.id.split('_')[0];
-    formatId = troncId + "_addItem";
-    let addItemButton = array.find(element => element.id === formatId);
-    if (addItemButton) {
-        addItemButton.classList.add("hidden");
-    }
+            let array = Array.prototype.slice.call(itemQuantityInputs);
+            let idItem = item.id.split('_')[0];
+            let concatId = idItem + "_itemQuantity";
+            let itemQuantityInput = array.find(element => element.id === concatId);
+            let quantity = itemQuantityInput.value;
 
-    array = Array.prototype.slice.call(itemQuantityInputs);
-    troncId = from.id.split('_')[0];
-    formatId = troncId + "_itemQuantity";
-    let itemQuantity = array.find(element => element.id === formatId);
-    if (itemQuantity) {
-        itemQuantity.disabled = true;
-    }
+            if (quantity > 0) {
 
-    from.classList.remove("clicked");
+                let requete = new XMLHttpRequest();
+                //OUVERTURE de la requête AJAX de type POST
+                requete.open('POST', "../store/storeUpdate.php", true);
+                //Construction du header
+                requete.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                //ENVOIS de la requête
+                requete.send("submit=" + "addToShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity);
+
+                //Selon l'état de la requête
+                requete.onreadystatechange = function () {
+                    switch (requete.readyState) {
+                        // 0 requête non initialisée
+                        // 1 connexion au serveur établie
+                        // 2 requête reçue
+                        // 3 requête en cours de traitement
+                        case 4: // 4 requête terminée et réponse reçue
+                            if (requete.responseText.trim() !== '') {
+
+                                //Si le joueur ne s'est pas authentifié
+                                if (requete.responseText === "notLogged")
+                                    window.location.href = "../session/login.php";
+                            }
+                            break;
+                    }
+                };
+            }
+        })
+    });
 }
 
 function addItem(from) {
@@ -113,6 +81,7 @@ function removeItem(from) {
 }
 
 function getItemQuantityInput(from) {
+    let itemQuantityInputs = document.querySelectorAll(".itemQuantity");
     let array = Array.prototype.slice.call(itemQuantityInputs);
     let troncId = from.id.split('_')[0];
     let formatId = troncId + "_itemQuantity";
@@ -121,3 +90,6 @@ function getItemQuantityInput(from) {
         return itemQuantityInput;
     return null;
 }
+
+UpdateAllShoppingCartButtons();
+UpdateAllAddToShoppingCartButtons();

@@ -16,10 +16,6 @@ include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
-//-------DEBUG
-
-//-------DEBUG
-
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);

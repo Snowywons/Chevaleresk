@@ -13,7 +13,7 @@ if (isset($_POST["submit"])) {
     $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
     if (PlayerIsAuthenticated($alias, $password)) {
-        $records = PlayerByAlias($alias);
+        $records = GetPlayerByAlias($alias);
 
         $_SESSION["logged"] = true;
         $_SESSION["alias"] = $records[0];

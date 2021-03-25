@@ -34,13 +34,18 @@ if (isset($_POST["submit"])) {
 
     //Sur l'ajout d'un item au panier
     if ($_POST["submit"] == "addToShoppingCart") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
         $alias = $_SESSION["alias"];
         $idItem = $_POST["idItem"];
         $quantity = $_POST["quantity"];
 
         AddItemToShoppingCartByAlias($alias, $idItem, $quantity);
-
-        echo $idItem . " " . $quantity;
         exit;
     }
 }
@@ -162,4 +167,5 @@ function CreateShoppingCartStoreContainer($records)
 
     return $content;
 }
+
 ?>
