@@ -19,16 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Cleaning de code avant ajout de fonctionnalités">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout divers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/playersDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/playersDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/shopping-cartsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/shopping-cartsDT.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/profiles.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/shoppingcart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/administration.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administration.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/modify-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/modify-profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
@@ -103,7 +106,7 @@
       <workItem from="1616678727741" duration="29348000" />
       <workItem from="1616712018024" duration="283000" />
       <workItem from="1616736554683" duration="7910000" />
-      <workItem from="1616801329686" duration="25224000" />
+      <workItem from="1616801329686" duration="40711000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -231,7 +234,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616813687380</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Ajout dernières fonctionnalités pour sprint 1">
+      <created>1616864035268</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1616864035268</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Ajout divers">
+      <created>1616864056757</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1616864056757</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +284,9 @@
     <MESSAGE value="Ajout multiples et cleaning de code" />
     <MESSAGE value="Ajout supression items panier et cleaning de code" />
     <MESSAGE value="Cleaning de code avant ajout de fonctionnalités" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaning de code avant ajout de fonctionnalités" />
+    <MESSAGE value="Ajout dernières fonctionnalités pour sprint 1" />
+    <MESSAGE value="Ajout divers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout divers" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -294,18 +313,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="508" y="220" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616641981856" />
-    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1616857391722">
+    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1616867154559">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616857391722" />
+    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616867154559" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1614444801399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616813689041">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616864062810">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616813689041" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616864062810" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616641819457">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

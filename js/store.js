@@ -1,13 +1,14 @@
 //Permet de mettre à jour le contenu du store selon un envoyeur (store, shopping-cart)
 function UpdateStoreContentOnFilter(sender, filtersStr) {
     let request = "submit=setFilters" + "&sender=" + sender + "&filters=" + filtersStr;
-    ServerRequest("POST", "../store/storeUpdate", request,
+    ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             RemoveOldContainers("storeContainer");
             InsertHtmlTo(JSON.parse(requete.responseText), "storeReference");
 
             UpdateAllItemPreviewContainer();
             UpdateAllAdminItemButtonsContainers();
+            UpdateAllModifyButtons();
             UpdateAllDeleteButtons();
 
             UpdateAllAddItemShoppingCartButtons();
@@ -44,10 +45,18 @@ function UpdateAllSaveItemQuantityButtons() {
         if (quantity > 0) {
             let request = "submit=modifyItemQuantity" + "&sender=" + sender +
                 "&idItem=" + idItem + "&quantity=" + quantity;
-            ServerRequest("POST", "../store/storeUpdate", request,
+            ServerRequest("POST", "../server/httpRequestHandler.php", request,
                 (requete) => {
                     NotifyWithPopup(requete.responseText);
-                    UpdateTotalShoppingCartContent();
+                    switch (sender) {
+                        case "store" :
+                            break;
+                        case "shopping-cart" :
+                            UpdateTotalShoppingCartContent();
+                            break;
+                        case "inventory" :
+                            break;
+                    }
                 }, () => {
                 });
         } else {
@@ -56,13 +65,42 @@ function UpdateAllSaveItemQuantityButtons() {
     });
 }
 
+//Permet de mettre à jour tous les événements (click) liés aux boutons d'observation
+function UpdateAllLookButtons() {
+    AddClickEventFor("lookButton", (item) => {
+        let sender = GetPageName();
+        let idItem = GetSplitedId(item.id, '_');
+        switch (sender) {
+            case "administration" :
+                window.location.href = "../profile/inventory.php?alias=" + idItem;
+                break;
+        }
+    })
+}
+
+//Permet de mettre à jour tous les événements (click) liés aux boutons de modification d'item
+function UpdateAllModifyButtons() {
+    AddClickEventFor("modifyButton", (item) => {
+        let sender = GetPageName();
+        let idItem = GetSplitedId(item.id, '_');
+        switch (sender) {
+            case "store" :
+                window.location.href = "../store/modify-item.php?idItem=" + idItem;
+                break;
+            case "administration" :
+                window.location.href = "../profile/modify-profile.php?alias=" + idItem;
+                break;
+        }
+    })
+}
+
 //Permet de mettre à jour tous les événements (click) liés aux boutons de suppression d'item
 function UpdateAllDeleteButtons() {
     AddClickEventFor("deleteButton", (item) => {
         let sender = GetPageName();
         let idItem = GetSplitedId(item.id, '_');
         let request = "submit=createDeleteConfirmContainer" + "&sender=" + sender + "&idItem=" + idItem;
-        ServerRequest("POST", "../store/storeUpdate", request,
+        ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 CloseNotifier();
                 RemoveOldContainers("itemDeleteConfirmationContainer");
@@ -84,7 +122,7 @@ function UpdateAllAddItemShoppingCartButtons() {
 
         if (quantity > 0) {
             let request = "submit=addItemShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity;
-            ServerRequest("POST", "../store/storeUpdate", request,
+            ServerRequest("POST", "../server/httpRequestHandler.php", request,
                 (requete) => {
                     if (requete.responseText === "notLogged") {
                         window.location.href = "../session/login.php";
@@ -133,6 +171,8 @@ function RemoveItem(item) {
 UpdateAllItemPreviewContainer();
 UpdateAllAdminItemButtonsContainers();
 UpdateAllSaveItemQuantityButtons();
+UpdateAllLookButtons();
+UpdateAllModifyButtons();
 UpdateAllDeleteButtons();
 UpdateAllAddItemShoppingCartButtons();
 UpdateAllAddItemButtons();

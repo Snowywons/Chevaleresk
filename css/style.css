@@ -104,8 +104,8 @@
     /*#endregion Évaluations*/
 
     /*#region Profil*/
-    --profile-inventoryButtonBackgroundColor: var(--col-lime);
-    --profile-inventoryButtonBorderColor: var(--col-lime);
+    --profile-lookButtonBackgroundColor: var(--col-lime);
+    --profile-lookButtonBorderColor: var(--col-lime);
     /*#endregion Profil*/
 
     /*#region Form et Fieldset*/
@@ -133,7 +133,7 @@ main.delete-item {
 }
 
 main.administration {
-    width: 600px;
+    width: 504px;
     margin: 40px auto;
     text-align: center;
 }
@@ -193,7 +193,7 @@ nav.title:hover {
 }
 
 nav > nav#administration {
-    background-color: var(--nav-administrationButtonBackgroundColor);
+    /*background-color: var(--nav-administrationButtonBackgroundColor);*/
 }
 
 @media screen and (max-width: 1600px) {
@@ -337,6 +337,7 @@ div.filters label {
 /*#region Magasin*/
 
 /*Présentation par défaut*/
+
 div.storeContainer {
     display: grid;
     grid-template-columns: auto 250px 250px 400px;
@@ -484,7 +485,7 @@ button.payButton {
     border-color: var(--store-payButtonBorderColor);
 }
 
-button.inventoryButton,
+button.lookButton,
 button.modifyButton,
 button.deleteButton,
 button.saveButton {
@@ -497,9 +498,9 @@ button.saveButton {
     margin: 0;
 }
 
-button.inventoryButton {
-    background-color: var(--profile-inventoryButtonBackgroundColor);
-    border-color: var(--profile-inventoryButtonBorderColor);
+button.lookButton {
+    background-color: var(--profile-lookButtonBackgroundColor);
+    border-color: var(--profile-lookButtonBorderColor);
 }
 
 button.modifyButton {
@@ -517,7 +518,7 @@ button.saveButton {
     border-color: var(--store-saveButtonBorderColor);
 }
 
-button.inventoryButton > img,
+button.lookButton > img,
 button.modifyButton > img,
 button.deleteButton > img,
 button.saveButton > img {
@@ -526,7 +527,7 @@ button.saveButton > img {
 
 button.payButton:hover,
 button.addToShoppingCart:hover,
-button.inventoryButton:hover,
+button.lookButton:hover,
 button.modifyButton:hover,
 button.deleteButton:hover,
 button.saveButton:hover {
@@ -535,7 +536,7 @@ button.saveButton:hover {
 
 button.addToShoppingCart:active,
 button.payButton:active,
-button.inventoryButton:active,
+button.lookButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
 button.deleteButton:active,
@@ -887,18 +888,18 @@ button.evaluationsListButton:hover {
 /*#endregion Évaluations*/
 
 /*#region Profil*/
-div.playerInfosContainer {
+div.managerContainer {
     display: grid;
-    grid-template-columns: 96px 100px 100px 100px 100px 104px;
+    grid-template-columns: 100px 100px 100px 100px 104px;
     width: 100%;
 }
 
-div.playerInfosContainer > div.category {
+div.managerContainer > div.category {
     background-color: var(--store-categoryBackgroundColor);
     font-weight: bold;
 }
 
-div.playerInfosContainer > div {
+div.managerContainer > div {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
@@ -908,11 +909,11 @@ div.playerInfosContainer > div {
     padding: 5px;
 }
 
-div.playerInfosContainer > div:nth-child(6n + 1) {
+div.managerContainer > div:nth-child(5n + 1) {
     border-left: 2px solid var(--store-frameCaseBorderColor);
 }
 
-div.playerInfosContainer > div:nth-child(n + 9) {
+div.managerContainer > div:nth-child(n + 7) {
     border-top: 1px solid var(--store-frameCaseBorderColor);
 }
 

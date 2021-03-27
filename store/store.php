@@ -6,6 +6,7 @@ include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
 include_once $root . "utilities/popupUtilities.php";
+include_once $root . "server/httpRequestHandler.php";
 include_once $root . "db/playersDT.php";
 include_once $root . "db/itemsDT.php";
 include_once $root . "db/weaponsDT.php";

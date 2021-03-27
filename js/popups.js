@@ -15,11 +15,25 @@ function UpdateAllPopupDeleteConfirmButtons() {
         ClosePopup(popupId);
 
         let request = "submit=deleteConfirm" + "&sender=" + sender + "&idItem=" + idItem;
-        ServerRequest("POST", "../store/storeUpdate.php", request,
+        ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 NotifyWithPopup(requete.responseText);
-                UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
-                UpdateTotalShoppingCartContent();
+                switch (sender) {
+                    case "store" :
+                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        break;
+                    case "shopping-cart" :
+                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        UpdateTotalShoppingCartContent();
+                        break;
+                    case "inventory" :
+                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        break;
+                    case "administration" :
+                        UpdateManagerContent();
+                        UpdateAllModifyButtons();
+                        break;
+                }
             },
             () => {
             });
@@ -68,7 +82,7 @@ function CloseAllPopups() {
 //Permet d'afficher un message à l'usager sous forme d'un popup
 function NotifyWithPopup(text) {
     if (notificationContainer) notificationContainer.classList.add("active");
-    if (notificationMessageContainer) notificationMessageContainer.innerText = text;
+    if (notificationMessageContainer) notificationMessageContainer.innerHTML = text;
     if (overlay) overlay.classList.add("active");
 }
 

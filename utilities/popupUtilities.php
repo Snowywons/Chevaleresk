@@ -127,7 +127,8 @@ function CreateItemDeleteConfirmationContainer($idItem, $sender)
     } else if ($sender === "inventory") {
         $content .= "Êtes-vous sûr de vouloir supprimer cet item de l'inventaire?";
     } else if ($sender === "administration") {
-        $content .= "Êtes-vous sûr de vouloir supprimer cet utilisateur?";
+        $content .= "Êtes-vous sûr de vouloir supprimer l'utilisateur ". $idItem
+            . " de la base de données?";
     }
     $content .= "
                 </div>
