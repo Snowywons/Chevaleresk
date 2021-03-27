@@ -10,6 +10,11 @@ function GetPlayerByAlias($alias)
     return executeQuery("CALL JoueurParAlias('$alias')", true);
 }
 
+function GetPlayerBalanceByAlias($alias)
+{
+    return executeQuery("SELECT SoldeJoueurParAlias('$alias')", true)[0];
+}
+
 function PlayerIsAuthenticated($alias, $password)
 {
     return executeQuery("SELECT JoueurEstAuthentifie('$alias', '$password')", true)[0];

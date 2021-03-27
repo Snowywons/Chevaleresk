@@ -10,11 +10,11 @@ if (overlay) overlay.addEventListener("click", () => CloseAllPopups());
 function UpdateAllPopupDeleteConfirmButtons() {
     AddClickEventFor("popupDeleteConfirmButton", (item) => {
         let idItem = item.id.split("_")[0];
-        let table = item.id.split("_")[1];
+        let sender = item.id.split("_")[1];
         let popupId = idItem + "_itemDeleteConfirmationContainer";
         ClosePopup(popupId);
 
-        let request = "submit=deleteConfirm" + "&idItem=" + idItem + "&table=" + table;
+        let request = "submit=deleteConfirm" + "&sender=" + sender + "&idItem=" + idItem;
         ServerRequest("POST", "../store/storeUpdate.php", request,
             (requete) => {
                 NotifyWithPopup(requete.responseText);
@@ -23,6 +23,14 @@ function UpdateAllPopupDeleteConfirmButtons() {
             },
             () => {
             });
+    });
+}
+
+//Permet de mettre à jour tous les événements (click) liés aux boutons d'annulation de suppression des popups
+function UpdateAllPopupDeleteCancelButtons() {
+    AddClickEventFor("popupCancelConfirmButton", (item) => {
+        let popupId = GetSiblingContainerId(item.id, "itemDeleteConfirmationContainer");
+        ClosePopup(popupId);
     });
 }
 

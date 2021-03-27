@@ -10,9 +10,10 @@ function UpdateStoreContentOnFilter(sender, filtersStr) {
             UpdateAllAdminItemButtonsContainers();
             UpdateAllDeleteButtons();
 
-            UpdateAllAddToShoppingCartButtons();
+            UpdateAllAddItemShoppingCartButtons();
             UpdateAllAddItemButtons();
             UpdateAllRemoveItemButtons();
+            UpdateAllSaveItemQuantityButtons();
         }, () => {
         }, false);
 }
@@ -31,32 +32,58 @@ function UpdateAllAdminItemButtonsContainers() {
     AddClickEventFor("adminButtonsContainer", (item, event) => event.stopPropagation());
 }
 
+//Permet de mettre à jour tous les événements (click) liés aux boutons de sauvegarde de quantité du panier
+function UpdateAllSaveItemQuantityButtons() {
+    AddClickEventFor("saveButton", (item) =>
+    {
+        let sender = GetPageName();
+        let idItem = GetSplitedId(item.id, '_');
+        let itemQuantityInput = document.getElementById(GetSiblingContainerId(item.id, "itemQuantity"));
+        let quantity = itemQuantityInput.value;
+
+        if (quantity > 0) {
+            let request = "submit=modifyItemQuantity" + "&sender=" + sender +
+                "&idItem=" + idItem + "&quantity=" + quantity;
+            ServerRequest("POST", "../store/storeUpdate", request,
+                (requete) => {
+                    NotifyWithPopup(requete.responseText);
+                    UpdateTotalShoppingCartContent();
+                }, () => {
+                });
+        } else {
+            NotifyWithPopup("Quantité invalide");
+        }
+    });
+}
+
 //Permet de mettre à jour tous les événements (click) liés aux boutons de suppression d'item
 function UpdateAllDeleteButtons() {
     AddClickEventFor("deleteButton", (item) => {
+        let sender = GetPageName();
         let idItem = GetSplitedId(item.id, '_');
-        let table = GetPageName();
-        let request = "submit=createDeleteConfirmContainer&idItem=" + idItem + "&table=" + table;
+        let request = "submit=createDeleteConfirmContainer" + "&sender=" + sender + "&idItem=" + idItem;
         ServerRequest("POST", "../store/storeUpdate", request,
             (requete) => {
+                CloseNotifier();
                 RemoveOldContainers("itemDeleteConfirmationContainer");
                 InsertHtmlTo(JSON.parse(requete.responseText), "deleteConfirmReference");
                 UpdateAllPopupExitButtons();
                 UpdateAllPopupDeleteConfirmButtons();
+                UpdateAllPopupDeleteCancelButtons();
             }, () => {
             });
     });
 }
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons d'ajout d'items au panier
-function UpdateAllAddToShoppingCartButtons() {
+function UpdateAllAddItemShoppingCartButtons() {
     AddClickEventFor("addToShoppingCart", (item) => {
         let idItem = GetSplitedId(item.id, '_');
         let itemQuantityInput = document.getElementById(GetSiblingContainerId(item.id, "itemQuantity"));
         let quantity = itemQuantityInput.value;
 
         if (quantity > 0) {
-            let request = "submit=" + "addToShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity;
+            let request = "submit=addItemShoppingCart" + "&idItem=" + idItem + "&quantity=" + quantity;
             ServerRequest("POST", "../store/storeUpdate", request,
                 (requete) => {
                     if (requete.responseText === "notLogged") {
@@ -76,14 +103,7 @@ function UpdateAllAddToShoppingCartButtons() {
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons d'ajout de quantité du store et du panier
 function UpdateAllAddItemButtons() {
-    AddClickEventFor("addItem", (item) =>
-    {
-        AddItem(item);
-
-        if (GetPageName() === "shopping-cart") {
-
-        }
-    });
+    AddClickEventFor("addItem", (item) => AddItem(item));
 }
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons de diminution de quantité du store et du panier
@@ -112,7 +132,8 @@ function RemoveItem(item) {
 //Exécution des fonctions à l'ouverture (l'ordre est important)
 UpdateAllItemPreviewContainer();
 UpdateAllAdminItemButtonsContainers();
+UpdateAllSaveItemQuantityButtons();
 UpdateAllDeleteButtons();
-UpdateAllAddToShoppingCartButtons();
+UpdateAllAddItemShoppingCartButtons();
 UpdateAllAddItemButtons();
 UpdateAllRemoveItemButtons();

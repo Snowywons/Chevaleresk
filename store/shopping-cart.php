@@ -22,20 +22,17 @@ $_SESSION["filters"] = "'AR','AM','PO','RS'";
 $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 
 //Création des conteneurs cachés et du overlay
-$records = GetAllItems();
+$records = GetAllShoppingCartItemsByAlias($alias);
 CreateItemDetailsContainers($records);
 CreateNotificationContainer();
 CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------
-echo <<<HTML
-<main class="shopping-cart">
-    <h1>Panier d'achat</h1>
-    
-HTML;
+echo "
+<main class='shopping-cart'>
+    <h1>Panier d'achat</h1>";
 
 CreateFilterSection();
-$records = GetAllShoppingCartItemsByAlias($alias);
 
 echo "<div id='storeReference'>";
 echo CreateShoppingCartStoreContainer($records);

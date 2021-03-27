@@ -7,17 +7,22 @@ global $conn;
 
 function GetFilteredShoppingCartItemsByAlias($filter, $alias)
 {
-    return executeQuery("CALL ItemsParFiltreEtAliasJoueur($filter, '$alias')");
+    return executeQuery("CALL ItemsPanierParFiltreEtAliasJoueur($filter, '$alias')");
 }
 
 function GetAllShoppingCartItemsByAlias($alias)
 {
-    return executeQuery("CALL ItemsParAliasJoueur('$alias')");
+    return executeQuery("CALL ItemsPanierParAliasJoueur('$alias')");
 }
 
-function AddItemToShoppingCartByAlias($alias, $idItem, $quantity)
+function AddItemShoppingCartByAlias($alias, $idItem, $quantity)
 {
     return executeQuery("CALL AjouterItemPanierParAliasJoueur('$alias', $idItem, $quantity)", true)[0];
+}
+
+function ModifyItemQuantityShoppingCartByAlias($alias, $idItem, $quantity)
+{
+    return executeQuery("CALL ModifierQuantiteItemPanierParAliasJoueur('$alias', $idItem, $quantity)", true)[0];
 }
 
 function DeleteItemFromShoppingCartByAlias($alias, $idItem)

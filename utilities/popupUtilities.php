@@ -107,7 +107,7 @@ function CreateItemDetailsContainers($records)
     echo "</div>";
 }
 
-function CreateItemDeleteConfirmationContainer($idItem, $table)
+function CreateItemDeleteConfirmationContainer($idItem, $sender)
 {
     $content = "
         <div>
@@ -120,19 +120,23 @@ function CreateItemDeleteConfirmationContainer($idItem, $table)
                     <br>
                     <div>";
 
-    if ($table === "store")
+    if ($sender === "store") {
         $content .= "Êtes-vous sûr de vouloir supprimer cet item de la base de données?";
-    else if ($table === "shopping-cart")
-        $content .= "Êtes-vous sûr de vouloir supprimer cet item de votre panier?";
-    else if ($table === "administration")
+    } else if ($sender === "shopping-cart") {
+        $content .= "Êtes-vous sûr de vouloir supprimer cet item du panier?";
+    } else if ($sender === "inventory") {
+        $content .= "Êtes-vous sûr de vouloir supprimer cet item de l'inventaire?";
+    } else if ($sender === "administration") {
         $content .= "Êtes-vous sûr de vouloir supprimer cet utilisateur?";
+    }
     $content .= "
                 </div>
             </div>
             <div class='popupFooterContainer'>
                 <div class='confirmationButtonsContainer'>
-                    <button class='popupCancelConfirmButton cancelButton'>Annuler</button>
-                    <button id='" . $idItem . "_" . $table . "' 
+                    <button id='" . $idItem . "_' 
+                            class='popupCancelConfirmButton cancelButton'>Annuler</button>
+                    <button id='" . $idItem . "_" . $sender . "' 
                             class='popupDeleteConfirmButton confirmButton'>Confirmer</button>
                 </div>
             </div>

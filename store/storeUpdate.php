@@ -5,7 +5,9 @@ include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/popupUtilities.php";
 include_once $root . "db/itemsDT.php";
+include_once $root . "db/playersDT.php";
 include_once $root . "db/shopping-cartsDT.php";
+include_once $root . "db/inventoriesDT.php";
 
 global $conn;
 
@@ -13,22 +15,28 @@ if (isset($_POST["submit"])) {
 
     //Sur un changement de filtre
     if ($_POST["submit"] == "setFilters") {
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','',''";
+        $_SESSION["filters"] = $filters;
 
         //Mise à jour des conteneurs du store à partir de la page 'store.php'
-        if ($_POST["sender"] == "store") {
-            $_SESSION["filters"] = $_POST["filters"];
-            $records = GetFilteredItems($_POST['filters']);
+        if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
+            $records = GetFilteredItems($filters);
             echo json_encode(CreateStoreContainer($records));
             exit;
         }
 
         //Mise à jour des conteneurs du store à partir de la page 'shopping-cart.php'
-        if ($_POST["sender"] == "shopping-cart") {
-            $_SESSION["filters"] = $_POST["filters"];
-            $alias = $_SESSION["alias"];
-            $records = GetFilteredShoppingCartItemsByAlias($_POST["filters"], $alias);
-
+        if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
+            $records = GetFilteredShoppingCartItemsByAlias($filters, $alias);
             echo json_encode(CreateShoppingCartStoreContainer($records));
+            exit;
+        }
+
+        //Mise à jour des conteneurs du store à partir de la page 'inventory.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
+            $records = GetFilteredInventoryItemsByAlias($filters, $alias);
+            echo json_encode(CreateInventoryStoreContainer($records));
             exit;
         }
     }
@@ -43,14 +51,14 @@ if (isset($_POST["submit"])) {
         }
 
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $table = isset($_POST["table"]) ? $_POST["table"] : "";
+        $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
 
-        echo json_encode(CreateItemDeleteConfirmationContainer($idItem, $table));
+        echo json_encode(CreateItemDeleteConfirmationContainer($idItem, $sender));
         exit;
     }
 
     //Sur l'ajout d'un item au panier
-    if ($_POST["submit"] == "addToShoppingCart") {
+    if ($_POST["submit"] == "addItemShoppingCart") {
 
         //Si le joueur ne s'est pas authentifié
         if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
@@ -62,11 +70,43 @@ if (isset($_POST["submit"])) {
         $idItem = $_POST["idItem"];
         $quantity = $_POST["quantity"];
 
-        echo AddItemToShoppingCartByAlias($alias, $idItem, $quantity);
+        echo AddItemShoppingCartByAlias($alias, $idItem, $quantity);
         exit;
     }
 
-    //Sur la suppression d'un item du panier
+    //Sur la modification de quantité d'un item
+    if ($_POST["submit"] == "modifyItemQuantity") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
+
+        //Demande de la page 'store.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
+            echo "Cette fonctionnalité n'existe pas.";
+            exit;
+        }
+
+        //Demande de la page 'shopping-cart.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
+            echo ModifyItemQuantityShoppingCartByAlias($alias, $idItem, $quantity);
+            exit;
+        }
+
+        //Demande de la page 'inventory.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
+            echo ModifyItemQuantityInventoryByAlias($alias, $idItem, $quantity);
+            exit;
+        }
+    }
+
+    //Sur la suppression d'un item
     if ($_POST["submit"] == "deleteConfirm") {
 
         //Si le joueur ne s'est pas authentifié
@@ -77,16 +117,24 @@ if (isset($_POST["submit"])) {
 
         $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $table = isset($_POST["table"]) ? $_POST["table"] : "";
 
-        if ($table === "store") {
-            echo "FONCTIONNALITÉ MANQUANTE.";
-        } else if ($table === "shopping-cart") {
-            echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
-        } else {
-            echo "Impossible de traiter la demande.";
+        //Demande de la page 'store.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
+            echo "Cette fonctionnalité n'existe pas.";
+            exit;
         }
-        exit;
+
+        //Demande de la page 'shopping-cart.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
+            echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
+            exit;
+        }
+
+        //Demande de la page 'inventory.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
+            echo DeleteItemFromInventoryByAlias($alias, $idItem);
+            exit;
+        }
     }
 
     //Sur le paiement du panier du joueur
@@ -98,7 +146,12 @@ if (isset($_POST["submit"])) {
             exit;
         }
 
-        echo PayShoppingCartByAlias($_SESSION["alias"]);
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+
+        $message = PayShoppingCartByAlias($alias);
+        $_SESSION["balance"] = GetPlayerBalanceByAlias($alias);
+
+        echo $message;
         exit;
     }
 
@@ -222,8 +275,8 @@ function CreateShoppingCartStoreContainer($records)
                         <button id='" . $idItem . "_addItem' class='addItem'>+</button>
                     </div>
                     <div class='adminButtonsContainer'>
-                        <button id='" . $idItem . "_modifyButton' class='modifyButton'>
-                            <img src='" . $root . "/icons/EditIcon.png'/>
+                        <button id='" . $idItem . "_saveButton' class='saveButton'>
+                            <img src='" . $root . "/icons/SaveIcon.png'/>
                         </button>
                         <button id='" . $idItem . "_deleteButton' class='deleteButton'>
                             <img src='" . $root . "/icons/DeleteIcon.png'/>
@@ -241,7 +294,7 @@ function CreateShoppingCartStoreContainer($records)
 function CreateShoppingCartTotalContainer()
 {
     $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-    $currentBalance = isset($_SESSION["balance"]) ? $_SESSION["balance"] : "0";
+    $currentBalance = GetPlayerBalanceByAlias($alias);
     $total = CalculateShoppingCartTotalByAlias($alias);
     $remainingBalance = $currentBalance - $total;
     $color = $remainingBalance < 0 ? "red" : "black";
@@ -253,6 +306,74 @@ function CreateShoppingCartTotalContainer()
             <div></div><div class='totalLigne'></div>
             <div id='remainingBalanceContainer'>Solde restant</div><div style='color: $color'>$remainingBalance</div>
         </div>";
+
+    return $content;
+}
+
+function CreateInventoryStoreContainer($records)
+{
+    global $root;
+
+    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+
+    $content = "
+        <div class='storeContainer'>
+        <div class='category'>Item</div>
+        <div class='category rightLastColumn'>Quantité</div>";
+
+    foreach ($records as $data) {
+        $idItem = $data[0];
+        $name = $data[1];
+        $stock = $data[2];
+        $price = $data[3];
+        $photoURL = $data[4];
+        $codeType = $data[5];
+        $quantity = $data[6];
+
+        $content .= "
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>";
+
+        $content .= "
+                <div class='itemIconContainer'>
+                    <img src='" . $root . "/icons/$photoURL.png'/>
+                </div>
+                <div class='titleContainer'>
+                    <div>" . $name . "</div>
+                </div>
+            </div>
+            <div class='rightLastColumn fadeIn'>";
+
+        if ($isAdmin) {
+            $content .= "
+                <div class='shoppingCartActionsContainer'>
+                    <div class='shoppingCartQuantityContainer'>
+                        <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
+                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
+                        <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                    </div>
+                    <div class='adminButtonsContainer'>
+                        <button id='" . $idItem . "_saveButton' class='saveButton'>
+                            <img src='" . $root . "/icons/SaveIcon.png'/>
+                        </button>
+                        <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                            <img src='" . $root . "/icons/DeleteIcon.png'/>
+                        </button>
+                    </div>
+                </div>";
+        } else {
+            $content .= "
+                <div class='shoppingCartActionsContainer'>
+                    <div class='shoppingCartQuantityContainer'>
+                        <input id='" . $idItem . "_itemQuantity' 
+                        class='itemQuantity' type='number' disabled value='$quantity'/>
+                    </div>
+                </div>";
+        }
+
+        $content .= "</div>";
+    }
+
+    $content .= "</div>";
 
     return $content;
 }

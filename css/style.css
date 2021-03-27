@@ -53,6 +53,8 @@
     --store-modifyButtonBorderColor: var(--col-skin);
     --store-deleteButtonBackgroundColor: var(--col-lightRed);
     --store-deleteButtonBorderColor: var(--col-lightRed);
+    --store-saveButtonBackgroundColor: var(--col-skin);
+    --store-saveButtonBorderColor: var(--col-skin);
     --store-activeButtonBackgroundColor: var(--col-gray);
     --store-activeButtonBorderColor: var(--col-gray);
     /*#endregion Magasin*/
@@ -484,7 +486,8 @@ button.payButton {
 
 button.inventoryButton,
 button.modifyButton,
-button.deleteButton {
+button.deleteButton,
+button.saveButton {
     width: 30px;
     height: 25px;
     outline: none;
@@ -509,9 +512,15 @@ button.deleteButton {
     border-color: var(--store-deleteButtonBorderColor);
 }
 
+button.saveButton {
+    background-color: var(--store-saveButtonBackgroundColor);
+    border-color: var(--store-saveButtonBorderColor);
+}
+
 button.inventoryButton > img,
 button.modifyButton > img,
-button.deleteButton > img {
+button.deleteButton > img,
+button.saveButton > img {
     height: 100%;
 }
 
@@ -519,7 +528,8 @@ button.payButton:hover,
 button.addToShoppingCart:hover,
 button.inventoryButton:hover,
 button.modifyButton:hover,
-button.deleteButton:hover {
+button.deleteButton:hover,
+button.saveButton:hover {
     cursor: pointer;
 }
 
@@ -528,7 +538,8 @@ button.payButton:active,
 button.inventoryButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
-button.deleteButton:active {
+button.deleteButton:active,
+button.saveButton:active{
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
 }
