@@ -355,13 +355,17 @@ main.shopping-cart div.storeContainer {
     grid-template-columns: auto 250px 250px 400px;
 }
 
-main.shopping-cart div.shoppingCartTotalContainer {
-    display: grid;
-    grid-template-columns: auto 200px;
+main.shopping-cart div.shoppingCartTransactionContainer {
     text-align: right;
     background-color: var(--store-shoppingCartTotalContainerBackgroundColor);
     border: 1px dashed var(--store-shoppingCartTotalContainerBorderColor);
     padding: 10px;
+}
+
+main.shopping-cart div.shoppingCartTotalContainer {
+    display: grid;
+    grid-template-columns: auto 200px;
+    text-align: right;
 }
 
 div.shoppingCartTotalContainer div.totalLigne {
@@ -470,7 +474,7 @@ button.addToShoppingCart {
     border-color: var(--store-addButtonBorderColor);
 }
 
-button.pay {
+button.payButton {
     width: 100px;
     height: 30px;
     outline: none;
@@ -511,7 +515,7 @@ button.deleteButton > img {
     height: 100%;
 }
 
-button.pay:hover,
+button.payButton:hover,
 button.addToShoppingCart:hover,
 button.inventoryButton:hover,
 button.modifyButton:hover,
@@ -520,7 +524,7 @@ button.deleteButton:hover {
 }
 
 button.addToShoppingCart:active,
-button.pay:active,
+button.payButton:active,
 button.inventoryButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
@@ -960,6 +964,15 @@ form input.itemQuantity {
 /*region Autres*/
 .hidden {
     display: none;
+}
+
+.fadeIn {
+    animation: fadeIn ease 0.75s;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
 }
 
 /*endregion Autres*/

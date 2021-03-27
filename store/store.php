@@ -16,10 +16,11 @@ include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
+$_SESSION["filters"] = "'AR','AM','PO','RS'";
+
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
-CreateItemDeleteConfirmationContainers($records, "store");
 CreateNotificationContainer();
 CreateOverlay();;
 
@@ -38,11 +39,12 @@ if (UserIsAdmin()) {
 }
 
 CreateFilterSection();
-$records = isset($_SESSION["filters"]) ? GetFilteredItems($_SESSION["filters"]) : GetAllItems();
 
 echo "<div id='storeReference'>";
 echo CreateStoreContainer($records);
 echo "</div></main>";
+
+echo "<div id='deleteConfirmReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
@@ -51,7 +53,6 @@ echo "
     <script type='text/javascript' src='" . $root . "js/filters.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/store.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/itemPreviewButtons.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
 ?>

@@ -13,7 +13,8 @@ $idJoueurs = [];
 foreach ($records as $data) {
     array_push($idJoueurs, $data[0]);
 }
-CreateItemDeleteConfirmationContainers($idJoueurs);
+CreateItemDeleteConfirmationContainers($idJoueurs, "administration");
+CreateNotificationContainer();
 CreateOverlay();
 
 echo <<<HTML
@@ -66,6 +67,6 @@ include_once $root . "master/footer.php";
 
 echo "
     <script type='text/javascript' src='" . $root . "js/profiles.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/popup.js' defer></script>";
+    <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>";
 
 ?>

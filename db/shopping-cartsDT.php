@@ -29,3 +29,8 @@ function PayShoppingCartByAlias($alias)
 {
     return executeQuery("CALL PayerPanierParAliasJoueur('$alias')", true)[0];
 }
+
+function CalculateShoppingCartTotalByAlias($alias)
+{
+    return executeQuery("SELECT CalculerMontantPanierParAliasJoueur('$alias')", true)[0];
+}

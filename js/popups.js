@@ -1,92 +1,74 @@
 //Récupération des différents conteneurs
 let itemDetailsContainers = document.querySelectorAll(".popupContainer.itemDetailsContainer");
-let itemDeleteConfirmationContainers = document.querySelectorAll(".popupContainer.itemDeleteConfirmationContainer");
 let notificationContainer = document.getElementById("notificationContainer");
 let notificationMessageContainer = document.getElementById("notificationMessageContainer");
 
-//Récupération de l'overlay
 let overlay = document.getElementById("overlay");
+if (overlay) overlay.addEventListener("click", () => CloseAllPopups());
 
-//Permet de mettre à jour tous les événements (click) liés aux popups
-function UpdateAllPopups() {
-    //Overlay (l'écran noir derrière un popup)
-    overlay.addEventListener("click", () => CloseAllPopups());
+//Permet de mettre à jour tous les événements (click) liés aux boutons de confirmation de suppression des popups
+function UpdateAllPopupDeleteConfirmButtons() {
+    AddClickEventFor("popupDeleteConfirmButton", (item) => {
+        let idItem = item.id.split("_")[0];
+        let table = item.id.split("_")[1];
+        let popupId = idItem + "_itemDeleteConfirmationContainer";
+        ClosePopup(popupId);
 
-    //Les conteneurs de classe (itemPreviewContainer) permettent d'ouvrir un popup de détails d'item
-    let itemPreviewContainers = document.querySelectorAll(".itemPreviewContainer");
-    itemPreviewContainers.forEach((item) => {
-        if (item.getAttribute('listener') !== 'true') {
-            item.addEventListener("click", () => {
-                let siblingContainerId = GetSiblingContainerId(item.id, "itemDetailsContainer");
-                OpenPopup(siblingContainerId);
+        let request = "submit=deleteConfirm" + "&idItem=" + idItem + "&table=" + table;
+        ServerRequest("POST", "../store/storeUpdate.php", request,
+            (requete) => {
+                NotifyWithPopup(requete.responseText);
+                UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                UpdateTotalShoppingCartContent();
+            },
+            () => {
             });
-            item.setAttribute('listener', 'true');
-        }
     });
+}
 
-    //Les boutons de classe (deleteButton) permettent d'ouvrir un popup de confirmation de suppression
-    let deleteButtons = document.querySelectorAll(".deleteButton");
-    deleteButtons.forEach((item) => {
-        if (item.getAttribute('listener') !== 'true') {
-            item.addEventListener("click", () => {
-                let siblingContainerId = GetSiblingContainerId(item.id, "itemDeleteConfirmationContainer");
-                OpenPopup(siblingContainerId);
-            });
-            item.setAttribute('listener', 'true');
-        }
-    });
-
-    //Les boutons de classe (popupExitButton) permettent de fermer tous les popups
-    let itemDetailsContainerExitButtons = document.querySelectorAll(".popupExitButton");
-    itemDetailsContainerExitButtons.forEach((item) => {
-        if (item.getAttribute('listener') !== 'true') {
-            item.addEventListener("click", () => {
-                let siblingContainerId = GetParentNode(item, 1, "popupContainer").id;
-                ClosePopup(siblingContainerId);
-            });
-            item.setAttribute('listener', 'true');
-        }
+//Permet de mettre à jour tous les événements (click) liés aux boutons de fermeture de popups
+function UpdateAllPopupExitButtons() {
+    AddClickEventFor("popupExitButton", (item) => {
+        let siblingContainerId = GetParentNode(item, 1, "popupContainer").id;
+        CloseNotifier();
+        ClosePopup(siblingContainerId);
     });
 }
 
 //Permet d'ouvrir un popup selon son id
-function OpenPopup (id) {
+function OpenPopup(id) {
     let popupContainer = document.getElementById(id);
-    if (popupContainer) {
-        popupContainer.classList.add("active");
-        overlay.classList.add("active");
-    }
+    if (popupContainer) popupContainer.classList.add("active");
+    if (overlay) overlay.classList.add("active");
 }
 
 //Permet de fermer un popup selon son id
-function ClosePopup (id) {
+function ClosePopup(id) {
     let popupContainer = document.getElementById(id);
-    if (popupContainer) {
-        popupContainer.classList.remove("active");
-        overlay.classList.remove("active");
-    }
+    if (popupContainer) popupContainer.classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
 }
 
 //Permet de fermer tous les popups
 function CloseAllPopups() {
+    RemoveOldContainers("itemDeleteConfirmationContainer");
     itemDetailsContainers.forEach((item) => item.classList.remove("active"));
-    itemDeleteConfirmationContainers.forEach((item) => item.classList.remove("active"));
-    notificationContainer.classList.remove("active");
-    overlay.classList.remove("active");
+    if (notificationContainer) notificationContainer.classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
 }
 
 //Permet d'afficher un message à l'usager sous forme d'un popup
 function NotifyWithPopup(text) {
-    notificationContainer.classList.add("active");
-    notificationMessageContainer.innerText = text;
-    overlay.classList.add("active");
+    if (notificationContainer) notificationContainer.classList.add("active");
+    if (notificationMessageContainer) notificationMessageContainer.innerText = text;
+    if (overlay) overlay.classList.add("active");
 }
 
 //Permet de fermer le popup de notification
 function CloseNotifier() {
-    notificationContainer.classList.remove("active");
-    overlay.classList.add("active");
+    if (notificationContainer) notificationContainer.classList.remove("active");
+    if (overlay) overlay.classList.add("active");
 }
 
 //Exécution des fonctions à l'ouverture
-UpdateAllPopups();
+UpdateAllPopupExitButtons();

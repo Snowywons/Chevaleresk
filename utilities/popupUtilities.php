@@ -107,44 +107,39 @@ function CreateItemDetailsContainers($records)
     echo "</div>";
 }
 
-function CreateItemDeleteConfirmationContainers($records, $target)
+function CreateItemDeleteConfirmationContainer($idItem, $table)
 {
-    echo "<div>";
+    $content = "
+        <div>
+            <div id='" . $idItem . "_itemDeleteConfirmationContainer' class='popupContainer itemDeleteConfirmationContainer active'>
+                <div class='popupHeaderContainer'>
+                      <span>Attention!</span>
+                      <button class='popupExitButton'>x</button>
+                </div>
+                <div class='popupBodyContainer'>
+                    <br>
+                    <div>";
 
-    foreach ($records as $data) {
-
-        $idItem = $data[0];
-
-        /*Création des pages de confirmation de suppression pour chaque item*/
-        echo "
-        <div id='" . $idItem . "_itemDeleteConfirmationContainer' class='popupContainer itemDeleteConfirmationContainer'>
-            <div class='popupHeaderContainer'>
-                  <span>Attention!</span>
-                  <button class='popupExitButton'>x</button>
-            </div>
-            <div class='popupBodyContainer'>
-                <br>
-                <div>";
-
-        if ($target === "store")
-            echo "Êtes-vous sûr de vouloir supprimer cet item de la base de données?";
-        else if ($target === "shopping-cart")
-            echo "Êtes-vous sûr de vouloir supprimer cet item de votre panier?";
-
-        echo "
+    if ($table === "store")
+        $content .= "Êtes-vous sûr de vouloir supprimer cet item de la base de données?";
+    else if ($table === "shopping-cart")
+        $content .= "Êtes-vous sûr de vouloir supprimer cet item de votre panier?";
+    else if ($table === "administration")
+        $content .= "Êtes-vous sûr de vouloir supprimer cet utilisateur?";
+    $content .= "
                 </div>
             </div>
             <div class='popupFooterContainer'>
                 <div class='confirmationButtonsContainer'>
-                    <button class='deleteCancelButton cancelButton'>Annuler</button>
-                    <button id='" . $idItem . "_" . $target . "DeleteConfirmButton' 
-                            class='deleteConfirmButton confirmButton'>Confirmer</button>
+                    <button class='popupCancelConfirmButton cancelButton'>Annuler</button>
+                    <button id='" . $idItem . "_" . $table . "' 
+                            class='popupDeleteConfirmButton confirmButton'>Confirmer</button>
                 </div>
             </div>
-        </div>";
-    }
+        </div>
+    </div>";
 
-    echo "</div>";
+    return $content;
 }
 
 function CreateNotificationContainer()

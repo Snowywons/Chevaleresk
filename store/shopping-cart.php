@@ -17,12 +17,13 @@ include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
+$_SESSION["filters"] = "'AR','AM','PO','RS'";
+
 $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
-CreateItemDeleteConfirmationContainers($records, "shopping-cart");
 CreateNotificationContainer();
 CreateOverlay();
 
@@ -34,25 +35,25 @@ echo <<<HTML
 HTML;
 
 CreateFilterSection();
-$records = isset($_SESSION["filters"]) ?
-    GetFilteredShoppingCartItemsByAlias($_SESSION["filters"], $alias) : GetAllShoppingCartItemsByAlias($alias);
+$records = GetAllShoppingCartItemsByAlias($alias);
 
 echo "<div id='storeReference'>";
 echo CreateShoppingCartStoreContainer($records);
 echo "</div>";
 
-echo <<<HTML
-</div>
-<br>
-<div class="shoppingCartTotalContainer">
-    <div>Votre solde</div><div>0</div>
-    <div>Total</div><div>-0</div>
-    <div></div><div class="totalLigne"></div>
-    <div>Solde restant</div><div>0</div>
-    <div></div><div><br><button id="payButton" class="pay">Payer</button></div>
-</div>
-</main>
-HTML;
+echo "
+    <br>
+    <div class='shoppingCartTransactionContainer'>
+        <div id='shoppingCartTotalReference'>";
+echo CreateShoppingCartTotalContainer();
+echo "
+        </div>
+        <div></div>
+        <div><br><button id='payButton' class='payButton'>Payer</button></div>
+    </div>
+</main>";
+
+echo "<div id='deleteConfirmReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
@@ -61,7 +62,6 @@ echo "
     <script type='text/javascript' src='" . $root . "js/filters.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/store.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/itemPreviewButtons.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
 ?>
