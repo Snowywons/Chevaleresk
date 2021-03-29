@@ -1,10 +1,10 @@
 <?php
 $root = "../";
 
-include_once $root."master/header.php";
+include_once $root . "master/header.php";
 include_once $root . "utilities/sessionUtilities.php";
-include_once $root."utilities/dbUtilities.php";
-include_once $root."utilities/popupUtilities.php";
+include_once $root . "utilities/dbUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
 include_once $root . "db/playersDT.php";
 
 //Accès interdit
@@ -14,7 +14,7 @@ if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
 }
 
 $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-$targetAlias = isset($_GET["alias"]) ? $_GET["alias"] : "";
+$targetAlias = isset($_GET["alias"]) ? $_GET["alias"] : $alias;
 $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
 
 //Accès interdit
@@ -63,7 +63,7 @@ echo <<<HTML
             <label for="passwordConfirm">Confirmation du mot de passe</label>
             <input type="password" id="passwordConfirm" name="" value="$password" onblur="PasswordConfirm()">
             <div id="confirmValidation" style = "color:red"></div>
-            <input type="submit" name="modifyProfileInformations" class="saveChanges" value="Enregistrer">
+            <input type="submit" class="saveChanges" value="Enregistrer">
         </fieldset>
     </form>
 </main>
@@ -71,7 +71,7 @@ HTML;
 echo "<div id='deleteConfirmReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
-include_once $root."master/footer.php";
+include_once $root . "master/footer.php";
 
 echo "
     <script type='text/javascript' src='" . $root . "js/administration.js' defer></script>

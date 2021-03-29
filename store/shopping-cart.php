@@ -19,12 +19,26 @@ include_once $root . "db/ressourcesDT.php";
 
 global $conn;
 
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
+//Accès interdit
+if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
+    header("location: ../session/login.php");
+    exit;
+}
 
 $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+$targetAlias = isset($_GET["alias"]) ? $_GET["alias"] : $alias;
+$isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+
+//Accès interdit
+if (!$isAdmin && $alias !== $targetAlias) {
+    header("location: ../store/store.php");
+    exit;
+}
+
+$_SESSION["filters"] = "'AR','AM','PO','RS'";
 
 //Création des conteneurs cachés et du overlay
-$records = GetAllShoppingCartItemsByAlias($alias);
+$records = GetAllShoppingCartItemsByAlias($targetAlias);
 CreateItemDetailsContainers($records);
 CreateNotificationContainer();
 CreateOverlay();
@@ -32,7 +46,7 @@ CreateOverlay();
 //---------------------------------------------------------------------------------------------------------------------
 echo "
 <main class='shopping-cart'>
-    <h1>Panier d'achat</h1>";
+    <h1>Panier d'achat de $targetAlias</h1>";
 
 CreateFilterSection();
 

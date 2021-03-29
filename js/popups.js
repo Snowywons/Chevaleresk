@@ -10,24 +10,25 @@ if (overlay) overlay.addEventListener("click", () => CloseAllPopups());
 function UpdateAllPopupDeleteConfirmButtons() {
     AddClickEventFor("popupDeleteConfirmButton", (item) => {
         let idItem = item.id.split("_")[0];
-        let sender = item.id.split("_")[1];
+        let alias = item.id.split("_")[1];
+        let sender = item.id.split("_")[2];
         let popupId = idItem + "_itemDeleteConfirmationContainer";
         ClosePopup(popupId);
 
-        let request = "submit=deleteConfirm" + "&sender=" + sender + "&idItem=" + idItem;
+        let request = "submit=deleteConfirm" + "&idItem=" + idItem + "&alias=" + alias + "&sender=" + sender;
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 NotifyWithPopup(requete.responseText);
                 switch (sender) {
                     case "store" :
-                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                         break;
                     case "shopping-cart" :
-                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                         UpdateTotalShoppingCartContent();
                         break;
                     case "inventory" :
-                        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                        UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                         break;
                     case "administration" :
                         UpdateManagerContent();

@@ -21,17 +21,31 @@ global $conn;
 
 $_SESSION["filters"] = "'AR','AM','PO','RS'";
 
+//Accès interdit
+if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
+    header("location: ../session/login.php");
+    exit;
+}
+
 $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+$targetAlias = isset($_GET["alias"]) ? $_GET["alias"] : $alias;
+$isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+
+//Accès interdit
+if (!$isAdmin && $alias !== $targetAlias) {
+    header("location: ../profile/profile.php");
+    exit;
+}
 
 //Création des conteneurs cachés et du overlay
-$records = GetAllInventoryItemsByAlias($alias);
+$records = GetAllInventoryItemsByAlias($targetAlias);
 CreateItemDetailsContainers($records);
 CreateNotificationContainer();
 CreateOverlay();
 
 echo "
 <main class='inventory'>
-    <h1>Inventaire de $alias</h1>";
+    <h1>Inventaire de $targetAlias</h1>";
 
 CreateFilterSection();
 

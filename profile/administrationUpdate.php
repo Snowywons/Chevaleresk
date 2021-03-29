@@ -27,17 +27,15 @@ function CreateManagerContainer($records) {
             <div>$firstName</div>
             <div>$balance</div>
             <div class='adminActionsContainer'>
-                <div class='adminButtonsContainer'>
-                    <button id='" . $alias . "_lookButton' class='lookButton'>
-                        <img src='" . $root . "/icons/EyeIcon.png'/>
-                    </button>
-                    <button id='" . $alias . "_modifyButton' class='modifyButton'>
-                        <img src='" . $root . "/icons/EditIcon.png'/>
-                    </button>
-                    <button id='" . $alias . "_deleteButton' class='deleteButton'>
-                        <img src='" . $root . "/icons/DeleteIcon.png'/>
-                    </button>
-                </div>
+                <button id='" . $alias . "_bagButton' class='bagButton'>
+                    <img src='" . $root . "/icons/BagIcon.png'/>
+                </button>
+                <button id='" . $alias . "_modifyButton' class='modifyButton'>
+                    <img src='" . $root . "/icons/EditIcon.png'/>
+                </button>
+                <button id='" . $alias . "_deleteButton' class='deleteButton'>
+                    <img src='" . $root . "/icons/DeleteIcon.png'/>
+                </button>
             </div>";
     }
 

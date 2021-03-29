@@ -22,7 +22,7 @@ CreateOverlay();
 
 echo "
     <main class='administration'>
-        <h1>Gestionnaire</h1>";
+        <h1>Gestionnaire d'utilisateurs</h1>";
 
 echo "<div id='managerReference'>";
 echo CreateManagerContainer($records);

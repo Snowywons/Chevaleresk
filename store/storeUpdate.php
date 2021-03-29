@@ -15,8 +15,6 @@ function CreateStoreContainer($records)
 {
     global $root;
 
-    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
-
     $content = "
         <div class='storeContainer'>
         <div class='category'>Item</div>
@@ -33,21 +31,7 @@ function CreateStoreContainer($records)
         $codeType = $data[5];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>";
-
-        if ($isAdmin) {
-            $content .= "
-                <div class='adminButtonsContainer'>
-                    <button id='" . $idItem . "_modifyButton' class='modifyButton'>
-                        <img src='" . $root . "/icons/EditIcon.png'/>
-                    </button>
-                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
-                        <img src='" . $root . "/icons/DeleteIcon.png'/>
-                    </button>
-                </div>";
-        }
-
-        $content .= "
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -64,9 +48,7 @@ function CreateStoreContainer($records)
                         <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='1'/>
                         <button id='" . $idItem . "_addItem' class='addItem'>+</button>
                     </div>
-                    <div class='adminButtonsContainer'>
-                        <button id='" . $idItem . "_addToShoppingCart' class='addToShoppingCart'>Ajouter</button>
-                    </div>
+                    <button id='" . $idItem . "_addToShoppingCart' class='addToShoppingCart'>Ajouter</button>
                 </div>
             </div>";
     }
@@ -97,9 +79,7 @@ function CreateShoppingCartStoreContainer($records)
         $quantity = $data[6];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>";
-
-        $content .= "
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -116,14 +96,12 @@ function CreateShoppingCartStoreContainer($records)
                         <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
                         <button id='" . $idItem . "_addItem' class='addItem'>+</button>
                     </div>
-                    <div class='adminButtonsContainer'>
-                        <button id='" . $idItem . "_saveButton' class='saveButton'>
-                            <img src='" . $root . "/icons/SaveIcon.png'/>
-                        </button>
-                        <button id='" . $idItem . "_deleteButton' class='deleteButton'>
-                            <img src='" . $root . "/icons/DeleteIcon.png'/>
-                        </button>
-                    </div>
+                    <button id='" . $idItem . "_saveButton' class='saveButton'>
+                        <img src='" . $root . "/icons/SaveIcon.png'/>
+                    </button>
+                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                        <img src='" . $root . "/icons/DeleteIcon.png'/>
+                    </button>
                 </div>
             </div>";
     }
@@ -161,7 +139,7 @@ function CreateInventoryStoreContainer($records)
     $content = "
         <div class='storeContainer'>
         <div class='category'>Item</div>
-        <div class='category rightLastColumn'>Quantité</div>";
+        <div class='category'>Quantité</div>";
 
     foreach ($records as $data) {
         $idItem = $data[0];
@@ -173,9 +151,7 @@ function CreateInventoryStoreContainer($records)
         $quantity = $data[6];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>";
-
-        $content .= "
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -193,14 +169,12 @@ function CreateInventoryStoreContainer($records)
                         <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
                         <button id='" . $idItem . "_addItem' class='addItem'>+</button>
                     </div>
-                    <div class='adminButtonsContainer'>
-                        <button id='" . $idItem . "_saveButton' class='saveButton'>
-                            <img src='" . $root . "/icons/SaveIcon.png'/>
-                        </button>
-                        <button id='" . $idItem . "_deleteButton' class='deleteButton'>
-                            <img src='" . $root . "/icons/DeleteIcon.png'/>
-                        </button>
-                    </div>
+                    <button id='" . $idItem . "_saveButton' class='saveButton'>
+                        <img src='" . $root . "/icons/SaveIcon.png'/>
+                    </button>
+                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                        <img src='" . $root . "/icons/DeleteIcon.png'/>
+                    </button>
                 </div>";
         } else {
             $content .= "

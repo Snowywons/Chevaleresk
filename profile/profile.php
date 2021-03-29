@@ -1,40 +1,62 @@
 <?php
 $root = "../";
 
-include_once $root."master/header.php";
-include_once $root."utilities/dbUtilities.php";
+include_once $root . "master/header.php";
+include_once $root . "utilities/sessionUtilities.php";
+include_once $root . "utilities/dbUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
+include_once $root . "db/playersDT.php";
 
-global $conn;
+//Accès interdit
+if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
+    header("location: ../session/login.php");
+    exit;
+}
 
-$records = executeQuery("SELECT * FROM Joueurs;");
+$alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+$targetAlias = isset($_GET["alias"]) ? $_GET["alias"] : $alias;
+$isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
 
-//Exemple d'information reçu de la bd
-$myInfosString = "JPaul61, Leblanc, Jean-Paul, 100, Password12345";
+//Accès interdit
+if (!$isAdmin && $alias !== $targetAlias) {
+    header("location: ../profile/profile.php");
+    exit;
+}
 
-$myInfosArray = explode(", ", $myInfosString);
-$alias = $myInfosArray[0];
-$lastName = $myInfosArray[1];
-$firstName = $myInfosArray[2];
-$balance = $myInfosArray[3];
+$records = GetPlayerByAlias($targetAlias);
+CreateNotificationContainer();
+CreateOverlay();
 
-echo <<<HTML
+$alias = "";
+$lastName = "";
+$firstName = "";
+$balance = "";
+
+if (count($records) > 0) {
+    $alias = $records[0];
+    $lastName = $records[1];
+    $firstName = $records[2];
+    $balance = $records[3];
+}
+
+echo "
     <main class='profile'>
-        <h1>Informations</h1>
-        <form action="">
+        <h1>Informations du profil</h1>
+        <form>
             <fieldset>
-                <label for="alias">Alias</label>
-                <input type="text" id="alias" name="alias" value="$alias" disabled>
-                <label for="firstName">Nom</label>
-                <input type="text" id="firstName" name="firstName" value="$firstName" disabled>
-                <label for="lastName">Last name:</label>
-                <input type="text" id="lastName" name="lastName" value="$lastName" disabled>
-                <label for="balance">Solde (écus)</label>
-                <input type="text" id="balance" name="balance" value="$balance" disabled>
+                <label for='alias'>Alias</label>
+                <input type='text' id='alias' name='alias' value='$alias' disabled>
+                <label for='firstName'>Nom</label>
+                <input type='text' id='firstName' name='firstName' value='$firstName' disabled>
+                <label for='lastName'>Last name:</label>
+                <input type='text' id='lastName' name='lastName' value='$lastName' disabled>
+                <label for='balance'>Solde (écus)</label>
+                <input type='text' id='balance' name='balance' value='$balance' disabled>
             </fieldset>
         </form>
-    </main>
-HTML;
+    </main>";
 
-include_once $root."master/footer.php";
+echo "<div id='deleteConfirmReference'></div>";
+//---------------------------------------------------------------------------------------------------------------------
 
-?>
+include_once $root . "master/footer.php";

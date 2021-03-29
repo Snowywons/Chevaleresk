@@ -5,6 +5,7 @@
     --col-oceanFog: rgba(95, 156, 211, 0.3); /*Inutilisé*/
     --col-sky: #6bb1f3; /*Inutilisé*/
     --col-darkBlue: #438edd; /*Inutilisé*/
+    --col-nebula: #b097ff;
     --col-lime: #9effd7;
     --col-grass: #39c995;
     --col-forest: #2dba86;
@@ -37,8 +38,8 @@
     --store-itemPreviewContainerHoverColor: var(--col-forestFog);
     --store-itemIconContainerHoverColor: var(--col-forestFog);
 
-    --store-addItemContainerBackgroundColor: var(--col-lime);
-    --store-addItemContainerBorderColor: var(--col-lime);
+    --store-addItemStoreContainerBackgroundColor: var(--col-lime);
+    --store-addItemStoreContainerBorderColor: var(--col-lime);
 
     --store-shoppingCartTotalContainerBackgroundColor: var(--col-gray);
     --store-shoppingCartTotalContainerBorderColor: black;
@@ -104,8 +105,8 @@
     /*#endregion Évaluations*/
 
     /*#region Profil*/
-    --profile-lookButtonBackgroundColor: var(--col-lime);
-    --profile-lookButtonBorderColor: var(--col-lime);
+    --profile-bagButtonBackgroundColor: var(--col-nebula);
+    --profile-bagButtonBorderColor: var(--col-nebula);
     /*#endregion Profil*/
 
     /*#region Form et Fieldset*/
@@ -132,17 +133,12 @@ main.delete-item {
     text-align: center;
 }
 
-main.administration {
-    width: 504px;
-    margin: 40px auto;
-    text-align: center;
-}
-
 main.index,
 main.store,
 main.inventory,
 main.evaluations,
-main.shopping-cart {
+main.shopping-cart,
+main.administration {
     width: 98%;
     margin: 40px auto;
     text-align: center;
@@ -336,26 +332,18 @@ div.filters label {
 
 /*#region Magasin*/
 
-/*Présentation par défaut*/
-
 div.storeContainer {
     display: grid;
-    grid-template-columns: auto 250px 250px 400px;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
     align-content: center;
-    grid-column-gap: 5px;
 }
 
-/*Présentation du tableau dans l'inventaire*/
 main.inventory div.storeContainer {
-    display: grid;
     grid-template-columns: auto auto;
 }
 
-/*Présentation du tableau dans le panier d'achat*/
 main.shopping-cart div.storeContainer {
-    display: grid;
-    /*grid-template-columns: 1fr 1fr 1fr;*/
-    grid-template-columns: auto 250px 250px 400px;
+
 }
 
 main.shopping-cart div.shoppingCartTransactionContainer {
@@ -385,7 +373,7 @@ div.storeContainer > div {
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid var(--store-frameCaseBorderColor);
+    /*border-right: 2px solid var(--store-frameCaseBorderColor);*/
     text-align: center;
     padding: 8px;
 }
@@ -408,7 +396,6 @@ div.storeContainer > div.rightLastColumn {
 
 button.removeItem, button.addItem {
     display: block;
-    margin: 0 10px;
 }
 
 button.removeItem.hidden, button.addItem.hidden {
@@ -456,22 +443,22 @@ div.itemPreviewContainer div.titleContainer {
 
 div.shoppingCartActionsContainer {
     position: relative;
-    display: grid;
-    grid-template-columns: auto 75px;
-    justify-content: start;
-    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 div.shoppingCartQuantityContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 }
 
 button.addToShoppingCart {
     width: 75px;
     height: 25px;
-    margin-left: 10px;
     outline: none;
     background-color: var(--store-addButtonBackgroundColor);
     border-color: var(--store-addButtonBorderColor);
@@ -485,7 +472,7 @@ button.payButton {
     border-color: var(--store-payButtonBorderColor);
 }
 
-button.lookButton,
+button.bagButton,
 button.modifyButton,
 button.deleteButton,
 button.saveButton {
@@ -498,9 +485,9 @@ button.saveButton {
     margin: 0;
 }
 
-button.lookButton {
-    background-color: var(--profile-lookButtonBackgroundColor);
-    border-color: var(--profile-lookButtonBorderColor);
+button.bagButton {
+    background-color: var(--profile-bagButtonBackgroundColor);
+    border-color: var(--profile-bagButtonBorderColor);
 }
 
 button.modifyButton {
@@ -518,7 +505,7 @@ button.saveButton {
     border-color: var(--store-saveButtonBorderColor);
 }
 
-button.lookButton > img,
+button.bagButton > img,
 button.modifyButton > img,
 button.deleteButton > img,
 button.saveButton > img {
@@ -527,7 +514,7 @@ button.saveButton > img {
 
 button.payButton:hover,
 button.addToShoppingCart:hover,
-button.lookButton:hover,
+button.bagButton:hover,
 button.modifyButton:hover,
 button.deleteButton:hover,
 button.saveButton:hover {
@@ -536,7 +523,7 @@ button.saveButton:hover {
 
 button.addToShoppingCart:active,
 button.payButton:active,
-button.lookButton:active,
+button.bagButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
 button.deleteButton:active,
@@ -552,36 +539,39 @@ input[type=number]::-webkit-outer-spin-button {
 
 /*#region Admin stuff*/
 div.adminButtonsContainer {
-    text-align: right;
     position: absolute;
-    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    left: 0;
     top: 0;
     padding: 2px;
 }
 
-div.addItemContainer {
+div.addItemStoreContainer {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 150px;
     border-width: 2px;
     border-style: outset;
-    border-color: var(--store-addItemContainerBorderColor);
+    border-color: var(--store-addItemStoreContainerBorderColor);
     padding: 5px;
     user-select: none;
-    background-color: var(--store-addItemContainerBackgroundColor);
+    background-color: var(--store-addItemStoreContainerBackgroundColor);
 }
 
-div.addItemContainer > img {
+div.addItemStoreContainer > img {
     height: 25px;
     transform: rotate(0);
 }
 
-div.addItemContainer:hover {
+div.addItemStoreContainer:hover {
     cursor: pointer;
 }
 
-div.addItemContainer:active {
+div.addItemStoreContainer:active {
     border-style: inset;
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
@@ -682,7 +672,7 @@ button.popupExitButton:hover {
 }
 
 div.popupBodyContainer {
-
+    position: relative;
 }
 
 div.popupFooterContainer {
@@ -890,8 +880,10 @@ button.evaluationsListButton:hover {
 /*#region Profil*/
 div.managerContainer {
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px 104px;
+    grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
     width: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 div.managerContainer > div.category {
@@ -904,21 +896,26 @@ div.managerContainer > div {
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid var(--store-frameCaseBorderColor);
+    /*border-right: 2px solid var(--store-frameCaseBorderColor);*/
+    border-top: 1px solid var(--store-frameCaseBorderColor);
     text-align: center;
     padding: 5px;
 }
 
-div.managerContainer > div:nth-child(5n + 1) {
-    border-left: 2px solid var(--store-frameCaseBorderColor);
-}
+/*div.managerContainer > div:nth-child(5n + 1) {*/
+/*    border-left: 2px solid var(--store-frameCaseBorderColor);*/
+/*}*/
 
-div.managerContainer > div:nth-child(n + 7) {
-    border-top: 1px solid var(--store-frameCaseBorderColor);
-}
+/*div.managerContainer > div:nth-child(n + 7) {*/
+/*    border-top: 1px solid var(--store-frameCaseBorderColor);*/
+/*}*/
 
-div.adminActionsContainer {
+div.managerContainer > div.adminActionsContainer {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px;
 }
 
 /*#endregion Profil*/
@@ -961,9 +958,15 @@ fieldset > input[type=submit]:active {
 }
 
 fieldset > div.addItemPreviewContainer {
+    position: relative;
+    height: 200px;
     text-align: center;
     background-color: var(--fieldset-addItemPreviewContainerBackgroundColor);
     grid-column: 2 span;
+}
+
+fieldset > div.addItemPreviewContainer > img {
+    height: 100%;
 }
 
 form input.itemQuantity {

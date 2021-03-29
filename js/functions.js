@@ -9,6 +9,23 @@ function GetPageName() {
     return name;
 }
 
+function GetUrlParamVal(paramName) {
+    let output = "";
+    let url = window.location.href.split("?");
+    if (url.length > 1) {
+        url = url[1];
+        let params = url.split("&");
+        for (let i = 0; i < params.length; i++) {
+            let val = params[i].split("=");
+            if ((paramName) === val[0]) {
+                output = val[1];
+                break;
+            }
+        }
+    }
+    return output;
+}
+
 function GetSplitedId(id, delimiter) {
     return id === "" ? "" : id.split(delimiter)[0];
 }

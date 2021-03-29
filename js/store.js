@@ -1,6 +1,8 @@
+AddClickEventFor("addItemStoreContainer", () => window.location.href = "../store/add-item.php");
+
 //Permet de mettre à jour le contenu du store selon un envoyeur (store, shopping-cart)
-function UpdateStoreContentOnFilter(sender, filtersStr) {
-    let request = "submit=setFilters" + "&sender=" + sender + "&filters=" + filtersStr;
+function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
+    let request = "submit=setFilters" + "&filters=" + filtersStr + "&alias=" + alias + "" + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             RemoveOldContainers("storeContainer");
@@ -35,16 +37,16 @@ function UpdateAllAdminItemButtonsContainers() {
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons de sauvegarde de quantité du panier
 function UpdateAllSaveItemQuantityButtons() {
-    AddClickEventFor("saveButton", (item) =>
-    {
-        let sender = GetPageName();
+    AddClickEventFor("saveButton", (item) => {
         let idItem = GetSplitedId(item.id, '_');
         let itemQuantityInput = document.getElementById(GetSiblingContainerId(item.id, "itemQuantity"));
         let quantity = itemQuantityInput.value;
+        let targetAlias = GetUrlParamVal("alias");
+        let sender = GetPageName();
 
         if (quantity > 0) {
-            let request = "submit=modifyItemQuantity" + "&sender=" + sender +
-                "&idItem=" + idItem + "&quantity=" + quantity;
+            let request = "submit=modifyItemQuantity" + "&idItem=" + idItem + "&quantity=" + quantity +
+                "&alias=" + targetAlias + "&sender=" + sender;
             ServerRequest("POST", "../server/httpRequestHandler.php", request,
                 (requete) => {
                     NotifyWithPopup(requete.responseText);
@@ -65,9 +67,9 @@ function UpdateAllSaveItemQuantityButtons() {
     });
 }
 
-//Permet de mettre à jour tous les événements (click) liés aux boutons d'observation
-function UpdateAllLookButtons() {
-    AddClickEventFor("lookButton", (item) => {
+//Permet de mettre à jour tous les événements (click) liés aux boutons d'inventaire
+function UpdateAllBagButtons() {
+    AddClickEventFor("bagButton", (item) => {
         let sender = GetPageName();
         let idItem = GetSplitedId(item.id, '_');
         switch (sender) {
@@ -97,11 +99,13 @@ function UpdateAllModifyButtons() {
 //Permet de mettre à jour tous les événements (click) liés aux boutons de suppression d'item
 function UpdateAllDeleteButtons() {
     AddClickEventFor("deleteButton", (item) => {
-        let sender = GetPageName();
         let idItem = GetSplitedId(item.id, '_');
-        let request = "submit=createDeleteConfirmContainer" + "&sender=" + sender + "&idItem=" + idItem;
+        let targetAlias = GetUrlParamVal("alias");
+        let sender = GetPageName();
+        let request = "submit=createDeleteConfirmContainer" + "&idItem=" + idItem + "&alias=" + targetAlias + "&sender=" + sender;
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
+                CloseAllPopups();
                 CloseNotifier();
                 RemoveOldContainers("itemDeleteConfirmationContainer");
                 InsertHtmlTo(JSON.parse(requete.responseText), "deleteConfirmReference");
@@ -171,7 +175,7 @@ function RemoveItem(item) {
 UpdateAllItemPreviewContainer();
 UpdateAllAdminItemButtonsContainers();
 UpdateAllSaveItemQuantityButtons();
-UpdateAllLookButtons();
+UpdateAllBagButtons();
 UpdateAllModifyButtons();
 UpdateAllDeleteButtons();
 UpdateAllAddItemShoppingCartButtons();

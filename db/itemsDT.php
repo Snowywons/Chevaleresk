@@ -20,3 +20,8 @@ function GetAllItems()
 {
     return executeQuery("CALL Items()");
 }
+
+function DeleteItemFromStoreById($idItem)
+{
+    return executeQuery("CALL SupprimerItemMagasinParId($idItem)", true)[0];
+}

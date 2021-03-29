@@ -32,7 +32,7 @@ echo "
 
 if (UserIsAdmin()) {
     echo "
-        <div class='addItemContainer'>
+        <div class='addItemStoreContainer'>
             <span>Ajouter un item</span>
             <img src='../icons/PlusIcon.png'>
         </div>

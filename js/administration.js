@@ -48,7 +48,7 @@ function UpdateManagerContent() {
             RemoveOldContainers("managerContainer");
             InsertHtmlTo(JSON.parse(requete.responseText), "managerReference");
 
-            UpdateAllLookButtons();
+            UpdateAllBagButtons();
             UpdateAllModifyButtons();
             UpdateAllDeleteButtons();
         }, () => {

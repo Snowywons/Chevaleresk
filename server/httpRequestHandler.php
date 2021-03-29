@@ -21,9 +21,10 @@ if (isset($_POST["submit"])) {
 
     //Sur un changement de filtre
     if ($_POST["submit"] == "setFilters") {
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
         $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','',''";
         $_SESSION["filters"] = $filters;
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
 
         //Mise à jour des conteneurs du store à partir de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
@@ -45,22 +46,6 @@ if (isset($_POST["submit"])) {
             echo json_encode(CreateInventoryStoreContainer($records));
             exit;
         }
-    }
-
-    //Sur la création d'un conteneur de suppression d'item
-    if ($_POST["submit"] == "createDeleteConfirmContainer") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
-        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
-
-        echo json_encode(CreateItemDeleteConfirmationContainer($idItem, $sender));
-        exit;
     }
 
     //Sur l'ajout d'un item au panier
@@ -89,7 +74,8 @@ if (isset($_POST["submit"])) {
             exit;
         }
 
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+                (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
 
@@ -112,6 +98,24 @@ if (isset($_POST["submit"])) {
         }
     }
 
+    //Sur la création d'un conteneur de suppression d'item
+    if ($_POST["submit"] == "createDeleteConfirmContainer") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
+
+        echo json_encode(CreateItemDeleteConfirmationContainer($idItem, $alias, $sender));
+        exit;
+    }
+
     //Sur la suppression d'un item
     if ($_POST["submit"] == "deleteConfirm") {
 
@@ -121,12 +125,12 @@ if (isset($_POST["submit"])) {
             exit;
         }
 
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
 
         //Demande de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
-            echo "Cette fonctionnalité n'existe pas.";
+            echo DeleteItemFromStoreById($idItem);
             exit;
         }
 
@@ -216,5 +220,47 @@ if (isset($_POST["submit"])) {
         }
 
         echo "Le profile n'existe pas.";
+    }
+
+    //Sur l'ajout d'un item à la base de données
+    if ($_POST["submit"] == "addItemDataBase") {
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $name = isset($_POST["name"]) ? $_POST["name"] : "";
+        $type = isset($_POST["type"]) ? $_POST["type"] : "";
+        $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
+        $price = isset($_POST["price"]) ? $_POST["price"] : "";
+        $pictureCode = isset($_POST["pictureCode"]) ? $_POST["pictureCode"] : "DefaultIcon";
+
+        switch ($type) {
+            case "AR" :
+                $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
+                $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+                $description = isset($_POST["description"]) ? $_POST["description"] : "";
+                echo AddWeaponStore($name, $quantity, $price, $pictureCode, $type, $efficiency, $gender, $description);
+                exit;
+            case "AM" :
+                $material = isset($_POST["material"]) ? $_POST["material"] : "";
+                $weigth = isset($_POST["weigth"]) ? $_POST["weigth"] : "";
+                $size = isset($_POST["size"]) ? $_POST["size"] : "";
+                echo AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material, $weigth, $size);
+                exit;
+            case "PO" :
+                $effect = isset($_POST["effect"]) ? $_POST["effect"] : "";
+                $duration = isset($_POST["duration"]) ? $_POST["duration"] : "";
+                echo AddPotionStore($name, $quantity, $price, $pictureCode, $type, $effect, $duration);
+                exit;
+            case "RS" :
+                $description = isset($_POST["description"]) ? $_POST["description"] : "";
+                echo AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $description);
+                exit;
+        }
+
+        echo "Impossible d'ajouter l'item.";
+        exit;
     }
 }

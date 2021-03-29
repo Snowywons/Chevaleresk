@@ -11,7 +11,11 @@
 
 function CreateItemDetailsContainers($records)
 {
-    echo "<div>";
+    global $root;
+
+    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+
+    $content = "<div>";
 
     foreach ($records as $data) {
 
@@ -28,13 +32,27 @@ function CreateItemDetailsContainers($records)
                     ($codeType == "PO" ? "Potion" : "Ressource")));
 
         /*Création des pages de détails pour chaque item*/
-        echo "
-        <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
-            <div class='popupHeaderContainer'>
-                  <span>$nomItem</span>
-                  <button class='popupExitButton'>x</button>
-            </div>
-            <div class='popupBodyContainer'>
+        $content .= "
+            <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
+                <div class='popupHeaderContainer'>
+                    <span>$nomItem</span>
+                    <button class='popupExitButton'>x</button>
+                </div>
+                <div class='popupBodyContainer'>";
+
+        if ($isAdmin) {
+            $content .= "
+                <div class='adminButtonsContainer'>
+                    <button id='" . $idItem . "_modifyButton' class='modifyButton'>
+                        <img src='" . $root . "/icons/EditIcon.png'/>
+                    </button>
+                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                        <img src='" . $root . "/icons/DeleteIcon.png'/>
+                    </button>
+                </div>";
+        }
+
+        $content .= "
                 <div class='itemDetailsImageContainer'>
                     <img src='$codePhoto'/>
                 </div>
@@ -50,9 +68,10 @@ function CreateItemDetailsContainers($records)
             case "AR":
                 $newData = GetWeaponById($idItem);
                 if (isset($newData) && count($newData) >= 4) {
-                    echo "<span>Efficacité</span><span>$newData[1]</span>
-                          <span>Genre</span><span>$newData[2]</span>
-                          <span>Description</span><span>$newData[3]</span>";
+                    $content .= "
+                        <span>Efficacité</span><span>$newData[1]</span>
+                        <span>Genre</span><span>$newData[2]</span>
+                        <span>Description</span><span>$newData[3]</span>";
                 }
                 break;
 
@@ -60,9 +79,10 @@ function CreateItemDetailsContainers($records)
             case "AM":
                 $newData = GetArmorById($idItem);
                 if (isset($newData) && count($newData) >= 4) {
-                    echo "<span>Matière</span><span>$newData[1]</span>
-                          <span>Poids</span><span>$newData[2]</span>
-                          <span>Taille</span><span>$newData[3]</span>";
+                    $content .= "
+                        <span>Matière</span><span>$newData[1]</span>
+                        <span>Poids</span><span>$newData[2]</span>
+                        <span>Taille</span><span>$newData[3]</span>";
                 }
                 break;
 
@@ -70,8 +90,9 @@ function CreateItemDetailsContainers($records)
             case "PO":
                 $newData = GetPotionById($idItem);
                 if (isset($newData) && count($newData) >= 3) {
-                    echo "<span>Effet</span><span>$newData[1]</span>
-                          <span>Durée (secondes)</span><span>$newData[2]</span>";
+                    $content .= "
+                        <span>Effet</span><span>$newData[1]</span>
+                        <span>Durée (secondes)</span><span>$newData[2]</span>";
                 }
                 break;
 
@@ -79,7 +100,7 @@ function CreateItemDetailsContainers($records)
             case "RS":
                 $newData = GetRessourceById($idItem);
                 if (isset($newData) && count($newData) >= 2) {
-                    echo "<span>Description</span><span>$newData[1]</span>";
+                    $content .= "<span>Description</span><span>$newData[1]</span>";
                 }
                 break;
 
@@ -88,7 +109,7 @@ function CreateItemDetailsContainers($records)
                 break;
         }
 
-        echo "
+        $content .= "
             </div>
         </div>
         <div class='popupFooterContainer'>
@@ -104,10 +125,12 @@ function CreateItemDetailsContainers($records)
       </div>";
     }
 
-    echo "</div>";
+    $content .= "</div>";
+
+    echo $content;
 }
 
-function CreateItemDeleteConfirmationContainer($idItem, $sender)
+function CreateItemDeleteConfirmationContainer($idItem, $alias, $sender)
 {
     $content = "
         <div>
@@ -121,15 +144,15 @@ function CreateItemDeleteConfirmationContainer($idItem, $sender)
                     <div>";
 
     if ($sender === "store") {
-        $content .= "Êtes-vous sûr de vouloir supprimer cet item de la base de données?";
+        $content .= "Êtes-vous sûr de vouloir supprimer cet item du magasin?";
     } else if ($sender === "shopping-cart") {
         $content .= "Êtes-vous sûr de vouloir supprimer cet item du panier?";
     } else if ($sender === "inventory") {
         $content .= "Êtes-vous sûr de vouloir supprimer cet item de l'inventaire?";
     } else if ($sender === "administration") {
-        $content .= "Êtes-vous sûr de vouloir supprimer l'utilisateur ". $idItem
-            . " de la base de données?";
+        $content .= "Êtes-vous sûr de vouloir supprimer l'utilisateur ". $idItem . " ?";
     }
+
     $content .= "
                 </div>
             </div>
@@ -137,7 +160,7 @@ function CreateItemDeleteConfirmationContainer($idItem, $sender)
                 <div class='confirmationButtonsContainer'>
                     <button id='" . $idItem . "_' 
                             class='popupCancelConfirmButton cancelButton'>Annuler</button>
-                    <button id='" . $idItem . "_" . $sender . "' 
+                    <button id='" . $idItem . "_" . $alias . "_" . $sender . "' 
                             class='popupDeleteConfirmButton confirmButton'>Confirmer</button>
                 </div>
             </div>
