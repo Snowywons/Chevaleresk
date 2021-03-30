@@ -1,5 +1,6 @@
 <?php
 $root = "../";
+$script = "js/register.js";
 
 include_once $root . "db/playersDT.php";
 
@@ -30,25 +31,44 @@ echo <<<HTML
 <main class="register">
     <h1>Inscription</h1>
     
-    <form action="register.php" method="post">
+    <form action="register.php" method="post" onsubmit="return validateForm()">
         <fieldset>
-            <label for="alias">Alias</label>
-            <input type="text" id="alias" name="alias" value="$alias" onblur="notEmpty('alias')">
+            <label for="alias">
+                <span>Alias</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type="text" id="alias" name="alias" value="$alias">
             <div id="aliasValidation" style="color:red"></div>
-            <label for="lastName">Nom</label>
-            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="notEmpty('lastName')">
-            <div id="lastNameValidation" style = "color:red"></div>
-            <label for="firstName">Prenom</label>
-            <input type="text" id="firstName" name="firstName" value="$firstName" onblur="notEmpty('firstName')">
-            <div id="firstNameValidation" style = "color:red"></div>
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" value="" onblur="notEmpty('password')">
-            <div id="passwordValidation" style = "color:red"></div>
-            <label for="passwordConfirm">Confirmation du mot de passe</label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" value="" onblur="PasswordConfirm()">
-            <div id="confirmValidation" style = "color:red"></div>
-            <input type="submit" name="submit" value="Enregistrer">
+
+            <label for="lastName">
+                <span>Nom</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>            
+            </label>
+            <input type="text" id="lastName" name="lastName" value="$lastName">
+            <div id="lastNameValidation" style="color:red"></div>
+
+            <label for="firstName">
+                <span>Prenom</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type="text" id="firstName" name="firstName" value="$firstName">
+            <div id="firstNameValidation" style="color:red"></div>
+
+            <label for="password">
+                <span>Mot de passe</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type="password" id="password" name="password">
+            <div id="passwordValidation" style="color:red"></div>
+
+            <label for="passwordConfirm">
+                <span>Confirmation du mot de passe</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type="password" id="passwordConfirm" name="passwordConfirm">
+            <div id="passwordConfirmValidation" style="color:red"></div>
         </fieldset>
+        <input type="submit" name="submit" value="Enregistrer">
     </form>
 </main>
 HTML;

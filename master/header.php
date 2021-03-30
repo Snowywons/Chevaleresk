@@ -1,5 +1,6 @@
 <?php
 global $root;
+global $script;
 
 include_once $root . "utilities/sessionUtilities.php";
 
@@ -30,8 +31,11 @@ echo "
     <title>Chevaleresk</title>
     <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
     <script type='text/javascript' src='" . $root . "js/functions.js'></script>
-    <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/formValidation.js'></script>
+    <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>";
+if(isset($script)) {
+    echo "<script type='text/javascript' src='" . $root . $script . "'></script>";
+}
+echo "
 </head>
 <body>
 <header>
