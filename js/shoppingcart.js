@@ -15,7 +15,7 @@ function UpdateAllPayButtons() {
         ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
             (requete) => {
                 NotifyWithPopup(requete.responseText);
-                UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+                UpdateStoreContentOnFilter(GetFiltersString(), "", GetPageName());
                 UpdateTotalShoppingCartContent();
             }, () => {
             });

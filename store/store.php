@@ -23,7 +23,7 @@ $_SESSION["filters"] = "'AR','AM','PO','RS'";
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
 CreateNotificationContainer();
-CreateOverlay();;
+CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------
 echo "
