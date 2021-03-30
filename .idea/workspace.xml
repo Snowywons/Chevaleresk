@@ -19,29 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout plusieurs fonctionnalité Sprint 2, centralisation des requetes serveur">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Commit 29 mars p2">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-03-23_08_10_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021-03-23_08_10__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/armorsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/armorsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/itemsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/itemsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/potionsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/potionsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/ressourcesDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/ressourcesDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/weaponsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/weaponsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/administration.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/administration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administration.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administrationUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administrationUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/modify-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/modify-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/add-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/add-item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/shoppingcart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +99,8 @@
       <workItem from="1616712018024" duration="283000" />
       <workItem from="1616736554683" duration="7910000" />
       <workItem from="1616801329686" duration="50436000" />
-      <workItem from="1616994294235" duration="15456000" />
+      <workItem from="1616994294235" duration="16422000" />
+      <workItem from="1617107995134" duration="1780000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -264,7 +249,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616881587314</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Commit 29 mars">
+      <created>1617026187186</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1617026187186</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Commit 29 mars p2">
+      <created>1617026209016</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1617026209016</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +302,9 @@
     <MESSAGE value="Ajout dernières fonctionnalités pour sprint 1" />
     <MESSAGE value="Ajout divers" />
     <MESSAGE value="Ajout plusieurs fonctionnalité Sprint 2, centralisation des requetes serveur" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout plusieurs fonctionnalité Sprint 2, centralisation des requetes serveur" />
+    <MESSAGE value="Commit 29 mars" />
+    <MESSAGE value="Commit 29 mars p2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit 29 mars p2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -338,10 +339,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1616881588448">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1617026219875">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616881588448" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617026219875" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616641819457">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
