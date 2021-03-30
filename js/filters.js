@@ -24,13 +24,13 @@ resetFilterContainer.addEventListener("click", () => {
         filters.classList.add("hidden");
     }
 
-    UpdateStoreContentOnFilter(GetPageName(), GetFiltersString());
+    UpdateStoreContentOnFilter(GetFiltersString(), "", GetPageName());
 });
 
 //Permet de mettre à jour le contenu du store lorsqu'un filtre est sélectionné
 inputs.forEach((item) =>
     item.addEventListener("change", () =>
-        UpdateStoreContentOnFilter(GetPageName(), GetFiltersString())));
+        UpdateStoreContentOnFilter(GetFiltersString(), "", GetPageName())));
 
 //Permet d'obtenir une chaine de caractères composée des filtres sélectionnés
 function GetFiltersString() {
