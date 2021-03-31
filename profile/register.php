@@ -7,6 +7,7 @@ include_once $root . "db/playersDT.php";
 $alias = "";
 $firstName = "";
 $lastName = "";
+$aliasError = "";
 
 if (isset($_POST["submit"])) {
     $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
@@ -17,11 +18,14 @@ if (isset($_POST["submit"])) {
 
     if ($alias && $firstName && $lastName &&
         $password && $passwordConfirm &&
-        $password === $passwordConfirm &&
-        count(GetPlayerByAlias($alias)) == 0) {
-        CreateNewPlayer($alias, $firstName, $lastName, $password);
-        header("location: ../session/login.php");
-        exit;
+        $password === $passwordConfirm) {
+            if(count(GetPlayerByAlias($alias)) == 0){
+                CreateNewPlayer($alias, $firstName, $lastName, $password);
+                header("location: ../session/login.php");
+                exit;
+            }
+            $aliasError= "Nom d'utilisateur non-disponible.";
+        
     }
 }
 
@@ -37,39 +41,40 @@ echo <<<HTML
                 <span>Alias</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="text" id="alias" name="alias" value="$alias">
-            <div id="aliasValidation" style="color:red"></div>
+            <input type="text" id="alias" name="alias" value="$alias" onblur="validateAlias()">
+            <div id="aliasValidation" style="color:red">$aliasError</div>
 
             <label for="lastName">
                 <span>Nom</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>            
             </label>
-            <input type="text" id="lastName" name="lastName" value="$lastName">
+            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="validateForm()">
             <div id="lastNameValidation" style="color:red"></div>
 
             <label for="firstName">
                 <span>Prenom</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="text" id="firstName" name="firstName" value="$firstName">
+            <input type="text" id="firstName" name="firstName" value="$firstName" onblur="validateFirstName()">
             <div id="firstNameValidation" style="color:red"></div>
 
             <label for="password">
                 <span>Mot de passe</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="password" id="password" name="password">
-            <div id="passwordValidation" style="color:red"></div>
+            <input type="password" id="password" name="password" onblur="validateForm()">
 
             <label for="passwordConfirm">
                 <span>Confirmation du mot de passe</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm">
+            <input type="password" id="passwordConfirm" name="passwordConfirm" onblur="validateForm()">
             <div id="passwordConfirmValidation" style="color:red"></div>
+            <input type="submit" name="submit" value="Enregistrer">
         </fieldset>
-        <input type="submit" name="submit" value="Enregistrer">
+        
     </form>
+    <a href='" . $root . "session/login.php'>Se connecter</a>
 </main>
 HTML;
 
