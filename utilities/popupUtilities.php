@@ -126,6 +126,7 @@ function CreateItemDetailsContainers($records)
     }
 
     $content .= "</div>";
+    
 
     echo $content;
 }

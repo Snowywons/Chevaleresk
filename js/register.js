@@ -14,7 +14,7 @@ function validateNotEmpty(id) {
 
 function validateName(id) {
     const element = document.getElementById(id);
-    return updateValidation(element, /^([a-z\-]|\s)+$/i.test(element.value));
+    return updateValidation(element, /^[a-z]([a-z\-]|\s)*$/i.test(element.value));
 }
 function validateAlias(){
     return validateNotEmpty('alias');
@@ -24,7 +24,7 @@ function validateFirstName(){
         return false;
     }
     else if(!validateName('firstName')) {
-        document.getElementById('firstNameValidation').innerHTML = "Le prénom ne peut pas comporter de chiffres ou de caractères spéciaux.";
+        document.getElementById('firstNameValidation').innerHTML = "Format invalide";
         return false;
     }
     else{
@@ -37,7 +37,7 @@ function validateLastName(){
         return false;
     }
     else if(!validateName('lastName')) {
-        document.getElementById('lastNameValidation').innerHTML = "Le nom ne peut pas comporter de chiffres ou de caractères spéciaux.";
+        document.getElementById('lastNameValidation').innerHTML = "Format invalide";
         return false;
     }
     else{
@@ -46,7 +46,7 @@ function validateLastName(){
     }
 }
 function validatePassword(){
-    if(!validateNotEmpty('passwordConfirm')){
+    if(!validateNotEmpty('passwordConfirm') && !validateNotEmpty('password')){
         return false;
     }
     else if(!validateIdentical('password', 'passwordConfirm')) {

@@ -48,7 +48,7 @@ echo <<<HTML
                 <span>Nom</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>            
             </label>
-            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="validateForm()">
+            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="validateLastName()">
             <div id="lastNameValidation" style="color:red"></div>
 
             <label for="firstName">
@@ -62,7 +62,7 @@ echo <<<HTML
                 <span>Mot de passe</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="password" id="password" name="password" onblur="validateForm()">
+            <input type="password" id="password" name="password" onblur="validateNotEmpty('password')">
 
             <label for="passwordConfirm">
                 <span>Confirmation du mot de passe</span>
@@ -74,9 +74,8 @@ echo <<<HTML
         </fieldset>
         
     </form>
-    <a href='" . $root . "session/login.php'>Se connecter</a>
-</main>
 HTML;
-
+     echo " <a href='" . $root . "session/login.php'>Se connecter</a>
+</main>";
 include_once $root . "master/footer.php";
 ?>

@@ -8,7 +8,7 @@ function connectDB($host, $dbName, $username, $password) {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
     } catch (PDOException $e) {
-        echo "La connexion avec la base de donnée à échouée.";
+        echo "La connexion avec la base de donnée à échoué.";
     }
     return null;
 }

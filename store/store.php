@@ -18,7 +18,6 @@ include_once $root . "store/storeUpdate.php";
 global $conn;
 
 $_SESSION["filters"] = "'AR','AM','PO','RS'";
-
 //Création des conteneurs cachés et du overlay
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
