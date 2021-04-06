@@ -65,8 +65,27 @@ if (isset($_POST["submit"])) {
         exit;
     }
 
+    //Sur la création d'un conteneur de modification d'une quantité
+    if ($_POST["submit"] == "createQuantityContainer") {
+
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
+        $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
+
+        echo json_encode(CreateQuantityContainer($idItem, $quantity, $alias, $sender));
+        exit;
+    }
+
     //Sur la modification de quantité d'un item
-    if ($_POST["submit"] == "modifyItemQuantity") {
+    if ($_POST["submit"] == "quantityConfirm") {
 
         //Si le joueur ne s'est pas authentifié
         if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
@@ -99,7 +118,7 @@ if (isset($_POST["submit"])) {
     }
 
     //Sur la création d'un conteneur de suppression d'item
-    if ($_POST["submit"] == "createDeleteConfirmContainer") {
+    if ($_POST["submit"] == "createDeleteContainer") {
 
         //Si le joueur ne s'est pas authentifié
         if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
@@ -112,7 +131,7 @@ if (isset($_POST["submit"])) {
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
         $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
 
-        echo json_encode(CreateItemDeleteConfirmationContainer($idItem, $alias, $sender));
+        echo json_encode(CreateItemDeleteContainer($idItem, $alias, $sender));
         exit;
     }
 

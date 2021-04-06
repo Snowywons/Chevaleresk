@@ -12,7 +12,7 @@ function UpdateAllPopupDeleteConfirmButtons() {
         let idItem = item.id.split("_")[0];
         let alias = item.id.split("_")[1];
         let sender = item.id.split("_")[2];
-        let popupId = idItem + "_itemDeleteConfirmationContainer";
+        let popupId = idItem + "_popupConfirmationContainer";
         ClosePopup(popupId);
 
         let request = "submit=deleteConfirm" + "&idItem=" + idItem + "&alias=" + alias + "&sender=" + sender;
@@ -41,10 +41,50 @@ function UpdateAllPopupDeleteConfirmButtons() {
     });
 }
 
+//Permet de mettre à jour tous les événements (click) liés aux boutons de confirmation de modification de quantité
+function UpdateAllPopupQuantityConfirmButtons() {
+    AddClickEventFor("popupQuantityConfirmButton", (item) => {
+        let idItem = item.id.split("_")[0];
+        let alias = item.id.split("_")[1];
+        let sender = item.id.split("_")[2];
+        let popupId = idItem + "_popupConfirmationContainer";
+        let quantity = parseInt(document.getElementById(idItem + "_itemQuantity").value);
+        ClosePopup(popupId);
+
+        if (quantity >= 1) {
+            let request = "submit=quantityConfirm" + "&idItem=" + idItem + "&quantity=" + quantity + "&alias=" + alias + "&sender=" + sender;
+            ServerRequest("POST", "../server/httpRequestHandler.php", request,
+                (requete) => {
+                    NotifyWithPopup(requete.responseText);
+                    switch (sender) {
+                        case "store" :
+                            UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                            break;
+                        case "shopping-cart" :
+                            UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                            UpdateTotalShoppingCartContent();
+                            break;
+                        case "inventory" :
+                            UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                            break;
+                        case "administration" :
+                            UpdateManagerContent();
+                            UpdateAllModifyButtons();
+                            break;
+                    }
+                },
+                () => {
+                });
+        } else {
+        NotifyWithPopup("Quantité invalide");
+    }
+    });
+}
+
 //Permet de mettre à jour tous les événements (click) liés aux boutons d'annulation de suppression des popups
-function UpdateAllPopupDeleteCancelButtons() {
+function UpdateAllPopupCancelButtons() {
     AddClickEventFor("popupCancelConfirmButton", (item) => {
-        let popupId = GetSiblingContainerId(item.id, "itemDeleteConfirmationContainer");
+        let popupId = GetSiblingContainerId(item.id, "popupConfirmationContainer");
         ClosePopup(popupId);
     });
 }
@@ -74,7 +114,7 @@ function ClosePopup(id) {
 
 //Permet de fermer tous les popups
 function CloseAllPopups() {
-    RemoveOldContainers("itemDeleteConfirmationContainer");
+    RemoveOldContainers("popupConfirmationContainer");
     itemDetailsContainers.forEach((item) => item.classList.remove("active"));
     if (notificationContainer) notificationContainer.classList.remove("active");
     if (overlay) overlay.classList.remove("active");

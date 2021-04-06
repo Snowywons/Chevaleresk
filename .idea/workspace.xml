@@ -19,12 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Commit 29 mars p2">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Commit 06 avril">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/session/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/inventoriesDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/inventoriesDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/administration.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +109,7 @@
       <workItem from="1617107995134" duration="4680000" />
       <workItem from="1617167516201" duration="1357000" />
       <workItem from="1617310174662" duration="6369000" />
-      <workItem from="1617710414773" duration="3717000" />
+      <workItem from="1617710414773" duration="9853000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -272,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617110192610</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Commit 06 avril">
+      <created>1617717150878</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1617717150878</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,7 +328,8 @@
     <MESSAGE value="Commit 29 mars" />
     <MESSAGE value="Commit 29 mars p2" />
     <MESSAGE value="Correction signature fonctions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction signature fonctions" />
+    <MESSAGE value="Commit 06 avril" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit 06 avril" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -353,10 +368,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1617110193506">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1617717152537">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617110193506" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617717152537" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1617322492464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

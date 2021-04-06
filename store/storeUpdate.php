@@ -92,12 +92,10 @@ function CreateShoppingCartStoreContainer($records)
             <div class='rightLastColumn fadeIn'>
                 <div class='shoppingCartActionsContainer'>
                     <div class='shoppingCartQuantityContainer'>
-                        <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
-                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
-                        <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                        <input id='" . $idItem . "_quantity' class='itemQuantity' type='number' disabled value='$quantity'/>
                     </div>
-                    <button id='" . $idItem . "_saveButton' class='saveButton'>
-                        <img src='" . $root . "/icons/SaveIcon.png'/>
+                    <button id='" . $idItem . "_quantityButton' class='quantityButton'>
+                        <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
                     <button id='" . $idItem . "_deleteButton' class='deleteButton'>
                         <img src='" . $root . "/icons/DeleteIcon.png'/>

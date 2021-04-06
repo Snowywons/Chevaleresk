@@ -474,6 +474,7 @@ button.payButton {
 
 button.bagButton,
 button.modifyButton,
+button.quantityButton,
 button.deleteButton,
 button.saveButton {
     width: 30px;
@@ -495,6 +496,11 @@ button.modifyButton {
     border-color: var(--store-modifyButtonBorderColor);
 }
 
+button.quantityButton {
+    background-color: var(--store-modifyButtonBackgroundColor);
+    border-color: var(--store-modifyButtonBorderColor);
+}
+
 button.deleteButton {
     background-color: var(--store-deleteButtonBackgroundColor);
     border-color: var(--store-deleteButtonBorderColor);
@@ -507,6 +513,7 @@ button.saveButton {
 
 button.bagButton > img,
 button.modifyButton > img,
+button.quantityButton > img,
 button.deleteButton > img,
 button.saveButton > img {
     height: 100%;
@@ -516,6 +523,7 @@ button.payButton:hover,
 button.addToShoppingCart:hover,
 button.bagButton:hover,
 button.modifyButton:hover,
+button.quantityButton:hover,
 button.deleteButton:hover,
 button.saveButton:hover {
     cursor: pointer;
@@ -526,6 +534,7 @@ button.payButton:active,
 button.bagButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
+button.quantityButton:active,
 button.deleteButton:active,
 button.saveButton:active{
     background-color: var(--store-activeButtonBackgroundColor);
@@ -600,7 +609,7 @@ div.popupContainer.active {
     z-index: 10;
 }
 
-div.popupContainer.itemDeleteConfirmationContainer.active {
+div.popupContainer.popupConfirmationContainer.active {
     width: 400px;
     height: auto;
     text-align: center;

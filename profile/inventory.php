@@ -53,7 +53,7 @@ echo "<div id='storeReference'>";
 echo CreateInventoryStoreContainer($records);
 echo "</div></main>";
 
-echo "<div id='deleteConfirmReference'></div>";
+echo "<div id='popupContentReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root."master/footer.php";

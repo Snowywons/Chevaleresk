@@ -11,6 +11,7 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
             UpdateAllItemPreviewContainer();
             UpdateAllAdminItemButtonsContainers();
             UpdateAllModifyButtons();
+            UpdateAllQuantityButtons();
             UpdateAllDeleteButtons();
 
             UpdateAllAddItemShoppingCartButtons();
@@ -96,22 +97,47 @@ function UpdateAllModifyButtons() {
     })
 }
 
+//Permet de mettre à jour tous les événements (click) liés aux boutons de modification de quantité
+function UpdateAllQuantityButtons() {
+    AddClickEventFor("quantityButton", (item) => {
+        let idItem = GetSplitedId(item.id, '_');
+        let targetAlias = GetUrlParamVal("alias");
+        let sender = GetPageName();
+        let quantity = document.getElementById(idItem + "_quantity").value;
+        let request = "submit=createQuantityContainer" + "&idItem=" + idItem + "&quantity=" + quantity +
+            "&alias=" + targetAlias + "&sender=" + sender;
+        ServerRequest("POST", "../server/httpRequestHandler.php", request,
+            (requete) => {
+                CloseAllPopups();
+                CloseNotifier();
+                RemoveOldContainers("quantityContainer");
+                InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
+                UpdateAllPopupExitButtons();
+                UpdateAllPopupQuantityConfirmButtons();
+                UpdateAllPopupCancelButtons();
+                UpdateAllAddItemButtons();
+                UpdateAllRemoveItemButtons();
+            }, () => {
+            });
+    });
+}
+
 //Permet de mettre à jour tous les événements (click) liés aux boutons de suppression d'item
 function UpdateAllDeleteButtons() {
     AddClickEventFor("deleteButton", (item) => {
         let idItem = GetSplitedId(item.id, '_');
         let targetAlias = GetUrlParamVal("alias");
         let sender = GetPageName();
-        let request = "submit=createDeleteConfirmContainer" + "&idItem=" + idItem + "&alias=" + targetAlias + "&sender=" + sender;
+        let request = "submit=createDeleteContainer" + "&idItem=" + idItem + "&alias=" + targetAlias + "&sender=" + sender;
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 CloseAllPopups();
                 CloseNotifier();
                 RemoveOldContainers("itemDeleteConfirmationContainer");
-                InsertHtmlTo(JSON.parse(requete.responseText), "deleteConfirmReference");
+                InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
                 UpdateAllPopupExitButtons();
                 UpdateAllPopupDeleteConfirmButtons();
-                UpdateAllPopupDeleteCancelButtons();
+                UpdateAllPopupCancelButtons();
             }, () => {
             });
     });
@@ -177,6 +203,7 @@ UpdateAllAdminItemButtonsContainers();
 UpdateAllSaveItemQuantityButtons();
 UpdateAllBagButtons();
 UpdateAllModifyButtons();
+UpdateAllQuantityButtons();
 UpdateAllDeleteButtons();
 UpdateAllAddItemShoppingCartButtons();
 UpdateAllAddItemButtons();

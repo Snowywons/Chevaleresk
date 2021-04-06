@@ -9,6 +9,7 @@
  *  codeType]
 */
 
+//Popup des détails d'un item
 function CreateItemDetailsContainers($records)
 {
     global $root;
@@ -131,11 +132,12 @@ function CreateItemDetailsContainers($records)
     echo $content;
 }
 
-function CreateItemDeleteConfirmationContainer($idItem, $alias, $sender)
+//Popup de supression d'un item
+function CreateItemDeleteContainer($idItem, $alias, $sender)
 {
     $content = "
         <div>
-            <div id='" . $idItem . "_itemDeleteConfirmationContainer' class='popupContainer itemDeleteConfirmationContainer active'>
+            <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
                 <div class='popupHeaderContainer'>
                       <span>Attention!</span>
                       <button class='popupExitButton'>x</button>
@@ -171,6 +173,55 @@ function CreateItemDeleteConfirmationContainer($idItem, $alias, $sender)
     return $content;
 }
 
+//Popup de modification d'une quantité
+function CreateQuantityContainer($idItem, $quantity, $alias, $sender) {
+    $content = "
+        <div>
+            <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
+                <div class='popupHeaderContainer'>
+                      <span>Modification</span>
+                      <button class='popupExitButton'>x</button>
+                </div>
+                <div class='popupBodyContainer'>
+                    <br>
+                    <div>";
+
+                    if ($sender === "shopping-cart") {
+                        $content .= "Veuillez indiquer la quantité souhaitée.<br><br>";
+                    } else if ($sender === "inventory") {
+                        $content .= "";
+                    } else if ($sender === "administration") {
+                        $content .= "";
+                    }
+
+                        $content .= "
+                            <div class='shoppingCartActionsContainer'>
+                                <div class='shoppingCartQuantityContainer'>
+                                    <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
+                                    <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
+                                    <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                                    <br><br>
+                                </div>
+                            </div>";
+
+    $content .= "
+                </div>
+            </div>
+            <div class='popupFooterContainer'>
+                <div class='confirmationButtonsContainer'>
+                    <button id='" . $idItem . "_' 
+                            class='popupCancelConfirmButton cancelButton'>Annuler</button>
+                    <button id='" . $idItem . "_" . $alias . "_" . $sender . "' 
+                            class='popupQuantityConfirmButton confirmButton'>Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>";
+
+    return $content;
+}
+
+//Popup de notification quelconque
 function CreateNotificationContainer()
 {
     /*Création du conteneur de notification*/
@@ -190,6 +241,7 @@ function CreateNotificationContainer()
         </div>";
 }
 
+//L'écran noir derrière un popup
 function CreateOverlay()
 {
     echo "<div id='overlay'></div>";

@@ -8,16 +8,6 @@ global $conn;
 function GetFilteredInventoryItemsByAlias($filter, $alias)
 {
     return executeQuery("CALL ItemsInventaireParFiltreEtAliasJoueur($filter, '$alias')");
-    /*global $conn;
-
-    $statement = $conn->prepare("CALL AjouterArmureMagasin(?, ?)");
-    $statement->bindParam(1,$filter, PDO::PARAM_STR);
-    $statement->bindParam(2,$alias, PDO::PARAM_STR);
-    $statement->execute();
-    if($result) {
-        return $result;
-    }
-    return [];*/
 }
 
 function GetAllInventoryItemsByAlias($alias)
@@ -28,9 +18,9 @@ function GetAllInventoryItemsByAlias($alias)
     $statement = $conn->prepare("CALL ItemsInventaireParAliasJoueur(?)");
     $statement->bindParam(1,$alias, PDO::PARAM_STR);
     $statement->execute();
-    $result = $statement->fetch();
+    $result = $statement->fetchAll();
     if($result) {
-        return [$result];
+        return $result;
     }
     return [];
 }
