@@ -1,7 +1,11 @@
 <?php
 $root = "../";
+$script = "js/register.js";
 
 include_once $root . "master/header.php";
+
+$alias = "";
+$aliasError = "";
 
 if (isset($_GET["alias"])){
     $alias = $_GET["alias"];
@@ -12,17 +16,29 @@ else {
     $alias = "";
 } 
 
-echo <<<HTML
+echo "
 <main class='login'>
-    <h1>Connexion</h1>
-    
-    <form method='POST' action='./login-validate.php'>
+    <h1>Connexion</h1>";
+
+if ($loginError) {
+    echo "<div id='loginError' style='color:red'>$loginError</div><br>";
+}
+
+echo <<<HTML
+    <form action='./login-validate.php' method="post" onsubmit="return validateLoginForm()">
         <fieldset>
-            <div id='loginError' style='color:red'>$loginError</div>
-            <label for='alias'>Alias</label>
-            <input type='text' id='alias' name='alias' value='$alias'>
-            <label for='password'>Mot de passe</label>
-            <input type='password' id='password' name='password' value=''>
+            <label for="alias">
+                <span>Alias</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type="text" id="alias" name="alias" value="$alias" onblur="validateAlias()">
+            
+            <label for="password">
+                <span>Mot de passe</span>
+                <abbr title="Obligatoire" style="color:red">*</abbr>
+            </label>
+            <input type='password' id='password' name='password' value='' onblur="validateNotEmpty('password')">
+            
             <input type='submit' name='submit' value='Connecter'>
         </fieldset>
     </form>

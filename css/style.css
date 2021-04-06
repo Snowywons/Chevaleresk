@@ -995,3 +995,9 @@ form input.itemQuantity {
 .errorField {
     border: 1px solid red; 
 }
+
+#loginError {
+    position: absolute;
+    width: 400px;
+    text-align: center;
+}

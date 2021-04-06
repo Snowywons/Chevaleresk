@@ -35,7 +35,7 @@ echo <<<HTML
 <main class="register">
     <h1>Inscription</h1>
     
-    <form action="register.php" method="post" onsubmit="return validateForm()">
+    <form action="register.php" method="post" onsubmit="return validateRegisterForm()">
         <fieldset>
             <label for="alias">
                 <span>Alias</span>
@@ -68,14 +68,15 @@ echo <<<HTML
                 <span>Confirmation du mot de passe</span>
                 <abbr title="Obligatoire" style="color:red">*</abbr>
             </label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" onblur="validateForm()">
+            <input type="password" id="passwordConfirm" name="passwordConfirm" onblur="validatePassword()">
             <div id="passwordConfirmValidation" style="color:red"></div>
             <input type="submit" name="submit" value="Enregistrer">
         </fieldset>
         
     </form>
 HTML;
-     echo " <a href='" . $root . "session/login.php'>Se connecter</a>
+    echo "<a href='" . $root . "session/login.php'>Se connecter</a>
 </main>";
+
 include_once $root . "master/footer.php";
 ?>

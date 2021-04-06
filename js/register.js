@@ -68,24 +68,24 @@ function validateIdentical(passwordId, confirmId) {
     return passwordValid && confirmValid;
 }
 
-function validateForm(event) {
+function validateRegisterForm() {
 
     let allValid = true;
     
-    if(!validateAlias()) {
-        allValid = false;
-    }
-    if(!validateFirstName()){
-        allValid = false;
-    }
+    if(!validateAlias()) allValid = false;
+    if(!validateFirstName()) allValid = false;
+    if(!validateLastName()) allValid = false;
+    if(!validatePassword()) allValid = false;
 
-    if(!validateLastName()){
-        allValid = false;
-    }
-    if(!validatePassword()){
-        allValid = false;
-    }
-    
+    return allValid;
+}
+
+function validateLoginForm() {
+
+    let allValid = true;
+
+    if(!validateAlias()) allValid = false;
+    if(!validateNotEmpty('password')) allValid = false;
 
     return allValid;
 }
