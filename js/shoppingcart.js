@@ -1,6 +1,8 @@
 //Permet de mettre à jour le contenu du total dans le panier
 function UpdateTotalShoppingCartContent() {
-    ServerRequest("POST", "../server/httpRequestHandler.php", "submit=calculateShoppingCart",
+    let targetAlias = GetUrlParamVal("alias");
+    let request = "submit=calculateShoppingCart" + "&alias=" + targetAlias;
+    ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             RemoveOldContainers("shoppingCartTotalContainer");
             InsertHtmlTo(JSON.parse(requete.responseText), "shoppingCartTotalReference");
@@ -15,7 +17,7 @@ function UpdateAllPayButtons() {
         ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
             (requete) => {
                 NotifyWithPopup(requete.responseText);
-                UpdateStoreContentOnFilter(GetFiltersString(), "", GetPageName());
+                UpdateStoreContentOnFilter("'AR','AM','PO','RS'", "", GetPageName());
                 UpdateTotalShoppingCartContent();
             }, () => {
             });

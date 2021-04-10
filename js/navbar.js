@@ -1,3 +1,5 @@
+AddClickEventFor("backToStoreContainer", () => window.location.href = "../store/store.php");
+
 function highlightCurrentNav() {
     //Découpe la chaine URL pour obtenir le nom de la page
     let url = document.location.href;

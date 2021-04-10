@@ -14,6 +14,8 @@ include_once $root . "db/weaponsDT.php";
 include_once $root . "db/armorsDT.php";
 include_once $root . "db/potionsDT.php";
 include_once $root . "db/ressourcesDT.php";
+include_once $root . "db/evaluationsDT.php";
+include_once $root . "evaluations/evaluationsUpdate.php";
 
 global $conn;
 
@@ -200,7 +202,10 @@ if (isset($_POST["submit"])) {
             exit;
         }
 
-        echo json_encode(CreateShoppingCartTotalContainer());
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+
+        echo json_encode(CreateShoppingCartTotalContainer($alias));
         exit;
     }
 
@@ -281,5 +286,29 @@ if (isset($_POST["submit"])) {
 
         echo "Impossible d'ajouter l'item.";
         exit;
+    }
+
+    //Sur la mise à jour du contenu des évaluations
+    if ($_POST["submit"] == "updateEvaluationContent") {
+        $idItem = $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $records = GetEvaluationPreviewByIdItem($idItem);
+        echo json_encode(CreateEvaluationContainer($records));
+        exit;
+    }
+
+    //Sur l'envoie d'un nouveau commentaire
+    if ($_POST["submit"] == "sendEvaluation") {
+        //Si le joueur ne s'est pas authentifié
+        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+            echo "notLogged";
+            exit;
+        }
+
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $stars = isset($_POST["stars"]) ? $_POST["stars"] : "";
+        $comment = isset($_POST["comment"]) ? $_POST["comment"] : "";
+
+        echo AddEvaluationByIdItem($idItem, $alias, $stars, $comment);
     }
 }

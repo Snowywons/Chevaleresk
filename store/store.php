@@ -30,12 +30,7 @@ echo "
         <h1>Magasin</h1>";
 
 if (UserIsAdmin()) {
-    echo "
-        <div class='addItemStoreContainer'>
-            <span>Ajouter un item</span>
-            <img src='../icons/PlusIcon.png'>
-        </div>
-        <br>";
+    CreateAddItemToStoreButton();
 }
 
 CreateFilterSection();

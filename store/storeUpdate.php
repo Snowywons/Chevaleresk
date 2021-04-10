@@ -109,9 +109,8 @@ function CreateShoppingCartStoreContainer($records)
     return $content;
 }
 
-function CreateShoppingCartTotalContainer()
+function CreateShoppingCartTotalContainer($alias)
 {
-    $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
     $currentBalance = GetPlayerBalanceByAlias($alias);
     $total = CalculateShoppingCartTotalByAlias($alias);
     $remainingBalance = $currentBalance - $total;
@@ -190,6 +189,21 @@ function CreateInventoryStoreContainer($records)
     $content .= "</div>";
 
     return $content;
+}
+
+function CreateAddItemToStoreButton() {
+    echo "
+        <div class='bigButton addItemStoreContainer'>
+            <span>Ajouter un item</span>
+            <img src='../icons/PlusIcon.png'>
+        </div>";
+}
+
+function CreateBackToStoreButton() {
+    echo "
+        <div class='bigButton backToStoreContainer'>
+            <span class='backToStoreButton'>Retour au magasin</span>
+        </div>";
 }
 
 ?>

@@ -119,8 +119,10 @@ function CreateItemDetailsContainers($records)
                     <img src='../icons/StarIcon.png'>
                     <img src='../icons/StarIcon.png'>
                 </div>
-                <button id='" . $idItem . "_showEvaluations' class='itemDetailsContainerEvaluationButton showEvaluations'>
-                Voir les évaluations</button>
+                <div id='" . $idItem . "_showEvaluations' 
+                class='mediumButton itemDetailsContainerEvaluationButton showEvaluations'>
+                    <span>Voir les évaluations</span>
+                </div>
             </div>
         </div>
       </div>";

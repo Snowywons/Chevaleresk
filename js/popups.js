@@ -24,7 +24,7 @@ function UpdateAllPopupDeleteConfirmButtons() {
                         UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                         break;
                     case "shopping-cart" :
-                        UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                        UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
                         UpdateTotalShoppingCartContent();
                         break;
                     case "inventory" :
@@ -61,7 +61,7 @@ function UpdateAllPopupQuantityConfirmButtons() {
                             UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                             break;
                         case "shopping-cart" :
-                            UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                            UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
                             UpdateTotalShoppingCartContent();
                             break;
                         case "inventory" :

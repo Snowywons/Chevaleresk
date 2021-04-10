@@ -6,6 +6,7 @@
     --col-sky: #6bb1f3; /*Inutilisé*/
     --col-darkBlue: #438edd; /*Inutilisé*/
     --col-nebula: #b097ff;
+    --col-slime: #a7f8d8;
     --col-lime: #9effd7;
     --col-grass: #39c995;
     --col-forest: #2dba86;
@@ -99,7 +100,7 @@
     --evaluations-evaluationItemImageContainerBackgroundColor: var(--col-lime);
     --evaluations-itemStarbarContainerBackgroundColor: var(--col-grass);
     --evaluations-playerEvaluationContainerBorderColor: var(--col-grass);
-    --evaluations-playerEvaluationContainerTextareaBackgroundColor: var(--col-lime);
+    --evaluations-playerEvaluationContainerTextareaBackgroundColor: var(--col-forestFog);
     --evaluations-evaluationsListButtonBackgroundColor: var(--col-lime);
     --evaluations-evaluationsListButtonBorderColor: var(--col-lime);
     /*#endregion Évaluations*/
@@ -297,8 +298,7 @@ div.resetFilterContainer:hover {
 
 div.filterContainer:active,
 div.filterContainer.opened,
-div.resetFilterContainer:active
-{
+div.resetFilterContainer:active {
     border-style: inset;
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBackgroundColor);
@@ -347,7 +347,10 @@ main.shopping-cart div.storeContainer {
 }
 
 main.shopping-cart div.shoppingCartTransactionContainer {
+    display: flex;
+    flex-direction: column;
     text-align: right;
+    align-items: flex-end;
     background-color: var(--store-shoppingCartTotalContainerBackgroundColor);
     border: 1px dashed var(--store-shoppingCartTotalContainerBorderColor);
     padding: 10px;
@@ -464,12 +467,8 @@ button.addToShoppingCart {
     border-color: var(--store-addButtonBorderColor);
 }
 
-button.payButton {
-    width: 100px;
-    height: 30px;
-    outline: none;
-    background-color: var(--store-payButtonBackgroundColor);
-    border-color: var(--store-payButtonBorderColor);
+div.mediumButton.payButton {
+    margin: 10px 0 0 0;
 }
 
 button.bagButton,
@@ -519,7 +518,6 @@ button.saveButton > img {
     height: 100%;
 }
 
-button.payButton:hover,
 button.addToShoppingCart:hover,
 button.bagButton:hover,
 button.modifyButton:hover,
@@ -530,13 +528,12 @@ button.saveButton:hover {
 }
 
 button.addToShoppingCart:active,
-button.payButton:active,
 button.bagButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
 button.quantityButton:active,
 button.deleteButton:active,
-button.saveButton:active{
+button.saveButton:active {
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
 }
@@ -558,7 +555,7 @@ div.adminButtonsContainer {
     padding: 2px;
 }
 
-div.addItemStoreContainer {
+div.bigButton, div.mediumButton {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -569,18 +566,25 @@ div.addItemStoreContainer {
     padding: 5px;
     user-select: none;
     background-color: var(--store-addItemStoreContainerBackgroundColor);
+    height: 25px;
+    margin-bottom: 20px;
 }
 
-div.addItemStoreContainer > img {
+div.mediumButton {
+    width: 100px;
+    height: 20px;
+}
+
+div.bigButton > img {
     height: 25px;
     transform: rotate(0);
 }
 
-div.addItemStoreContainer:hover {
+div.bigButton:hover, div.mediumButton:hover {
     cursor: pointer;
 }
 
-div.addItemStoreContainer:active {
+div.bigButton:active, div.mediumButton:active {
     border-style: inset;
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
@@ -731,20 +735,9 @@ div.itemDetailsFooter {
     padding: 5px 0;
 }
 
-button.itemDetailsContainerEvaluationButton {
-    background-color: var(--popup-itemDetailsContainerEvaluationButtonBackgroundColor);
-    border-color: var(--popup-itemDetailsContainerEvaluationButtonBorderColor);
-    outline: none;
-    height: 25px;
-}
-
-button.itemDetailsContainerEvaluationButton:hover {
-    cursor: pointer;
-}
-
-button.itemDetailsContainerEvaluationButton:active {
-    background-color: var(--store-activeButtonBackgroundColor);
-    border-color: var(--store-activeButtonBorderColor);
+div.mediumButton.itemDetailsContainerEvaluationButton {
+    width: 150px;
+    margin: 0 auto;
 }
 
 div#overlay {
@@ -767,47 +760,111 @@ div#overlay.active {
 /*#endregion Popup*/
 
 /*#region Évaluations*/
-div.itemEvaluationsContainer {
-    display: flex;
+div.evaluationsContainer { /*Le conteneur des previews (frame) de toutes les évaluations*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-gap: 10px;
 }
 
-div.itemEvaluationPreviewContainer {
+div.evaluationContainer { /*Le conteneur des évaluations individuel*/
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-column-gap: 10px;
+}
+
+div.itemEvaluationPreviewContainer { /*Les frames de toutes les évaluations*/
+    width: 190px;
     user-select: none;
-    margin: 10px 10px 10px 0;
-    border: 1px solid var(--evaluations-evaluationPreviewContainerBorderColor);
+    margin: 0 auto;
+    /*border: 1px solid var(--col-slime);*/
+    background-color: var(--evaluations-itemStarbarContainerBackgroundColor);
 }
 
-div.itemEvaluationPreviewContainer:hover {
+div.itemEvaluationPreviewImageBackgroundContainer {
+    background-color: whitesmoke;
+    border: 1px solid var(--col-grass);
+    border-bottom: 0;
+}
+
+div.itemEvaluationPreviewImageContainer {
+    padding: 15px 10px 10px 10px;
+    text-align: center;
+}
+
+div.itemEvaluationPreviewImageContainer:hover {
     background-color: var(--evaluations-evaluationPreviewContainerHoverColor);
     cursor: pointer;
 }
 
-div.evaluationContainer {
-    display: grid;
-    grid-template-columns: 200px auto;
-    grid-column-gap: 5px;
+div.itemEvaluationPreviewImageContainer div.itemIconContainer,
+div.evaluationItemImageContainer div.itemIconContainer {
+    background-color: var(--store-itemIconContainerHoverColor);
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+div.itemEvaluationPreviewImageContainer:hover > div.itemIconContainer {
+    background-color: whitesmoke;
+}
+
+div.itemEvaluationPreviewImageContainer div.itemIconContainer img,
+div.evaluationItemImageContainer div.itemIconContainer img {
+    width: 100%;
     height: 100%;
 }
 
-div.evaluationItemImageContainer {
-    background-color: var(--evaluations-evaluationItemImageContainerBackgroundColor);
-}
-
-div.evaluationItemContainer {
-    grid-row-start: span 9000;
-    border: 1px solid var(--evaluations-evaluationItemContainerBorderColor);
-    background-color: var(--evaluations-evaluationItemContainerBackgroundColor);
+div.itemEvaluationPreviewImageContainer div.titleContainer {
+    margin-top: 10px;
 }
 
 div.itemStarbarContainer {
-    background-color: var(--evaluations-itemStarbarContainerBackgroundColor);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
-    text-align: left;
 }
 
 div.itemStarbar img {
     padding: 2px;
-    height: 20px;
+    height: 22px;
+}
+
+div.evaluationItemContainer { /*La colonne de gauche dans les évaluations individuel*/
+    min-height: 65vh;
+    grid-row-start: span 9000;
+    background-image: linear-gradient(var(--col-forestFog) 90%, transparent);
+    padding: 0;
+    margin: 0;
+}
+
+div.evaluationItemContainer > div.itemEvaluationPreviewContainer {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border: 0;
+    /*border: 1px solid var(--evaluations-evaluationItemContainerBorderColor);*/
+}
+div.evaluationItemContainer:hover {
+    cursor: help;
+}
+
+div.evaluationItemContainer:hover div.itemEvaluationPreviewContainer {
+    display: none;
+}
+
+div.allItemStarbarContainer {
+    display: none;
+}
+
+div.evaluationItemContainer:hover div.allItemStarbarContainer {
+    display: block;
+}
+
+div.evaluationItemContainer > div.itemStarbarContainer {
+    padding: 5px 0;
+    width: 150px;
 }
 
 div.playerEvaluationContainer {
@@ -816,25 +873,32 @@ div.playerEvaluationContainer {
     min-height: 100px;
     text-align: left;
     padding: 5px 5px 0 5px;
-    /*padding: 0;*/
     border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
+}
+
+div.playerEvaluationContainer .itemStarbarContainer {
+    justify-content: flex-start;
+    padding: 0;
+    margin-left: -3px;
 }
 
 div.playerEvaluationContainer ~ div.playerEvaluationContainer {
     border-top: 0;
 }
 
-div.playerEvaluationContainer > div:nth-of-type(3) {
+div.playerEvaluationContainer > div:nth-of-type(3) { /*Le nom du joueur au bas du commentaire*/
     position: absolute;
     bottom: 5px;
 }
 
-div.playerEvaluationContainer img {
-    height: 20px;
+div.playerEvaluationContainer:last-child {
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
-div.playerEvaluationContainer:last-child {
-    height: 200px;
+div.playerEvaluationContainer ~ div.playerEvaluationContainer:last-child {
+    margin-top: 10px;
     padding: 0;
 }
 
@@ -842,30 +906,31 @@ div.playerEvaluationContainer form {
     height: 100%;
     padding: 0;
     margin: 0;
+    /*background-color: whitesmoke;*/
 }
 
 div.playerEvaluationContainer fieldset {
+    display: block;
+    position: relative;
     padding: 0;
     margin: 0;
 }
 
 div.playerEvaluationContainer textarea {
     width: 100%;
-    height: 172px;
-    border-width: 0 0 0 0;
+    height: 150px;
     box-sizing: border-box;
     resize: none;
+    border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
 }
 
 div.playerEvaluationContainer textarea:focus {
     outline: none;
-    border-width: 0;
     background-color: var(--evaluations-playerEvaluationContainerTextareaBackgroundColor);
 }
 
-div.evaluationsListButtonContainer {
-    text-align: left;
-    padding-bottom: 10px;
+div.mediumButton.evaluationSendButton {
+    margin: 10px 0 0 0;
 }
 
 button.evaluationsListButton {
@@ -882,6 +947,26 @@ button.evaluationsListButton:active {
 
 button.evaluationsListButton:hover {
     cursor: pointer;
+}
+
+div.rating {
+    display: flex;
+    padding: 2px 5px;
+    background-color: var(--col-grass);
+}
+
+div.rating label {
+    cursor: pointer;
+    width: 22px;
+    height: 22px;
+    background-image: url("../Icons/StarIconEmpty.png");
+    background-size: contain;
+    margin: 5px 0;
+    border-right: 5px solid var(--evaluations-evaluationItemContainerBackgroundColor);
+}
+
+div.rating label.clicked {
+    background-image: url("../Icons/StarIcon.png");
 }
 
 /*#endregion Évaluations*/
@@ -948,11 +1033,11 @@ fieldset label, fieldset input, fieldset select, fieldset textarea {
     grid-column: 2 span;
 }
 
-fieldset > input[type=submit]:hover {
+input[type=submit]:hover {
     cursor: pointer;
 }
 
-fieldset > input[type=submit] {
+input[type=submit] {
     background-color: var(--fieldset-inputSubmitBackgroundColor);
     border-color: var(--fieldset-inputSubmitBorderColor);
     outline: none;
@@ -961,7 +1046,7 @@ fieldset > input[type=submit] {
     width: 100px;
 }
 
-fieldset > input[type=submit]:active {
+input[type=submit]:active {
     background-color: var(--store-activeButtonBackgroundColor);
     border-color: var(--store-activeButtonBorderColor);
 }
@@ -995,14 +1080,18 @@ form input.itemQuantity {
 }
 
 @keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /*endregion Autres*/
 
 .errorField {
-    border: 1px solid red; 
+    border: 1px solid red;
 }
 
 #loginError {

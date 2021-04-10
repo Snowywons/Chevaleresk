@@ -48,8 +48,6 @@ echo "
 <main class='shopping-cart'>
     <h1>Panier d'achat de $targetAlias</h1>";
 
-CreateFilterSection();
-
 echo "<div id='storeReference'>";
 echo CreateShoppingCartStoreContainer($records);
 echo "</div>";
@@ -58,11 +56,10 @@ echo "
     <br>
     <div class='shoppingCartTransactionContainer'>
         <div id='shoppingCartTotalReference'>";
-echo CreateShoppingCartTotalContainer();
+echo CreateShoppingCartTotalContainer($targetAlias);
 echo "
         </div>
-        <div></div>
-        <div><br><button id='payButton' class='payButton'>Payer</button></div>
+        <div id='payButton' class='mediumButton payButton'><span>Payer</span></div>
     </div>
 </main>";
 
@@ -72,7 +69,6 @@ echo "<div id='popupContentReference'></div>";
 include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='" . $root . "js/filters.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/store.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/shoppingcart.js' defer></script>

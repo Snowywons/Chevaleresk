@@ -2,140 +2,54 @@
 $root = "../";
 
 include_once $root . "master/header.php";
+include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
+include_once $root . "server/httpRequestHandler.php";
+include_once $root . "db/playersDT.php";
+include_once $root . "db/itemsDT.php";
+include_once $root . "db/weaponsDT.php";
+include_once $root . "db/armorsDT.php";
+include_once $root . "db/potionsDT.php";
+include_once $root . "db/ressourcesDT.php";
+include_once $root . "db/evaluationsDT.php";
+include_once $root . "evaluations/evaluationsUpdate.php";
 
 
 global $conn;
 
-$itemId = isset($_GET["idItem"]) ? $_GET["idItem"] : null;
+CreateNotificationContainer();
+CreateOverlay();
 
-$itemName = "";
-$itemImage = "";
-$typeCode = "";
+$idItem = isset($_GET["idItem"]) ? $_GET["idItem"] : "";
 
-$records = executeQuery("SELECT * FROM Items WHERE idItem=$itemId;", true);
+echo "
+<main class='evaluations'>
+    <h1>Évaluations</h1>";
 
-if (count($records) > 0) {
-    $itemName = $records[1];
-    $itemImage = $records[4];
-    $typeCode = $records[5];
-}
+echo "<div id='evaluationsReference'>";
 
-echo <<<HTML
-<main class="evaluations">
-    <h1>Évaluations</h1>
-HTML;
-
-if ($itemId == null) {
-    CreateFilterSection();
-
-    $records = executeQuery("SELECT * FROM Items;");
-
-    /* Affichage de tous les items  */
-    echo "<div class='itemEvaluationsContainer'>";
-    foreach ($records as $data) {
-        $idItem = $data[0];
-        $itemName = $data[1];
-        echo "
-            <!-- Image -->
-            <div id='" . $idItem . "_showEvaluations' class='itemEvaluationPreviewContainer'>
-                <img src='" . $root . "icons/ChevalereskIcon.png'/>
-                <!-- Nom item -->
-                <div>" . $itemName . "</div>
-                <!-- Barre d'étoiles -->
-                <div class='itemStarbarContainer'>
-                    <div class='itemStarbar'>
-                        <img src='" . $root . "icons/StarIcon.png'>
-                        <img src='" . $root . "icons/StarIcon.png'>
-                        (99)
-                    </div>
-                </div>
-            </div>";
-    }
-    echo "</div>";
+if ($idItem == "") {
+    CreateBackToStoreButton();
+    $records = GetAllEvaluationsPreviews();
+    echo CreateEvaluationsContainer($records);
 } else {
-    /* Affichage des évaluations pour un item sélectionné */
     echo "
-        <div class='evaluationsListButtonContainer'>
-            <button class='evaluationsListButton'>Retour à la liste</button>
-        </div>
-        
-        <div class='evaluationContainer'>
-            <!-- Image et Barre d'étoiles -->
-            <div class='evaluationItemContainer'>
-                <div class='evaluationItemImageContainer'>
-                    <img src='" . $root . "icons/ChevalereskIcon.png'/>
-                    <div>" . $itemName . "</div>
-                    <div class='itemStarbarContainer'>
-                        <div class='itemStarbar'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            (99)
-                        </div>
-                        <div class='itemStarbar'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            (99)
-                        </div>
-                        <div class='itemStarbar'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            (99)
-                        </div>
-                        <div class='itemStarbar'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            (99)
-                        </div>
-                        <div class='itemStarbar'>
-                            <img src='" . $root . "icons/StarIcon.png'>
-                            (99)
-                        </div>
-                    </div>
-                </div>
-            </div>";
+        <div class='bigButton evaluationsListButtonContainer'>
+            <span>Retour à la liste</span>
+        </div>";
 
-    $records = executeQuery("SELECT idEvaluation, noteEvaluation, commentaireEvaluation, idJoueur FROM Evaluations E WHERE E.idItem = $itemId;");
-
-    foreach ($records as $data) {
-        $starsCount = intval($data[1]);
-        $starBar = "";
-        for ($i = 0; $i < $starsCount; $i++)
-            $starBar .= "<img src='" . $root . "icons/StarIcon.png'>";
-        echo "
-            <div class='playerEvaluationContainer'>
-                <div>$starBar</div>
-                <div>$data[2]</div>
-                <div>Nom joueur</div>
-            </div>";
-    }
-
-    echo <<<HTML
-        <div class='playerEvaluationContainer'>
-            <div class="itemStarbar"><img src='$root/icons/StarIcon.png'></div>
-            <form action="" method="post">
-                <fieldset>
-                    <textarea placeholder="Nouveau commentaire"></textarea>
-                    <input type="submit">
-                </fieldset>
-            </form>
-        </div>
-    </div>
-HTML;
+    $records = GetEvaluationPreviewByIdItem($idItem);
+    echo CreateEvaluationContainer($records);
 }
 
-echo "</main>";
+echo "</div></main>";
+echo "<div id='popupContentReference'></div>";
 
 include_once $root . "master/footer.php";
 
 echo "
-    <script type='text/javascript' src='" . $root . "js/filter.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/evaluations.js' defer></script>";
 ?>
