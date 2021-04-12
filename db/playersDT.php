@@ -42,10 +42,10 @@ function PlayerIsAuthenticated($alias, $password)
 {
     //return executeQuery("SELECT JoueurEstAuthentifie('$alias', '$password')", true)[0];
     global $conn;
-    
+    $passwordhash = hash("sha256", $password);
     $statement = $conn->prepare("SELECT JoueurEstAuthentifie(?,?)");
     $statement->bindParam(1,$alias, PDO::PARAM_STR);
-    $statement->bindParam(2,$password, PDO::PARAM_STR);
+    $statement->bindParam(2,$passwordhash, PDO::PARAM_STR);
     $statement->execute();
     $result = $statement->fetch();
     if($result) {
@@ -58,12 +58,12 @@ function CreateNewPlayer($alias, $firstName, $lastName, $password)
 {
     //executeQuery("CALL InscrireNouveauJoueur('$alias', '$lastName', '$firstName', '$password')");
     global $conn;
-    
+    $passwordhash = hash("sha256", $password);
     $statement = $conn->prepare("CALL InscrireNouveauJoueur(?, ?, ?, ?)");
     $statement->bindParam(1,$alias, PDO::PARAM_STR);
     $statement->bindParam(2,$firstName, PDO::PARAM_STR);
     $statement->bindParam(3,$lastName, PDO::PARAM_STR);
-    $statement->bindParam(4,$password, PDO::PARAM_STR);
+    $statement->bindParam(4,$passwordhash, PDO::PARAM_STR);
     $statement->execute();
 }
 

@@ -155,7 +155,8 @@ function UpdateAllAddItemShoppingCartButtons() {
             ServerRequest("POST", "../server/httpRequestHandler.php", request,
                 (requete) => {
                     if (requete.responseText === "notLogged") {
-                        window.location.href = "../session/login.php";
+                        NotifyWithPopup("Vous devez être connecté pour ajouter un item au panier");
+                        //window.location.href = "../session/login.php";
                     } else {
                         NotifyWithPopup(requete.responseText);
                         itemQuantityInput.value = 1;
