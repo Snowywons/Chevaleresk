@@ -115,8 +115,9 @@ function ClosePopup(id) {
 //Permet de fermer tous les popups
 function CloseAllPopups() {
     RemoveOldContainers("popupConfirmationContainer");
-    itemDetailsContainers.forEach((item) => item.classList.remove("active"));
-    if (notificationContainer) notificationContainer.classList.remove("active");
+    for(const popup of document.querySelectorAll('.popupContainer')) {
+        popup.classList.remove("active");
+    }
     if (overlay) overlay.classList.remove("active");
 }
 

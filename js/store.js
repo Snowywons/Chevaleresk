@@ -68,19 +68,6 @@ function UpdateAllSaveItemQuantityButtons() {
     });
 }
 
-//Permet de mettre à jour tous les événements (click) liés aux boutons d'inventaire
-function UpdateAllBagButtons() {
-    AddClickEventFor("bagButton", (item) => {
-        let sender = GetPageName();
-        let idItem = GetSplitedId(item.id, '_');
-        switch (sender) {
-            case "administration" :
-                window.location.href = "../profile/inventory.php?alias=" + idItem;
-                break;
-        }
-    })
-}
-
 //Permet de mettre à jour tous les événements (click) liés aux boutons de modification d'item
 function UpdateAllModifyButtons() {
     AddClickEventFor("modifyButton", (item) => {
@@ -202,7 +189,6 @@ function RemoveItem(item) {
 UpdateAllItemPreviewContainer();
 UpdateAllAdminItemButtonsContainers();
 UpdateAllSaveItemQuantityButtons();
-UpdateAllBagButtons();
 UpdateAllModifyButtons();
 UpdateAllQuantityButtons();
 UpdateAllDeleteButtons();

@@ -54,3 +54,19 @@ function UpdateManagerContent() {
         }, () => {
         }, false);
 }
+
+function OpenBalancePopup(alias, balance) {
+    const popup = document.getElementById('balanceEditContainer');
+    const form = popup.querySelector('form');
+
+    form.elements["alias"].value = alias;
+    form.elements["balance"].value = balance;
+
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
+    popup.classList.add("active");
+}
+
+function Redirect(alias, redirectTo){
+    window.location.href = redirectTo +".php?alias=" + alias;
+}
