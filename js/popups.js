@@ -32,7 +32,6 @@ function UpdateAllPopupDeleteConfirmButtons() {
                         break;
                     case "administration" :
                         UpdateManagerContent();
-                        UpdateAllModifyButtons();
                         break;
                 }
             },
@@ -69,7 +68,6 @@ function UpdateAllPopupQuantityConfirmButtons() {
                             break;
                         case "administration" :
                             UpdateManagerContent();
-                            UpdateAllModifyButtons();
                             break;
                     }
                 },

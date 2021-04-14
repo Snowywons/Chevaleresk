@@ -47,10 +47,6 @@ function UpdateManagerContent() {
         (requete) => {
             RemoveOldContainers("managerContainer");
             InsertHtmlTo(JSON.parse(requete.responseText), "managerReference");
-
-            UpdateAllBagButtons();
-            UpdateAllModifyButtons();
-            UpdateAllDeleteButtons();
         }, () => {
         }, false);
 }
@@ -67,6 +63,18 @@ function OpenBalancePopup(alias, balance) {
     popup.classList.add("active");
 }
 
+function OpenDeletePopup(alias){
+    const popup = document.getElementById('playerDeleteContainer');
+    const form = popup.querySelector('form');
+
+    form.elements["alias"].value = alias;
+
+    const overlay = document.getElementById("overlay");
+    overlay.classList.add("active");
+    popup.classList.add("active");
+
+}
 function Redirect(alias, redirectTo){
+    console.log('alias:' + alias);
     window.location.href = redirectTo +".php?alias=" + alias;
 }

@@ -38,10 +38,10 @@ function CreateManagerContainer($records) {
                 <button class='bagButton' onclick='Redirect(\"$alias\", \"../profile/inventory\")'>
                     <img src='" . $root . "/icons/BagIcon.png'/>
                 </button>
-                <button id='" . $alias . "_modifyButton' class='modifyButton'>
+                <button class='modifyButton' onclick='Redirect(\"$alias\", \"../profile/modify-profile\")'>
                     <img src='" . $root . "/icons/EditIcon.png'/>
                 </button>
-                <button id='" . $alias . "_deleteButton' class='deleteButton'>
+                <button class='deleteButton' onclick='OpenDeletePopup(\"$alias\")'>
                     <img src='" . $root . "/icons/DeleteIcon.png'/>
                 </button>
             </div>";
@@ -65,6 +65,26 @@ function CreateManagerContainer($records) {
             <div class='popupFooterContainer'>
             </div>
         </div>";
+    $content .= "
+    <div id='playerDeleteContainer' class='popupContainer'>
+            <div class='popupHeaderContainer'>
+                <span>Confirmation de suppression</span>
+                <button class='popupExitButton'>x</button>
+            </div>
+            <div class='popupBodyContainer'>
+                Êtes-vous sûr de vouloir supprimer cet utilisateur?
+                <form action='../server/deletePlayerHandler.php' method='POST'>
+                    <input type='hidden' name='alias' value=''>
+                    <div class='confirmationButtonsContainer'>
+                        <button type='button' class='popupCancelConfirmButton cancelButton' 
+                        onclick='ClosePopup(\"playerDeleteContainer\")'>Annuler</button>
+                        <input type='submit' class='popupDeleteConfirmButton confirmButton' value='Confirmer'>
+                    </div>
+                </form>
+            </div>
+            <div class='popupFooterContainer'>
+            </div>
+    ";
 
     return $content;
 }

@@ -119,23 +119,6 @@ if (isset($_POST["submit"])) {
         }
     }
 
-    //Sur la création d'un conteneur de suppression d'item
-    if ($_POST["submit"] == "createDeleteContainer") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
-        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
-            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
-        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
-
-        echo json_encode(CreateItemDeleteContainer($idItem, $alias, $sender));
-        exit;
-    }
 
     //Sur la suppression d'un item
     if ($_POST["submit"] == "deleteConfirm") {

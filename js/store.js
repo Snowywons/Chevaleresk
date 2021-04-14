@@ -12,7 +12,6 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
             UpdateAllAdminItemButtonsContainers();
             UpdateAllModifyButtons();
             UpdateAllQuantityButtons();
-            UpdateAllDeleteButtons();
 
             UpdateAllAddItemShoppingCartButtons();
             UpdateAllAddItemButtons();
@@ -101,7 +100,6 @@ function UpdateAllQuantityButtons() {
                 InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
                 UpdateAllPopupExitButtons();
                 UpdateAllPopupQuantityConfirmButtons();
-                UpdateAllPopupCancelButtons();
                 UpdateAllAddItemButtons();
                 UpdateAllRemoveItemButtons();
             }, () => {
@@ -123,11 +121,13 @@ function UpdateAllDeleteButtons() {
                 RemoveOldContainers("itemDeleteConfirmationContainer");
                 InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
                 UpdateAllPopupExitButtons();
-                UpdateAllPopupDeleteConfirmButtons();
-                UpdateAllPopupCancelButtons();
             }, () => {
             });
     });
+}
+function DeleteUser($idUser){
+    let request = ""
+
 }
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons d'ajout d'items au panier
@@ -189,9 +189,7 @@ function RemoveItem(item) {
 UpdateAllItemPreviewContainer();
 UpdateAllAdminItemButtonsContainers();
 UpdateAllSaveItemQuantityButtons();
-UpdateAllModifyButtons();
 UpdateAllQuantityButtons();
-UpdateAllDeleteButtons();
 UpdateAllAddItemShoppingCartButtons();
 UpdateAllAddItemButtons();
 UpdateAllRemoveItemButtons();
