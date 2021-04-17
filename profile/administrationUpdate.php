@@ -53,7 +53,7 @@ function CreateManagerContainer($records) {
         <div id='balanceEditContainer' class='popupContainer'>
             <div class='popupHeaderContainer'>
                 <span>Modification du solde</span>
-                <button class='popupExitButton'>x</button>
+                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"balanceEditContainer\"), '>x</button>
             </div>
             <div class='popupBodyContainer'>
                 <form action='update-balance.php' method='POST'>
@@ -69,7 +69,7 @@ function CreateManagerContainer($records) {
     <div id='playerDeleteContainer' class='popupContainer'>
             <div class='popupHeaderContainer'>
                 <span>Confirmation de suppression</span>
-                <button class='popupExitButton'>x</button>
+                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"playerDeleteContainer\")'>x</button>
             </div>
             <div class='popupBodyContainer'>
                 Êtes-vous sûr de vouloir supprimer cet utilisateur?

@@ -37,17 +37,17 @@ function CreateItemDetailsContainers($records)
             <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
                 <div class='popupHeaderContainer'>
                     <span>$nomItem</span>
-                    <button class='popupExitButton'>x</button>
+                    <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"" . $idItem . "_itemDetailsContainer\")'>x</button>
                 </div>
                 <div class='popupBodyContainer'>";
 
         if ($isAdmin) {
             $content .= "
                 <div class='adminButtonsContainer'>
-                    <button id='" . $idItem . "_modifyButton' class='modifyButton'>
+                    <button type='button' id='" . $idItem . "_modifyButton' class='modifyButton' onclick='redirect(\"../store/modify-item.php?idItem=" . $idItem . "\")'>
                         <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
-                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                    <button type='button' class='deleteButton' onclick='CreateDeleteButton($idItem)'>
                         <img src='" . $root . "/icons/DeleteIcon.png'/>
                     </button>
                 </div>";
@@ -142,7 +142,7 @@ function CreateItemDeleteContainer($idItem, $alias, $sender)
             <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
                 <div class='popupHeaderContainer'>
                       <span>Attention!</span>
-                      <button class='popupExitButton'>x</button>
+                      <button class='popupExitButton onclick='ClosePopupAndNotifier(\"" . $idItem . "_popupConfirmationContainer\")'>x</button>
                 </div>
                 <div class='popupBodyContainer'>
                     <br>
@@ -182,7 +182,7 @@ function CreateQuantityContainer($idItem, $quantity, $alias, $sender) {
             <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
                 <div class='popupHeaderContainer'>
                       <span>Modification</span>
-                      <button class='popupExitButton'>x</button>
+                      <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"" . $idItem . "_popupConfirmationContainer\")>x</button>
                 </div>
                 <div class='popupBodyContainer'>
                     <br>
@@ -199,9 +199,9 @@ function CreateQuantityContainer($idItem, $quantity, $alias, $sender) {
                         $content .= "
                             <div class='shoppingCartActionsContainer'>
                                 <div class='shoppingCartQuantityContainer'>
-                                    <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
+                                    <button class='removeItem' onclick='RemoveItem(\"$idItem\")'>-</button>
                                     <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
-                                    <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                                    <button class='addItem' onclick='AddItem(\"$idItem\")'>+</button>
                                     <br><br>
                                 </div>
                             </div>";
@@ -231,7 +231,7 @@ function CreateNotificationContainer()
         <div id='notificationContainer' class='popupContainer notificationContainer'>
             <div class='popupHeaderContainer'>
                 <span>Notification</span>
-                <button class='popupExitButton'>x</button>
+                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"notificationContainer\")'>x</button>
             </div>
             <div class='popupBodyContainer'>
                 <br>

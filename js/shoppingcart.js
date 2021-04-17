@@ -12,17 +12,13 @@ function UpdateTotalShoppingCartContent() {
 }
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons de paiement du panier
-function UpdateAllPayButtons() {
-    AddClickEventFor("payButton", () => {
-        ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
-            (requete) => {
-                NotifyWithPopup(requete.responseText);
-                UpdateStoreContentOnFilter("'AR','AM','PO','RS'", "", GetPageName());
-                UpdateTotalShoppingCartContent();
-            }, () => {
-            });
-    });
+function PayCart() {
+    ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
+        (requete) => {
+            NotifyWithPopup(requete.responseText);
+            UpdateStoreContentOnFilter("'AR','AM','PO','RS'", "", GetPageName());
+            UpdateTotalShoppingCartContent();
+        }, () => {
+        });
 }
 
-//Exécution des fonctions à l'ouverture
-UpdateAllPayButtons();

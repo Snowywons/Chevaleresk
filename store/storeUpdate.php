@@ -31,7 +31,7 @@ function CreateStoreContainer($records)
         $codeType = $data[5];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -44,11 +44,11 @@ function CreateStoreContainer($records)
             <div class='rightLastColumn fadeIn'>
                 <div class='shoppingCartActionsContainer'>
                     <div class='shoppingCartQuantityContainer'>
-                        <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
+                        <button class='removeItem' onclick='RemoveItem(\"$idItem\")'>-</button>
                         <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='1'/>
-                        <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                        <button class='addItem' onclick='AddItem(\"$idItem\")'>+</button>
                     </div>
-                    <button id='" . $idItem . "_addToShoppingCart' class='addToShoppingCart'>Ajouter</button>
+                    <button class='addToShoppingCart' onclick='AddItemToCart(\"$idItem\")'>Ajouter</button>
                 </div>
             </div>";
     }
@@ -79,7 +79,7 @@ function CreateShoppingCartStoreContainer($records)
         $quantity = $data[6];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -94,10 +94,10 @@ function CreateShoppingCartStoreContainer($records)
                     <div class='shoppingCartQuantityContainer'>
                         <input id='" . $idItem . "_quantity' class='itemQuantity' type='number' disabled value='$quantity'/>
                     </div>
-                    <button id='" . $idItem . "_quantityButton' class='quantityButton'>
+                    <button class='quantityButton' onclick='UpdateQuantity(\"$idItem\")'>
                         <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
-                    <button id='" . $idItem . "_deleteButton' class='deleteButton'>
+                    <button class='deleteButton' onclick='CreateDeletePopup(\"$idItem\")'>
                         <img src='" . $root . "/icons/DeleteIcon.png'/>
                     </button>
                 </div>
@@ -148,7 +148,7 @@ function CreateInventoryStoreContainer($records)
         $quantity = $data[6];
 
         $content .= "
-            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn'>
+            <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
                     <img src='" . $root . "/icons/$photoURL.png'/>
                 </div>
@@ -162,11 +162,11 @@ function CreateInventoryStoreContainer($records)
             $content .= "
                 <div class='shoppingCartActionsContainer'>
                     <div class='shoppingCartQuantityContainer'>
-                        <button id='" . $idItem . "_removeItem' class='removeItem'>-</button>
+                        <button class='removeItem' onclick='RemoveItem(\"$idItem\")'>-</button>
                         <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
-                        <button id='" . $idItem . "_addItem' class='addItem'>+</button>
+                        <button class='addItem' onclick='AddItem(\"$idItem\")'>+</button>
                     </div>
-                    <button id='" . $idItem . "_saveButton' class='saveButton'>
+                    <button class='saveButton' onclick='SaveItemQuantity($idItem)'>
                         <img src='" . $root . "/icons/SaveIcon.png'/>
                     </button>
                     <button id='" . $idItem . "_deleteButton' class='deleteButton'>
@@ -194,7 +194,7 @@ function CreateInventoryStoreContainer($records)
 function CreateAddItemToStoreButton() {
     echo "
         <div class='bigButton addItemStoreContainer'>
-            <span>Ajouter un item</span>
+            <a href='../store/add-item.php'>Ajouter un item</a>
             <img src='../icons/PlusIcon.png'>
         </div>";
 }

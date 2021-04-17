@@ -79,21 +79,11 @@ function UpdateAllPopupQuantityConfirmButtons() {
     });
 }
 
-//Permet de mettre à jour tous les événements (click) liés aux boutons d'annulation de suppression des popups
-function UpdateAllPopupCancelButtons() {
-    AddClickEventFor("popupCancelConfirmButton", (item) => {
-        let popupId = GetSiblingContainerId(item.id, "popupConfirmationContainer");
-        ClosePopup(popupId);
-    });
-}
 
 //Permet de mettre à jour tous les événements (click) liés aux boutons de fermeture de popups
-function UpdateAllPopupExitButtons() {
-    AddClickEventFor("popupExitButton", (item) => {
-        let siblingContainerId = GetParentNode(item, 1, "popupContainer").id;
+function ClosePopupAndNotifier(id) {    
         CloseNotifier();
-        ClosePopup(siblingContainerId);
-    });
+        ClosePopup(id);
 }
 
 //Permet d'ouvrir un popup selon son id
@@ -131,6 +121,3 @@ function CloseNotifier() {
     if (notificationContainer) notificationContainer.classList.remove("active");
     if (overlay) overlay.classList.add("active");
 }
-
-//Exécution des fonctions à l'ouverture
-UpdateAllPopupExitButtons();

@@ -59,7 +59,7 @@ echo "
 echo CreateShoppingCartTotalContainer($targetAlias);
 echo "
         </div>
-        <div id='payButton' class='mediumButton payButton'><span>Payer</span></div>
+        <div id='payButton' class='mediumButton payButton' onclick='PayCart()'><span>Payer</span></div>
     </div>
 </main>";
 

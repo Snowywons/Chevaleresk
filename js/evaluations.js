@@ -72,7 +72,6 @@ function UpdateAllEvaluationSendButton() {
                 CloseAllPopups();
                 CloseNotifier();
                 NotifyWithPopup(requete.responseText);
-                UpdateAllPopupExitButtons();
                 UpdateEvaluationContent(idItem);
             }, () => {
             });

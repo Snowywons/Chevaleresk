@@ -34,13 +34,6 @@ function GetSiblingContainerId(id, siblingClassName) {
     return GetSplitedId(id, '_') + "_" + siblingClassName;
 }
 
-function GetParentNode(node, n = 1, classList = "") {
-    let parent = node.parentElement;
-    while (n-- && parent && !parent.classList.contains(classList)) {
-        parent = parent.parentElement;
-    }
-    return parent;
-}
 
 function RemoveOldContainers(className) {
     let oldContainers = document.querySelectorAll("." + className);
