@@ -1,4 +1,4 @@
-//Permet de mettre à jour le contenu du store selon un envoyeur (store, shopping-cart)
+//Demande de mise à jour du contenu du store selon un envoyeur (store, shopping-cart)
 function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
     let request = "submit=setFilters" + "&filters=" + filtersStr + "&alias=" + alias + "" + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
@@ -9,72 +9,81 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
         }, false);
 }
 
-
-//Permet de mettre à jour tous les événements (click) liés aux boutons de sauvegarde de quantité du panier
-function SaveItemQuantity(id) {
-    let itemQuantityInput = document.getElementById(GetSiblingContainerId(id, "itemQuantity"));
-    let quantity = itemQuantityInput.value;
+//Demande de création d'un popup de modification de quantité
+function UpdateQuantity(id) {
     let targetAlias = GetUrlParamVal("alias");
     let sender = GetPageName();
+    let quantity = document.getElementById(id + "_quantity").value;
+    let request = "submit=createUpdateQuantityPopup" + "&idItem=" + id + "&quantity=" + quantity +
+        "&alias=" + targetAlias + "&sender=" + sender;
+    ServerRequest("POST", "../server/httpRequestHandler.php", request,
+        (requete) => {
+            CloseAllPopups();
+            CloseNotifier();
+            InsertHtmlTo(JSON.parse(requete.responseText), "popupReference");
+        }, () => {
+        });
+}
 
-    if (quantity > 0) {
-        let request = "submit=modifyItemQuantity" + "&idItem=" + id + "&quantity=" + quantity +
-            "&alias=" + targetAlias + "&sender=" + sender;
+function UpdateQuantityConfirm(idItem, alias, sender) {
+    let quantity = document.getElementById(idItem + "_itemQuantity").value;
+    if (quantity >= 1) {
+        let request = "submit=updateQuantityConfirm" + "&idItem=" + idItem + "&quantity=" + quantity + "&alias=" + alias + "&sender=" + sender;
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 NotifyWithPopup(requete.responseText);
                 switch (sender) {
-                    case "store" :
+                    case "store": //Inutilisé pour l'instant
                         break;
                     case "shopping-cart" :
+                        UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
                         UpdateTotalShoppingCartContent();
                         break;
-                    case "inventory" :
+                    case "inventory" : //Inutilisé pour l'instant
                         break;
                 }
-            }, () => {
+            },
+            () => {
             });
     } else {
         NotifyWithPopup("Quantité invalide");
     }
 }
 
-
-//Permet de mettre à jour tous les événements (click) liés aux boutons de modification de quantité
-function UpdateQuantity(id) {
-        let targetAlias = GetUrlParamVal("alias");
-        let sender = GetPageName();
-        let quantity = document.getElementById(id + "_quantity").value;
-        let request = "submit=createQuantityContainer" + "&idItem=" + id + "&quantity=" + quantity +
-            "&alias=" + targetAlias + "&sender=" + sender;
-        ServerRequest("POST", "../server/httpRequestHandler.php", request,
-            (requete) => {
-                CloseAllPopups();
-                CloseNotifier();
-                RemoveOldContainers("quantityContainer");
-                InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
-                UpdateAllPopupQuantityConfirmButtons();
-            }, () => {
-            });
-}
-
-//Permet de mettre à jour tous les événements (click) liés aux boutons de suppression d'item
-function CreateDeletePopup(id) {
+//Demande de création d'un popup de suppression d'item
+function DeleteItem(id) {
     let targetAlias = GetUrlParamVal("alias");
     let sender = GetPageName();
-    let request = "submit=createDeleteContainer" + "&idItem=" + id + "&alias=" + targetAlias + "&sender=" + sender;
+    let request = "submit=createDeleteItemPopup" + "&idItem=" + id + "&alias=" + targetAlias + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             CloseAllPopups();
             CloseNotifier();
-            RemoveOldContainers("itemDeleteConfirmationContainer");
-            InsertHtmlTo(JSON.parse(requete.responseText), "popupContentReference");
+            InsertHtmlTo(JSON.parse(requete.responseText), "popupReference");
         }, () => {
         });
 }
 
+function DeleteItemConfirm(idItem, alias, sender) {
+    let request = "submit=deleteItemConfirm" + "&idItem=" + idItem + "&alias=" + alias + "&sender=" + sender;
+    ServerRequest("POST", "../server/httpRequestHandler.php", request,
+        (requete) => {
+            NotifyWithPopup(requete.responseText);
+            switch (sender) {
+                case "store" :
+                    UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
+                    break;
+                case "shopping-cart" :
+                    UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
+                    UpdateTotalShoppingCartContent();
+                    break;
+            }
+        },
+        () => {
+        });
+}
 
-//Permet de mettre à jour tous les événements (click) liés aux boutons d'ajout d'items au panier
+//Demande d'ajout d'item dans le panier du joueur
 function AddItemToCart(id) {
     let itemQuantityInput = document.getElementById(GetSiblingContainerId(id, "itemQuantity"));
     let quantity = itemQuantityInput.value;
@@ -83,12 +92,8 @@ function AddItemToCart(id) {
         let request = "submit=addItemShoppingCart" + "&idItem=" + id + "&quantity=" + quantity;
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
-                if (requete.responseText === "notLogged") {
-                    NotifyWithPopup("Vous devez être connecté pour ajouter un item au panier");
-                } else {
-                    NotifyWithPopup(requete.responseText);
-                    itemQuantityInput.value = 1;
-                }
+                NotifyWithPopup(requete.responseText);
+                itemQuantityInput.value = 1;
             }, () => {
             });
     } else {
@@ -97,6 +102,7 @@ function AddItemToCart(id) {
     }
 }
 
+//Ajout +1 à la quantité d'item
 function AddItem(id) {
     let itemQuantityInput = document.getElementById(GetSiblingContainerId(id, "itemQuantity"));
     if (itemQuantityInput) {
@@ -106,6 +112,7 @@ function AddItem(id) {
     }
 }
 
+//Retrait -1 à la quantité d'item
 function RemoveItem(id) {
     let itemQuantityInput = document.getElementById(GetSiblingContainerId(id, "itemQuantity"));
     if (itemQuantityInput) {

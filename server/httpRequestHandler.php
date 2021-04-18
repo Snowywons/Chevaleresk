@@ -21,7 +21,8 @@ global $conn;
 
 if (isset($_POST["submit"])) {
 
-    //Sur un changement de filtre
+// ---------------------------- FILTRE ----------------------------------
+    //Sur la demande d'un changement de filtre
     if ($_POST["submit"] == "setFilters") {
         $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','',''";
         $_SESSION["filters"] = $filters;
@@ -50,139 +51,206 @@ if (isset($_POST["submit"])) {
         }
     }
 
-    //Sur l'ajout d'un item au panier
-    if ($_POST["submit"] == "addItemShoppingCart") {
+// ---------------------------- ÉVALUATIONS ----------------------------------
+    //Sur la mise à jour du contenu des évaluations
+    if ($_POST["submit"] == "updateEvaluationContent") {
 
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
-        $alias = $_SESSION["alias"];
-        $idItem = $_POST["idItem"];
-        $quantity = $_POST["quantity"];
-
-        echo AddItemShoppingCartByAlias($alias, $idItem, $quantity);
+        $idItem = $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $records = GetEvaluationPreviewByIdItem($idItem);
+        echo json_encode(CreateEvaluationContainer($records));
         exit;
     }
 
-    //Sur la création d'un conteneur de modification d'une quantité
-    if ($_POST["submit"] == "createQuantityContainer") {
+    //Sur l'envoie d'un nouveau commentaire
+    if ($_POST["submit"] == "sendEvaluation") {
 
-        //Si le joueur ne s'est pas authentifié
         if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
+            echo "Vous devez être connecté pour envoyer un commentaire.";
             exit;
         }
 
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $stars = isset($_POST["stars"]) ? $_POST["stars"] : "";
+        $comment = isset($_POST["comment"]) ? $_POST["comment"] : "";
+
+        echo AddEvaluationByIdItem($idItem, $alias, $stars, $comment);
+    }
+
+// --------------------------- PROTECTION --------------------------------
+    //Protection : Si le joueur ne s'est pas authentifié
+    if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
+        echo "Veuillez vous connecter.";
+        exit;
+    }
+
+// ---------------------------- JOUEUR ----------------------------------
+    //Sur la demande de création d'un conteneur de modification de solde
+    if ($_POST["submit"] == "createUpdatePlayerBalancePopup") {
+
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
+        $balance = isset($_POST["balance"]) ? $_POST["balance"] : "";
+
+        //Initialisation des éléments du popup
+        $title = "Modification";
+        $body = "
+                <p>Veuillez indiquer le nouveau solde de $alias</p>
+                <div class='shoppingCartActionsContainer'>
+                    <div class='shoppingCartQuantityContainer'>
+                        <input id='" . $alias . "_playerBalance' class='itemQuantity' type='number' value='$balance'/>
+                        <br><br>
+                    </div>
+                </div>";
+        $onConfirm = "UpdatePlayerBalanceConfirm(\"$alias\", $balance)";
+
+        echo json_encode(CreatePopup($title, $body, $onConfirm));
+        exit;
+    }
+
+    //Sur la confirmation du nouveau solde d'un joueur
+    if ($_POST["submit"] == "updatePlayerBalanceConfirm") {
+
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
+        $balance = isset($_POST["balance"]) ? $_POST["balance"] : "";
+
+        ModifyPlayerBalanceByAlias($alias, $balance);
+        echo "Le solde du joueur a bien été mis à jour.";
+        exit;
+    }
+
+    //Sur la demande de création d'un conteneur de suppression d'un joueur
+    if ($_POST["submit"] == "createDeletePlayerPopup") {
+
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
+
+        //Initialisation des éléments du popup
+        $title = "Suppression";
+        $body = "Êtes-vous sûr de vouloir supprimer ce joueur?";
+        $onConfirm = "DeletePlayerConfirm(\"$alias\")";
+
+        echo json_encode(CreatePopup($title, $body, $onConfirm));
+        exit;
+    }
+
+    //Sur la confirmation de la suppression d'un joueur
+    if ($_POST["submit"] == "deletePlayerConfirm") {
+
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
+
+        echo DeletePlayerByAlias($alias);
+        exit;
+    }
+
+    //Sur la demande d'une mise à jour des informations d'un profil
+    if ($_POST["submit"] == "modifyProfileInformations") {
+
+        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
+        $records = GetPlayerByAlias($alias);
+
+        if (count($records) > 0) {
+            $lastName = isset($_POST["lastName"]) ? $_POST["lastName"] : $records[1];
+            $firstName = isset($_POST["firstName"]) ? $_POST["firstName"] : $records[2];
+
+            ModifyPlayerNamesByAlias($alias, $lastName, $firstName);
+
+            if (isset($_POST["password"]) && strlen($_POST["password"]) > 0)
+                ModifyPlayerPasswordByAlias($alias, $_POST["password"]);
+
+            echo "Informations enregistrées";
+            exit;
+        }
+
+        echo "Le profile n'existe pas.";
+        exit;
+    }
+
+    //Sur la demande d'une mise à jour du contenu du gestionnaire
+    if ($_POST["submit"] == "updateManagerContent") {
+        $records = GetAllPlayers();
+        echo json_encode(CreateManagerContainer($records));
+        exit;
+    }
+
+// ---------------------------- ITEM ----------------------------------
+    //Sur la demande de création d'un conteneur de modification d'une quantité
+    if ($_POST["submit"] == "createUpdateQuantityPopup") {
+
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
-            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+                (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
         $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
 
-        echo json_encode(CreateQuantityContainer($idItem, $quantity, $alias, $sender));
+        //Initialisation des éléments du popup
+        $title = "Modification";
+        $body = "
+                <p>Veuillez indiquer la quantité souhaitée</p>
+                <div class='shoppingCartActionsContainer'>
+                    <div class='shoppingCartQuantityContainer'>
+                        <button class='removeItem' onclick='RemoveItem(\"$idItem\")'>-</button>
+                        <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
+                        <button class='addItem' onclick='AddItem(\"$idItem\")'>+</button>
+                        <br><br>
+                    </div>
+                </div>";
+        $onConfirm = "UpdateQuantityConfirm($idItem, \"$alias\", \"$sender\")";
+
+        echo json_encode(CreatePopup($title, $body, $onConfirm));
         exit;
     }
 
-    //Sur la modification de quantité d'un item
-    if ($_POST["submit"] == "quantityConfirm") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
+    //Sur la confirmation d'une quantité d'item
+    if ($_POST["submit"] == "updateQuantityConfirm") {
 
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
                 (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
 
-        //Demande de la page 'store.php'
-        if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
-            echo "Cette fonctionnalité n'existe pas.";
-            exit;
-        }
-
         //Demande de la page 'shopping-cart.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
             echo ModifyItemQuantityShoppingCartByAlias($alias, $idItem, $quantity);
             exit;
         }
-
-        //Demande de la page 'inventory.php'
-        if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
-            echo ModifyItemQuantityInventoryByAlias($alias, $idItem, $quantity);
-            exit;
-        }
     }
 
-    //Sur la création d'un conteneur de suppression d'item
-    if ($_POST["submit"] == "createDeleteContainer") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
+    //Sur la demande de création d'un conteneur de suppression d'item
+    if ($_POST["submit"] == "createDeleteItemPopup") {
 
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
         $sender = isset($_POST["sender"]) ? $_POST["sender"] : "";
 
-        echo json_encode(CreateItemDeleteContainer($idItem, $alias, $sender));
+        //Initialisation des éléments du popup
+        $title = "Suppression";
+        $body = "Êtes-vous sûr de vouloir supprimer cet item?";
+        $onConfirm = "DeleteItemConfirm($idItem, \"$alias\", \"$sender\")";
+
+        echo json_encode(CreatePopup($title, $body, $onConfirm));
         exit;
     }
     
-    //Sur la suppression d'un item
-    if ($_POST["submit"] == "deleteConfirm") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
+    //Sur la confirmation de la suppression d'un item
+    if ($_POST["submit"] == "deleteItemConfirm") {
 
         $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
 
-        //Demande de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
             echo DeleteItemFromStoreById($idItem);
             exit;
         }
 
-        //Demande de la page 'shopping-cart.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
             echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
             exit;
         }
-
-        //Demande de la page 'inventory.php'
-        if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
-            echo DeleteItemFromInventoryByAlias($alias, $idItem);
-            exit;
-        }
-
-        //Demande de la page 'administration.php'
-        if (isset($_POST["sender"]) && $_POST["sender"] == "administration") {
-            $alias = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-            echo DeletePlayerByAlias($alias);
-            exit;
-        }
     }
 
+// ---------------------------- PANIER ----------------------------------
     //Sur le paiement du panier du joueur
     if ($_POST["submit"] == "payShoppingCart") {
-
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
 
         $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
 
@@ -196,12 +264,6 @@ if (isset($_POST["submit"])) {
     //Sur le calcule du panier du joueur
     if ($_POST["submit"] == "calculateShoppingCart") {
 
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
 
@@ -209,50 +271,20 @@ if (isset($_POST["submit"])) {
         exit;
     }
 
-    //Sur la mise à jour du contenu du gestionnaire
-    if ($_POST["submit"] == "updateManagerContent") {
-        $records = GetAllPlayers();
-        echo json_encode(CreateManagerContainer($records));
+// ---------------------------- MAGASIN ----------------------------------
+    //Sur l'ajout d'un item au panier
+    if ($_POST["submit"] == "addItemShoppingCart") {
+
+        $alias = $_SESSION["alias"];
+        $idItem = $_POST["idItem"];
+        $quantity = $_POST["quantity"];
+
+        echo AddItemShoppingCartByAlias($alias, $idItem, $quantity);
         exit;
-    }
-
-    //Sur la mise à jour des informations d'un profil
-    if ($_POST["submit"] == "modifyProfileInformations") {
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
-        $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";
-        $records = GetPlayerByAlias($alias);
-
-        if (count($records) > 0) {
-            $lastName = isset($_POST["lastName"]) ? $_POST["lastName"] : $records[1];
-            $firstName = isset($_POST["firstName"]) ? $_POST["firstName"] : $records[2];
-            $balance = isset($_POST["balance"]) ? $_POST["balance"] : $records[3];
-
-
-            ModifyPlayerNamesByAlias($alias, $lastName, $firstName);
-            ModifyPlayerBalanceByAlias($alias, $balance);
-
-            if (isset($_POST["password"]) && strlen($_POST["password"]) > 0)
-                ModifyPlayerPasswordByAlias($alias, $_POST["password"]);
-
-            echo "Informations enregistrées";
-            exit;
-        }
-
-        echo "Le profile n'existe pas.";
     }
 
     //Sur l'ajout d'un item à la base de données
     if ($_POST["submit"] == "addItemDataBase") {
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
 
         $name = isset($_POST["name"]) ? $_POST["name"] : "";
         $type = isset($_POST["type"]) ? $_POST["type"] : "";
@@ -286,29 +318,5 @@ if (isset($_POST["submit"])) {
 
         echo "Impossible d'ajouter l'item.";
         exit;
-    }
-
-    //Sur la mise à jour du contenu des évaluations
-    if ($_POST["submit"] == "updateEvaluationContent") {
-        $idItem = $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $records = GetEvaluationPreviewByIdItem($idItem);
-        echo json_encode(CreateEvaluationContainer($records));
-        exit;
-    }
-
-    //Sur l'envoie d'un nouveau commentaire
-    if ($_POST["submit"] == "sendEvaluation") {
-        //Si le joueur ne s'est pas authentifié
-        if (!isset($_SESSION["logged"]) || !$_SESSION["logged"]) {
-            echo "notLogged";
-            exit;
-        }
-
-        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-        $stars = isset($_POST["stars"]) ? $_POST["stars"] : "";
-        $comment = isset($_POST["comment"]) ? $_POST["comment"] : "";
-
-        echo AddEvaluationByIdItem($idItem, $alias, $stars, $comment);
     }
 }

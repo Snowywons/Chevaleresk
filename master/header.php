@@ -1,74 +1,74 @@
 <?php
 global $root;
-global $script;
 
 include_once $root . "utilities/sessionUtilities.php";
+include_once $root . "utilities/popupUtilities.php";
 
-$indexPageLink = $root . "index.php";
+$indexPageLink = $root . "index";
 
-$storePageLink = $root . "store/store.php";
-$addItemPageLink = $root . "store/add-item.php";
-$modifyItemPageLink = $root . "store/modify-item.php";
-$deleteItemPageLink = $root . "store/delete-item.php";
-$shoppingCartPageLink = $root . "store/shopping-cart.php";
+$storePageLink = $root . "store/store";
+$addItemPageLink = $root . "store/add-item";
+$modifyItemPageLink = $root . "store/modify-item";
+$deleteItemPageLink = $root . "store/delete-item";
+$shoppingCartPageLink = $root . "store/shopping-cart";
 
-$evaluationsPageLink = $root . "evaluations/evaluations.php";
+$evaluationsPageLink = $root . "evaluations/evaluations";
 
-$loginPageLink = $root . "session/login.php";
-$logoutPageLink = $root . "session/logout.php";
+$loginPageLink = $root . "session/login";
+$logoutPageLink = $root . "session/logout";
 
-$profilePageLink = $root . "profile/profile.php";
-$administrationPageLink = $root . "profile/administration.php";
-$modifyProfilePageLink = $root . "profile/modify-profile.php";
-$inventoryPageLink = $root . "profile/inventory.php";
-$registerPageLink = $root . "profile/register.php";
+$profilePageLink = $root . "profile/profile";
+$administrationPageLink = $root . "profile/administration";
+$modifyProfilePageLink = $root . "profile/modify-profile";
+$inventoryPageLink = $root . "profile/inventory";
+$registerPageLink = $root . "profile/register";
 
 echo "
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <title>Chevaleresk</title>
-    <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
-    <script type='text/javascript' src='" . $root . "js/functions.js'></script>
-    <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>";
-if(isset($script)) {
-    echo "<script type='text/javascript' src='" . $root . $script . "'></script>";
-}
-echo "
-</head>
-<body>
-<header>
-    <nav>
-        <nav class='title'>
-            <img src='" . $root . "icons/ChevalereskIcon.png'>";
+    <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <title>Chevaleresk</title>
+            <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
+            <script type='text/javascript' src='" . $root . "js/functions.js'></script>
+            <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>";
+
+CreateOverlay();
+
+    echo "
+        </head>
+        <body>
+        <header>
+            <nav>
+                <nav class='title'>
+                    <img src='" . $root . "icons/ChevalereskIcon.png'>";
 
 //Onglets par défaut
 echo <<<HTML
-            <p onclick="redirect('$indexPageLink')"></p>
+            <p onclick="Redirect('$indexPageLink')"></p>
             Chevaleresk
         </nav>
         <nav id="index">
-            <p onclick="redirect('$indexPageLink')"></p>
+            <p onclick="Redirect('$indexPageLink')"></p>
             Accueil
         </nav>
         <nav id="store">
-            <p onclick="redirect('$storePageLink')"></p>
+            <p onclick="Redirect('$storePageLink')"></p>
             Magasin
             <ul class="hidden">
-                <li id="add-item" onclick="redirect('$addItemPageLink')">
+                <li id="add-item" onclick="Redirect('$addItemPageLink')">
                     Ajouter
                 </li>
-                <li id="modify-item" onclick="redirect('$modifyItemPageLink')">
+                <li id="modify-item" onclick="Redirect('$modifyItemPageLink')">
                     Modifier
                 </li>
-                <li id="delete-item" onclick="redirect('$deleteItemPageLink')">
+                <li id="delete-item" onclick="Redirect('$deleteItemPageLink')">
                     Supprimer
                 </li>
             </ul>
         </nav>
         <nav id="evaluations">
-            <p onclick="redirect('$evaluationsPageLink')"></p>
+            <p onclick="Redirect('$evaluationsPageLink')"></p>
             Évaluations
         </nav>
 HTML;
@@ -77,11 +77,11 @@ HTML;
 if (!UserIsLogged()) {
     echo <<<HTML
             <nav id="login">
-                <p onclick="redirect('$loginPageLink')"></p>
+                <p onclick="Redirect('$loginPageLink')"></p>
                 Connexion
             </nav>
             <nav id="register">
-                <p onclick="redirect('$registerPageLink')"></p>
+                <p onclick="Redirect('$registerPageLink')"></p>
                 Inscription
             </nav>
 HTML;
@@ -92,7 +92,7 @@ HTML;
 
         echo <<<HTML
         <nav id="administration">
-            <p onclick="redirect('$administrationPageLink')"></p>
+            <p onclick="Redirect('$administrationPageLink')"></p>
             Administration
         </nav>
 HTML;
@@ -100,16 +100,16 @@ HTML;
 
     echo <<<HTML
         <nav id="profile">
-            <p onclick="redirect('$profilePageLink')"></p>
+            <p onclick="Redirect('$profilePageLink')"></p>
             Profil
             <ul>
-                <li id="modify-profile" onclick="redirect('$modifyProfilePageLink')">
+                <li id="modify-profile" onclick="Redirect('$modifyProfilePageLink')">
                     Modifier
                 </li>
-                <li id="inventory" onclick="redirect('$inventoryPageLink')">
+                <li id="inventory" onclick="Redirect('$inventoryPageLink')">
                     Inventaire
                 </li>
-                <li id="logout" onclick="redirect('$logoutPageLink')">
+                <li id="logout" onclick="Redirect('$logoutPageLink')">
                     Déconnexion
                 </li>
             </ul>
@@ -118,7 +118,7 @@ HTML;
 HTML;
     echo "<img src='". $root . "icons/ShoppingCartIcon.png'/>";
     echo <<<HTML
-            <p onclick="redirect('$shoppingCartPageLink')"></p>
+            <p onclick="Redirect('$shoppingCartPageLink')"></p>
         </nav>
 HTML;
 }

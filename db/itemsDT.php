@@ -8,7 +8,6 @@ global $conn;
 function GetFilteredItems($filter)
 {
     return executeQuery("CALL ItemsParFiltre($filter)");
-
 }
 
 function GetItemById($id)

@@ -2,9 +2,7 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "db/playersDT.php";
 
 //Accès interdit
@@ -24,10 +22,7 @@ if (!$isAdmin && $alias !== $targetAlias) {
 }
 
 $records = GetPlayerByAlias($targetAlias);
-CreateNotificationContainer();
-CreateOverlay();
 
-$alias = "";
 $lastName = "";
 $firstName = "";
 $balance = "";
@@ -41,39 +36,50 @@ if (count($records) > 0) {
     $password = "default";
 }
 
-echo <<<HTML
-<main class="modify-profile">
-    <h1>Modifier les informations</h1>
+echo "
+    <main class='modify-profile'>
+        <h1>Modifier les informations</h1>
+        
+        <form action='modify-profile.php' method='POST'>
+            <fieldset>
+                <input type='text' id='alias' value='$alias' hidden disabled>
+                
+                <label for='lastName'>
+                    <span>Nom</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>            
+                </label>
+                <input type='text' id='lastName' name='lastName' value='$lastName' onblur='validateLastName()'>
+                <div id='lastNameValidation' style='color:red'></div>
     
-    <form method="POST">
-        <fieldset>
-            <input type="text" id="alias" name="alias" value="$alias" hidden disabled">
-            <label for="lastName">Nom</label>
-            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="notEmpty('lastName')">
-            <div id="lastNameValidation" style = "color:red"></div>
-            <label for="firstName">Prénom</label>
-            <input type="text" id="firstName" name="firstName" value="$firstName" onblur="notEmpty('firstName')">
-            <div id="firstNameValidation" style = "color:red"></div>
-            <label for="balance">Solde (écus)</label>
-            <input type="number" id="balance" name="balance" value="$balance">
-            <div id="balanceValidation" style = "color:red"></div>
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="motDePasse" value="$password" onblur="notEmpty('password')">
-            <div id="passwordValidation" style = "color:red"></div>
-            <label for="passwordConfirm">Confirmation du mot de passe</label>
-            <input type="password" id="passwordConfirm" name="" value="$password" onblur="PasswordConfirm()">
-            <div id="confirmValidation" style = "color:red"></div>
-            <input type="submit" class="saveChanges" value="Enregistrer">
-        </fieldset>
-    </form>
-</main>
-HTML;
-echo "<div id='deleteConfirmReference'></div>";
+                <label for='firstName'>
+                    <span>Prenom</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='text' id='firstName' name='firstName' value='$firstName' onblur='validateFirstName()'>
+                <div id='firstNameValidation' style='color:red'></div>
+    
+                <label for='password'>
+                    <span>Mot de passe</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='password' id='password' name='password' value='$password' onblur='validateNotEmpty(\"password\")'>
+    
+                <label for='passwordConfirm'>
+                    <span>Confirmation du mot de passe</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='password' id='passwordConfirm' name='passwordConfirm' value='$password' onblur='validatePassword()'>
+                <div id='passwordConfirmValidation' style='color:red'></div>
+                <input type='submit' name='submit' value='Enregistrer' class='saveChanges'>
+            </fieldset>
+        </form>
+    </main>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
 
 echo "
     <script type='text/javascript' src='" . $root . "js/administration.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/register.js' defer></script>
     <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>";
 ?>

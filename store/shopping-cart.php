@@ -2,10 +2,8 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "server/httpRequestHandler.php";
 include_once $root . "store/storeUpdate.php";
 include_once $root . "db/playersDT.php";
@@ -40,30 +38,34 @@ $_SESSION["filters"] = "'AR','AM','PO','RS'";
 //Création des conteneurs cachés et du overlay
 $records = GetAllShoppingCartItemsByAlias($targetAlias);
 CreateItemDetailsContainers($records);
-CreateNotificationContainer();
-CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------
 echo "
-<main class='shopping-cart'>
-    <h1>Panier d'achat de $targetAlias</h1>";
+    <main class='shopping-cart'>
+        <h1>Panier d'achat de $targetAlias</h1>
 
-echo "<div id='storeReference'>";
-echo CreateShoppingCartStoreContainer($records);
-echo "</div>";
+    <div class='bigButton backToStoreContainer' onclick='Redirect(\"../store/store\")'>
+        <span class='backToStoreButton'>Retour au magasin</span>
+    </div>";
 
-echo "
-    <br>
-    <div class='shoppingCartTransactionContainer'>
-        <div id='shoppingCartTotalReference'>";
-echo CreateShoppingCartTotalContainer($targetAlias);
-echo "
+    //Le contenu du panier
+    echo "
+        <div id='storeReference'>".
+            CreateShoppingCartStoreContainer($records)."
+        </div>";
+
+    //Le total du panier et le bouton de paiement
+    echo "
+        <br>
+        <div class='shoppingCartTransactionContainer'>
+            <div id='shoppingCartTotalReference'>".
+                CreateShoppingCartTotalContainer($targetAlias)."
+            </div>
+            <div id='payButton' class='mediumButton payButton' onclick='PayCart()'>
+                <span>Payer</span>
+            </div>
         </div>
-        <div id='payButton' class='mediumButton payButton' onclick='PayCart()'><span>Payer</span></div>
-    </div>
-</main>";
-
-echo "<div id='popupContentReference'></div>";
+    </main>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";

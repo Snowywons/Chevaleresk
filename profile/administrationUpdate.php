@@ -27,64 +27,27 @@ function CreateManagerContainer($records) {
             <div>$firstName</div>
             <div class='adminActionsContainer' style='justify-content:flex-end'>
                 $balance
-                <button class='balanceButton' onclick='OpenBalancePopup(\"$alias\", $balance)'>
+                <button class='balanceButton' onclick='UpdatePlayerBalance(\"$alias\", $balance)'>
                     <img src='" . $root . "/icons/EditIcon.png'/>
                 </button>
             </div>
             <div class='adminActionsContainer'>
-                <button class='shoppingCartButton' onclick='Redirect(\"$alias\", \"../store/shopping-cart\")'>
+                <button class='shoppingCartButton' onclick='Redirect(\"../store/shopping-cart\", \"alias=$alias\")'>
                     <img src='" . $root . "/icons/ShoppingCartIcon.png'>
                 </button>
-                <button class='bagButton' onclick='Redirect(\"$alias\", \"../profile/inventory\")'>
+                <button class='bagButton' onclick='Redirect(\"../profile/inventory\", \"alias=$alias\")'>
                     <img src='" . $root . "/icons/BagIcon.png'/>
                 </button>
-                <button class='modifyButton' onclick='Redirect(\"$alias\", \"../profile/modify-profile\")'>
+                <button class='modifyButton' onclick='Redirect(\"../profile/modify-profile\", \"alias=$alias\")'>
                     <img src='" . $root . "/icons/EditIcon.png'/>
                 </button>
-                <button class='deleteButton' onclick='OpenDeletePopup(\"$alias\")'>
+                <button class='deleteButton' onclick='DeletePlayer(\"$alias\")'>
                     <img src='" . $root . "/icons/DeleteIcon.png'/>
                 </button>
             </div>";
     }
 
     $content .= "</div>";
-
-    $content .= "
-        <div id='balanceEditContainer' class='popupContainer'>
-            <div class='popupHeaderContainer'>
-                <span>Modification du solde</span>
-                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"balanceEditContainer\"), '>x</button>
-            </div>
-            <div class='popupBodyContainer'>
-                <form action='update-balance.php' method='POST'>
-                    <input type='hidden' name='alias' value=''>
-                    <input type='number' name='balance' value='0'>
-                    <input type='submit' value='Modifier'>
-                </form>
-            </div>
-            <div class='popupFooterContainer'>
-            </div>
-        </div>";
-    $content .= "
-    <div id='playerDeleteContainer' class='popupContainer'>
-            <div class='popupHeaderContainer'>
-                <span>Confirmation de suppression</span>
-                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"playerDeleteContainer\")'>x</button>
-            </div>
-            <div class='popupBodyContainer'>
-                Êtes-vous sûr de vouloir supprimer cet utilisateur?
-                <form action='../server/deletePlayerHandler.php' method='POST'>
-                    <input type='hidden' name='alias' value=''>
-                    <div class='confirmationButtonsContainer'>
-                        <button type='button' class='popupCancelConfirmButton cancelButton' 
-                        onclick='ClosePopup(\"playerDeleteContainer\")'>Annuler</button>
-                        <input type='submit' class='popupDeleteConfirmButton confirmButton' value='Confirmer'>
-                    </div>
-                </form>
-            </div>
-            <div class='popupFooterContainer'>
-            </div>
-    ";
 
     return $content;
 }

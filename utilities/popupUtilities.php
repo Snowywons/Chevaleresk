@@ -6,7 +6,9 @@
  *  quantiteStock,
  *  prixItem,
  *  codePhoto,
- *  codeType]
+ *  codeType,
+ *  starsAvg
+ *  starsCount]
 */
 
 //Popup des détails d'un item
@@ -37,17 +39,17 @@ function CreateItemDetailsContainers($records)
             <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
                 <div class='popupHeaderContainer'>
                     <span>$nomItem</span>
-                    <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"" . $idItem . "_itemDetailsContainer\")'>x</button>
+                    <button class='popupExitButton' onclick='ClosePopup(\"" . $idItem . "_itemDetailsContainer\")'>x</button>
                 </div>
                 <div class='popupBodyContainer'>";
 
         if ($isAdmin) {
             $content .= "
                 <div class='adminButtonsContainer'>
-                    <button type='button' id='" . $idItem . "_modifyButton' class='modifyButton' onclick='redirect(\"../store/modify-item.php?idItem=" . $idItem . "\")'>
+                    <button type='button' id='" . $idItem . "_modifyButton' class='modifyButton' onclick='Redirect(\"../store/modify-item\",\"idItem=" . $idItem . "\")'>
                         <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
-                    <button type='button' class='deleteButton' onclick='CreateDeleteButton($idItem)'>
+                    <button type='button' class='deleteButton' onclick='DeleteItem($idItem)'>
                         <img src='" . $root . "/icons/DeleteIcon.png'/>
                     </button>
                 </div>";
@@ -111,16 +113,29 @@ function CreateItemDetailsContainers($records)
         }
 
         $content .= "
+                <br>
             </div>
         </div>
         <div class='popupFooterContainer'>
-            <div class='itemDetailsFooter'>
-                <div class='itemStarbar'>
-                    <img src='../icons/StarIcon.png'>
-                    <img src='../icons/StarIcon.png'>
-                </div>
+            <div class='itemDetailsFooter'>";
+
+        $evaluation = GetEvaluationPreviewByIdItem($idItem);
+        $starsAvg = $evaluation[3];
+        $evaluationCount = $evaluation[4];
+
+        $starBar = "";
+
+        if ($starsAvg != 0) {
+            for ($i = 0; $i < $starsAvg; $i++)
+                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $starBar .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
+        }
+
+        $content .= "
+                <div class='itemStarbarContainer'>$starBar</div>
                 <div id='" . $idItem . "_showEvaluations' 
-                class='mediumButton itemDetailsContainerEvaluationButton showEvaluations'>
+                    class='mediumButton itemDetailsContainerEvaluationButton'
+                    onClick='Redirect(\"../evaluations/evaluations\",\"idItem=" .$idItem."\")'>
                     <span>Voir les évaluations</span>
                 </div>
             </div>
@@ -129,98 +144,8 @@ function CreateItemDetailsContainers($records)
     }
 
     $content .= "</div>";
-    
 
     echo $content;
-}
-
-//Popup de supression d'un item
-function CreateItemDeleteContainer($idItem, $alias, $sender)
-{
-    $content = "
-        <div>
-            <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
-                <div class='popupHeaderContainer'>
-                      <span>Attention!</span>
-                      <button class='popupExitButton onclick='ClosePopupAndNotifier(\"" . $idItem . "_popupConfirmationContainer\")'>x</button>
-                </div>
-                <div class='popupBodyContainer'>
-                    <br>
-                    <div>";
-
-    if ($sender === "store") {
-        $content .= "Êtes-vous sûr de vouloir supprimer cet item du magasin?";
-    } else if ($sender === "shopping-cart") {
-        $content .= "Êtes-vous sûr de vouloir supprimer cet item du panier?";
-    } else if ($sender === "inventory") {
-        $content .= "Êtes-vous sûr de vouloir supprimer cet item de l'inventaire?";
-    } else if ($sender === "administration") {
-        $content .= "Êtes-vous sûr de vouloir supprimer l'utilisateur ". $idItem . " ?";
-    }
-
-    $content .= "
-                </div>
-            </div>
-            <div class='popupFooterContainer'>
-                <div class='confirmationButtonsContainer'>
-                    <button id='" . $idItem . "_' 
-                            class='popupCancelConfirmButton cancelButton'>Annuler</button>
-                    <button id='" . $idItem . "_" . $alias . "_" . $sender . "' 
-                            class='popupDeleteConfirmButton confirmButton'>Confirmer</button>
-                </div>
-            </div>
-        </div>
-    </div>";
-
-    return $content;
-}
-
-//Popup de modification d'une quantité
-function CreateQuantityContainer($idItem, $quantity, $alias, $sender) {
-    $content = "
-        <div>
-            <div id='" . $idItem . "_popupConfirmationContainer' class='popupContainer popupConfirmationContainer active'>
-                <div class='popupHeaderContainer'>
-                      <span>Modification</span>
-                      <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"" . $idItem . "_popupConfirmationContainer\")>x</button>
-                </div>
-                <div class='popupBodyContainer'>
-                    <br>
-                    <div>";
-
-                    if ($sender === "shopping-cart") {
-                        $content .= "Veuillez indiquer la quantité souhaitée.<br><br>";
-                    } else if ($sender === "inventory") {
-                        $content .= "";
-                    } else if ($sender === "administration") {
-                        $content .= "";
-                    }
-
-                        $content .= "
-                            <div class='shoppingCartActionsContainer'>
-                                <div class='shoppingCartQuantityContainer'>
-                                    <button class='removeItem' onclick='RemoveItem(\"$idItem\")'>-</button>
-                                    <input id='" . $idItem . "_itemQuantity' class='itemQuantity' type='number' value='$quantity'/>
-                                    <button class='addItem' onclick='AddItem(\"$idItem\")'>+</button>
-                                    <br><br>
-                                </div>
-                            </div>";
-
-    $content .= "
-                </div>
-            </div>
-            <div class='popupFooterContainer'>
-                <div class='confirmationButtonsContainer'>
-                    <button id='" . $idItem . "_' 
-                            class='popupCancelConfirmButton cancelButton'>Annuler</button>
-                    <button id='" . $idItem . "_" . $alias . "_" . $sender . "' 
-                            class='popupQuantityConfirmButton confirmButton'>Confirmer</button>
-                </div>
-            </div>
-        </div>
-    </div>";
-
-    return $content;
 }
 
 //Popup de notification quelconque
@@ -238,9 +163,43 @@ function CreateNotificationContainer()
                 <div id='notificationMessageContainer'></div>
                 <br>
             </div>
-            <div class='popupFooterContainer'>
-            </div>
+            <div class='popupFooterContainer'></div>
         </div>";
+}
+
+//Popup vide
+function CreatePopup($title, $body, $onConfirm)
+{
+    $content = "
+    <div id='popupContainer' class='popupContainer popupConfirmationContainer active'>
+        <!-- Popup Header -->
+        <div class='popupHeaderContainer'>
+            <span>$title</span>
+            <button class='popupExitButton' onclick='ClosePopup(\"popupContainer\")'>x</button>
+        </div>
+        
+        <!-- Popup Body -->
+        <div class='popupBodyContainer'>";
+    $content .= $body;
+    $content .= "</div>
+
+        <!-- Popup Footer -->
+        <div class='popupFooterContainer'>
+            <div class='confirmationButtonsContainer'>
+                <button class='popupCancelConfirmButton cancelButton' onclick='ClosePopup(\"popupContainer\")'>Annuler</button>";
+
+    $content .= <<<HTML
+                <button id='' 
+                        class='popupQuantityConfirmButton confirmButton'
+                        onclick='{ ClosePopup("popupContainer"); $onConfirm; }'>Confirmer</button>
+HTML;
+
+    $content .= "
+            </div>
+        </div>
+    </div>";
+
+    return $content;
 }
 
 //L'écran noir derrière un popup

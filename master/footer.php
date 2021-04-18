@@ -1,10 +1,10 @@
 <?php
-echo <<<HTML
+echo "
         <footer>
-<!--            <div>Auteurs: Jimi-Luc Denis, Julie-Anne Castonguay, Mélissa St-Jean</div>-->
+            <div id='popupReference'></div>".
+            CreateNotificationContainer()."
         </footer>
     </body>
-</html>
-HTML;
+</html>";
 
 ?>

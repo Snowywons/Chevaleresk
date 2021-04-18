@@ -12,7 +12,6 @@ function GetFilteredInventoryItemsByAlias($filter, $alias)
 
 function GetAllInventoryItemsByAlias($alias)
 {
-    //return executeQuery("CALL ItemsInventaireParAliasJoueur('$alias')");
     global $conn;
 
     $statement = $conn->prepare("CALL ItemsInventaireParAliasJoueur(?)");
@@ -25,9 +24,23 @@ function GetAllInventoryItemsByAlias($alias)
     return [];
 }
 
+function PlayerHasItem($alias, $idItem)
+{
+    global $conn;
+
+    $statement = $conn->prepare("SELECT JoueurPossedeItem(?, ?)");
+    $statement->bindParam(1,$alias, PDO::PARAM_STR);
+    $statement->bindParam(2,$idItem, PDO::PARAM_INT);
+    $statement->execute();
+    $result = $statement->fetch();
+    if($result) {
+        return $result[0];
+    }
+    return [];
+}
+
 function AddItemInventoryByAlias($alias, $idItem, $quantity)
 {
-    //return executeQuery("CALL AjouterItemPanierParAliasJoueur('$alias', $idItem, $quantity)", true)[0];
     global $conn;
     
     $statement = $conn->prepare("SELECT AjouterItemPanierParAliasJoueur(?,?,?)");
@@ -44,7 +57,6 @@ function AddItemInventoryByAlias($alias, $idItem, $quantity)
 
 function ModifyItemQuantityInventoryByAlias($alias, $idItem, $quantity)
 {
-    //return executeQuery("CALL ModifierQuantiteItemInventaireParAliasJoueur('$alias', $idItem, $quantity)", true)[0];
     global $conn;
     
     $statement = $conn->prepare("SELECT ModifierQuantiteItemInventaireParAliasJoueur(?,?,?)");
@@ -61,7 +73,6 @@ function ModifyItemQuantityInventoryByAlias($alias, $idItem, $quantity)
 
 function DeleteItemFromInventoryByAlias($alias, $idItem)
 {
-    //return executeQuery("CALL SupprimerItemInventaireParAliasJoueur('$alias', $idItem)", true)[0];
     global $conn;
     
     $statement = $conn->prepare("SELECT SupprimerItemInventaireParAliasJoueur(?,?)");

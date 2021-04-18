@@ -1,6 +1,5 @@
 <?php
 $root = "../";
-$script = "js/register.js";
 
 include_once $root . "db/playersDT.php";
 
@@ -25,58 +24,57 @@ if (isset($_POST["submit"])) {
                 exit;
             }
             $aliasError= "Nom d'utilisateur non-disponible.";
-        
     }
 }
 
 include_once $root . "master/header.php";
 
-echo <<<HTML
-<main class="register">
-    <h1>Inscription</h1>
-    
-    <form action="register.php" method="post" onsubmit="return validateRegisterForm()">
-        <fieldset>
-            <label for="alias">
-                <span>Alias</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type="text" id="alias" name="alias" value="$alias" onblur="validateAlias()">
-            <div id="aliasValidation" style="color:red">$aliasError</div>
-
-            <label for="lastName">
-                <span>Nom</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>            
-            </label>
-            <input type="text" id="lastName" name="lastName" value="$lastName" onblur="validateLastName()">
-            <div id="lastNameValidation" style="color:red"></div>
-
-            <label for="firstName">
-                <span>Prenom</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type="text" id="firstName" name="firstName" value="$firstName" onblur="validateFirstName()">
-            <div id="firstNameValidation" style="color:red"></div>
-
-            <label for="password">
-                <span>Mot de passe</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type="password" id="password" name="password" onblur="validateNotEmpty('password')">
-
-            <label for="passwordConfirm">
-                <span>Confirmation du mot de passe</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" onblur="validatePassword()">
-            <div id="passwordConfirmValidation" style="color:red"></div>
-            <input type="submit" name="submit" value="Enregistrer">
-        </fieldset>
+echo "
+    <main class='register'>
+        <h1>Inscription</h1>
         
-    </form>
-HTML;
-    echo "<a href='" . $root . "session/login.php'>Se connecter</a>
-</main>";
+        <form action='register.php' method='post' onsubmit='return validateRegisterForm()'>
+            <fieldset>
+                <label for='alias'>
+                    <span>Alias</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='text' id='alias' name='alias' value='$alias' onblur='validateAlias()'>
+                <div id='aliasValidation' style='color:red'>$aliasError</div>
+    
+                <label for='lastName'>
+                    <span>Nom</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>            
+                </label>
+                <input type='text' id='lastName' name='lastName' value='$lastName' onblur='validateLastName()'>
+                <div id='lastNameValidation' style='color:red'></div>
+    
+                <label for='firstName'>
+                    <span>Prenom</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='text' id='firstName' name='firstName' value='$firstName' onblur='validateFirstName()'>
+                <div id='firstNameValidation' style='color:red'></div>
+    
+                <label for='password'>
+                    <span>Mot de passe</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='password' id='password' name='password' onblur='validateNotEmpty(\"password\")'>
+    
+                <label for='passwordConfirm'>
+                    <span>Confirmation du mot de passe</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='password' id='passwordConfirm' name='passwordConfirm' onblur='validatePassword()'>
+                <div id='passwordConfirmValidation' style='color:red'></div>
+                <input type='submit' name='submit' value='Enregistrer'>
+            </fieldset>
+        </form>
+        <a href='" . $root . "session/login.php'>Se connecter</a>
+    </main>";
+
+echo "<script type='text/javascript' src='" . $root . "js/register.js' defer></script>";
 
 include_once $root . "master/footer.php";
 ?>

@@ -24,8 +24,6 @@ if (!$isAdmin && $alias !== $targetAlias) {
 }
 
 $records = GetPlayerByAlias($targetAlias);
-CreateNotificationContainer();
-CreateOverlay();
 
 $alias = "";
 $lastName = "";
@@ -55,8 +53,6 @@ echo "
             </fieldset>
         </form>
     </main>";
-
-echo "<div id='deleteConfirmReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
