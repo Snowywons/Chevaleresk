@@ -13,10 +13,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == false) {
     exit;
 }
 
-CreateNotificationContainer();
-CreateOverlay();
-
-//Ajout d'un item 
+//Ajout d'un item
 echo "
     <main class='add-item'>
         <h1>Ajouter un item</h1>
@@ -29,7 +26,7 @@ echo "
                 
                 <!-- Type -->
                 <label for='types'>Type</label>
-                <select name='types' id='types'>
+                <select name='types' id='types' onchange='ChangeTypeField()'>
                     <option selected disabled hidden value=''>-Choisir un type-</option>
                     <option value='AR'>Arme</option>
                     <option value='AM'>Armure</option>
@@ -56,7 +53,7 @@ echo "
                     <label for='materials'>Matière</label>
                     <select name='materials' id='materials'>
                         <option selected disabled hidden value=''>-Choisir une matière-</option>
-                        <option value='leather'>Cuire</option>
+                        <option value='leather'>Cuir</option>
                         <option value='metal'>Métal</option>
                     </select>
                     <label for='weigth'>Poids</label>
@@ -90,17 +87,16 @@ echo "
                 <!-- Image -->
                 <label for='picture'>Image</label>
                 <div class='addItemPreviewContainer'>
-                    <img src='" . $root . "icons/DefaultIcon.png' id='imageToUpload' oneclick='imageClick()'>
+                    <img src='" . $root . "icons/DefaultIcon.png' id='UploadedImage' onclick='OpenImageUploader()'>
                 </div>
-                <input type='file' accept='.jpg,.jpeg,.png' id='picture' onchange='displayImage(this)' name='picture' value=''>
+                <input type='file' accept='.jpg,.jpeg,.png' id='ImageUploader' name='picture' value='' 
+                        onchange='ChangeImagePreview()'>
                 
                 <!-- Ajouter -->
-                <input type='submit' class='saveChanges' value='Ajouter'>
+                <input type='submit' class='saveChanges' value='Ajouter' onclick='AddItem()'>
         </fieldset>
     </form>
 </main>";
-
-echo "<div id='deleteConfirmReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 include_once $root . "master/footer.php";
 

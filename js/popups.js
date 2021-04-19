@@ -47,6 +47,3 @@ function CloseNotifier() {
     if (overlay) overlay.classList.add("active");
 }
 
-//Exécution des fonctions à l'ouverture
-UpdateAllPopupExitButtons();
-

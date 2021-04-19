@@ -290,8 +290,45 @@ if (isset($_POST["submit"])) {
         $type = isset($_POST["type"]) ? $_POST["type"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
         $price = isset($_POST["price"]) ? $_POST["price"] : "";
-        $pictureCode = isset($_POST["pictureCode"]) ? $_POST["pictureCode"] : "DefaultIcon"; //
+        $guid = "DefaultIcon";
 
+        $picture = isset($_FILES["ImageUploader"]) ? $_FILES["ImageUploader"] : "";
+        if ($picture !== "") {
+            $info = pathinfo($_FILES['ImageUploader']['name']);
+            $ext = $info['extension'];
+            $guid = com_create_guid();
+            $newname = $guid.".".$ext;
+            $target = '../icons/'.$newname;
+            move_uploaded_file( $_FILES['ImageUploader']['tmp_name'], $target);
+        }
+
+        switch ($type) {
+            case "AR" :
+                $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
+                $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+                $description = isset($_POST["description"]) ? $_POST["description"] : "";
+                AddWeaponStore($name, $quantity, $price, $guid, $type, $efficiency, $gender, $description);
+                break;
+            case "AM" :
+                $material = isset($_POST["material"]) ? $_POST["material"] : "";
+                $weigth = isset($_POST["weigth"]) ? $_POST["weigth"] : "";
+                $size = isset($_POST["size"]) ? $_POST["size"] : "";
+                AddArmorStore($name, $quantity, $price, $guid, $type, $material, $weigth, $size);
+                break;
+            case "PO" :
+                $effect = isset($_POST["effect"]) ? $_POST["effect"] : "";
+                $duration = isset($_POST["duration"]) ? $_POST["duration"] : "";
+                AddPotionStore($name, $quantity, $price, $guid, $type, $effect, $duration);
+                break;
+            case "RS" :
+                $description = isset($_POST["description"]) ? $_POST["description"] : "";
+                AddRessourceStore($name, $quantity, $price, $guid, $type, $description);
+                break;
+        }
+
+        header("location: ./add-item.php");
+        exit;
+/*
         switch ($type) {
             case "AR" :
                 $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
@@ -315,7 +352,7 @@ if (isset($_POST["submit"])) {
                 echo AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $description);
                 exit;
         }
-
+*/
         echo "Impossible d'ajouter l'item.";
         exit;
     }

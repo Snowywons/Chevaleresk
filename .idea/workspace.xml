@@ -19,38 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout évaluations et autres fonctionnalités">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/evaluationsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/evaluationsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/inventoriesDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/inventoriesDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/itemsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/itemsDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/playersDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/playersDT.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluations/evaluations.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/administration.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/administration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/evaluations.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/evaluations.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filters.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/add-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-item.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/shoppingcart.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/shoppingcart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/master/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/master/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administration.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administrationUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administrationUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/modify-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/modify-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/update-balance.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/deletePlayerHandler.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/session/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/add-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/add-item.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +108,8 @@
       <workItem from="1618093541347" duration="665000" />
       <workItem from="1618236073206" duration="2721000" />
       <workItem from="1618268506754" duration="4650000" />
-      <workItem from="1618673275309" duration="29926000" />
+      <workItem from="1618673275309" duration="31245000" />
+      <workItem from="1618841636171" duration="10048000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -325,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618093610795</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Ajout multiples">
+      <created>1618704767619</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1618704767619</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,7 +337,6 @@
     <MESSAGE value="Modifications multiples" />
     <MESSAGE value="Commit final avant la remise du sprint 0" />
     <MESSAGE value="Ajout AJAX" />
-    <MESSAGE value="Ajout multiples" />
     <MESSAGE value="Ajout multiples 2" />
     <MESSAGE value="Ajout multiples et cleaning de code" />
     <MESSAGE value="Ajout supression items panier et cleaning de code" />
@@ -369,17 +350,18 @@
     <MESSAGE value="Commit 06 avril" />
     <MESSAGE value="Ajout popup pour quantité shopping cart" />
     <MESSAGE value="Ajout évaluations et autres fonctionnalités" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout évaluations et autres fonctionnalités" />
+    <MESSAGE value="Ajout multiples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444760288" />
-    <state x="624" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1618689212061">
+    <state x="624" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1618851539014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="624" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618689212061" />
+    <state x="624" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618851539014" />
     <state x="92" y="92" width="1769" height="855" key="DiffContextDialog" timestamp="1618674122732">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -400,29 +382,29 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="508" y="220" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616641981856" />
-    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1617854870748">
+    <state x="748" y="424" key="NewPhpFileDialog" timestamp="1618848803411">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617854870748" />
+    <state x="748" y="424" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618848803411" />
     <state x="336" y="77" key="SettingsEditor" timestamp="1614444801399">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1618093611750">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1618704786486">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618093611750" />
-    <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618673317184">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618704786486" />
+    <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618841644854">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618673317184" />
+    <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618841644854" />
     <state x="532" y="237" key="run.anything.popup" timestamp="1618691851082">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618691851082" />
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1618701825383">
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1618847482746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618701825383" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618847482746" />
   </component>
 </project>
