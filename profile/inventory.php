@@ -45,7 +45,11 @@ CreateOverlay();
 
 echo "
 <main class='inventory'>
-    <h1>Inventaire de $targetAlias</h1>";
+    <h1>Inventaire de $targetAlias</h1>
+    
+    <div class='bigButton backToStoreContainer' onclick='Redirect(\"../store/store\")'>
+        <span class='backToStoreButton'>Retour au magasin</span>
+    </div>";
 
 CreateFilterSection();
 

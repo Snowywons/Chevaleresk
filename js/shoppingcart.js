@@ -1,4 +1,4 @@
-//Permet de mettre à jour le contenu du total dans le panier
+//Demande de mise à jour du contenu du total dans le panier
 function UpdateTotalShoppingCartContent() {
     let targetAlias = GetUrlParamVal("alias");
     let request = "submit=calculateShoppingCart" + "&alias=" + targetAlias;
@@ -11,18 +11,14 @@ function UpdateTotalShoppingCartContent() {
         }, false);
 }
 
-//Permet de mettre à jour tous les événements (click) liés aux boutons de paiement du panier
-function UpdateAllPayButtons() {
-    AddClickEventFor("payButton", () => {
-        ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
-            (requete) => {
-                NotifyWithPopup(requete.responseText);
-                UpdateStoreContentOnFilter("'AR','AM','PO','RS'", "", GetPageName());
-                UpdateTotalShoppingCartContent();
-            }, () => {
-            });
-    });
+//Demande de paiement du panier du joueur
+function PayCart() {
+    ServerRequest("POST", "../server/httpRequestHandler.php", "submit=payShoppingCart",
+        (requete) => {
+            NotifyWithPopup(requete.responseText);
+            UpdateStoreContentOnFilter("'AR','AM','PO','RS'", "", GetPageName());
+            UpdateTotalShoppingCartContent();
+        }, () => {
+        });
 }
 
-//Exécution des fonctions à l'ouverture
-UpdateAllPayButtons();

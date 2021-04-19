@@ -2,10 +2,8 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "db/playersDT.php";
 include_once $root . "db/itemsDT.php";
 include_once $root . "db/weaponsDT.php";
@@ -17,8 +15,6 @@ include_once $root . "profile/administrationUpdate.php";
 global $conn;
 
 $records = GetAllPlayers();
-CreateNotificationContainer();
-CreateOverlay();
 
 echo "
     <main class='administration'>
@@ -27,8 +23,6 @@ echo "
 echo "<div id='managerReference'>";
 echo CreateManagerContainer($records);
 echo "</div></main>";
-
-echo "<div id='popupContentReference'></div>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";

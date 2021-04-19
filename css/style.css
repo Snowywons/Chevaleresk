@@ -68,7 +68,7 @@
     /*#endregion Filtre*/
 
     /*#region Popup*/
-    --popup-itemDetailsContainerBackgroundColor: var(--col-lime);
+    --popup-itemDetailsContainerBackgroundColor: whitesmoke;
     --popup-itemDetailsContainerBorderColor: var(--col-grass);
 
     --popup-itemDetailsContainerExitButtonHoverBackgroundColor: var(--col-lightRed);
@@ -342,9 +342,9 @@ main.inventory div.storeContainer {
     grid-template-columns: auto auto;
 }
 
-main.shopping-cart div.storeContainer {
+/*main.shopping-cart div.storeContainer {
 
-}
+}*/
 
 main.shopping-cart div.shoppingCartTransactionContainer {
     display: flex;
@@ -471,10 +471,12 @@ div.mediumButton.payButton {
     margin: 10px 0 0 0;
 }
 
+button.shoppingCartButton,
 button.bagButton,
 button.modifyButton,
 button.quantityButton,
 button.deleteButton,
+button.balanceButton,
 button.saveButton {
     width: 30px;
     height: 25px;
@@ -485,12 +487,14 @@ button.saveButton {
     margin: 0;
 }
 
+button.shoppingCartButton,
 button.bagButton {
     background-color: var(--profile-bagButtonBackgroundColor);
     border-color: var(--profile-bagButtonBorderColor);
 }
 
-button.modifyButton {
+button.modifyButton, 
+button.balanceButton {
     background-color: var(--store-modifyButtonBackgroundColor);
     border-color: var(--store-modifyButtonBorderColor);
 }
@@ -510,17 +514,21 @@ button.saveButton {
     border-color: var(--store-saveButtonBorderColor);
 }
 
+button.shoppingCartButton > img,
 button.bagButton > img,
 button.modifyButton > img,
 button.quantityButton > img,
+button.balanceButton > img,
 button.deleteButton > img,
 button.saveButton > img {
     height: 100%;
 }
 
 button.addToShoppingCart:hover,
+button.shoppingCartButton:hover,
 button.bagButton:hover,
 button.modifyButton:hover,
+button.balanceButton:hover,
 button.quantityButton:hover,
 button.deleteButton:hover,
 button.saveButton:hover {
@@ -528,7 +536,9 @@ button.saveButton:hover {
 }
 
 button.addToShoppingCart:active,
+button.shoppingCartButton:active,
 button.bagButton:active,
+button.balanceButton:active,
 button.modifyButton:active,
 button.modifyButton.clicked,
 button.quantityButton:active,
@@ -603,7 +613,6 @@ div.popupContainer {
 div.popupContainer.active {
     display: block;
     width: 500px;
-    height: 600px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -686,6 +695,7 @@ button.popupExitButton:hover {
 
 div.popupBodyContainer {
     position: relative;
+    margin: 10px;
 }
 
 div.popupFooterContainer {

@@ -1,7 +1,7 @@
 function updateValidation(element, valid) {
-    if(valid) {
+    if (valid) {
         element.classList.remove('errorField');
-        return true; 
+        return true;
     }
     element.classList.add('errorField');
     return false;
@@ -16,48 +16,47 @@ function validateName(id) {
     const element = document.getElementById(id);
     return updateValidation(element, /^[a-z]([a-z\-]|\s)*$/i.test(element.value));
 }
-function validateAlias(){
+
+function validateAlias() {
     return validateNotEmpty('alias');
 }
-function validateFirstName(){
-    if(!validateNotEmpty('firstName')){
+
+function validateFirstName() {
+    if (!validateNotEmpty('firstName')) {
         return false;
-    }
-    else if(!validateName('firstName')) {
+    } else if (!validateName('firstName')) {
         document.getElementById('firstNameValidation').innerHTML = "Format invalide";
         return false;
-    }
-    else{
+    } else {
         document.getElementById('firstNameValidation').innerHTML = "";
         return true;
     }
 }
-function validateLastName(){
-    if(!validateNotEmpty('lastName')){
+
+function validateLastName() {
+    if (!validateNotEmpty('lastName')) {
         return false;
-    }
-    else if(!validateName('lastName')) {
+    } else if (!validateName('lastName')) {
         document.getElementById('lastNameValidation').innerHTML = "Format invalide";
         return false;
-    }
-    else{
+    } else {
         document.getElementById('lastNameValidation').innerHTML = "";
         return true;
     }
 }
-function validatePassword(){
-    if(!validateNotEmpty('passwordConfirm') && !validateNotEmpty('password')){
+
+function validatePassword() {
+    if (!validateNotEmpty('passwordConfirm') && !validateNotEmpty('password')) {
         return false;
-    }
-    else if(!validateIdentical('password', 'passwordConfirm')) {
+    } else if (!validateIdentical('password', 'passwordConfirm')) {
         document.getElementById('passwordConfirmValidation').innerHTML = "Le mot de passe et sa confirmation doivent correspondre.";
         return false;
-    }
-    else {
-       document.getElementById('passwordConfirmValidation').innerHTML = "";
-       return true; 
+    } else {
+        document.getElementById('passwordConfirmValidation').innerHTML = "";
+        return true;
     }
 }
+
 function validateIdentical(passwordId, confirmId) {
     const password = document.getElementById(passwordId);
     const confirm = document.getElementById(confirmId);
@@ -71,11 +70,11 @@ function validateIdentical(passwordId, confirmId) {
 function validateRegisterForm() {
 
     let allValid = true;
-    
-    if(!validateAlias()) allValid = false;
-    if(!validateFirstName()) allValid = false;
-    if(!validateLastName()) allValid = false;
-    if(!validatePassword()) allValid = false;
+
+    if (!validateAlias()) allValid = false;
+    if (!validateFirstName()) allValid = false;
+    if (!validateLastName()) allValid = false;
+    if (!validatePassword()) allValid = false;
 
     return allValid;
 }
@@ -84,13 +83,23 @@ function validateLoginForm() {
 
     let allValid = true;
 
-    if(!validateAlias()) allValid = false;
-    if(!validateNotEmpty('password')) allValid = false;
+    if (!validateAlias()) allValid = false;
+    if (!validateNotEmpty('password')) allValid = false;
 
     return allValid;
 }
 
-function RegEx(regex, value)
-{
+function validateModifyProfileForm() {
+
+    let allValid = true;
+
+    if (!validateFirstName()) allValid = false;
+    if (!validateLastName()) allValid = false;
+    if (!validatePassword()) allValid = false;
+
+    return allValid;
+}
+
+function RegEx(regex, value) {
     return regex.test(value);
 }

@@ -24,27 +24,27 @@ if ($loginError) {
     echo "<div id='loginError' style='color:red'>$loginError</div><br>";
 }
 
-echo <<<HTML
-    <form action='./login-validate.php' method="post" onsubmit="return validateLoginForm()">
-        <fieldset>
-            <label for="alias">
-                <span>Alias</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type="text" id="alias" name="alias" value="$alias" onblur="validateAlias()">
-            
-            <label for="password">
-                <span>Mot de passe</span>
-                <abbr title="Obligatoire" style="color:red">*</abbr>
-            </label>
-            <input type='password' id='password' name='password' value='' onblur="validateNotEmpty('password')">
-            
-            <input type='submit' name='submit' value='Connecter'>
-        </fieldset>
-    </form>
-HTML;
-   echo "<a href='" . $root . "profile/register.php'>S'inscrire</a>
-</main>";
+    echo "
+        <form action='./login-validate.php' method='POST' onsubmit='return validateLoginForm()'>
+            <fieldset>
+                <label for='alias'>
+                    <span>Alias</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='text' id='alias' name='alias' value='$alias' onblur='validateAlias()'>
+                
+                <label for='password'>
+                    <span>Mot de passe</span>
+                    <abbr title='Obligatoire' style='color:red'>*</abbr>
+                </label>
+                <input type='password' id='password' name='password' value='' onblur='validateNotEmpty(\"password\")'>
+                <input type='submit' name='submit' value='Connecter'>
+            </fieldset>
+        </form>
+       <a href='" . $root . "profile/register.php'>S'inscrire</a>
+    </main>";
+
+echo "<script type='text/javascript' src='" . $root . "js/register.js' defer></script>";
 
 
 include_once $root . "master/footer.php";

@@ -40,7 +40,6 @@ function GetPlayerBalanceByAlias($alias)
 
 function PlayerIsAuthenticated($alias, $password)
 {
-    //return executeQuery("SELECT JoueurEstAuthentifie('$alias', '$password')", true)[0];
     global $conn;
     $passwordhash = hash("sha256", $password);
     $statement = $conn->prepare("SELECT JoueurEstAuthentifie(?,?)");
@@ -56,7 +55,6 @@ function PlayerIsAuthenticated($alias, $password)
 
 function CreateNewPlayer($alias, $firstName, $lastName, $password)
 {
-    //executeQuery("CALL InscrireNouveauJoueur('$alias', '$lastName', '$firstName', '$password')");
     global $conn;
     $passwordhash = hash("sha256", $password);
     $statement = $conn->prepare("CALL InscrireNouveauJoueur(?, ?, ?, ?)");
@@ -69,7 +67,6 @@ function CreateNewPlayer($alias, $firstName, $lastName, $password)
 
 function DeletePlayerByAlias($alias)
 {
-    //return executeQuery("CALL SupprimerJoueurParAlias('$alias')", true)[0];
     global $conn;
     
     $statement = $conn->prepare("CALL SupprimerJoueurParAlias(?)");
@@ -84,7 +81,6 @@ function DeletePlayerByAlias($alias)
 
 function ModifyPlayerNamesByAlias($alias, $lastName, $firstName)
 {
-    //executeQuery("CALL ModifierNomPrenomJoueurParAlias('$alias', '$lastName', '$firstName')");
     global $conn;
     
     $statement = $conn->prepare("CALL ModifierNomPrenomJoueurParAlias(?, ?, ?)");
@@ -96,23 +92,21 @@ function ModifyPlayerNamesByAlias($alias, $lastName, $firstName)
 
 function ModifyPlayerBalanceByAlias($alias, $balance)
 {
-    //executeQuery("CALL ModifierSoldeJoueurParAlias('$alias', $balance)");
     global $conn;
     
     $statement = $conn->prepare("CALL ModifierSoldeJoueurParAlias(?, ?)");
     $statement->bindParam(1,$alias, PDO::PARAM_STR);
     $statement->bindParam(2,$balance, PDO::PARAM_INT);
     $statement->execute();
-    
 }
 
 function ModifyPlayerPasswordByAlias($alias, $password)
 {
-    //executeQuery("CALL ModifierMotDePasseJoueurParAlias('$alias', '$password')");
     global $conn;
-    
+    $passwordhash = hash("sha256", $password);
+
     $statement = $conn->prepare("CALL ModifierMotDePasseJoueurParAlias(?, ?)");
     $statement->bindParam(1,$alias, PDO::PARAM_STR);
-    $statement->bindParam(2,$password, PDO::PARAM_STR);
+    $statement->bindParam(2,$passwordhash, PDO::PARAM_STR);
     $statement->execute();
 }

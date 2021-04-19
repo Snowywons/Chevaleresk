@@ -25,15 +25,23 @@ function CreateManagerContainer($records) {
             <div>$alias</div>
             <div>$lastName</div>
             <div>$firstName</div>
-            <div>$balance</div>
-            <div class='adminActionsContainer'>
-                <button id='" . $alias . "_bagButton' class='bagButton'>
-                    <img src='" . $root . "/icons/BagIcon.png'/>
-                </button>
-                <button id='" . $alias . "_modifyButton' class='modifyButton'>
+            <div class='adminActionsContainer' style='justify-content:flex-end'>
+                $balance
+                <button class='balanceButton' onclick='UpdatePlayerBalance(\"$alias\", $balance)'>
                     <img src='" . $root . "/icons/EditIcon.png'/>
                 </button>
-                <button id='" . $alias . "_deleteButton' class='deleteButton'>
+            </div>
+            <div class='adminActionsContainer'>
+                <button class='shoppingCartButton' onclick='Redirect(\"../store/shopping-cart\", \"alias=$alias\")'>
+                    <img src='" . $root . "/icons/ShoppingCartIcon.png'>
+                </button>
+                <button class='bagButton' onclick='Redirect(\"../profile/inventory\", \"alias=$alias\")'>
+                    <img src='" . $root . "/icons/BagIcon.png'/>
+                </button>
+                <button class='modifyButton' onclick='Redirect(\"../profile/modify-profile\", \"alias=$alias\")'>
+                    <img src='" . $root . "/icons/EditIcon.png'/>
+                </button>
+                <button class='deleteButton' onclick='DeletePlayer(\"$alias\")'>
                     <img src='" . $root . "/icons/DeleteIcon.png'/>
                 </button>
             </div>";

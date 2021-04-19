@@ -1,6 +1,9 @@
 //Les fonctions générales
-function redirect(url) {
-    document.location.href = url;
+function Redirect(url, args = null) {
+    if (args)
+        window.location.href = url + ".php?" + args;
+    else
+        window.location.href = url + ".php";
 }
 
 function GetPageName() {
@@ -32,14 +35,6 @@ function GetSplitedId(id, delimiter) {
 
 function GetSiblingContainerId(id, siblingClassName) {
     return GetSplitedId(id, '_') + "_" + siblingClassName;
-}
-
-function GetParentNode(node, n = 1, classList = "") {
-    let parent = node.parentElement;
-    while (n-- && parent && !parent.classList.contains(classList)) {
-        parent = parent.parentElement;
-    }
-    return parent;
 }
 
 function RemoveOldContainers(className) {

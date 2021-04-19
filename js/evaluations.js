@@ -1,11 +1,3 @@
-//Bouton Voir les évaluation pour un item sélectionné (Popup)
-AddClickEventFor("showEvaluations",
-    (item) => window.location.href = "../evaluations/evaluations.php?idItem=" + item.id.split('_')[0]);
-
-//Bouton Voir la liste des items évalués
-AddClickEventFor("evaluationsListButtonContainer",
-    () => window.location.href = "../evaluations/evaluations.php");
-
 let idClickedInputBeforeChange = 0;
 
 //Permet de changer l'état de la barre d'étoile selon la position de la souris
@@ -45,7 +37,7 @@ function UpdateAllStarbar() {
     });
 }
 
-//Permet de mettre à jour le contenu des commentaires
+//Demande la mise à jour du contenu des commentaires
 function UpdateEvaluationContent(idItem) {
     let request = "submit=updateEvaluationContent" + "&idItem=" + idItem;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
@@ -54,33 +46,27 @@ function UpdateEvaluationContent(idItem) {
             InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
 
             UpdateAllStarbar();
-            UpdateAllEvaluationSendButton();
         }, () => {
         }, false);
 }
 
-//Permet de mettre à jour l'événement (click) liés aux boutons d'envoi d'une évaluation
-function UpdateAllEvaluationSendButton() {
-    AddClickEventFor("evaluationSendButton", (item) => {
-        let idItem = GetSplitedId(item.id, '_');
-        let stars = idClickedInputBeforeChange;
-        let comment= document.getElementById("commentArea").value;
-        let request = "submit=sendEvaluation" + "&idItem=" + idItem + "&stars=" + stars + "&comment=" + comment;
-        if (idItem !== "" && stars !== 0 && comment !== "") {
+//Demande la soumission du commentaire
+function SendEvaluation(idItem) {
+    let stars = idClickedInputBeforeChange;
+    let comment= document.getElementById("commentArea").value;
+    let request = "submit=sendEvaluation" + "&idItem=" + idItem + "&stars=" + stars + "&comment=" + comment;
+    if (idItem !== "" && stars !== 0 && comment !== "") {
         ServerRequest("POST", "../server/httpRequestHandler.php", request,
             (requete) => {
                 CloseAllPopups();
                 CloseNotifier();
                 NotifyWithPopup(requete.responseText);
-                UpdateAllPopupExitButtons();
                 UpdateEvaluationContent(idItem);
             }, () => {
             });
-        } else {
-            NotifyWithPopup("Impossible d'ajouter le commentaire.<br>Des informations sont manquantes.");
-        }
-    });
+    } else {
+        NotifyWithPopup("Impossible d'ajouter le commentaire.<br>Des informations sont manquantes.");
+    }
 }
 
 UpdateAllStarbar();
-UpdateAllEvaluationSendButton();

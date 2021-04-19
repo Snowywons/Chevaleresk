@@ -2,10 +2,8 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "server/httpRequestHandler.php";
 include_once $root . "db/playersDT.php";
 include_once $root . "db/itemsDT.php";
@@ -18,28 +16,32 @@ include_once $root . "store/storeUpdate.php";
 global $conn;
 
 $_SESSION["filters"] = "'AR','AM','PO','RS'";
-//Création des conteneurs cachés et du overlay
+
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
-CreateNotificationContainer();
-CreateOverlay();
 
 //---------------------------------------------------------------------------------------------------------------------
 echo "
     <main class='store'>
         <h1>Magasin</h1>";
 
+//Administrateurs seulement
 if (UserIsAdmin()) {
-    CreateAddItemToStoreButton();
+    echo "
+        <div class='bigButton addItemStoreContainer' onclick='window.location.href = \"../store/add-item.php\"'>
+            <span>Ajouter un item</span>
+            <img src='../icons/PlusIcon.png'>
+        </div>";
 }
 
-CreateFilterSection();
+    CreateFilterSection();
 
-echo "<div id='storeReference'>";
-echo CreateStoreContainer($records);
-echo "</div></main>";
-
-echo "<div id='popupContentReference'></div>";
+    //Le contenu du magasin
+    echo "
+        <div id='storeReference'>".
+            CreateStoreContainer($records)."
+        </div>
+    </main>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root . "master/footer.php";
