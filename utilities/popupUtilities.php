@@ -79,18 +79,19 @@ function CreateItemDetailsContainers($records)
             //Armures
             case "AM":
                 $newData = GetArmorById($idItem);
-                if (isset($newData) && count($newData) >= 4) {
+                if (isset($newData) && count($newData) >= 3) {
                     $content .= "
                         <span>Matière</span><span>$newData[1]</span>
                         <span>Poids</span><span>$newData[2]</span>
                         <span>Taille</span><span>$newData[3]</span>";
+                        
                 }
                 break;
 
             //Potions
             case "PO":
                 $newData = GetPotionById($idItem);
-                if (isset($newData) && count($newData) >= 3) {
+                if (isset($newData) && count($newData) >= 2) {
                     $content .= "
                         <span>Effet</span><span>$newData[1]</span>
                         <span>Durée (secondes)</span><span>$newData[2]</span>";
@@ -100,7 +101,7 @@ function CreateItemDetailsContainers($records)
             //Potions
             case "RS":
                 $newData = GetRessourceById($idItem);
-                if (isset($newData) && count($newData) >= 2) {
+                if (isset($newData) && count($newData) >= 1) {
                     $content .= "<span>Description</span><span>$newData[1]</span>";
                 }
                 break;

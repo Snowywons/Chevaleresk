@@ -10,8 +10,6 @@ $quantite = "999";
 $prix = "0";
 
 echo <<<HTML
-<!--DEV MESSAGE-->
-<h1 style="background-color: deeppink">CETTE PAGE DEVRA ÊTRE ACCESSIBLE SEULEMENT PAR LES ADMINISTRATEURS</h1>
 <main class="modify-item">
     <h1>Modifier un item</h1>
     

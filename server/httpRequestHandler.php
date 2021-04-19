@@ -258,7 +258,7 @@ if (isset($_POST["submit"])) {
         $type = isset($_POST["type"]) ? $_POST["type"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
         $price = isset($_POST["price"]) ? $_POST["price"] : "";
-        $pictureCode = isset($_POST["pictureCode"]) ? $_POST["pictureCode"] : "DefaultIcon";
+        $pictureCode = isset($_POST["pictureCode"]) ? $_POST["pictureCode"] : "DefaultIcon"; //
 
         switch ($type) {
             case "AR" :

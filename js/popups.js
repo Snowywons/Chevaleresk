@@ -135,3 +135,4 @@ function CloseNotifier() {
 
 //Exécution des fonctions à l'ouverture
 UpdateAllPopupExitButtons();
+

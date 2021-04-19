@@ -51,6 +51,14 @@ CreateFilterSection();
 
 echo "<div id='storeReference'>";
 echo CreateInventoryStoreContainer($records);
+
+
+if($records == NULL){
+
+    echo "<br>
+    L'inventaire de $targetAlias est vide !";
+}
+
 echo "</div></main>";
 
 echo "<div id='popupContentReference'></div>";

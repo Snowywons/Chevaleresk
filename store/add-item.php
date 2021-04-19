@@ -16,11 +16,12 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == false) {
 CreateNotificationContainer();
 CreateOverlay();
 
+//Ajout d'un item 
 echo "
     <main class='add-item'>
         <h1>Ajouter un item</h1>
         
-        <form method='POST'>
+        <form method='POST' name ='myItem'>
             <fieldset>
                 <!-- Nom -->
                 <label for='name'>Nom</label>
@@ -29,7 +30,7 @@ echo "
                 <!-- Type -->
                 <label for='types'>Type</label>
                 <select name='types' id='types'>
-                    <option selected disabled hidden>-Choisir un type-</option>
+                    <option selected disabled hidden value=''>-Choisir un type-</option>
                     <option value='AR'>Arme</option>
                     <option value='AM'>Armure</option>
                     <option value='PO'>Potion</option>
@@ -42,7 +43,7 @@ echo "
                     <input type='number' id='efficiency' name='efficiency' value='0'>
                     <label for='genres'>Genre</label>
                     <select name='genders' id='genders'>
-                        <option selected disabled hidden>-Choisir un genre-</option>
+                        <option selected disabled hidden value=''>-Choisir un genre-</option>
                         <option value='one-handed'>Une main</option>
                         <option value='two-handed'>Deux mains</option>
                     </select>
@@ -54,7 +55,7 @@ echo "
                 <div id='AM_Informations' class='addItemInfosContainer hidden'>
                     <label for='materials'>Matière</label>
                     <select name='materials' id='materials'>
-                        <option selected disabled hidden>-Choisir une matière-</option>
+                        <option selected disabled hidden value=''>-Choisir une matière-</option>
                         <option value='leather'>Cuire</option>
                         <option value='metal'>Métal</option>
                     </select>
@@ -84,14 +85,14 @@ echo "
                 
                 <!-- Prix -->
                 <label for='price'>Prix unitaire (écus)</label>
-                <input type='number' id='price' name='price' value=''>
+                <input type='number' id='price' name='price' value='0' >
                 
                 <!-- Image -->
                 <label for='picture'>Image</label>
                 <div class='addItemPreviewContainer'>
-                    <img src='" . $root . "icons/DefaultIcon.png'>
+                    <img src='" . $root . "icons/DefaultIcon.png' id='imageToUpload' oneclick='imageClick()'>
                 </div>
-                <input type='file' id='picture' name='picture' value=''>
+                <input type='file' accept='.jpg,.jpeg,.png' id='picture' onchange='displayImage(this)' name='picture' value=''>
                 
                 <!-- Ajouter -->
                 <input type='submit' class='saveChanges' value='Ajouter'>
@@ -105,4 +106,6 @@ include_once $root . "master/footer.php";
 
 echo "
     <script type='text/javascript' src='" . $root . "js/popups.js' defer></script>
-    <script type='text/javascript' src='" . $root . "js/add-item.js' defer></script>";
+    <script type='text/javascript' src='" . $root . "js/add-item.js' defer></script>
+    <script type='text/javascript' src='" . $root . "js/functions.js' defer></script>";
+    
