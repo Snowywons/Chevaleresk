@@ -238,6 +238,12 @@ if (isset($_POST["submit"])) {
         $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
 
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
+            $item = GetItemById($idItem);
+            if ($item) {
+                $guid = $item[4];
+                if ($guid !== "DefaultIcon")
+                    unlink("../icons/$guid"."."."png");
+            }
             echo DeleteItemFromStoreById($idItem);
             exit;
         }

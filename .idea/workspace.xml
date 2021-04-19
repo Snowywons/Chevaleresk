@@ -19,13 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout multiples">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout ImageUploader Guid">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/add-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/add-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/add-item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +105,7 @@
       <workItem from="1618236073206" duration="2721000" />
       <workItem from="1618268506754" duration="4650000" />
       <workItem from="1618673275309" duration="31245000" />
-      <workItem from="1618841636171" duration="10048000" />
+      <workItem from="1618841636171" duration="10916000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -307,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618704767619</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Ajout ImageUploader Guid">
+      <created>1618852640924</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1618852640924</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,7 +329,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Second Commit" />
     <MESSAGE value="Ajout nouvelles pages" />
     <MESSAGE value="Modification du tableau d'items et ajout de scripts js" />
     <MESSAGE value="Modification du popup" />
@@ -351,7 +353,8 @@
     <MESSAGE value="Ajout popup pour quantité shopping cart" />
     <MESSAGE value="Ajout évaluations et autres fonctionnalités" />
     <MESSAGE value="Ajout multiples" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout multiples" />
+    <MESSAGE value="Ajout ImageUploader Guid" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout ImageUploader Guid" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -390,10 +393,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1618704786486">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1618852643281">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618704786486" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618852643281" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1618841644854">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
