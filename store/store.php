@@ -15,8 +15,6 @@ include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
-
 $records = GetAllItems();
 CreateItemDetailsContainers($records);
 

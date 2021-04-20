@@ -14,9 +14,12 @@ function CreateEvaluationsContainer($records)
     foreach ($records as $data) {
         $idItem = $data[0];
         $name = $data[1];
-        $photoURL = $data[2];
-        $starsAvg = $data[3];
-        $evaluationCount = $data[4];
+        $stock = $data[2];
+        $price = $data[3];
+        $photoURL = $data[4];
+        $codeType = $data[5];
+        $starsAvg = $data[6];
+        $evaluationCount = $data[7];
 
         $content .= "
             <!-- Image -->
@@ -63,9 +66,12 @@ function CreateEvaluationContainer($records)
 
         $idItem = $records[0];
         $name = $records[1];
-        $photoURL = $records[2];
-        $starsAvg = $records[3];
-        $evaluationCount = $records[4];
+        $stock = $records[2];
+        $price = $records[3];
+        $photoURL = $records[4];
+        $codeType = $records[5];
+        $starsAvg = $records[6];
+        $evaluationCount = $records[7];
 
 
         $starsCount = explode(",", GetEvaluationCountForEachStarByIdItem($idItem));

@@ -6,7 +6,6 @@ $root = "../";
 include_once $root . "db/playersDT.php";
 
 $_SESSION["logged"] = false;
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
 
 if (isset($_POST["submit"])) {
     $alias = isset($_POST["alias"]) ? $_POST["alias"] : "";

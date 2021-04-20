@@ -310,6 +310,14 @@ div.resetFilterContainer {
 }
 
 div.filters {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    background-color: var(--store-filtersBackgroundColor);
+    width: min-content;
+}
+
+div.filters > div {
     position: relative;
     display: grid;
     grid-template-columns: auto 20px;
@@ -317,7 +325,15 @@ div.filters {
     padding: 5px;
     text-align: left;
     align-items: baseline;
-    background-color: var(--store-filtersBackgroundColor);
+}
+
+div.filters > div > .category {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    font-weight: bold;
+    border-bottom: 1px solid var(--col-forest);
+    padding: 3px 3px 3px 0;
+
 }
 
 div.filters.hidden {
@@ -468,7 +484,8 @@ button.addToShoppingCart {
 }
 
 div.mediumButton.payButton {
-    margin: 10px 0 0 0;
+    margin: 10px auto 5px 5px;
+    width: 182px
 }
 
 button.shoppingCartButton,

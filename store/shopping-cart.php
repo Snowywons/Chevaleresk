@@ -33,8 +33,6 @@ if (!$isAdmin && $alias !== $targetAlias) {
     exit;
 }
 
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
-
 //Création des conteneurs cachés et du overlay
 $records = GetAllShoppingCartItemsByAlias($targetAlias);
 CreateItemDetailsContainers($records);
@@ -60,9 +58,6 @@ echo "
         <div class='shoppingCartTransactionContainer'>
             <div id='shoppingCartTotalReference'>".
                 CreateShoppingCartTotalContainer($targetAlias)."
-            </div>
-            <div id='payButton' class='mediumButton payButton' onclick='PayCart()'>
-                <span>Payer</span>
             </div>
         </div>
     </main>";

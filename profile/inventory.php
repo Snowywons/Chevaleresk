@@ -19,8 +19,6 @@ include_once $root . "store/storeUpdate.php";
 
 global $conn;
 
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
-
 //Accès interdit
 if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == false) {
     header("location: ../session/login.php");

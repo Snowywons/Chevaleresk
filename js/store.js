@@ -3,8 +3,17 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
     let request = "submit=setFilters" + "&filters=" + filtersStr + "&alias=" + alias + "" + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
-            RemoveOldContainers("storeContainer");
-            InsertHtmlTo(JSON.parse(requete.responseText), "storeReference");
+            switch (sender) {
+                case "store":
+                case "inventory":
+                    RemoveOldContainers("storeContainer");
+                    InsertHtmlTo(JSON.parse(requete.responseText), "storeReference");
+                    break;
+                case "evaluations":
+                    RemoveOldContainers("evaluationsContainer");
+                    InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
+                        break;
+            }
         }, () => {
         }, false);
 }
@@ -36,7 +45,7 @@ function UpdateQuantityConfirm(idItem, alias, sender) {
                     case "store": //Inutilisé pour l'instant
                         break;
                     case "shopping-cart" :
-                        UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
+                        UpdateShoppingCartContent();
                         UpdateTotalShoppingCartContent();
                         break;
                     case "inventory" : //Inutilisé pour l'instant
@@ -74,7 +83,7 @@ function DeleteItemConfirm(idItem, alias, sender) {
                     UpdateStoreContentOnFilter(GetFiltersString(), alias, sender);
                     break;
                 case "shopping-cart" :
-                    UpdateStoreContentOnFilter("'AR','AM','PO','RS'", alias, sender);
+                    UpdateShoppingCartContent();
                     UpdateTotalShoppingCartContent();
                     break;
             }

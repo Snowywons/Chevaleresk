@@ -10,6 +10,10 @@ function GetEvaluationsByIdItem($idItem)
     return executeQuery("CALL EvaluationsParIdItem($idItem)");
 }
 
+function GetFilteredEvaluations($filter) {
+    return executeQuery("CALL EvaluationsParFiltre($filter)");
+}
+
 function GetAllEvaluationsPreviews()
 {
     return executeQuery("CALL EvaluationsSommaires()");

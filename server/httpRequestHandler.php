@@ -24,22 +24,14 @@ if (isset($_POST["submit"])) {
 // ---------------------------- FILTRE ----------------------------------
     //Sur la demande d'un changement de filtre
     if ($_POST["submit"] == "setFilters") {
-        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','',''";
-        $_SESSION["filters"] = $filters;
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','','', null, null, null, null, null";
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
 
         //Mise à jour des conteneurs du store à partir de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
-            $records = GetFilteredItems($filters);
+            $records = GetFilteredEvaluations($filters);
             echo json_encode(CreateStoreContainer($records));
-            exit;
-        }
-
-        //Mise à jour des conteneurs du store à partir de la page 'shopping-cart.php'
-        if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
-            $records = GetFilteredShoppingCartItemsByAlias($filters, $alias);
-            echo json_encode(CreateShoppingCartStoreContainer($records));
             exit;
         }
 
@@ -47,6 +39,13 @@ if (isset($_POST["submit"])) {
         if (isset($_POST["sender"]) && $_POST["sender"] == "inventory") {
             $records = GetFilteredInventoryItemsByAlias($filters, $alias);
             echo json_encode(CreateInventoryStoreContainer($records));
+            exit;
+        }
+
+        //Mise à jour des conteneurs du store à partir de la page 'evaluations.php'
+        if (isset($_POST["sender"]) && $_POST["sender"] == "evaluations") {
+            $records = GetFilteredEvaluations($filters);
+            echo json_encode(CreateEvaluationsContainer($records));
             exit;
         }
     }
@@ -274,6 +273,15 @@ if (isset($_POST["submit"])) {
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
 
         echo json_encode(CreateShoppingCartTotalContainer($alias));
+        exit;
+    }
+
+    if ($_POST["submit"] == "updateShoppingCartContent") {
+        $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
+            (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+
+        $records = GetAllShoppingCartItemsByAlias($alias);
+        echo json_encode(CreateShoppingCartStoreContainer($records));
         exit;
     }
 

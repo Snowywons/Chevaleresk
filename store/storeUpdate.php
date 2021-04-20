@@ -116,13 +116,21 @@ function CreateShoppingCartTotalContainer($alias)
     $remainingBalance = $currentBalance - $total;
     $color = $remainingBalance < 0 ? "red" : "black";
 
-    return "        
+    if ($total > 0) {
+        return "        
         <div id='shoppingCartTotalContainer' class='shoppingCartTotalContainer'>
             <div id='currentBalanceContainer'>Votre solde</div><div>$currentBalance</div>
             <div id='totalContainer'>Total</div><div style='color: crimson'>-$total</div>
             <div></div><div class='totalLigne'></div>
             <div id='remainingBalanceContainer'>Solde restant</div><div style='color: $color'>$remainingBalance</div>
+            <div></div>
+            <div id='payButton' class='mediumButton payButton' onclick='PayCart()'>
+                <span>Payer</span>
+            </div>
         </div>";
+    }
+
+    return "<div>Le panier est vide.</div>";
 }
 
 function CreateInventoryStoreContainer($records)

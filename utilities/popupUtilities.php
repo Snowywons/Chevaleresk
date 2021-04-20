@@ -30,7 +30,7 @@ function CreateItemDetailsContainers($records)
         $codeType = $data[5];
 
         $nomType =
-            ($codeType == "AR" ? "Arme" :
+            ($codeType == "AE" ? "Arme" :
                 ($codeType == "AM" ? "Armure" :
                     ($codeType == "PO" ? "Potion" : "Ressource")));
 
@@ -68,7 +68,7 @@ function CreateItemDetailsContainers($records)
         switch ($codeType) {
 
             //Armes
-            case "AR":
+            case "AE":
                 $newData = GetWeaponById($idItem);
                 if (isset($newData) && count($newData) >= 4) {
                     $content .= "
@@ -121,8 +121,8 @@ function CreateItemDetailsContainers($records)
             <div class='itemDetailsFooter'>";
 
         $evaluation = GetEvaluationPreviewByIdItem($idItem);
-        $starsAvg = $evaluation[3];
-        $evaluationCount = $evaluation[4];
+        $starsAvg = $evaluation[6];
+        $evaluationCount = $evaluation[7];
 
         $starBar = "";
 

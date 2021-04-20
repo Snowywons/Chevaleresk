@@ -1,6 +1,6 @@
 //Récupération des différents conteneurs
 let filters = document.getElementById("filters");
-let inputs = document.querySelectorAll("#filters > input[type='checkbox']");
+let inputs = document.querySelectorAll("#filters input[type='checkbox']");
 
 //Permet d'ouvrir et de fermer le conteneur des inputs (filters)
 let filterContainer = document.getElementById("filterContainer");
@@ -42,9 +42,9 @@ inputs.forEach((item) =>
 //Permet d'obtenir une chaine de caractères composée des filtres sélectionnés
 function GetFiltersString() {
     let str = "";
-    let filters = document.querySelectorAll(".filters > input[type='checkbox']");
+    let filters = document.querySelectorAll(".filters input[type='checkbox']");
     for (let i = 0; i < filters.length; i++) {
-        str += filters[i].checked ? "'" + filters[i].id + "'" : "''";
+        str += filters[i].checked ? "'" + filters[i].id + "'" : null;
         if (i < filters.length - 1) str += ",";
     }
     return str;

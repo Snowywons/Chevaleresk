@@ -17,8 +17,6 @@ include_once $root . "evaluations/evaluationsUpdate.php";
 
 global $conn;
 
-$_SESSION["filters"] = "'AR','AM','PO','RS'";
-
 $idItem = isset($_GET["idItem"]) ? $_GET["idItem"] : "";
 
 echo "
