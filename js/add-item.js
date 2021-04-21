@@ -21,7 +21,7 @@ function AddItem() {
     data.append('price', price.value);
 
     switch (types.value) {
-        case "AR" : //Arme
+        case "AE" : //Arme
             data.append('efficiency', efficiency.value);
             data.append('gender', genders.value);
             data.append('description', weaponDescription.value);
@@ -99,4 +99,216 @@ function ChangeImagePreview() {
     } else {
         imagePreview.src = "../icons/DefaultIcon.png";
     }
+}
+
+function updateValidation(element, valid) {
+    if (valid) {
+        element.classList.remove('errorField');
+        return true;
+    }
+    element.classList.add('errorField');
+    return false;
+}
+
+function validateNotEmpty(id) {
+    const element = document.getElementById(id);
+    return updateValidation(element, element.value.length > 0);
+}
+
+function validateNumber(id) {
+    const element = document.getElementById(id);
+    return updateValidation(element, element.value > 0);
+}
+
+function validateName(id) {
+    const element = document.getElementById(id);
+    return updateValidation(element, /^[a-z]([a-z\-]|\s)*$/i.test(element.value));
+}
+
+function validateNameItem() {
+    if(!validateNotEmpty('name')){
+        document.getElementById('nameValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if (!validateName('name')) {
+        document.getElementById('nameValidation').innerHTML = "Format invalide";
+        return false;
+    } 
+    else
+    {
+        document.getElementById('nameValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateQuantity(){
+    if(!validateNotEmpty('quantity')){
+        document.getElementById('quantityValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('quantity'))
+    {   
+        document.getElementById('quantityValidation').innerHTML = "Veuillez mettre une qté supérieure à 0!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('quantityValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validatePrice(){
+    if(!validateNotEmpty('price')){
+        document.getElementById('priceValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('price'))
+    {   
+        document.getElementById('priceValidation').innerHTML = "Veuillez mettre un prix supérieur à 0!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('priceValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateEfficiency(){
+    if(!validateNotEmpty('efficiency')){
+        document.getElementById('efficiencyValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('efficiency'))
+    {   
+        document.getElementById('efficiencyValidation').innerHTML = "Veuillez mettre l'efficacité supérieure à 0!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('efficiencyValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateDescription() {
+    if(!validateName('weaponDescription')){
+        document.getElementById('descriptionValidation').innerHTML = "Format invalide!";
+        return false;
+    }
+    else if(!validateNotEmpty('weaponDescription')){
+        document.getElementById('descriptionValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('descriptionValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateWeight(){
+    if(!validateNotEmpty('weight')){
+        document.getElementById('weightValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('weight'))
+    {   
+        document.getElementById('weightValidation').innerHTML = "Veuillez mettre un poids supérieur à 0!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('weightValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateSize(){
+    if(!validateNotEmpty('size')){
+        document.getElementById('sizeValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('size'))
+    {   
+        document.getElementById('sizeValidation').innerHTML = "Veuillez mettre une grandeur supérieure à 0";
+        return false;
+    }
+    else
+    {
+        document.getElementById('sizeValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateEffect(){
+    if(!validateName('effect')){
+        document.getElementById('effectValidation').innerHTML = "Format invalide!";
+        return false;
+    }
+    else if(!validateNotEmpty('effect')){
+        document.getElementById('effectValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('effectValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateDuration(){
+    if(!validateNotEmpty('duration')){
+        document.getElementById('durationValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else if(!validateNumber('duration'))
+    {   
+        document.getElementById('durationValidation').innerHTML = "Veuillez mettre une durée supérieure à 0!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('durationValidation').innerHTML = "";
+        return true;
+    }
+}
+
+function validateRsDescription(){
+    if(!validateName('ressourceDescription')){
+        document.getElementById('rsDescriptionValidation').innerHTML = "Format invalide!";
+        return false;
+    }
+    else if(!validateNotEmpty('ressourceDescription')){
+        document.getElementById('rsDescriptionValidation').innerHTML = "Veuillez remplir ce champ!";
+        return false;
+    }
+    else
+    {
+        document.getElementById('rsDescriptionValidation').innerHTML = "";
+        return true;
+    }
+}
+
+/*function validateAddItemForm() {
+
+    let allValid = true;
+
+    if (!validateName()) allValid = false;
+    if(!validateQuantity()) allValid = false;
+    if(!validatePrice()) allValid = false;
+    if(!validateEfficiency()) allValid = false;
+    if(!validateDescription()) allValid = false;
+    if(!validateWeight()) allValid = false;
+    if(!validateSize()) allValid = false;
+    if(!validateEffect()) allValid = false;
+    if(!validateDuration()) allValid = false;
+    if(!validateRsDescription()) allValid = false;
+
+    return allValid;
+}*/
+
+function RegEx(regex, value) {
+    return regex.test(value);
 }

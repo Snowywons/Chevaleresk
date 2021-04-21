@@ -85,8 +85,7 @@ function CreateItemDetailsContainers($records)
                     $content .= "
                         <span>Matière</span><span>$newData[1]</span>
                         <span>Poids</span><span>$newData[2]</span>
-                        <span>Taille</span><span>$newData[3]</span>";
-                        
+                        <span>Taille</span><span>$newData[3]</span>";   
                 }
                 break;
 

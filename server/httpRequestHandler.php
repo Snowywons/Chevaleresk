@@ -317,7 +317,7 @@ if (isset($_POST["submit"])) {
         }
 
         switch ($type) {
-            case "AR" :
+            case "AE" :
                 $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
                 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
                 $description = isset($_POST["description"]) ? $_POST["description"] : "";
@@ -342,11 +342,10 @@ if (isset($_POST["submit"])) {
 
         header("location: ./add-item.php");
         exit;
-/*
-        switch ($type) {
+
+      /* switch ($type) {
             case "AR" :
                 $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
-                $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
                 $description = isset($_POST["description"]) ? $_POST["description"] : "";
                 echo AddWeaponStore($name, $quantity, $price, $pictureCode, $type, $efficiency, $gender, $description);
                 exit;
@@ -365,8 +364,7 @@ if (isset($_POST["submit"])) {
                 $description = isset($_POST["description"]) ? $_POST["description"] : "";
                 echo AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $description);
                 exit;
-        }
-*/
+        }*/
         echo "Impossible d'ajouter l'item.";
         exit;
     }
