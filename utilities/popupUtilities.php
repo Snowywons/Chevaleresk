@@ -46,6 +46,9 @@ function CreateItemDetailsContainers($records)
         if ($isAdmin) {
             $content .= "
                 <div class='adminButtonsContainer'>
+                    <button type='button' id='" . $idItem . "_modifyButton' class='modifyButton' onclick='Redirect(\"../store/modify-item\",\"idItem=" . $idItem . "\")'>
+                        <img src='" . $root . "/icons/EditIcon.png'/>
+                    </button>
                     <button type='button' class='deleteButton' onclick='DeleteItem($idItem)'>
                         <img src='" . $root . "/icons/DeleteIcon.png'/>
                     </button>
