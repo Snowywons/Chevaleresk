@@ -32,8 +32,6 @@ function CreateManagerContainer($records) {
                 </button>
             </div>
             <div class='adminActionsContainer'>
-                <button class='shoppingCartButton' onclick='Redirect(\"../store/shopping-cart\", \"alias=$alias\")'>
-                    <img src='" . $root . "/icons/ShoppingCartIcon.png'>
                 </button>
                 <button class='bagButton' onclick='Redirect(\"../profile/inventory\", \"alias=$alias\")'>
                     <img src='" . $root . "/icons/BagIcon.png'/>
