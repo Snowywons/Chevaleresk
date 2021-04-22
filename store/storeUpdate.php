@@ -142,6 +142,10 @@ function CreateInventoryStoreContainer($records)
         <div class='category'>Item</div>
         <div class='category'>Quantité</div>";
 
+    if($records == NULL) {
+        $content.= "<div style='grid-column-start: 1; grid-column-end: 3;'>Aucun item correspondant</div>";
+    }
+
     foreach ($records as $data) {
         $idItem = $data[0];
         $name = $data[1];
@@ -149,7 +153,7 @@ function CreateInventoryStoreContainer($records)
         $price = $data[3];
         $photoURL = $data[4];
         $codeType = $data[5];
-        $quantity = $data[6];
+        $quantity = $data[8];
 
         $content .= "
             <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>

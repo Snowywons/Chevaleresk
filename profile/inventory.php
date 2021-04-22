@@ -3,10 +3,8 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
 include_once $root . "utilities/filterUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "server/httpRequestHandler.php";
 include_once $root . "db/playersDT.php";
 include_once $root . "db/itemsDT.php";
@@ -49,21 +47,13 @@ echo "
         <span class='backToStoreButton'>Retour au magasin</span>
     </div>";
 
-CreateFilterSection();
+    CreateFilterSection();
 
-echo "<div id='storeReference'>";
-echo CreateInventoryStoreContainer($records);
-
-
-if($records == NULL){
-
-    echo "<br>
-    L'inventaire de $targetAlias est vide !";
-}
-
-echo "</div></main>";
-
-echo "<div id='popupContentReference'></div>";
+echo "
+    <div id='storeReference'>".
+        CreateInventoryStoreContainer($records)."
+    </div>
+</main>";
 //---------------------------------------------------------------------------------------------------------------------
 
 include_once $root."master/footer.php";

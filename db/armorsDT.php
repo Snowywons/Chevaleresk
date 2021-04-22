@@ -21,10 +21,8 @@ function GetArmorById($id)
     return [];
 }
 
-function AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material, $weigth, $size)
+function AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material, $weight, $size)
 {
-    //return executeQuery("CALL AjouterArmureMagasin('$name', $quantity, $price, '$pictureCode',
-                            //'$type', '$material', $weigth, '$size')", true)[0];
     global $conn;
 
     $statement = $conn->prepare("CALL AjouterArmureMagasin(?, ?, ?, ?, ?, ?, ?, ?)");

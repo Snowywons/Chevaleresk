@@ -325,7 +325,7 @@ if (isset($_POST["submit"])) {
                 break;
             case "AM" :
                 $material = isset($_POST["material"]) ? $_POST["material"] : "";
-                $weigth = isset($_POST["weigth"]) ? $_POST["weigth"] : "";
+                $weigth = isset($_POST["weight"]) ? $_POST["weight"] : "";
                 $size = isset($_POST["size"]) ? $_POST["size"] : "";
                 AddArmorStore($name, $quantity, $price, $guid, $type, $material, $weigth, $size);
                 break;

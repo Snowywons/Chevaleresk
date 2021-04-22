@@ -1,4 +1,6 @@
 function AddItem() {
+    let formIsValid = true;
+
     let name = document.getElementById("name");
     let types = document.getElementById("types");
     let quantity = document.getElementById("quantity");
@@ -7,54 +9,90 @@ function AddItem() {
     let genders = document.getElementById("genders");
     let weaponDescription = document.getElementById("weaponDescription");
     let materials = document.getElementById("materials");
-    let weigth = document.getElementById("weigth");
-    let size = document.getElementById("size");
+    let weight = document.getElementById("weight");
+    let sizes = document.getElementById("sizes");
     let effect = document.getElementById("effect");
     let duration = document.getElementById("duration");
     let ressourceDescription = document.getElementById("ressourceDescription");
 
-    let data = new FormData();
-    data.append('submit', 'addItemDataBase');
-    data.append('name', name.value);
-    data.append('type', types.value);
-    data.append('quantity', quantity.value);
-    data.append('price', price.value);
+    if (validateAddItemForm()) {
+        let data = new FormData();
+        data.append('submit', 'addItemDataBase');
+        data.append('name', name.value);
+        data.append('type', types.value);
+        data.append('quantity', quantity.value);
+        data.append('price', price.value);
+
+        switch (types.value) {
+            case "AE" : //Arme
+                data.append('efficiency', efficiency.value);
+                data.append('gender', genders.value);
+                data.append('description', weaponDescription.value);
+                break;
+            case "AM" : //Armure
+                data.append('material', materials.value);
+                data.append('weight', weight.value);
+                data.append('size', sizes.value);
+                break;
+            case "PO" : //Potion
+                data.append('effect', effect.value);
+                data.append('duration', duration.value);
+                break;
+            case "RS" :
+                data.append('description', ressourceDescription.value);
+                break;
+        }
+
+        let input = document.getElementById("ImageUploader");
+        let file = input.files[0];
+        if (file !== undefined)
+            data.append('ImageUploader', file);
+
+            let requete = new XMLHttpRequest();
+            requete.open('POST', "../server/httpRequestHandler.php", true);
+            requete.send(data);
+            requete.onreadystatechange = function () {
+                if (requete.readyState === 4) {
+                    if (requete.status === 200) {
+                        //console.log(requete.responseText);
+                    }
+                }
+            }
+    }
+}
+
+function validateAddItemForm() {
+    let formIsValid = true;
+    let types = document.getElementById("types");
+
+    formIsValid = !validateNameItem() ? false : formIsValid;
+    formIsValid = !validateNotEmpty("types") ? false : formIsValid;
+    formIsValid = !validateQuantity() ? false : formIsValid;
+    formIsValid = !validatePrice() ? false : formIsValid;
 
     switch (types.value) {
         case "AE" : //Arme
-            data.append('efficiency', efficiency.value);
-            data.append('gender', genders.value);
-            data.append('description', weaponDescription.value);
+            formIsValid = !validateEfficiency() ? false : formIsValid;
+            formIsValid = !validateNotEmpty("genders") ? false : formIsValid;
+            formIsValid = !validateWeaponDescription() ? false : formIsValid;
             break;
         case "AM" : //Armure
-            data.append('material', materials.value);
-            data.append('weigth', weigth.value);
-            data.append('size', size.value);
+            formIsValid = !validateNotEmpty("materials") ? false : formIsValid;
+            formIsValid = !validateWeight() ? false : formIsValid;
+            formIsValid = !validateNotEmpty("sizes") ? false : formIsValid;
             break;
         case "PO" : //Potion
-            data.append('effect', effect.value);
-            data.append('duration', duration.value);
+            formIsValid = !validateEffect() ? false : formIsValid;
+            formIsValid = !validateDuration() ? false : formIsValid;
             break;
         case "RS" :
-            data.append('description', ressourceDescription.value);
+            formIsValid = !validateRessourceDescription() ? false : formIsValid;
             break;
     }
 
-    let input = document.getElementById("ImageUploader");
-    let file = input.files[0];
-    if (file !== undefined)
-        data.append('ImageUploader', file);
+    formIsValid = !validateImage() ? false : formIsValid;
 
-    let requete = new XMLHttpRequest();
-    requete.open('POST', "../server/httpRequestHandler.php", true);
-    requete.send(data);
-    requete.onreadystatechange = function () {
-        if (requete.readyState === 4) {
-            if (requete.status === 200) {
-                // console.log(requete.responseText);
-            }
-        }
-    }
+    return formIsValid;
 }
 
 function ChangeTypeField() {
@@ -78,6 +116,8 @@ function OpenImageUploader() {
 function ChangeImagePreview() {
     let imagePreview = document.getElementById("UploadedImage");
     let input = document.getElementById("ImageUploader");
+
+    validateImage();
 
     if (input.files[0] !== undefined) {
         let fileName = input.files[0].name;
@@ -115,6 +155,11 @@ function validateNotEmpty(id) {
     return updateValidation(element, element.value.length > 0);
 }
 
+function validateNotMoreThan(id, max) {
+    const element = document.getElementById(id);
+    return updateValidation(element, element.value.length <= max);
+}
+
 function validateNumber(id) {
     const element = document.getElementById(id);
     return updateValidation(element, element.value > 0);
@@ -122,12 +167,11 @@ function validateNumber(id) {
 
 function validateName(id) {
     const element = document.getElementById(id);
-    return updateValidation(element, /^[a-z]([a-z\-]|\s)*$/i.test(element.value));
-}
+    return updateValidation(element, /[^0-9]$/.test(element.value));
+} //OK
 
 function validateNameItem() {
     if(!validateNotEmpty('name')){
-        document.getElementById('nameValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if (!validateName('name')) {
@@ -139,16 +183,15 @@ function validateNameItem() {
         document.getElementById('nameValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
 function validateQuantity(){
     if(!validateNotEmpty('quantity')){
-        document.getElementById('quantityValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if(!validateNumber('quantity'))
     {   
-        document.getElementById('quantityValidation').innerHTML = "Veuillez mettre une qté supérieure à 0!";
+        document.getElementById('quantityValidation').innerHTML = "Quantité invalide";
         return false;
     }
     else
@@ -156,16 +199,15 @@ function validateQuantity(){
         document.getElementById('quantityValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
 function validatePrice(){
     if(!validateNotEmpty('price')){
-        document.getElementById('priceValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if(!validateNumber('price'))
     {   
-        document.getElementById('priceValidation').innerHTML = "Veuillez mettre un prix supérieur à 0!";
+        document.getElementById('priceValidation').innerHTML = "Quantité invalide";
         return false;
     }
     else
@@ -173,16 +215,15 @@ function validatePrice(){
         document.getElementById('priceValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
 function validateEfficiency(){
     if(!validateNotEmpty('efficiency')){
-        document.getElementById('efficiencyValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if(!validateNumber('efficiency'))
     {   
-        document.getElementById('efficiencyValidation').innerHTML = "Veuillez mettre l'efficacité supérieure à 0!";
+        document.getElementById('efficiencyValidation').innerHTML = "Quantité invalide";
         return false;
     }
     else
@@ -190,15 +231,13 @@ function validateEfficiency(){
         document.getElementById('efficiencyValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
-function validateDescription() {
-    if(!validateName('weaponDescription')){
-        document.getElementById('descriptionValidation').innerHTML = "Format invalide!";
+function validateWeaponDescription() {
+    if(!validateNotEmpty('weaponDescription')){
         return false;
     }
-    else if(!validateNotEmpty('weaponDescription')){
-        document.getElementById('descriptionValidation').innerHTML = "Veuillez remplir ce champ!";
+    else if(!validateNotMoreThan('weaponDescription', 280)) {
         return false;
     }
     else
@@ -206,16 +245,15 @@ function validateDescription() {
         document.getElementById('descriptionValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
 function validateWeight(){
     if(!validateNotEmpty('weight')){
-        document.getElementById('weightValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if(!validateNumber('weight'))
     {   
-        document.getElementById('weightValidation').innerHTML = "Veuillez mettre un poids supérieur à 0!";
+        document.getElementById('weightValidation').innerHTML = "Poids invalide";
         return false;
     }
     else
@@ -223,32 +261,13 @@ function validateWeight(){
         document.getElementById('weightValidation').innerHTML = "";
         return true;
     }
-}
-
-function validateSize(){
-    if(!validateNotEmpty('size')){
-        document.getElementById('sizeValidation').innerHTML = "Veuillez remplir ce champ!";
-        return false;
-    }
-    else if(!validateNumber('size'))
-    {   
-        document.getElementById('sizeValidation').innerHTML = "Veuillez mettre une grandeur supérieure à 0";
-        return false;
-    }
-    else
-    {
-        document.getElementById('sizeValidation').innerHTML = "";
-        return true;
-    }
-}
+} //OK
 
 function validateEffect(){
-    if(!validateName('effect')){
-        document.getElementById('effectValidation').innerHTML = "Format invalide!";
+    if(!validateNotEmpty('effect')){
         return false;
     }
-    else if(!validateNotEmpty('effect')){
-        document.getElementById('effectValidation').innerHTML = "Veuillez remplir ce champ!";
+    else if(!validateNotMoreThan('effect', 280)) {
         return false;
     }
     else
@@ -256,16 +275,15 @@ function validateEffect(){
         document.getElementById('effectValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
 function validateDuration(){
     if(!validateNotEmpty('duration')){
-        document.getElementById('durationValidation').innerHTML = "Veuillez remplir ce champ!";
         return false;
     }
     else if(!validateNumber('duration'))
     {   
-        document.getElementById('durationValidation').innerHTML = "Veuillez mettre une durée supérieure à 0!";
+        document.getElementById('durationValidation').innerHTML = "Durée invalide";
         return false;
     }
     else
@@ -273,15 +291,13 @@ function validateDuration(){
         document.getElementById('durationValidation').innerHTML = "";
         return true;
     }
-}
+} //OK
 
-function validateRsDescription(){
-    if(!validateName('ressourceDescription')){
-        document.getElementById('rsDescriptionValidation').innerHTML = "Format invalide!";
+function validateRessourceDescription(){
+    if(!validateNotEmpty('ressourceDescription')){
         return false;
     }
-    else if(!validateNotEmpty('ressourceDescription')){
-        document.getElementById('rsDescriptionValidation').innerHTML = "Veuillez remplir ce champ!";
+    else if(!validateNotMoreThan('ressourceDescription', 280)) {
         return false;
     }
     else
@@ -289,26 +305,18 @@ function validateRsDescription(){
         document.getElementById('rsDescriptionValidation').innerHTML = "";
         return true;
     }
+} //OK
+
+function validateImage() {
+    let input = document.getElementById("ImageUploader");
+    return updateValidation(document.getElementById("UploadedImageContainer"), input.files[0] !== undefined);
 }
-
-/*function validateAddItemForm() {
-
-    let allValid = true;
-
-    if (!validateName()) allValid = false;
-    if(!validateQuantity()) allValid = false;
-    if(!validatePrice()) allValid = false;
-    if(!validateEfficiency()) allValid = false;
-    if(!validateDescription()) allValid = false;
-    if(!validateWeight()) allValid = false;
-    if(!validateSize()) allValid = false;
-    if(!validateEffect()) allValid = false;
-    if(!validateDuration()) allValid = false;
-    if(!validateRsDescription()) allValid = false;
-
-    return allValid;
-}*/
 
 function RegEx(regex, value) {
     return regex.test(value);
 }
+
+/*
+* /^[a-z]([a-z\-]|\s)*$/i
+* /^[A-Za-z]+([^0-9]*)$/
+* */

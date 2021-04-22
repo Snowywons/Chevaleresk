@@ -109,7 +109,7 @@ function CreateEvaluationContainer($records)
             </div>
                 
                 <div class='allItemStarbarContainer'>
-                    <h4>Nombre d'évaluations par étoiles</h4>
+                    <h4>Nombre d'évaluations par note</h4>
                     <hr style='width: 90%'>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 5; $i++)

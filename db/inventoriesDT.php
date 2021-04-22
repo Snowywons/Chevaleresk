@@ -12,6 +12,7 @@ function GetFilteredInventoryItemsByAlias($filter, $alias)
 
 function GetAllInventoryItemsByAlias($alias)
 {
+//    return executeQuery("CALL ItemsInventaireParAliasJoueur('$alias')");
     global $conn;
 
     $statement = $conn->prepare("CALL ItemsInventaireParAliasJoueur(?)");

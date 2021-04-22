@@ -485,7 +485,7 @@ button.addToShoppingCart {
 
 div.mediumButton.payButton {
     margin: 10px auto 5px 5px;
-    width: 182px
+    width: 182px;
 }
 
 button.shoppingCartButton,
@@ -716,7 +716,7 @@ div.popupBodyContainer {
 }
 
 div.popupFooterContainer {
-
+    height: max-content;
 }
 
 div.itemDetailsImageContainer {
@@ -733,8 +733,8 @@ div.itemDetailsImageContainer > img {
 div.itemDetailsBodyContainer {
     display: grid;
     grid-template-columns: auto auto;
-    max-height: 224px;
-    overflow-y: scroll;
+    height: max-content;
+    overflow-wrap: anywhere;
 }
 
 div.itemDetailsBodyContainer::-webkit-scrollbar {
@@ -752,10 +752,7 @@ div.itemDetailsBodyContainer > span:nth-of-type(2n + 1) {
 }
 
 div.itemDetailsFooter {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     width: 100%;
     text-align: center;
     background-color: var(--popup-itemDetailsFooterBackgroundColor);
