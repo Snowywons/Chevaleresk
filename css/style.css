@@ -900,10 +900,15 @@ div.playerEvaluationContainer {
     border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
 }
 
-div.playerEvaluationContainer .itemStarbarContainer {
+div.playerEvaluationContainer div.itemStarbarContainer {
     justify-content: flex-start;
     padding: 0;
     margin-left: -3px;
+}
+
+div.playerEvaluationContainer div.adminButtonsContainer {
+    left: auto;
+    right: 0;
 }
 
 div.playerEvaluationContainer ~ div.playerEvaluationContainer {
@@ -983,14 +988,14 @@ div.rating label {
     cursor: pointer;
     width: 22px;
     height: 22px;
-    background-image: url("../Icons/StarIconEmpty.png");
+    background-image: url("../icons/StarIconEmpty.png");
     background-size: contain;
     margin: 5px 0;
     border-right: 5px solid var(--evaluations-evaluationItemContainerBackgroundColor);
 }
 
 div.rating label.clicked {
-    background-image: url("../Icons/StarIcon.png");
+    background-image: url("../icons/StarIcon.png");
 }
 
 /*#endregion Évaluations*/

@@ -43,3 +43,15 @@ function AddEvaluationByIdItem($id, $alias, $stars, $comment)
 
     return count($result) > 0 ? $result[0] : "";
 }
+
+function DeleteEvaluationByIdItemAndAlias($id, $alias) {
+    global $conn;
+
+    $statement = $conn->prepare("CALL SupprimerEvaluationParIdItemEtAliasJoueur(?, ?)");
+    $statement->bindParam(1, $id, PDO::PARAM_INT);
+    $statement->bindParam(2, $alias, PDO::PARAM_STR);
+    $statement->execute();
+    $result = $statement->fetch();
+
+    return count($result) > 0 ? $result[0] : "";
+}

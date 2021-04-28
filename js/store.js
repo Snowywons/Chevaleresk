@@ -60,8 +60,8 @@ function UpdateQuantityConfirm(idItem, alias, sender) {
 }
 
 //Demande de création d'un popup de suppression d'item
-function DeleteItem(id) {
-    let targetAlias = GetUrlParamVal("alias");
+function DeleteItem(id, alias = null) {
+    let targetAlias = alias == null ? GetUrlParamVal("alias") : alias;
     let sender = GetPageName();
     let request = "submit=createDeleteItemPopup" + "&idItem=" + id + "&alias=" + targetAlias + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
@@ -85,6 +85,9 @@ function DeleteItemConfirm(idItem, alias, sender) {
                 case "shopping-cart" :
                     UpdateShoppingCartContent();
                     UpdateTotalShoppingCartContent();
+                    break;
+                case "evaluations" :
+                    UpdateEvaluationContent();
                     break;
             }
         },

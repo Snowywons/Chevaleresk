@@ -38,7 +38,8 @@ function UpdateAllStarbar() {
 }
 
 //Demande la mise à jour du contenu des commentaires
-function UpdateEvaluationContent(idItem) {
+function UpdateEvaluationContent() {
+    let idItem = GetUrlParamVal("idItem");
     let request = "submit=updateEvaluationContent" + "&idItem=" + idItem;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
@@ -61,7 +62,7 @@ function SendEvaluation(idItem) {
                 CloseAllPopups();
                 CloseNotifier();
                 NotifyWithPopup(requete.responseText);
-                UpdateEvaluationContent(idItem);
+                UpdateEvaluationContent();
             }, () => {
             });
     } else {

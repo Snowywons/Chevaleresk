@@ -19,9 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Modifications multiples">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Modifications multiples2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/evaluationsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/evaluationsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/add-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/administration.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/administration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/evaluations.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/evaluations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +115,10 @@
       <workItem from="1618841636171" duration="11185000" />
       <workItem from="1618920746280" duration="14398000" />
       <workItem from="1619028603130" duration="2115000" />
-      <workItem from="1619061624388" duration="18131000" />
+      <workItem from="1619061624388" duration="26767000" />
+      <workItem from="1619287571443" duration="6000" />
+      <workItem from="1619551227053" duration="3067000" />
+      <workItem from="1619558397092" duration="833000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -341,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619112348767</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Modifications multiples2">
+      <created>1619112435478</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1619112435478</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +377,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ajout d'une page d'évaluation pour les items" />
     <MESSAGE value="Modification évaluations et connexion" />
     <MESSAGE value="Ajout plusieurs pages" />
     <MESSAGE value="Modifications de plusieurs pages" />
@@ -385,7 +401,8 @@
     <MESSAGE value="Ajout filtre evaluations modification update panier" />
     <MESSAGE value="Modifications multiples" />
     <MESSAGE value="Revert &quot;Enlevé les boutons inutiles&quot;&#10;&#10;This reverts commit 0fa92d1d" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Enlevé les boutons inutiles&quot;&#10;&#10;This reverts commit 0fa92d1d" />
+    <MESSAGE value="Modifications multiples2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifications multiples2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -428,18 +445,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1619112356487">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1619112437905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619112356487" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619112437905" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619028721787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619028721787" />
-    <state x="532" y="237" key="run.anything.popup" timestamp="1619108893141">
+    <state x="532" y="237" key="run.anything.popup" timestamp="1619553262349">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619108893141" />
+    <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619553262349" />
     <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1618847482746">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

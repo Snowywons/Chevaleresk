@@ -251,6 +251,11 @@ if (isset($_POST["submit"])) {
             echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
             exit;
         }
+
+        if (isset($_POST["sender"]) && $_POST["sender"] == "evaluations") {
+            echo DeleteEvaluationByIdItemAndAlias($idItem, $alias);
+            exit;
+        }
     }
 
 // ---------------------------- PANIER ----------------------------------
@@ -307,13 +312,14 @@ if (isset($_POST["submit"])) {
         $guid = "DefaultIcon";
 
         $picture = isset($_FILES["ImageUploader"]) ? $_FILES["ImageUploader"] : "";
+
         if ($picture !== "") {
             $info = pathinfo($_FILES['ImageUploader']['name']);
             $ext = $info['extension'];
-            $guid = com_create_guid();
-            $newname = $guid.".".$ext;
-            $target = '../icons/'.$newname;
-            move_uploaded_file( $_FILES['ImageUploader']['tmp_name'], $target);
+            $guid = getGUID();
+            $newname = $guid . "." . $ext;
+            $target = '../icons/' . $newname;
+            move_uploaded_file($_FILES['ImageUploader']['tmp_name'], $target);
         }
 
         switch ($type) {
@@ -340,32 +346,26 @@ if (isset($_POST["submit"])) {
                 break;
         }
 
-        header("location: ./add-item.php");
+//        header("location: ../store/add-item.php");
         exit;
+    }
+}
 
-      /* switch ($type) {
-            case "AR" :
-                $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
-                $description = isset($_POST["description"]) ? $_POST["description"] : "";
-                echo AddWeaponStore($name, $quantity, $price, $pictureCode, $type, $efficiency, $gender, $description);
-                exit;
-            case "AM" :
-                $material = isset($_POST["material"]) ? $_POST["material"] : "";
-                $weigth = isset($_POST["weigth"]) ? $_POST["weigth"] : "";
-                $size = isset($_POST["size"]) ? $_POST["size"] : "";
-                echo AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material, $weigth, $size);
-                exit;
-            case "PO" :
-                $effect = isset($_POST["effect"]) ? $_POST["effect"] : "";
-                $duration = isset($_POST["duration"]) ? $_POST["duration"] : "";
-                echo AddPotionStore($name, $quantity, $price, $pictureCode, $type, $effect, $duration);
-                exit;
-            case "RS" :
-                $description = isset($_POST["description"]) ? $_POST["description"] : "";
-                echo AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $description);
-                exit;
-        }*/
-        echo "Impossible d'ajouter l'item.";
-        exit;
+function getGUID(){
+    if (function_exists('com_create_guid')){
+        return com_create_guid();
+    }
+    else {
+        mt_srand((double)microtime()*10000);
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = chr(123)// "{"
+            .substr($charid, 0, 8).$hyphen
+            .substr($charid, 8, 4).$hyphen
+            .substr($charid,12, 4).$hyphen
+            .substr($charid,16, 4).$hyphen
+            .substr($charid,20,12)
+            .chr(125);// "}"
+        return $uuid;
     }
 }

@@ -40,7 +40,7 @@ function CreateEvaluationsContainer($records)
                 <div class='itemStarbarContainer'>";
         if ($starsAvg != 0) {
             for ($i = 0; $i < $starsAvg; $i++)
-                $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+                $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
             $content .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
         } else {
             $content .= "<div class='itemStarbar'>Aucune évaluation</div>";
@@ -60,6 +60,7 @@ function CreateEvaluationContainer($records)
 {
     global $root;
 
+    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
     $content = "";
 
     if (count($records) > 0) {
@@ -98,7 +99,7 @@ function CreateEvaluationContainer($records)
 
         if ($starsAvg != 0) {
             for ($i = 0; $i < $starsAvg; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+                $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
             $starBar .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
         } else {
             $starBar .= "<div class='itemStarbar'>Aucune évaluation</div>";
@@ -113,32 +114,36 @@ function CreateEvaluationContainer($records)
                     <hr style='width: 90%'>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 5; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[4])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 4; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[3])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 3; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[2])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 2; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[1])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
-        $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+        $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[0])</div>
                     </div>
                 </div>
             </div>";
 
+
+        //COMMENTAIRES
         $records = GetEvaluationsByIdItem($idItem);
+        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+        $playerHasItem = PlayerHasItem($alias, $idItem);
 
         foreach ($records as $data) {
             $name = $data[0];
@@ -148,21 +153,30 @@ function CreateEvaluationContainer($records)
 
             $starBar = "";
             for ($i = 0; $i < $starsCount; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+                $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
 
             $content .= "
             <div class='playerEvaluationContainer'>
                 <div>
-                    <div class='itemStarbarContainer'>$starBar</div>
+                    <div class='itemStarbarContainer'>$starBar</div>";
+
+            if ($isAdmin || ($name == $alias)) {
+                $content .= "
+                    <div class='adminButtonsContainer'>
+                        <button type='button' class='deleteButton' onclick='DeleteItem(\"".$idItem."\",\"".$name."\")'>
+                            <img src='" . $root . "/icons/DeleteIcon.png'/>
+                        </button>
+                    </div>";
+            }
+
+            $content .= "
                 </div>
                 <div>$comment</div>
                 <div><i>$name</i>, $date</div>
             </div>";
         }
 
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-
-        if (PlayerHasItem($alias, $idItem)) {
+        if ($playerHasItem) {
             $content .= "
                 <div class='playerEvaluationContainer'>
                     <form action='' method='post'>
