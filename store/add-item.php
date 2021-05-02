@@ -147,7 +147,7 @@ echo "
                 onchange='ChangeImagePreview()'>
         
         <!-- Ajouter -->
-        <input type='submit' class='saveChanges' value='Ajouter' onclick='AddItem()' >
+        <input type='button' class='saveChanges' value='Ajouter' onclick='AddItem()' >
 </fieldset>
 </form>
 </main>";

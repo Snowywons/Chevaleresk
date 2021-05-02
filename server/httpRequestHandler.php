@@ -241,7 +241,7 @@ if (isset($_POST["submit"])) {
             if ($item) {
                 $guid = $item[4];
                 if ($guid !== "DefaultIcon")
-                    unlink("../icons/$guid"."."."png");
+                    unlink("../icons/$guid");
             }
             echo DeleteItemFromStoreById($idItem);
             exit;
@@ -315,10 +315,8 @@ if (isset($_POST["submit"])) {
 
         if ($picture !== "") {
             $info = pathinfo($_FILES['ImageUploader']['name']);
-            $ext = $info['extension'];
             $guid = getGUID();
-            $newname = $guid . "." . $ext;
-            $target = '../icons/' . $newname;
+            $target = '../icons/' . $guid;
             move_uploaded_file($_FILES['ImageUploader']['tmp_name'], $target);
         }
 

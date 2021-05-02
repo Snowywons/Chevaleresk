@@ -52,7 +52,8 @@ function AddItem() {
             requete.onreadystatechange = function () {
                 if (requete.readyState === 4) {
                     if (requete.status === 200) {
-                        // console.log(requete.responseText);
+                        NotifyWithPopup(`${quantity.value} ${name.value} ont été ajoutés au magasin.`, "../store/add-item");
+                        console.log(requete.responseText);
                     }
                 }
             }

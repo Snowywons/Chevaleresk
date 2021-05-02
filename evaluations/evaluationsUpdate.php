@@ -29,7 +29,7 @@ function CreateEvaluationsContainer($records)
                 <div class='itemEvaluationPreviewImageBackgroundContainer'>
                     <div class='itemEvaluationPreviewImageContainer'>
                         <div class='itemIconContainer'>
-                            <img src='" . $root . "/icons/$photoURL.png'/>
+                            <img src='" . $root . "/icons/$photoURL'/>
                         </div>
                         <div class='titleContainer'>
                             <div>" . $name . "</div>
@@ -87,7 +87,7 @@ function CreateEvaluationContainer($records)
                 <div class='itemEvaluationPreviewImageBackgroundContainer'>
                     <div class='itemEvaluationPreviewImageContainer'>
                         <div class='itemIconContainer'>
-                            <img src='" . $root . "/icons/$photoURL.png'/>
+                            <img src='" . $root . "/icons/$photoURL'/>
                         </div>
                         <div class='titleContainer'>
                             <div>" . $name . "</div>
