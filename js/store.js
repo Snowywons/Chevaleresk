@@ -1,6 +1,7 @@
-//Demande de mise à jour du contenu du store selon un envoyeur (store, shopping-cart)
-function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
-    let request = "submit=setFilters" + "&filters=" + filtersStr + "&alias=" + alias + "" + "&sender=" + sender;
+//Demande de mise à jour du contenu du store selon un envoyeur (store, inventory, evaluations)
+function UpdateStoreContentOnFilter(filtersStr, alias, sender, idItem = "") {
+    let request = "submit=setFilters" + "&filters=" + filtersStr +
+        "&alias=" + alias + "&sender=" + sender + "&idItem=" + idItem;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             switch (sender) {
@@ -10,9 +11,15 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
                     InsertHtmlTo(JSON.parse(requete.responseText), "storeReference");
                     break;
                 case "evaluations":
-                    RemoveOldContainers("evaluationsContainer");
-                    InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
-                        break;
+                    if (idItem === "") { //Évaluations petits frames
+                        RemoveOldContainers("evaluationsContainer");
+                        InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
+                    } else { //Évaluations des joueurs
+                        RemoveOldContainers("playerEvaluationContainer");
+                        InsertHtmlTo(JSON.parse(requete.responseText), "playerEvaluationContainerReference");
+                        UpdateAllStarbar(); //I know... I know...
+                    }
+                    break;
             }
         }, () => {
         }, false);

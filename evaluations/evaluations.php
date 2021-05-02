@@ -23,9 +23,7 @@ echo "
 <main class='evaluations'>
     <h1>Évaluations</h1>";
 
-echo "<div id='evaluationsReference'>";
-
-if ($idItem == "") {
+if ($idItem == "") { //Évaluations petits frames
     echo "
         <div class='bigButton backToStoreContainer' onclick='Redirect(\"../store/store\")'>
             <span class='backToStoreButton'>Retour au magasin</span>
@@ -33,17 +31,22 @@ if ($idItem == "") {
 
     CreateFilterSection();
 
+    echo "<div id='evaluationsReference'>";
     $records = GetAllEvaluationsPreviews();
     echo CreateEvaluationsContainer($records);
-} else {
+
+} else { //Évaluations des joueurs
     echo "
         <div class='bigButton evaluationsListButtonContainer' 
             onClick='Redirect(\"../evaluations/evaluations\")'>
             <span>Retour à la liste</span>
         </div>";
 
+    CreateEvaluationFilterSection();
+
+    echo "<div id='evaluationReference'>";
     $records = GetEvaluationPreviewByIdItem($idItem);
-    echo CreateEvaluationContainer($records);
+    echo CreateEvaluationContainer($records, "1,2,3,4,5");
 }
 
 echo "</div></main>";

@@ -3,7 +3,7 @@ $root = "../";
 
 global $conn;
 
-//Premet d'afficher les évaluations miniatures (frame)
+//Premet d'afficher les évaluations miniatures (frames)
 function CreateEvaluationsContainer($records)
 {
     global $root;
@@ -55,12 +55,11 @@ function CreateEvaluationsContainer($records)
     return $content;
 }
 
-//Permet d'afficher toutes les évaluations d'un item en particulier
-function CreateEvaluationContainer($records)
+//Permet d'afficher toutes les évaluations des joueurs d'un item en particulier (AVEC Cadre gauche)
+function CreateEvaluationContainer($records, $filters)
 {
     global $root;
 
-    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
     $content = "";
 
     if (count($records) > 0) {
@@ -73,7 +72,6 @@ function CreateEvaluationContainer($records)
         $codeType = $records[5];
         $starsAvg = $records[6];
         $evaluationCount = $records[7];
-
 
         $starsCount = explode(",", GetEvaluationCountForEachStarByIdItem($idItem));
 
@@ -139,45 +137,59 @@ function CreateEvaluationContainer($records)
                 </div>
             </div>";
 
+        $content .= "<div id='playerEvaluationContainerReference'>";
+        $records = GetFilteredEvaluationsByIdItem($filters, $idItem);
+        $content .= CreateAllPlayerEvaluationsContainer($records, $idItem);
+        $content .= "</div></div>";
+    }
 
-        //COMMENTAIRES
-        $records = GetEvaluationsByIdItem($idItem);
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-        $playerHasItem = PlayerHasItem($alias, $idItem);
+    return $content;
+}
 
-        foreach ($records as $data) {
-            $name = $data[0];
-            $starsCount = intval($data[1]);
-            $comment = $data[2];
-            $date = $data[3];
+//Permet d'afficher toutes les évaluations des joueurs d'un item en particulier (SANS Cadre gauche)
+function CreateAllPlayerEvaluationsContainer($records, $idItem) {
+    global $root;
 
-            $starBar = "";
-            for ($i = 0; $i < $starsCount; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
+    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+    $content = "";
 
-            $content .= "
+    //COMMENTAIRES
+    $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+    $playerHasItem = PlayerHasItem($alias, $idItem);
+
+    foreach ($records as $data) {
+        $name = $data[0];
+        $starsCount = intval($data[1]);
+        $comment = $data[2];
+        $date = $data[3];
+
+        $starBar = "";
+        for ($i = 0; $i < $starsCount; $i++)
+            $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
+
+        $content .= "
             <div class='playerEvaluationContainer'>
                 <div>
                     <div class='itemStarbarContainer'>$starBar</div>";
 
-            if ($isAdmin || ($name == $alias)) {
-                $content .= "
+        if ($isAdmin || ($name == $alias)) {
+            $content .= "
                     <div class='adminButtonsContainer'>
                         <button type='button' class='deleteButton' onclick='DeleteItem(\"".$idItem."\",\"".$name."\")'>
                             <img src='" . $root . "/icons/DeleteIcon.png'/>
                         </button>
                     </div>";
-            }
+        }
 
-            $content .= "
+        $content .= "
                 </div>
                 <div>$comment</div>
                 <div><i>$name</i>, $date</div>
             </div>";
-        }
+    }
 
-        if ($playerHasItem) {
-            $content .= "
+    if ($playerHasItem) {
+        $content .= "
                 <div class='playerEvaluationContainer'>
                     <form action='' method='post'>
                         <fieldset>
@@ -205,11 +217,8 @@ function CreateEvaluationContainer($records)
                         </div>
                     </form>
                 </div>";
-        } else {
-            $content .= "<div class='playerEvaluationContainer'>Vous devez d'abord acheter l'item pour pouvoir le commenter. &#128540;</div>";
-        }
-
-        $content .= "</div>";
+    } else {
+        $content .= "<div class='playerEvaluationContainer'>Vous devez d'abord acheter l'item pour pouvoir le commenter. &#128540;</div>";
     }
 
     return $content;

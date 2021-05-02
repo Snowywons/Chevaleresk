@@ -265,6 +265,7 @@ nav > nav:hover, nav ul > li:hover {
 div.filterWrapper {
     display: flex;
     justify-content: start;
+    align-items: center;
 }
 
 div.filterContainer, div.resetFilterContainer {

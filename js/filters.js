@@ -4,7 +4,7 @@ let inputs = document.querySelectorAll("#filters input[type='checkbox']");
 
 //Permet d'ouvrir et de fermer le conteneur des inputs (filters)
 let filterContainer = document.getElementById("filterContainer");
-if (filterContainer !== null) {
+if (filterContainer) {
     filterContainer.addEventListener("click", () => {
         if (filters.classList.contains("hidden")) {
             filterContainer.classList.add("opened");
@@ -18,7 +18,7 @@ if (filterContainer !== null) {
 
 //Permet de réinitialiser la sélection des filtres et de mettre à jour le contenu du store
 let resetFilterContainer = document.getElementById("resetFilterContainer");
-if (resetFilterContainer !== null) {
+if (resetFilterContainer) {
     resetFilterContainer.addEventListener("click", () => {
         inputs.forEach((item) => item.checked = true);
 
@@ -28,7 +28,8 @@ if (resetFilterContainer !== null) {
         }
 
         let targetAlias = GetUrlParamVal("alias");
-        UpdateStoreContentOnFilter(GetFiltersString(), targetAlias, GetPageName());
+        let idItem = GetUrlParamVal("idItem");
+        UpdateStoreContentOnFilter(GetFiltersString(), targetAlias, GetPageName(), idItem);
     });
 }
 
@@ -36,7 +37,8 @@ if (resetFilterContainer !== null) {
 inputs.forEach((item) =>
     item.addEventListener("change", () => {
         let targetAlias = GetUrlParamVal("alias");
-        UpdateStoreContentOnFilter(GetFiltersString(), targetAlias, GetPageName())
+        let idItem = GetUrlParamVal("idItem");
+        UpdateStoreContentOnFilter(GetFiltersString(), targetAlias, GetPageName(), idItem);
     }));
 
 //Permet d'obtenir une chaine de caractères composée des filtres sélectionnés

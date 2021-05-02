@@ -24,9 +24,10 @@ if (isset($_POST["submit"])) {
 // ---------------------------- FILTRE ----------------------------------
     //Sur la demande d'un changement de filtre
     if ($_POST["submit"] == "setFilters") {
-        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','','', null, null, null, null, null";
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "";
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
 
         //Mise à jour des conteneurs du store à partir de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
@@ -44,19 +45,26 @@ if (isset($_POST["submit"])) {
 
         //Mise à jour des conteneurs du store à partir de la page 'evaluations.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "evaluations") {
-            $records = GetFilteredEvaluations($filters);
-            echo json_encode(CreateEvaluationsContainer($records));
-            exit;
+            if ($idItem == "") { //Évaluations petits frames
+                $records = GetFilteredEvaluations($filters);
+                echo json_encode(CreateEvaluationsContainer($records));
+                exit;
+            } else { //Évaluations des joueurs
+                $records = GetFilteredEvaluationsByIdItem($filters, $idItem);
+                echo json_encode(CreateAllPlayerEvaluationsContainer($records, $idItem));
+                exit;
+            }
         }
     }
 
 // ---------------------------- ÉVALUATIONS ----------------------------------
     //Sur la mise à jour du contenu des évaluations
     if ($_POST["submit"] == "updateEvaluationContent") {
-
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "";
         $idItem = $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+
         $records = GetEvaluationPreviewByIdItem($idItem);
-        echo json_encode(CreateEvaluationContainer($records));
+        echo json_encode(CreateEvaluationContainer($records, $filters));
         exit;
     }
 
