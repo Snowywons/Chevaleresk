@@ -19,16 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Modifications multiples2">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout suppression evaluations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/evaluationsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/evaluationsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluations/evaluations.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluations.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/add-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/administration.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/administration.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/evaluations.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/evaluations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/filters.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/filterUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/filterUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +120,8 @@
       <workItem from="1619287571443" duration="6000" />
       <workItem from="1619551227053" duration="3067000" />
       <workItem from="1619558397092" duration="833000" />
+      <workItem from="1619626028830" duration="978000" />
+      <workItem from="1619902102185" duration="13023000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -358,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619112435478</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Ajout suppression evaluations">
+      <created>1619626073053</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1619626073053</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +387,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modification évaluations et connexion" />
     <MESSAGE value="Ajout plusieurs pages" />
     <MESSAGE value="Modifications de plusieurs pages" />
     <MESSAGE value="Commit final avant la remise du sprint 0" />
@@ -402,7 +411,8 @@
     <MESSAGE value="Modifications multiples" />
     <MESSAGE value="Revert &quot;Enlevé les boutons inutiles&quot;&#10;&#10;This reverts commit 0fa92d1d" />
     <MESSAGE value="Modifications multiples2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifications multiples2" />
+    <MESSAGE value="Ajout suppression evaluations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout suppression evaluations" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -445,10 +455,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1619112437905">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1619626079467">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619112437905" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619626079467" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619028721787">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

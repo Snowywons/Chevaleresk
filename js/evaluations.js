@@ -40,13 +40,13 @@ function UpdateAllStarbar() {
 //Demande la mise à jour du contenu des commentaires
 function UpdateEvaluationContent() {
     let idItem = GetUrlParamVal("idItem");
-    let request = "submit=updateEvaluationContent" + "&idItem=" + idItem;
+    let filters = GetFiltersString();
+    let request = "submit=updateEvaluationContent" + "&idItem=" + idItem + "&filters=" + filters;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             RemoveOldContainers("evaluationContainer");
-            InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
-
-            UpdateAllStarbar();
+            InsertHtmlTo(JSON.parse(requete.responseText), "evaluationReference");
+            UpdateAllStarbar(); //I know... I know...
         }, () => {
         }, false);
 }
@@ -70,4 +70,4 @@ function SendEvaluation(idItem) {
     }
 }
 
-UpdateAllStarbar();
+UpdateAllStarbar(); //I know... I know...
