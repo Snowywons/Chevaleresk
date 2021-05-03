@@ -36,3 +36,21 @@ function AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material,
     $statement->bindParam(8,$size, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function updateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure)
+{
+    global $conn;
+    $armor = GetArmorById($idItem);
+    $query = "";
+    if(!empty($armor))
+        $query = "update Armures set matiereArmure=?, poidsArmure=?, tailleArmure=? where idItem=?";
+    else
+        $query = "insert into Armures (matiereArmure, poidsArmure, tailleArmure, idItem) values (?, ?, ?, ?)";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$matiereArmure, PDO::PARAM_STR);
+    $statement->bindParam(2,$poidsArmure, PDO::PARAM_STR);
+    $statement->bindParam(3,$tailleArmure, PDO::PARAM_STR);
+    $statement->bindParam(4,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}

@@ -38,3 +38,21 @@ function AddWeaponStore($name, $quantity, $price, $pictureCode, $type, $efficien
     $statement->bindParam(8,$description, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function updateWeaponById($idItem, $efficacite, $genres, $description)
+{
+    global $conn;
+    $weapon = GetWeaponById($idItem);
+    $query = "";
+    if(!empty($weapon))
+        $query = "update Armes set efficaciteArme=?, genreArme=?, descArme=? where idItem=?";
+    else
+        $query = "insert into Armes (efficaciteArme, genreArme, descArme, idItem) values (?, ?, ?, ?)";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$efficacite, PDO::PARAM_STR);
+    $statement->bindParam(2,$genres, PDO::PARAM_STR);
+    $statement->bindParam(3,$description, PDO::PARAM_STR);
+    $statement->bindParam(4,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}

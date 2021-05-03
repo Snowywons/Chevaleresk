@@ -31,7 +31,10 @@ echo "
             <title>Chevaleresk</title>
             <link rel='stylesheet' type='text/css' href='" . $root . "css/style.css'>
             <script type='text/javascript' src='" . $root . "js/functions.js'></script>
-            <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>";
+            <script type='text/javascript' src='" . $root . "js/navbar.js' defer></script>
+            <script type='text/javascript' src='" . $root . "js/jquery-3.6.0.min.js'></script>
+            <script type='text/javascript' src='" . $root . "js/jquery.validate.min.js'></script>
+            <script type='text/javascript' src='" . $root . "js/additional-methods.min.js'></script>";
 
 CreateOverlay();
 

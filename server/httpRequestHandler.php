@@ -368,4 +368,43 @@ if (isset($_POST["submit"])) {
         echo "Impossible d'ajouter l'item.";
         exit;
     }
+
+    //Modfier l'item
+    if ($_POST["submit"] == "updateItem") {
+
+        $alias = $_SESSION["alias"];
+        $idItem = $_POST["idItem"];
+        $nomItem = $_POST["nom"];
+        $codeType = $_POST["types"];
+        $quantiteStock = $_POST["quantite"];
+        $prixItem = $_POST["price"];
+        $codePhoto = $_POST["picture"];
+
+        updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem, $codePhoto);
+        if($codeType=="AE")
+        {
+            $efficacite = $_POST["efficacite"];
+            $genres = $_POST["genres"];
+            $description = $_POST["description"];
+            updateWeaponById($idItem, $efficacite, $genres, $description);
+        }    
+        else if($codeType=="AM")
+        {
+            $matiereArmure = $_POST["matieres"];
+            $poidsArmure = $_POST["poids"];
+            $tailleArmure = $_POST["taille"];
+            updateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure);
+        }   
+        else if($codeType=="PO")
+        {
+            $effet = $_POST["effet"];
+            $duree = $_POST["duree"];
+            updatePotionById($idItem, $effet, $duree);
+        }    
+        else if($codeType=="RS")
+        {
+            $ressourceDescription = $_POST["ressourceDescription"];
+            updateRessourceById($idItem, $ressourceDescription);
+        }    
+    }
 }

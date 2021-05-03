@@ -37,3 +37,20 @@ function AddPotionStore($name, $quantity, $price, $pictureCode, $type, $effect, 
     $statement->bindParam(7,$duration, PDO::PARAM_STR);
     $statement->execute();                                                    
 }
+
+function updatePotionById($idItem, $effet, $duree)
+{
+    global $conn;
+    $potion = GetPotionById($idItem);
+    $query = "";
+    if(!empty($potion))
+        $query = "update Potions set effetPotion=?, dureePotion=? where idItem=?";
+    else
+        $query = "insert into Potions (effetPotion, dureePotion, idItem) values (?, ?, ?)";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$effet, PDO::PARAM_STR);
+    $statement->bindParam(2,$duree, PDO::PARAM_STR);
+    $statement->bindParam(3,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}

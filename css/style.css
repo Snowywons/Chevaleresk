@@ -1114,8 +1114,11 @@ form input.itemQuantity {
 
 /*endregion Autres*/
 
-.errorField {
+.errorField,.error {
     border: 1px solid red;
+}
+span.error {
+    display: none !important;
 }
 
 #loginError {

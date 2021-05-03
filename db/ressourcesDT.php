@@ -36,3 +36,19 @@ function AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $descr
     $statement->bindParam(6,$description, PDO::PARAM_STR);
     $statement->execute();
 }
+
+function updateRessourceById($idItem, $ressourceDescription)
+{
+    global $conn;
+    $ressource = GetRessourceById($idItem);
+    $query = "";
+    if(!empty($ressource))
+        $query = "update Ressources set descRessource=? where idItem=?";
+    else
+        $query = "insert into Ressources (descRessource, idItem) values (?, ?)";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$ressourceDescription, PDO::PARAM_STR);
+    $statement->bindParam(2,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}

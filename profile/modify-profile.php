@@ -70,7 +70,7 @@ echo "
                 </label>
                 <input type='password' id='passwordConfirm' name='passwordConfirm' value='$password' onblur='validatePassword()'>
                 <div id='passwordConfirmValidation' style='color:red'></div>
-                <input type='submit' name='submit' value='Enregistrer' class='saveChanges'>
+                <input type='submit' name='submit' value='Enregistrer'>
             </fieldset>
         </form>
     </main>";
