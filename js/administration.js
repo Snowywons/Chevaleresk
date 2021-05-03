@@ -17,8 +17,6 @@ AddClickEventFor("saveChanges", (item) => {
             NotifyWithPopup(requete.responseText);
         }, () => {
         });
-    } else {
-        NotifyWithPopup("Informations invalides");
     }
 });
 

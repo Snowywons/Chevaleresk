@@ -10,6 +10,11 @@ function GetEvaluationsByIdItem($idItem)
     return executeQuery("CALL EvaluationsParIdItem($idItem)");
 }
 
+function GetFilteredEvaluationsByIdItem($filter, $idItem)
+{
+    return executeQuery("CALL EvaluationsParFiltreEtIdItem($filter, $idItem)");
+}
+
 function GetFilteredEvaluations($filter) {
     return executeQuery("CALL EvaluationsParFiltre($filter)");
 }
@@ -38,6 +43,18 @@ function AddEvaluationByIdItem($id, $alias, $stars, $comment)
     $statement->bindParam(2, $alias, PDO::PARAM_STR);
     $statement->bindParam(3, $stars, PDO::PARAM_INT);
     $statement->bindParam(4, $comment, PDO::PARAM_STR);
+    $statement->execute();
+    $result = $statement->fetch();
+
+    return count($result) > 0 ? $result[0] : "";
+}
+
+function DeleteEvaluationByIdItemAndAlias($id, $alias) {
+    global $conn;
+
+    $statement = $conn->prepare("CALL SupprimerEvaluationParIdItemEtAliasJoueur(?, ?)");
+    $statement->bindParam(1, $id, PDO::PARAM_INT);
+    $statement->bindParam(2, $alias, PDO::PARAM_STR);
     $statement->execute();
     $result = $statement->fetch();
 

@@ -26,7 +26,7 @@ function CreateItemDetailsContainers($records)
         $nomItem = $data[1];
         $quantiteStock = $data[2];
         $prixItem = $data[3];
-        $codePhoto = "../icons/$data[4].png";
+        $codePhoto = "../icons/$data[4]";
         $codeType = $data[5];
 
         $nomType =
@@ -162,6 +162,7 @@ function CreateNotificationContainer()
                 <br>
                 <div id='notificationMessageContainer'></div>
                 <br>
+                <button class='confirmButton' id='notificationOkayButton' onclick='ClosePopupAndNotifier(\"notificationContainer\")'>Ok</button>
             </div>
             <div class='popupFooterContainer'></div>
         </div>";

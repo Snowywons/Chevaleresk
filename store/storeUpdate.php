@@ -33,7 +33,7 @@ function CreateStoreContainer($records)
         $content .= "
             <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
-                    <img src='" . $root . "/icons/$photoURL.png'/>
+                    <img src='" . $root . "/icons/$photoURL'/>
                 </div>
                 <div class='titleContainer'>
                     <div>" . $name . "</div>
@@ -81,7 +81,7 @@ function CreateShoppingCartStoreContainer($records)
         $content .= "
             <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
-                    <img src='" . $root . "/icons/$photoURL.png'/>
+                    <img src='" . $root . "/icons/$photoURL'/>
                 </div>
                 <div class='titleContainer'>
                     <div>" . $name . "</div>
@@ -158,7 +158,7 @@ function CreateInventoryStoreContainer($records)
         $content .= "
             <div id='" . $idItem . "_preview' class='itemPreviewContainer fadeIn' onclick='OpenPopup(\"" . $idItem . "_itemDetailsContainer\")'>
                 <div class='itemIconContainer'>
-                    <img src='" . $root . "/icons/$photoURL.png'/>
+                    <img src='" . $root . "/icons/$photoURL'/>
                 </div>
                 <div class='titleContainer'>
                     <div>" . $name . "</div>

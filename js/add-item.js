@@ -1,6 +1,4 @@
 function AddItem() {
-    let formIsValid = true;
-
     let name = document.getElementById("name");
     let types = document.getElementById("types");
     let quantity = document.getElementById("quantity");
@@ -54,45 +52,12 @@ function AddItem() {
             requete.onreadystatechange = function () {
                 if (requete.readyState === 4) {
                     if (requete.status === 200) {
-                        //console.log(requete.responseText);
+                        NotifyWithPopup(`${quantity.value} ${name.value} ont été ajoutés au magasin.`, "../store/add-item");
+                        console.log(requete.responseText);
                     }
                 }
             }
     }
-}
-
-function validateAddItemForm() {
-    let formIsValid = true;
-    let types = document.getElementById("types");
-
-    formIsValid = !validateNameItem() ? false : formIsValid;
-    formIsValid = !validateNotEmpty("types") ? false : formIsValid;
-    formIsValid = !validateQuantity() ? false : formIsValid;
-    formIsValid = !validatePrice() ? false : formIsValid;
-
-    switch (types.value) {
-        case "AE" : //Arme
-            formIsValid = !validateEfficiency() ? false : formIsValid;
-            formIsValid = !validateNotEmpty("genders") ? false : formIsValid;
-            formIsValid = !validateWeaponDescription() ? false : formIsValid;
-            break;
-        case "AM" : //Armure
-            formIsValid = !validateNotEmpty("materials") ? false : formIsValid;
-            formIsValid = !validateWeight() ? false : formIsValid;
-            formIsValid = !validateNotEmpty("sizes") ? false : formIsValid;
-            break;
-        case "PO" : //Potion
-            formIsValid = !validateEffect() ? false : formIsValid;
-            formIsValid = !validateDuration() ? false : formIsValid;
-            break;
-        case "RS" :
-            formIsValid = !validateRessourceDescription() ? false : formIsValid;
-            break;
-    }
-
-    formIsValid = !validateImage() ? false : formIsValid;
-
-    return formIsValid;
 }
 
 function ChangeTypeField() {
@@ -139,6 +104,40 @@ function ChangeImagePreview() {
     } else {
         imagePreview.src = "../icons/DefaultIcon.png";
     }
+}
+
+function validateAddItemForm() {
+    let formIsValid = true;
+    let types = document.getElementById("types");
+
+    formIsValid = !validateNameItem() ? false : formIsValid;
+    formIsValid = !validateNotEmpty("types") ? false : formIsValid;
+    formIsValid = !validateQuantity() ? false : formIsValid;
+    formIsValid = !validatePrice() ? false : formIsValid;
+
+    switch (types.value) {
+        case "AE" : //Arme
+            formIsValid = !validateEfficiency() ? false : formIsValid;
+            formIsValid = !validateNotEmpty("genders") ? false : formIsValid;
+            formIsValid = !validateWeaponDescription() ? false : formIsValid;
+            break;
+        case "AM" : //Armure
+            formIsValid = !validateNotEmpty("materials") ? false : formIsValid;
+            formIsValid = !validateWeight() ? false : formIsValid;
+            formIsValid = !validateNotEmpty("sizes") ? false : formIsValid;
+            break;
+        case "PO" : //Potion
+            formIsValid = !validateEffect() ? false : formIsValid;
+            formIsValid = !validateDuration() ? false : formIsValid;
+            break;
+        case "RS" :
+            formIsValid = !validateRessourceDescription() ? false : formIsValid;
+            break;
+    }
+
+    formIsValid = !validateImage() ? false : formIsValid;
+
+    return formIsValid;
 }
 
 function updateValidation(element, valid) {

@@ -1,7 +1,7 @@
-
-//Demande de mise à jour du contenu du store selon un envoyeur (store, shopping-cart)
-function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
-    let request = "submit=setFilters" + "&filters=" + filtersStr + "&alias=" + alias + "" + "&sender=" + sender;
+//Demande de mise à jour du contenu du store selon un envoyeur (store, inventory, evaluations)
+function UpdateStoreContentOnFilter(filtersStr, alias, sender, idItem = "") {
+    let request = "submit=setFilters" + "&filters=" + filtersStr +
+        "&alias=" + alias + "&sender=" + sender + "&idItem=" + idItem;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
         (requete) => {
             switch (sender) {
@@ -11,9 +11,15 @@ function UpdateStoreContentOnFilter(filtersStr, alias, sender) {
                     InsertHtmlTo(JSON.parse(requete.responseText), "storeReference");
                     break;
                 case "evaluations":
-                    RemoveOldContainers("evaluationsContainer");
-                    InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
-                        break;
+                    if (idItem === "") { //Évaluations petits frames
+                        RemoveOldContainers("evaluationsContainer");
+                        InsertHtmlTo(JSON.parse(requete.responseText), "evaluationsReference");
+                    } else { //Évaluations des joueurs
+                        RemoveOldContainers("playerEvaluationContainer");
+                        InsertHtmlTo(JSON.parse(requete.responseText), "playerEvaluationContainerReference");
+                        UpdateAllStarbar(); //I know... I know...
+                    }
+                    break;
             }
         }, () => {
         }, false);
@@ -61,8 +67,8 @@ function UpdateQuantityConfirm(idItem, alias, sender) {
 }
 
 //Demande de création d'un popup de suppression d'item
-function DeleteItem(id) {
-    let targetAlias = GetUrlParamVal("alias");
+function DeleteItem(id, alias = null) {
+    let targetAlias = alias == null ? GetUrlParamVal("alias") : alias;
     let sender = GetPageName();
     let request = "submit=createDeleteItemPopup" + "&idItem=" + id + "&alias=" + targetAlias + "&sender=" + sender;
     ServerRequest("POST", "../server/httpRequestHandler.php", request,
@@ -86,6 +92,9 @@ function DeleteItemConfirm(idItem, alias, sender) {
                 case "shopping-cart" :
                     UpdateShoppingCartContent();
                     UpdateTotalShoppingCartContent();
+                    break;
+                case "evaluations" :
+                    UpdateEvaluationContent();
                     break;
             }
         },

@@ -1,5 +1,4 @@
 <?php
-
 function CreateFilterSection()
 {
     global $root;
@@ -51,5 +50,40 @@ function CreateFilterSection()
         </div>
         <br>";
 }
+function CreateEvaluationFilterSection()
+{
+    global $root;
 
+    echo "
+        <!-- Bouton de filtre -->
+        <div class='filterWrapper'>
+            <div id='filterContainer' class='filterContainer'>
+                <span>Voir les filtres</span>
+                <img src='" . $root . "icons/DownArrowIcon.png'>
+            </div>
+            <div id='resetFilterContainer' class='resetFilterContainer'>
+                <img src='" . $root . "/icons/resetIcon.png'>
+            </div>
+        </div>
+        
+        <!-- Filtre individuel -->
+        <div id='filters' class='filters hidden'>
+
+            <div>
+                <!-- Nombre d'étoiles -->
+                <div class='category'>Évaluation</div>
+                <label for='1'>1 Étoile</label>
+                <input type='checkbox' id='1' name='etoile1' checked>
+                <label for='2'>2 Étoiles</label>
+                <input type='checkbox' id='2' name='etoile2' checked>
+                <label for='3'>3 Étoiles</label>
+                <input type='checkbox' id='3' name='etoile3' checked>
+                <label for='4'>4 Étoiles</label>
+                <input type='checkbox' id='4' name='etoile4' checked>
+                <label for='5'>5 Étoiles</label>
+                <input type='checkbox' id='5' name='etoile5' checked>
+            </div>
+        </div>
+        <br>";
+}
 ?>

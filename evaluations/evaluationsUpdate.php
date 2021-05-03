@@ -3,7 +3,7 @@ $root = "../";
 
 global $conn;
 
-//Premet d'afficher les évaluations miniatures (frame)
+//Premet d'afficher les évaluations miniatures (frames)
 function CreateEvaluationsContainer($records)
 {
     global $root;
@@ -29,7 +29,7 @@ function CreateEvaluationsContainer($records)
                 <div class='itemEvaluationPreviewImageBackgroundContainer'>
                     <div class='itemEvaluationPreviewImageContainer'>
                         <div class='itemIconContainer'>
-                            <img src='" . $root . "/icons/$photoURL.png'/>
+                            <img src='" . $root . "/icons/$photoURL'/>
                         </div>
                         <div class='titleContainer'>
                             <div>" . $name . "</div>
@@ -40,7 +40,7 @@ function CreateEvaluationsContainer($records)
                 <div class='itemStarbarContainer'>";
         if ($starsAvg != 0) {
             for ($i = 0; $i < $starsAvg; $i++)
-                $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+                $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
             $content .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
         } else {
             $content .= "<div class='itemStarbar'>Aucune évaluation</div>";
@@ -55,8 +55,8 @@ function CreateEvaluationsContainer($records)
     return $content;
 }
 
-//Permet d'afficher toutes les évaluations d'un item en particulier
-function CreateEvaluationContainer($records)
+//Permet d'afficher toutes les évaluations des joueurs d'un item en particulier (AVEC Cadre gauche)
+function CreateEvaluationContainer($records, $filters)
 {
     global $root;
 
@@ -73,7 +73,6 @@ function CreateEvaluationContainer($records)
         $starsAvg = $records[6];
         $evaluationCount = $records[7];
 
-
         $starsCount = explode(",", GetEvaluationCountForEachStarByIdItem($idItem));
 
         $content .= "
@@ -86,7 +85,7 @@ function CreateEvaluationContainer($records)
                 <div class='itemEvaluationPreviewImageBackgroundContainer'>
                     <div class='itemEvaluationPreviewImageContainer'>
                         <div class='itemIconContainer'>
-                            <img src='" . $root . "/icons/$photoURL.png'/>
+                            <img src='" . $root . "/icons/$photoURL'/>
                         </div>
                         <div class='titleContainer'>
                             <div>" . $name . "</div>
@@ -98,7 +97,7 @@ function CreateEvaluationContainer($records)
 
         if ($starsAvg != 0) {
             for ($i = 0; $i < $starsAvg; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+                $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
             $starBar .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
         } else {
             $starBar .= "<div class='itemStarbar'>Aucune évaluation</div>";
@@ -113,57 +112,84 @@ function CreateEvaluationContainer($records)
                     <hr style='width: 90%'>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 5; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[4])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 4; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[3])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 3; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[2])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
         for ($i = 0; $i < 2; $i++)
-            $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+            $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[1])</div>
                     </div>
                     <div class='itemStarbarContainer'>";
-        $content .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+        $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
         $content .= "<div class='itemStarbar'>($starsCount[0])</div>
                     </div>
                 </div>
             </div>";
 
-        $records = GetEvaluationsByIdItem($idItem);
+        $content .= "<div id='playerEvaluationContainerReference'>";
+        $records = GetFilteredEvaluationsByIdItem($filters, $idItem);
+        $content .= CreateAllPlayerEvaluationsContainer($records, $idItem);
+        $content .= "</div></div>";
+    }
 
-        foreach ($records as $data) {
-            $name = $data[0];
-            $starsCount = intval($data[1]);
-            $comment = $data[2];
-            $date = $data[3];
+    return $content;
+}
 
-            $starBar = "";
-            for ($i = 0; $i < $starsCount; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
+//Permet d'afficher toutes les évaluations des joueurs d'un item en particulier (SANS Cadre gauche)
+function CreateAllPlayerEvaluationsContainer($records, $idItem) {
+    global $root;
 
-            $content .= "
+    $isAdmin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
+    $content = "";
+
+    //COMMENTAIRES
+    $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
+    $playerHasItem = PlayerHasItem($alias, $idItem);
+
+    foreach ($records as $data) {
+        $name = $data[0];
+        $starsCount = intval($data[1]);
+        $comment = $data[2];
+        $date = $data[3];
+
+        $starBar = "";
+        for ($i = 0; $i < $starsCount; $i++)
+            $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
+
+        $content .= "
             <div class='playerEvaluationContainer'>
                 <div>
-                    <div class='itemStarbarContainer'>$starBar</div>
+                    <div class='itemStarbarContainer'>$starBar</div>";
+
+        if ($isAdmin || ($name == $alias)) {
+            $content .= "
+                    <div class='adminButtonsContainer'>
+                        <button type='button' class='deleteButton' onclick='DeleteItem(\"".$idItem."\",\"".$name."\")'>
+                            <img src='" . $root . "/icons/DeleteIcon.png'/>
+                        </button>
+                    </div>";
+        }
+
+        $content .= "
                 </div>
                 <div>$comment</div>
                 <div><i>$name</i>, $date</div>
             </div>";
-        }
+    }
 
-        $alias = isset($_SESSION["alias"]) ? $_SESSION["alias"] : "";
-
-        if (PlayerHasItem($alias, $idItem)) {
-            $content .= "
+    if ($playerHasItem) {
+        $content .= "
                 <div class='playerEvaluationContainer'>
                     <form action='' method='post'>
                         <fieldset>
@@ -191,11 +217,8 @@ function CreateEvaluationContainer($records)
                         </div>
                     </form>
                 </div>";
-        } else {
-            $content .= "<div class='playerEvaluationContainer'>Vous devez d'abord acheter l'item pour pouvoir le commenter. &#128540;</div>";
-        }
-
-        $content .= "</div>";
+    } else {
+        $content .= "<div class='playerEvaluationContainer'>Vous devez d'abord acheter l'item pour pouvoir le commenter. &#128540;</div>";
     }
 
     return $content;

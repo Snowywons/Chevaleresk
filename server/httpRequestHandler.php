@@ -24,9 +24,10 @@ if (isset($_POST["submit"])) {
 // ---------------------------- FILTRE ----------------------------------
     //Sur la demande d'un changement de filtre
     if ($_POST["submit"] == "setFilters") {
-        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "'','','','', null, null, null, null, null";
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "";
         $alias = isset($_POST["alias"]) ? ($_POST["alias"] !== "" ? $_POST["alias"] :
             (isset($_SESSION["alias"]) ? $_SESSION["alias"] : "")) : "";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
 
         //Mise à jour des conteneurs du store à partir de la page 'store.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "store") {
@@ -44,19 +45,26 @@ if (isset($_POST["submit"])) {
 
         //Mise à jour des conteneurs du store à partir de la page 'evaluations.php'
         if (isset($_POST["sender"]) && $_POST["sender"] == "evaluations") {
-            $records = GetFilteredEvaluations($filters);
-            echo json_encode(CreateEvaluationsContainer($records));
-            exit;
+            if ($idItem == "") { //Évaluations petits frames
+                $records = GetFilteredEvaluations($filters);
+                echo json_encode(CreateEvaluationsContainer($records));
+                exit;
+            } else { //Évaluations des joueurs
+                $records = GetFilteredEvaluationsByIdItem($filters, $idItem);
+                echo json_encode(CreateAllPlayerEvaluationsContainer($records, $idItem));
+                exit;
+            }
         }
     }
 
 // ---------------------------- ÉVALUATIONS ----------------------------------
     //Sur la mise à jour du contenu des évaluations
     if ($_POST["submit"] == "updateEvaluationContent") {
-
+        $filters = isset($_POST["filters"]) ? $_POST["filters"] : "";
         $idItem = $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+
         $records = GetEvaluationPreviewByIdItem($idItem);
-        echo json_encode(CreateEvaluationContainer($records));
+        echo json_encode(CreateEvaluationContainer($records, $filters));
         exit;
     }
 
@@ -241,7 +249,7 @@ if (isset($_POST["submit"])) {
             if ($item) {
                 $guid = $item[4];
                 if ($guid !== "DefaultIcon")
-                    unlink("../icons/$guid"."."."png");
+                    unlink("../icons/$guid");
             }
             echo DeleteItemFromStoreById($idItem);
             exit;
@@ -249,6 +257,11 @@ if (isset($_POST["submit"])) {
 
         if (isset($_POST["sender"]) && $_POST["sender"] == "shopping-cart") {
             echo DeleteItemFromShoppingCartByAlias($alias, $idItem);
+            exit;
+        }
+
+        if (isset($_POST["sender"]) && $_POST["sender"] == "evaluations") {
+            echo DeleteEvaluationByIdItemAndAlias($idItem, $alias);
             exit;
         }
     }
@@ -307,13 +320,12 @@ if (isset($_POST["submit"])) {
         $guid = "DefaultIcon";
 
         $picture = isset($_FILES["ImageUploader"]) ? $_FILES["ImageUploader"] : "";
+
         if ($picture !== "") {
             $info = pathinfo($_FILES['ImageUploader']['name']);
-            $ext = $info['extension'];
-            $guid = com_create_guid();
-            $newname = $guid.".".$ext;
-            $target = '../icons/'.$newname;
-            move_uploaded_file( $_FILES['ImageUploader']['tmp_name'], $target);
+            $guid = getGUID();
+            $target = '../icons/' . $guid;
+            move_uploaded_file($_FILES['ImageUploader']['tmp_name'], $target);
         }
 
         switch ($type) {
@@ -340,32 +352,7 @@ if (isset($_POST["submit"])) {
                 break;
         }
 
-        header("location: ./add-item.php");
-        exit;
-
-      /* switch ($type) {
-            case "AR" :
-                $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
-                $description = isset($_POST["description"]) ? $_POST["description"] : "";
-                echo AddWeaponStore($name, $quantity, $price, $pictureCode, $type, $efficiency, $gender, $description);
-                exit;
-            case "AM" :
-                $material = isset($_POST["material"]) ? $_POST["material"] : "";
-                $weigth = isset($_POST["weigth"]) ? $_POST["weigth"] : "";
-                $size = isset($_POST["size"]) ? $_POST["size"] : "";
-                echo AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material, $weigth, $size);
-                exit;
-            case "PO" :
-                $effect = isset($_POST["effect"]) ? $_POST["effect"] : "";
-                $duration = isset($_POST["duration"]) ? $_POST["duration"] : "";
-                echo AddPotionStore($name, $quantity, $price, $pictureCode, $type, $effect, $duration);
-                exit;
-            case "RS" :
-                $description = isset($_POST["description"]) ? $_POST["description"] : "";
-                echo AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $description);
-                exit;
-        }*/
-        echo "Impossible d'ajouter l'item.";
+//        header("location: ../store/add-item.php");
         exit;
     }
 
@@ -406,5 +393,24 @@ if (isset($_POST["submit"])) {
             $ressourceDescription = $_POST["ressourceDescription"];
             updateRessourceById($idItem, $ressourceDescription);
         }    
+    }
+}
+
+function getGUID(){
+    if (function_exists('com_create_guid')){
+        return com_create_guid();
+    }
+    else {
+        mt_srand((double)microtime()*10000);
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = chr(123)// "{"
+            .substr($charid, 0, 8).$hyphen
+            .substr($charid, 8, 4).$hyphen
+            .substr($charid,12, 4).$hyphen
+            .substr($charid,16, 4).$hyphen
+            .substr($charid,20,12)
+            .chr(125);// "}"
+        return $uuid;
     }
 }

@@ -2,6 +2,7 @@
 let itemDetailsContainers = document.querySelectorAll(".popupContainer.itemDetailsContainer");
 let notificationContainer = document.getElementById("notificationContainer");
 let notificationMessageContainer = document.getElementById("notificationMessageContainer");
+let notificationOkayButton = document.getElementById("notificationOkayButton");
 
 let overlay = document.getElementById("overlay");
 if (overlay) overlay.addEventListener("click", () => CloseAllPopups());
@@ -35,10 +36,15 @@ function CloseAllPopups() {
 }
 
 //Permet d'afficher un message à l'usager sous forme d'un popup
-function NotifyWithPopup(text) {
+function NotifyWithPopup(text, destination) {
     if (notificationContainer) notificationContainer.classList.add("active");
     if (notificationMessageContainer) notificationMessageContainer.innerHTML = text;
     if (overlay) overlay.classList.add("active");
+    if (notificationOkayButton && destination){
+        notificationOkayButton.addEventListener("click", () => {            
+            Redirect(destination);
+        });
+    }
 }
 
 //Permet de fermer le popup de notification
