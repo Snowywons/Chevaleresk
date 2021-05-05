@@ -12,8 +12,11 @@ function AddItem() {
     let effect = document.getElementById("effect");
     let duration = document.getElementById("duration");
     let ressourceDescription = document.getElementById("ressourceDescription");
+    let nameValidation =  document.getElementById("nameValidation");
 
     if (validateAddItemForm()) {
+        nameValidation.innerText = "";
+
         let data = new FormData();
         data.append('submit', 'addItemDataBase');
         data.append('name', name.value);
@@ -51,9 +54,14 @@ function AddItem() {
             requete.send(data);
             requete.onreadystatechange = function () {
                 if (requete.readyState === 4) {
-                    if (requete.status === 200) {
-                        NotifyWithPopup(`${quantity.value} ${name.value} ont été ajoutés au magasin.`, "../store/add-item");
-                        console.log(requete.responseText);
+                    switch(requete.status) {
+                        case 200:
+                            NotifyWithPopup(`${quantity.value} ${name.value} ont été ajoutés au magasin.`, "../store/add-item");
+                            break;
+                        case 400:
+                            nameValidation.innerText = requete.responseText;
+                            updateValidation(name, false);
+                            break;
                     }
                 }
             }

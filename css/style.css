@@ -850,6 +850,21 @@ div.itemStarbarContainer {
     justify-content: center;
     padding: 5px;
 }
+div.fiveStarsContainer{
+    height:22px;
+    width:120px;
+    position:relative;
+    
+}
+.fiveStarsImg {
+    height:22px;
+}
+.fiveStarsImgContainer{
+    position:absolute;
+    left:0;
+    top:0;
+    overflow:hidden;
+}
 
 div.itemStarbar img {
     padding: 2px;

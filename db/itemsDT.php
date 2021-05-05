@@ -22,7 +22,17 @@ function GetItemById($id)
         return $result;
     return [];
 }
-
+function GetItemByName($name){
+    global $conn;
+    
+    $statement = $conn->prepare("CALL ItemParNom(?)");
+    $statement->bindParam(1,$name, PDO::PARAM_STR);
+    $statement->execute();
+    $result = $statement->fetch();
+    if ($result)
+        return $result;
+    return [];
+}
 function GetAllItems()
 {
     return executeQuery("CALL Items()");

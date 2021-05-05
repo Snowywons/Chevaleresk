@@ -314,6 +314,11 @@ if (isset($_POST["submit"])) {
     if ($_POST["submit"] == "addItemDataBase") {
 
         $name = isset($_POST["name"]) ? $_POST["name"] : "";
+        if(GetItemByName($name)){
+            http_response_code(400);
+            echo "Le nom est déjà utilisé.";
+            exit;
+        }
         $type = isset($_POST["type"]) ? $_POST["type"] : "";
         $quantity = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
         $price = isset($_POST["price"]) ? $_POST["price"] : "";
@@ -330,6 +335,7 @@ if (isset($_POST["submit"])) {
 
         switch ($type) {
             case "AE" :
+                
                 $efficiency = isset($_POST["efficiency"]) ? $_POST["efficiency"] : "";
                 $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
                 $description = isset($_POST["description"]) ? $_POST["description"] : "";

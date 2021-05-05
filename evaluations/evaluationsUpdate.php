@@ -18,7 +18,7 @@ function CreateEvaluationsContainer($records)
         $price = $data[3];
         $photoURL = $data[4];
         $codeType = $data[5];
-        $starsAvg = $data[6];
+        $starsAvg = round($data[6], 2);
         $evaluationCount = $data[7];
 
         $content .= "
@@ -37,16 +37,20 @@ function CreateEvaluationsContainer($records)
                     </div>
                 </div>
                 <!-- Barre d'étoiles -->
-                <div class='itemStarbarContainer'>";
+                ";
         if ($starsAvg != 0) {
-            for ($i = 0; $i < $starsAvg; $i++)
-                $content .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
-            $content .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
+                $content .= "<div class='itemStarbarContainer'>
+                    <div class='fiveStarsContainer'>
+                        <div class='fiveStarsImgContainer'><img class='fiveStarsImg' src='" . $root . "icons/StarBarEmpty.png'></div>
+                        <div class='fiveStarsImgContainer' style='width:" . $starsAvg * 20 . "%'>
+                        <img class='fiveStarsImg' src='" . $root . "icons/StarBarFull.png'></div>
+                    </div>
+                    <div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>
+                </div>";
         } else {
             $content .= "<div class='itemStarbar'>Aucune évaluation</div>";
         }
         $content .= "
-                </div>
             </div>";
     }
 
@@ -70,7 +74,7 @@ function CreateEvaluationContainer($records, $filters)
         $price = $records[3];
         $photoURL = $records[4];
         $codeType = $records[5];
-        $starsAvg = $records[6];
+        $starsAvg = round($records[6], 2);
         $evaluationCount = $records[7];
 
         $starsCount = explode(",", GetEvaluationCountForEachStarByIdItem($idItem));
@@ -96,9 +100,12 @@ function CreateEvaluationContainer($records, $filters)
         $starBar = "";
 
         if ($starsAvg != 0) {
-            for ($i = 0; $i < $starsAvg; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "/icons/StarIcon.png'></div>";
-            $starBar .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
+            $starBar .= "<div class='fiveStarsContainer'>
+            <div class='fiveStarsImgContainer'><img class='fiveStarsImg' src='" . $root . "icons/StarBarEmpty.png'></div>
+            <div class='fiveStarsImgContainer' style='width:" . $starsAvg * 20 . "%'><img class='fiveStarsImg' src='" . $root . "icons/StarBarFull.png'></div>
+        </div>";
+
+        $starBar .= "<div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>";
         } else {
             $starBar .= "<div class='itemStarbar'>Aucune évaluation</div>";
         }

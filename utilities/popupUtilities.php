@@ -120,16 +120,16 @@ function CreateItemDetailsContainers($records)
             <div class='itemDetailsFooter'>";
 
         $evaluation = GetEvaluationPreviewByIdItem($idItem);
-        $starsAvg = $evaluation[6];
+        $starsAvg = round($evaluation[6], 1);
         $evaluationCount = $evaluation[7];
-
         $starBar = "";
 
-        if ($starsAvg != 0) {
-            for ($i = 0; $i < $starsAvg; $i++)
-                $starBar .= "<div class='itemStarbar'><img src='" . $root . "icons/StarIcon.png'></div>";
-            $starBar .= "<div class='itemStarbar'>&nbsp($evaluationCount)</div>";
-        }
+        $starBar .= "<div class='fiveStarsContainer'>
+            <div class='fiveStarsImgContainer'><img class='fiveStarsImg' src='" . $root . "icons/StarBarEmpty.png'></div>
+            <div class='fiveStarsImgContainer' style='width:" . $starsAvg * 20 . "%'><img class='fiveStarsImg' src='" . $root . "icons/StarBarFull.png'></div>
+        </div>";
+
+        $starBar .= "<div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>";
 
         $content .= "
                 <div class='itemStarbarContainer'>$starBar</div>
