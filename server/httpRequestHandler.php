@@ -365,9 +365,21 @@ if (isset($_POST["submit"])) {
         $codeType = $_POST["types"];
         $quantiteStock = $_POST["quantite"];
         $prixItem = $_POST["price"];
-        $codePhoto = $_POST["picture"];
+        //$codePhoto = $_POST["picture"];
+        $codePhoto = "DefaultIcon";
 
-        updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem, $codePhoto);
+        $picture = isset($_FILES["picture"]) ? $_FILES["picture"] : "";
+
+        if ($_FILES['picture']['name'] !== "") {
+            $info = pathinfo($_FILES['picture']['name']);
+            $codePhoto = getGUID();
+            $target = '../icons/' . $codePhoto;
+            move_uploaded_file($_FILES['picture']['tmp_name'], $target);
+
+            updatePictureItemById($idItem, $codePhoto);
+        }
+            updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem);
+
         if($codeType=="AE")
         {
             $efficacite = $_POST["efficacite"];

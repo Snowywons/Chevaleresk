@@ -6,24 +6,31 @@ $( document ).ready(function() {
     });
     showElementsOnChange();
     
-    
+    $("#updateForm").change(function() {
+        $("#updateForm").valid();
+    });
+
     $("#updateForm").validate({
-        //errorClass: 'errorField',
-        //onkeyup: true,
+       
         errorElement: 'span',
         rules: {
             nom: {
                 required: true
             },
             price: {
-                required: true
+                required: true,
+                number: true,
+                min: 0
             },
             quantite: {
-                required: true
+                required: true,
+                number: true,
+                min: 0
             },
             efficacite: {
                 required: function(element) { return $('#types').val() == 'AE'; },
-                number: true
+                number: true,
+                min: 0
             },
             genres: {
                 required: function(element) { return $('#types').val() == 'AE'; }
@@ -38,7 +45,8 @@ $( document ).ready(function() {
             },
             poids: {
                 required: function(element) { return $('#types').val() == 'AM'; },
-                number: true
+                number: true,
+                min: 0
             },
             taille: {
                 required: function(element) { return $('#types').val() == 'AM'; }
@@ -49,12 +57,16 @@ $( document ).ready(function() {
             },
             duree: {
                 required: function(element) { return $('#types').val() == 'PO'; },
-                number: true
+                number: true,
+                min: 0
             },
 
             ressourceDescription: {
                 required: function(element) { return $('#types').val() == 'RS'; },
                 maxlength: 280
+            },
+            picture: {
+                extension: "jpg|jpeg|png"
             }
         }
       });
@@ -73,17 +85,30 @@ $( document ).ready(function() {
             $("#RS_Informations").show();
 
     }
-
-    /*function updateElementClick()
-    {
-         
-    }
-    function validateElement(el, condition)
-    {
-        if(condition)
-            el.addClass('errorField');
-        else
-            el.removeClass('errorField');
-    }*/
-    
 });
+
+function ChangeImagePreview() {
+    let imagePreview = document.getElementById("UploadedImage");
+    let input = document.getElementById("picture");
+
+    if (input.files[0] !== undefined) {
+        let fileName = input.files[0].name;
+        let ext = fileName.split('.').pop().toLowerCase();
+
+        if ((ext !== "png") &&
+            (ext !== "jpeg") &&
+            (ext !== "jpg") &&
+            (ext !== "bmp") &&
+            (ext !== "gif")) {
+            alert("Ce n'est pas un fichier d'image de format reconnu. Sélectionnez un autre fichier.");
+        } else {
+            let fReader = new FileReader();
+            fReader.readAsDataURL(input.files[0]);
+            fReader.onloadend = function (event) {
+                imagePreview.src = event.target.result;
+            }
+        }
+    } else {
+        imagePreview.src = "../icons/DefaultIcon.png";
+    }
+}

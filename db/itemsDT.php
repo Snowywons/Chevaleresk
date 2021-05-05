@@ -40,7 +40,7 @@ function DeleteItemFromStoreById($idItem)
     return count($result) > 0 ? $result[0] : "";
 }
 
-function updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem, $codePhoto)
+function updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem)
 {
     global $conn;
     $statement = $conn->prepare("update Items set nomItem=?, quantiteStock=?, prixItem=?, codeType=? where idItem=?");
@@ -49,5 +49,13 @@ function updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem,
     $statement->bindParam(3,$prixItem, PDO::PARAM_STR);
     $statement->bindParam(4,$codeType, PDO::PARAM_STR);
     $statement->bindParam(5,$idItem, PDO::PARAM_STR);
-    $statement->execute();
+    $statement->execute(); 
+}
+function updatePictureItemById($idItem, $codePhoto)
+{
+    global $conn;
+    $statement = $conn->prepare("update Items set codePhoto=? where idItem=?");
+    $statement->bindParam(1,$codePhoto, PDO::PARAM_STR);
+    $statement->bindParam(2,$idItem, PDO::PARAM_STR);
+    $statement->execute(); 
 }

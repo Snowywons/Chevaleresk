@@ -12,7 +12,6 @@ include_once $root . "db/potionsDT.php";
 
 if (isset($_POST["modifier"])) {
     include_once $root . "server/httpRequestHandler.php";
-    //echo "modifier = ".$_POST["modifier"];
 }
 //Chercher les informations
 $targetItem = isset($_GET["idItem"]) ? $_GET["idItem"] : -1;
@@ -32,7 +31,7 @@ if(!empty($record))
     $nomItem = $record[1];
     $quantiteStock = $record[2];
     $prixItem = $record[3];
-    $codePhoto = $record[4].".png";//"../icons/$record[4].png"
+    $codePhoto = $record[4].".png";
     $codeType = $record[5];
 }
 $efficacite=""; $genre=""; $description="";
