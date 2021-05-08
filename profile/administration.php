@@ -18,8 +18,7 @@ $records = GetAllPlayers();
 
 echo "
     <main class='administration'>
-        <h1>Gestionnaire d'utilisateurs</h1>";
-
+        <span data-shadow=\"" ."Gestionnaire&nbsp;d'utilisateurs" . "\" class='pageTitle'>Gestionnaire&nbsp;d'utilisateurs</span>";
 echo "<div id='managerReference'>";
 echo CreateManagerContainer($records);
 echo "</div></main>";

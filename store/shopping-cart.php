@@ -40,7 +40,7 @@ CreateItemDetailsContainers($records);
 //---------------------------------------------------------------------------------------------------------------------
 echo "
     <main class='shopping-cart'>
-        <h1>Panier d'achat de $targetAlias</h1>
+        <span data-shadow=\"" ."Panier&nbsp;d'achat" . "\" class='pageTitle'>Panier&nbsp;d'achat</span>
 
     <div class='bigButton backToStoreContainer' onclick='Redirect(\"../store/store\")'>
         <span class='backToStoreButton'>Retour au magasin</span>

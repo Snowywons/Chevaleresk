@@ -1,16 +1,11 @@
 :root {
     /*#region Couleurs*/
-    --col-lightBlue: #b5d9f8; /*Inutilisé*/
-    --col-ocean: #5f9cd3; /*Inutilisé*/
-    --col-oceanFog: rgba(95, 156, 211, 0.3); /*Inutilisé*/
-    --col-sky: #6bb1f3; /*Inutilisé*/
-    --col-darkBlue: #438edd; /*Inutilisé*/
     --col-nebula: #b097ff;
-    --col-slime: #a7f8d8;
-    --col-lime: #9effd7;
-    --col-grass: #39c995;
-    --col-forest: #2dba86;
-    --col-forestFog: rgba(57, 201, 147, 0.3);
+    --col-slime: #D1B8E0;
+    --col-lime: #D1B8E0;
+    --col-grass: #8a4da8;
+    --col-forest: #ad7fc7;
+    --col-forestFog: rgba(209, 184, 224, 0.3);
     --col-skin: #ffbda3;
     --col-lightRed: #ff6d6d;
     --col-gray: #d3d3d3;
@@ -143,6 +138,49 @@ main.administration {
     width: 98%;
     margin: 40px auto;
     text-align: center;
+    position: relative;
+}
+
+.pageTitleContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.pageTitle {
+    position: relative;
+    display: inline-block;
+    color: var(--col-lime);
+    font-family: 'Righteous', serif;
+    font-size: 5em;
+    text-shadow: .03em .03em 0 var(--col-grass);
+}
+.pageTitle:after {
+    content: attr(data-shadow);
+    position: absolute;
+    top: .06em; left: .06em;
+    z-index: -1;
+    text-shadow: none;
+    background-image:
+            linear-gradient(
+                    45deg,
+                    transparent 45%,
+                    hsl(291, 38%, 61%) 45%,
+                    hsl(291, 37%, 30%) 55%,
+                    transparent 0
+            );
+    background-size: .05em .05em;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shad-anim 20s linear infinite;
+}
+main.store .pageTitle:after,
+main.inventory .pageTitle:after,
+main.shopping-cart .pageTitle:after,
+main.evaluation .pageTitle:after {
+    animation: shad-anim 15s linear infinite;
+}
+main.administration .pageTitle:after {
+    animation: shad-anim 25s linear infinite;
 }
 
 /*#region Navigation*/
@@ -178,7 +216,7 @@ nav {
 nav > nav.title {
     background-color: transparent;
     position: absolute;
-    left: 0;
+    left: -30px;
     color: var(--nav-borderTopCurrentPageColor);
     font-weight: bold;
     font-size: var(--nav-titleFontSize);
@@ -264,8 +302,7 @@ nav > nav:hover, nav ul > li:hover {
 /*#region Filtre*/
 div.filterWrapper {
     display: flex;
-    justify-content: start;
-    align-items: center;
+    align-items: flex-start;
 }
 
 div.filterContainer, div.resetFilterContainer {
@@ -280,12 +317,18 @@ div.filterContainer, div.resetFilterContainer {
     border-width: 2px;
     border-style: outset;
     border-color: var(--store-filterContainerBorderColor);
+    border-radius: 8px;
 }
 
 div.filterContainer > img,
 div.resetFilterContainer > img {
     height: 25px;
     transform: rotate(0);
+}
+
+div.filterContainer.opened {
+    border-radius: 8px 8px 0 0;
+    border-bottom: 5px;
 }
 
 div.filterContainer.opened > img {
@@ -316,6 +359,11 @@ div.filters {
     align-items: start;
     background-color: var(--store-filtersBackgroundColor);
     width: min-content;
+    border-radius: 0 8px 8px 8px;
+}
+
+div.filters.short {
+    border-radius: 0 0 8px 8px;
 }
 
 div.filters > div {
@@ -371,6 +419,7 @@ main.shopping-cart div.shoppingCartTransactionContainer {
     background-color: var(--store-shoppingCartTotalContainerBackgroundColor);
     border: 1px dashed var(--store-shoppingCartTotalContainerBorderColor);
     padding: 10px;
+    border-radius: 8px;
 }
 
 main.shopping-cart div.shoppingCartTotalContainer {
@@ -388,12 +437,19 @@ div.storeContainer > div.category {
     font-weight: bold;
 }
 
+div.storeContainer > div.category:first-of-type {
+    border-radius: 8px 0 0 8px;
+}
+
+div.storeContainer > div.category.rightLastColumn {
+    border-radius: 0 8px 8px 0;
+}
+
 div.storeContainer > div {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    /*border-right: 2px solid var(--store-frameCaseBorderColor);*/
     text-align: center;
     padding: 8px;
 }
@@ -403,7 +459,7 @@ div.storeContainer > div:nth-child(n + 9), /*Propre au magasin*/
 main.inventory div.storeContainer > div:nth-child(n + 5), /*Propre à l'inventaire*/
 main.shopping-cart div.storeContainer > div:nth-child(n + 9) /*Propre au panier d'achat*/
 {
-    border-top: 1px solid var(--store-frameCaseBorderColor);
+    border-top: 1px solid var(--col-lime);
 }
 
 div.storeContainer > div.rightLastColumn {
@@ -476,12 +532,14 @@ div.shoppingCartQuantityContainer {
     gap: 5px;
 }
 
+button.addToStore,
 button.addToShoppingCart {
     width: 75px;
     height: 25px;
     outline: none;
     background-color: var(--store-addButtonBackgroundColor);
     border-color: var(--store-addButtonBorderColor);
+    border-radius: 5px;
 }
 
 div.mediumButton.payButton {
@@ -503,6 +561,7 @@ button.saveButton {
     justify-content: center;
     padding: 0;
     margin: 0;
+    border-radius: 5px;
 }
 
 button.shoppingCartButton,
@@ -511,7 +570,7 @@ button.bagButton {
     border-color: var(--profile-bagButtonBorderColor);
 }
 
-button.modifyButton, 
+button.modifyButton,
 button.balanceButton {
     background-color: var(--store-modifyButtonBackgroundColor);
     border-color: var(--store-modifyButtonBorderColor);
@@ -542,6 +601,7 @@ button.saveButton > img {
     height: 100%;
 }
 
+button.addToStore:hover,
 button.addToShoppingCart:hover,
 button.shoppingCartButton:hover,
 button.bagButton:hover,
@@ -553,6 +613,7 @@ button.saveButton:hover {
     cursor: pointer;
 }
 
+button.addToStore:active,
 button.addToShoppingCart:active,
 button.shoppingCartButton:active,
 button.bagButton:active,
@@ -596,6 +657,7 @@ div.bigButton, div.mediumButton {
     background-color: var(--store-addItemStoreContainerBackgroundColor);
     height: 25px;
     margin-bottom: 20px;
+    border-radius: 8px;
 }
 
 div.mediumButton {
@@ -626,6 +688,8 @@ div.bigButton:active, div.mediumButton:active {
 div.popupContainer {
     display: none;
     position: relative;
+    border-radius: 8px;
+    background-color: var(--col-grass);
 }
 
 div.popupContainer.active {
@@ -635,8 +699,7 @@ div.popupContainer.active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid var(--popup-itemDetailsContainerBorderColor);
-    background-color: var(--popup-itemDetailsContainerBackgroundColor);
+    border: 2px solid var(--col-grass);
     z-index: 10;
 }
 
@@ -644,14 +707,13 @@ div.popupContainer.popupConfirmationContainer.active {
     width: 400px;
     height: auto;
     text-align: center;
-    background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);
 }
 
 div.popupContainer.notificationContainer.active {
     width: 400px;
     height: auto;
     text-align: center;
-    background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);
+    /*background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);*/
 }
 
 div.confirmationButtonsContainer {
@@ -664,12 +726,14 @@ div.confirmationButtonsContainer button.cancelButton {
     background-color: var(--popup-cancelButtonBackgroundColor);
     border-color: var(--popup-cancelButtonBorderColor);
     outline: none;
+    border-radius: 5px;
 }
 
 div.confirmationButtonsContainer button.confirmButton {
     background-color: var(--popup-confirmButtonBackgroundColor);
     border-color: var(--popup-confirmButtonBorderColor);
     outline: none;
+    border-radius: 5px;
 }
 
 div.confirmationButtonsContainer button.cancelButton:active,
@@ -688,15 +752,16 @@ div.popupHeaderContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--popup-itemDetailsContainerHeaderBackgroundColor);
     font-weight: bold;
     padding: 2px 2px 3px 5px;
+    margin-top: 1px;
 }
 
 button.popupExitButton {
     font-size: medium;
     outline: none;
     border-color: transparent;
+    border-radius: 5px;
 }
 
 button.popupExitButton:focus,
@@ -713,11 +778,34 @@ button.popupExitButton:hover {
 
 div.popupBodyContainer {
     position: relative;
-    margin: 10px;
+    margin-top: 1px;
+    padding: 10px 0;
+    background-color: var(--popup-itemDetailsContainerBackgroundColor);
+}
+
+div.popupContainer.notificationContainer > div.popupBodyContainer {
+    border-radius: 0 0 8px 8px;
 }
 
 div.popupFooterContainer {
+    position: relative;
     height: max-content;
+    border-radius: 0 0 8px 8px;
+}
+
+div.popupConfirmationContainer > div.popupFooterContainer:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 400px;
+    top: -3px;
+    left: 0;
+    background-color: var(--popup-itemDetailsContainerBackgroundColor);
+    border-top: 5px solid var(--popup-itemDetailsContainerBackgroundColor);
+}
+
+div.popupConfirmationContainer > div.popupFooterContainer {
+    background-color: var(--popup-itemDeleteConfirmationContainerBackgroundColor);
 }
 
 div.itemDetailsImageContainer {
@@ -793,22 +881,25 @@ div.evaluationsContainer { /*Le conteneur des previews (frame) de toutes les év
 
 div.evaluationContainer { /*Le conteneur des évaluations individuel*/
     display: grid;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 190px auto;
     grid-column-gap: 10px;
+
 }
 
 div.itemEvaluationPreviewContainer { /*Les frames de toutes les évaluations*/
     width: 190px;
     user-select: none;
     margin: 0 auto;
-    /*border: 1px solid var(--col-slime);*/
+    border-radius: 8px;
     background-color: var(--evaluations-itemStarbarContainerBackgroundColor);
+    position: relative;
 }
 
 div.itemEvaluationPreviewImageBackgroundContainer {
     background-color: whitesmoke;
-    border: 1px solid var(--col-grass);
+    border: 1px solid var(--col-lime);
     border-bottom: 0;
+    border-radius: 8px 8px 0 0;
 }
 
 div.itemEvaluationPreviewImageContainer {
@@ -846,24 +937,32 @@ div.itemEvaluationPreviewImageContainer div.titleContainer {
 div.itemStarbarContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     padding: 5px;
+    height: 28px;
 }
-div.fiveStarsContainer{
-    height:22px;
-    width:120px;
-    position:relative;
-    
+
+div.fiveStarsContainer {
+    height: 22px;
+    width: 120px;
+    position: relative;
+
 }
+
 .fiveStarsImg {
-    height:22px;
+    height: 22px;
 }
-.fiveStarsImgContainer{
-    position:absolute;
-    left:0;
-    top:0;
-    overflow:hidden;
+
+.fiveStarsImgContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+div.itemStarbar {
+    height: 22px;
 }
 
 div.itemStarbar img {
@@ -877,6 +976,7 @@ div.evaluationItemContainer { /*La colonne de gauche dans les évaluations indiv
     background-image: linear-gradient(var(--col-forestFog) 90%, transparent);
     padding: 0;
     margin: 0;
+    border-radius: 8px 8px 0 0;
 }
 
 div.evaluationItemContainer > div.itemEvaluationPreviewContainer {
@@ -886,6 +986,7 @@ div.evaluationItemContainer > div.itemEvaluationPreviewContainer {
     border: 0;
     /*border: 1px solid var(--evaluations-evaluationItemContainerBorderColor);*/
 }
+
 div.evaluationItemContainer:hover {
     cursor: help;
 }
@@ -912,8 +1013,9 @@ div.playerEvaluationContainer {
     grid-column-start: 2;
     min-height: 100px;
     text-align: left;
-    padding: 5px 5px 0 5px;
-    border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
+    padding: 8px 10px 10px 10px;
+    border: 1px solid var(--col-lime);
+    border-radius: 8px;
 }
 
 div.playerEvaluationContainer div.itemStarbarContainer {
@@ -928,7 +1030,8 @@ div.playerEvaluationContainer div.adminButtonsContainer {
 }
 
 div.playerEvaluationContainer ~ div.playerEvaluationContainer {
-    border-top: 0;
+    /*border-top: 0;*/
+    margin-top: 5px;
 }
 
 div.playerEvaluationContainer > div:nth-of-type(3) { /*Le nom du joueur au bas du commentaire*/
@@ -967,6 +1070,7 @@ div.playerEvaluationContainer textarea {
     box-sizing: border-box;
     resize: none;
     border: 1px solid var(--evaluations-playerEvaluationContainerBorderColor);
+    border-radius: 0 0 8px 8px;
 }
 
 div.playerEvaluationContainer textarea:focus {
@@ -998,6 +1102,7 @@ div.rating {
     display: flex;
     padding: 2px 5px;
     background-color: var(--col-grass);
+    border-radius: 8px 8px 0 0;
 }
 
 div.rating label {
@@ -1021,8 +1126,7 @@ div.managerContainer {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
     width: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin-top: 25px;
 }
 
 div.managerContainer > div.category {
@@ -1030,24 +1134,26 @@ div.managerContainer > div.category {
     font-weight: bold;
 }
 
+div.managerContainer > div.category:first-of-type {
+    border-radius: 8px 0 0 8px;
+}
+
+div.managerContainer > div.category.rightLastColumn {
+    border-radius: 0 8px 8px 0;
+}
+
 div.managerContainer > div {
     display: grid;
     grid-template-columns: auto;
     align-items: center;
     justify-content: center;
-    /*border-right: 2px solid var(--store-frameCaseBorderColor);*/
-    border-top: 1px solid var(--store-frameCaseBorderColor);
     text-align: center;
     padding: 5px;
 }
 
-/*div.managerContainer > div:nth-child(5n + 1) {*/
-/*    border-left: 2px solid var(--store-frameCaseBorderColor);*/
-/*}*/
-
-/*div.managerContainer > div:nth-child(n + 7) {*/
-/*    border-top: 1px solid var(--store-frameCaseBorderColor);*/
-/*}*/
+div.managerContainer > div:nth-child(n + 11) {
+    border-top: 1px solid var(--col-lime);
+}
 
 div.managerContainer > div.adminActionsContainer {
     position: relative;
@@ -1089,6 +1195,7 @@ input[type=submit] {
     grid-column-start: 2;
     height: 25px;
     width: 100px;
+    border-radius: 5px;
 }
 
 input[type=submit]:active {
@@ -1133,11 +1240,17 @@ form input.itemQuantity {
     }
 }
 
+@keyframes shad-anim {
+    0% {background-position: 0 0}
+    0% {background-position: 100% -100%}
+}
+
 /*endregion Autres*/
 
-.errorField,.error {
+.errorField, .error {
     border: 1px solid red;
 }
+
 span.error {
     display: none !important;
 }

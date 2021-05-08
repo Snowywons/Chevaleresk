@@ -1,4 +1,6 @@
 function AddItem() {
+    event.preventDefault();
+
     let name = document.getElementById("name");
     let types = document.getElementById("types");
     let quantity = document.getElementById("quantity");

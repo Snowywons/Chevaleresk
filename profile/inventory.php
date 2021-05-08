@@ -40,9 +40,22 @@ CreateNotificationContainer();
 CreateOverlay();
 
 echo "
-<main class='inventory'>
-    <h1>Inventaire de $targetAlias</h1>
-    
+<main class='inventory'>";
+if ($targetAlias === $alias) {
+    echo " 
+    <div class='pageTitleContainer'>
+        <span data-shadow=\"" ."Mon&nbsp;inventaire" . "\" class='pageTitle'>Mon&nbsp;inventaire</span>
+    </div>
+    <br>";
+} else {
+    echo " 
+    <div class='pageTitleContainer'>
+        <span data-shadow=\"" ."Inventaire&nbsp;de&nbsp;$targetAlias" . "\" class='pageTitle'>Inventaire&nbsp;de&nbsp;$targetAlias</span>
+    </div>
+    <br>";
+}
+
+echo "
     <div class='bigButton backToStoreContainer' onclick='Redirect(\"../store/store\")'>
         <span class='backToStoreButton'>Retour au magasin</span>
     </div>";

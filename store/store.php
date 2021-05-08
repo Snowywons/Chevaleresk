@@ -21,7 +21,16 @@ CreateItemDetailsContainers($records);
 //---------------------------------------------------------------------------------------------------------------------
 echo "
     <main class='store'>
-        <h1>Magasin</h1>";
+        <div class='pageTitleContainer'>
+            <span data-shadow=\"" ."Magasin" . "\" class='pageTitle'>Magasin</span>
+        </div>
+    <br>";
+
+if (!isset($_SESSION["logged"]) ||
+    !isset($_SESSION["admin"]) ||
+    $_SESSION["admin"] == false) {
+    echo "<br><br><br>"; //Petit hack pour le title... I know I know
+}
 
 //Administrateurs seulement
 if (UserIsAdmin()) {

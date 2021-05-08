@@ -62,7 +62,8 @@ if(!empty($ressource))
 
 //Afficher le form
 echo "<main class='modify-item'>
-<h1>Modifier un item</h1>
+<span data-shadow=\"" ."Modifier&nbsp;un&nbsp;item" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-53%)'>Modifier&nbsp;un&nbsp;item</span><br><br>
 
 <form action='' id='updateForm' name='updateForm' method='post'>
     <fieldset>

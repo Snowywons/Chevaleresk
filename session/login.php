@@ -18,7 +18,8 @@ else {
 
 echo "
 <main class='login'>
-    <h1>Connexion</h1>";
+    <span data-shadow=\"" ."Connexion" . "\" class='pageTitle'>Connexion</span>
+    <br><br>";
 
 if ($loginError) {
     echo "<div id='loginError' style='color:red'>$loginError</div><br>";

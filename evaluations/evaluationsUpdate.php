@@ -37,21 +37,20 @@ function CreateEvaluationsContainer($records)
                     </div>
                 </div>
                 <!-- Barre d'étoiles -->
-                ";
+                <div class='itemStarbarContainer'>";
         if ($starsAvg != 0) {
-                $content .= "<div class='itemStarbarContainer'>
+                $content .= "
                     <div class='fiveStarsContainer'>
                         <div class='fiveStarsImgContainer'><img class='fiveStarsImg' src='" . $root . "icons/StarBarEmpty.png'></div>
                         <div class='fiveStarsImgContainer' style='width:" . $starsAvg * 20 . "%'>
                         <img class='fiveStarsImg' src='" . $root . "icons/StarBarFull.png'></div>
                     </div>
-                    <div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>
-                </div>";
+                    <div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>";
         } else {
-            $content .= "<div class='itemStarbar'>Aucune évaluation</div>";
+            $content .= "<div class='itemStarbar'>Aucune&nbsp;évaluation</div>";
         }
         $content .= "
-            </div>";
+            </div></div>";
     }
 
     $content .= "</div>";
@@ -107,7 +106,7 @@ function CreateEvaluationContainer($records, $filters)
 
         $starBar .= "<div class='itemStarbar'>&nbsp$starsAvg ($evaluationCount)</div>";
         } else {
-            $starBar .= "<div class='itemStarbar'>Aucune évaluation</div>";
+            $starBar .= "<div class='itemStarbar'>Aucune&nbsp;évaluation</div>";
         }
 
         $content .= "

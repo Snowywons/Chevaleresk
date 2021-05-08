@@ -140,7 +140,7 @@ function CreateInventoryStoreContainer($records)
     $content = "
         <div class='storeContainer'>
         <div class='category'>Item</div>
-        <div class='category'>Quantité</div>";
+        <div class='category rightLastColumn'>Quantité</div>";
 
     if($records == NULL) {
         $content.= "<div style='grid-column-start: 1; grid-column-end: 3;'>Aucun item correspondant</div>";

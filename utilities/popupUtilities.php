@@ -162,7 +162,6 @@ function CreateNotificationContainer()
                 <br>
                 <div id='notificationMessageContainer'></div>
                 <br>
-                <button class='confirmButton' id='notificationOkayButton' onclick='ClosePopupAndNotifier(\"notificationContainer\")'>Ok</button>
             </div>
             <div class='popupFooterContainer'></div>
         </div>";

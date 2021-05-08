@@ -43,8 +43,7 @@ CreateOverlay();
         <body>
         <header>
             <nav>
-                <nav class='title'>
-                    <img src='" . $root . "icons/ChevalereskIcon.png'>";
+                <nav class='title'>";
 
 //Onglets par défaut
 echo <<<HTML

@@ -16,7 +16,8 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == false) {
 //Ajout d'un item
 echo "
 <main class='add-item'>
-<h1>Ajouter un item</h1>
+<span data-shadow=\"" ."Ajouter&nbsp;un&nbsp;item" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-53%)'>Ajouter&nbsp;un&nbsp;item</span><br><br>
 
 <form method='POST' name ='myItem' onsubmit='return validateAddItemForm()'>
     <fieldset>
@@ -143,11 +144,13 @@ echo "
             <img src='" . $root . "icons/DefaultIcon.png' id='UploadedImage' onclick='OpenImageUploader()'>
         </div>
         <div id='imageValidation' style='color:red'></div>
-        <input type='file' accept='.jpg,.jpeg,.png' id='ImageUploader' name='picture' value='' 
+        <input hidden type='file' accept='.jpg,.jpeg,.png' id='ImageUploader' name='picture' value='' 
                 onchange='ChangeImagePreview()'>
         
         <!-- Ajouter -->
-        <input type='button' class='saveChanges' value='Ajouter' onclick='AddItem()' >
+        <div style='grid-column-start: 1; grid-column-end: 3; text-align: right; margin-top: 10px'>
+            <button class='addToStore' onclick='AddItem()'>Ajouter</button>
+        </div>
 </fieldset>
 </form>
 </main>";

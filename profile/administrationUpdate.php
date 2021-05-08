@@ -12,7 +12,7 @@ function CreateManagerContainer($records) {
             <div class='category'>Nom</div>
             <div class='category'>Prénom</div>
             <div class='category'>Solde (écus)</div>
-            <div class='category'>Actions</div>";
+            <div class='category rightLastColumn'>Actions</div>";
 
     foreach ($records as $data) {
         $alias = $data[0];

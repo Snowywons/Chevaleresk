@@ -21,7 +21,10 @@ $idItem = isset($_GET["idItem"]) ? $_GET["idItem"] : "";
 
 echo "
 <main class='evaluations'>
-    <h1>Évaluations</h1>";
+    <div class='pageTitleContainer'>
+        <span data-shadow=\"" ."Évaluations" . "\" class='pageTitle'>Évaluations</span>
+    </div>
+    <br>";
 
 if ($idItem == "") { //Évaluations petits frames
     echo "

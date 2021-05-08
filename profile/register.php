@@ -31,7 +31,9 @@ include_once $root . "master/header.php";
 
 echo "
     <main class='register'>
-        <h1>Inscription</h1>
+        <span data-shadow=\"" ."Inscription" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-60%)'>Inscription</span>
+        <br><br>
         
         <form action='register.php' method='post' onsubmit='return validateRegisterForm()'>
             <fieldset>

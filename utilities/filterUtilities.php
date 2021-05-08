@@ -67,7 +67,7 @@ function CreateEvaluationFilterSection()
         </div>
         
         <!-- Filtre individuel -->
-        <div id='filters' class='filters hidden'>
+        <div id='filters' class='filters hidden short'>
 
             <div>
                 <!-- Nombre d'étoiles -->

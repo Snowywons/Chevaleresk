@@ -28,6 +28,22 @@ $firstName = "";
 $balance = "";
 $password = "";
 
+
+echo "
+    <main class='modify-profile'>";
+
+if ($targetAlias === $alias) {
+    echo " 
+        <span data-shadow=\"" ."Modifier&nbsp;mon&nbsp;profil" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-50%)'>Modifier&nbsp;mon&nbsp;profil</span>
+    <br><br>";
+} else {
+    echo " 
+        <span data-shadow=\"" ."Profil&nbsp;de&nbsp;$targetAlias" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-50%)'>Profil&nbsp;de&nbsp;$targetAlias</span>
+    <br><br>";
+}
+
 if (count($records) > 0) {
     $alias = $records[0];
     $lastName = $records[1];
@@ -37,9 +53,6 @@ if (count($records) > 0) {
 }
 
 echo "
-    <main class='modify-profile'>
-        <h1>Modifier les informations</h1>
-        
         <form action='modify-profile.php' method='POST'>
             <fieldset>
                 <input type='text' id='alias' value='$alias' hidden disabled>

@@ -39,7 +39,8 @@ if (count($records) > 0) {
 
 echo "
     <main class='profile'>
-        <h1>Informations du profil</h1>
+        <span data-shadow=\"" ."Mon&nbsp;profil" . "\" class='pageTitle'
+        style='left: 50%;transform: translateX(-60%)'>Mon&nbsp;profil</span><br><br>
         <form>
             <fieldset>
                 <label for='alias'>Alias</label>
