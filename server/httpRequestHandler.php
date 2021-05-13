@@ -357,60 +357,84 @@ if (isset($_POST["submit"])) {
                 AddRessourceStore($name, $quantity, $price, $guid, $type, $description);
                 break;
         }
-
-//        header("location: ../store/add-item.php");
+        echo "$quantity" . " " . $name . "ont été ajoutés au magasin";
         exit;
     }
 
     //Modfier l'item
-    if ($_POST["submit"] == "updateItem") {
+    if ($_POST["submit"] == "updateItemDataBase") {
 
-        $alias = $_SESSION["alias"];
-        $idItem = $_POST["idItem"];
-        $nomItem = $_POST["nom"];
-        $codeType = $_POST["types"];
-        $quantiteStock = $_POST["quantite"];
-        $prixItem = $_POST["price"];
-        //$codePhoto = $_POST["picture"];
-        $codePhoto = "DefaultIcon";
+        $idItem = isset($_POST["idItem"]) ? $_POST["idItem"] : "";
+        $nomItem = isset($_POST["name"]) ? $_POST["name"] : "";
+        $previousName = isset($_POST["previousName"]) ? $_POST["previousName"] : "";
+        if($previousName !== $nomItem && GetItemByName($nomItem)){
+            http_response_code(400);
+            echo "Le nom est déjà utilisé.";
+            exit;
+        }
 
-        $picture = isset($_FILES["picture"]) ? $_FILES["picture"] : "";
+        $codeType = isset($_POST["type"]) ? $_POST["type"] : "";
+        $previousCodeType = isset($POST["previousCodeType"]) ? $_POST["previousCodeType"] : "";
+        $quantiteStock = isset($_POST["quantity"]) ? $_POST["quantity"] : "";
+        $prixItem = isset($_POST["price"]) ? $_POST["price"] : "";
+        $codePhoto = isset($_POST["codePhoto"]) ? $_POST["codePhoto"] : "DefaultIcon";
+        $picture = isset($_FILES["ImageUploader"]) ? $_FILES["ImageUploader"] : "";
 
-        if ($_FILES['picture']['name'] !== "") {
-            $info = pathinfo($_FILES['picture']['name']);
+        if ($picture && $_FILES['ImageUploader']['name'] !== "") {
+            if ($codePhoto !== "DefaultIcon")
+                unlink("../icons/$codePhoto");
+
             $codePhoto = getGUID();
             $target = '../icons/' . $codePhoto;
-            move_uploaded_file($_FILES['picture']['tmp_name'], $target);
-
-            updatePictureItemById($idItem, $codePhoto);
+            move_uploaded_file($_FILES['ImageUploader']['tmp_name'], $target);
+            UpdatePictureItemById($idItem, $codePhoto);
         }
-            updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem);
 
-        if($codeType=="AE")
+        UpdateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem);
+
+        switch ($previousCodeType)
         {
-            $efficacite = $_POST["efficacite"];
-            $genres = $_POST["genres"];
-            $description = $_POST["description"];
-            updateWeaponById($idItem, $efficacite, $genres, $description);
-        }    
-        else if($codeType=="AM")
+            case "AE":
+                DeleteWeaponById($idItem);
+                break;
+            case "AM":
+                DeleteArmorById($idItem);
+                break;
+            case "PO":
+                DeletePotionById($idItem);
+                break;
+            case "RS":
+                DeleteRessourceById($idItem);
+                break;
+        }
+
+        switch ($codeType)
         {
-            $matiereArmure = $_POST["matieres"];
-            $poidsArmure = $_POST["poids"];
-            $tailleArmure = $_POST["taille"];
-            updateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure);
-        }   
-        else if($codeType=="PO")
-        {
-            $effet = $_POST["effet"];
-            $duree = $_POST["duree"];
-            updatePotionById($idItem, $effet, $duree);
-        }    
-        else if($codeType=="RS")
-        {
-            $ressourceDescription = $_POST["ressourceDescription"];
-            updateRessourceById($idItem, $ressourceDescription);
-        }    
+            case "AE":
+                $efficacite = $_POST["efficiency"];
+                $genres = $_POST["gender"];
+                $description = $_POST["description"];
+                UpdateWeaponById($idItem, $efficacite, $genres, $description);
+                break;
+            case "AM":
+                $matiereArmure = $_POST["material"];
+                $poidsArmure = $_POST["weight"];
+                $tailleArmure = $_POST["size"];
+                UpdateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure);
+                break;
+            case "PO":
+                $effet = $_POST["effect"];
+                $duree = $_POST["duration"];
+                UpdatePotionById($idItem, $effet, $duree);
+                break;
+            case "RS":
+                $ressourceDescription = $_POST["description"];
+                UpdateRessourceById($idItem, $ressourceDescription);
+                break;
+        }
+
+        echo "L'item a bien été modifié.";
+        exit;
     }
 }
 

@@ -65,7 +65,7 @@ function AddClickEventFor(className, action) {
 function ServerRequest(method, url, request, onSuccess, onFailure, NWPP = true) {
 
     if (NWPP)
-        NotifyWithPopup("Traitement de la demande...");
+        NotifyWithPopup("Traitement de la demande...", true);
 
     let requete = new XMLHttpRequest();
     requete.open(method, url, true);
@@ -75,8 +75,12 @@ function ServerRequest(method, url, request, onSuccess, onFailure, NWPP = true) 
     requete.onreadystatechange = function () {
         if (requete.readyState === 4) {
             if (requete.status === 200) {
+                if(NWPP)
+                    CloseNotifier();
                 onSuccess(requete);
             } else {
+                if (NWPP)
+                    CloseNotifier();
                 onFailure(requete);
             }
         }

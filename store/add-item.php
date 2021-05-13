@@ -2,9 +2,7 @@
 $root = "../";
 
 include_once $root . "master/header.php";
-include_once $root . "utilities/sessionUtilities.php";
 include_once $root . "utilities/dbUtilities.php";
-include_once $root . "utilities/popupUtilities.php";
 include_once $root . "db/itemsDT.php";
 
 //Accès interdit
@@ -19,7 +17,7 @@ echo "
 <span data-shadow=\"" ."Ajouter&nbsp;un&nbsp;item" . "\" class='pageTitle'
         style='left: 50%;transform: translateX(-53%)'>Ajouter&nbsp;un&nbsp;item</span><br><br>
 
-<form method='POST' name ='myItem' onsubmit='return validateAddItemForm()'>
+<form method='POST' name ='myItem'>
     <fieldset>
         <!-- Nom -->
         <label for='name'>Nom
@@ -49,7 +47,7 @@ echo "
             <input type='number' id='efficiency' name='efficiency' placeholder='0' onblur='validateEfficiency()'>
             <div id='efficiencyValidation' style='color:red'></div>
 
-            <label for='genres'>Genre
+            <label for='genders'>Genre
                 <abbr title='Obligatoire' style='color:red'>*</abbr>
             </label>
             <select name='genders' id='genders' onblur='validateNotEmpty(\"genders\")'>
@@ -57,7 +55,6 @@ echo "
                 <option value='Une main'>Une main</option>
                 <option value='Deux mains'>Deux mains</option>
             </select>
-            <div id='sortValidation' style='color:red'></div>
 
             <label for='weaponDescription'>Description (max 280 caractères)
                 <abbr title='Obligatoire' style='color:red'>*</abbr>
@@ -84,7 +81,7 @@ echo "
             <input type='number' id='weight' name='weight' placeholder='0' onblur='validateWeight()'>
             <div id='weightValidation' style='color:red'></div>
 
-            <label for='size'>Taille
+            <label for='sizes'>Taille
                 <abbr title='Obligatoire' style='color:red'>*</abbr>
             </label>
             <select name='sizes' id='sizes' onblur='validateNotEmpty(\"sizes\")'>

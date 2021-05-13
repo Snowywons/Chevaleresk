@@ -37,7 +37,7 @@ function AddArmorStore($name, $quantity, $price, $pictureCode, $type, $material,
     $statement->execute();
 }
 
-function updateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure)
+function UpdateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure)
 {
     global $conn;
     $armor = GetArmorById($idItem);
@@ -52,5 +52,15 @@ function updateArmorById($idItem, $matiereArmure, $poidsArmure, $tailleArmure)
     $statement->bindParam(2,$poidsArmure, PDO::PARAM_STR);
     $statement->bindParam(3,$tailleArmure, PDO::PARAM_STR);
     $statement->bindParam(4,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+function DeleteArmorById($idItem)
+{
+    global $conn;
+    $query = "DELETE FROM Armures WHERE idItem=?";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$idItem, PDO::PARAM_INT);
     $statement->execute();
 }

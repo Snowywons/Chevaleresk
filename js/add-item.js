@@ -16,7 +16,8 @@ function AddItem() {
     let ressourceDescription = document.getElementById("ressourceDescription");
     let nameValidation =  document.getElementById("nameValidation");
 
-    if (validateAddItemForm()) {
+    if (validateItemForm()) {
+        NotifyWithPopup("Traitement en cours.", true);
         nameValidation.innerText = "";
 
         let data = new FormData();
@@ -56,11 +57,14 @@ function AddItem() {
             requete.send(data);
             requete.onreadystatechange = function () {
                 if (requete.readyState === 4) {
+                    CloseNotifier();
                     switch(requete.status) {
                         case 200:
-                            NotifyWithPopup(`${quantity.value} ${name.value} ont été ajoutés au magasin.`, "../store/add-item");
+                            NotifyWithPopup(requete.responseText, false, "../store/add-item.php");
                             break;
                         case 400:
+                            CloseOverlay();
+                            CloseNotifier();
                             nameValidation.innerText = requete.responseText;
                             updateValidation(name, false);
                             break;
@@ -116,7 +120,7 @@ function ChangeImagePreview() {
     }
 }
 
-function validateAddItemForm() {
+function validateItemForm(needImage = true) {
     let formIsValid = true;
     let types = document.getElementById("types");
 
@@ -145,7 +149,8 @@ function validateAddItemForm() {
             break;
     }
 
-    formIsValid = !validateImage() ? false : formIsValid;
+    if (needImage)
+        formIsValid = !validateImage() ? false : formIsValid;
 
     return formIsValid;
 }
@@ -324,8 +329,3 @@ function validateImage() {
 function RegEx(regex, value) {
     return regex.test(value);
 }
-
-/*
-* /^[a-z]([a-z\-]|\s)*$/i
-* /^[A-Za-z]+([^0-9]*)$/
-* */

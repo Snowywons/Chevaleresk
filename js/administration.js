@@ -1,6 +1,8 @@
 //Demande de soumission du formulaire de modification des informations d'un joueur
-AddClickEventFor("saveChanges", (item) => {
+function UpdateProfile() {
+    event.preventDefault();
     if (validateModifyProfileForm()) {
+
         let alias = document.getElementById("alias").value;
         let firstName = document.getElementById("firstName").value;
         let lastName = document.getElementById("lastName").value;
@@ -18,7 +20,7 @@ AddClickEventFor("saveChanges", (item) => {
         }, () => {
         });
     }
-});
+}
 
 //Demande de mise à jour du contenu du gestionnaire
 function UpdateManagerContent() {

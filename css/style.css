@@ -722,6 +722,10 @@ div.confirmationButtonsContainer {
     padding: 10px;
 }
 
+div.confirmationButtonsContainer.hidden {
+    display: none;
+}
+
 div.confirmationButtonsContainer button.cancelButton {
     background-color: var(--popup-cancelButtonBackgroundColor);
     border-color: var(--popup-cancelButtonBorderColor);
@@ -987,19 +991,7 @@ div.evaluationItemContainer > div.itemEvaluationPreviewContainer {
     /*border: 1px solid var(--evaluations-evaluationItemContainerBorderColor);*/
 }
 
-div.evaluationItemContainer:hover {
-    cursor: help;
-}
-
-div.evaluationItemContainer:hover div.itemEvaluationPreviewContainer {
-    display: none;
-}
-
 div.allItemStarbarContainer {
-    display: none;
-}
-
-div.evaluationItemContainer:hover div.allItemStarbarContainer {
     display: block;
 }
 

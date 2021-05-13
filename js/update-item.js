@@ -1,114 +1,85 @@
-$( document ).ready(function() {
-   
-    //Montre ou cache les éléments
-    $("#types").change(function() {
-        showElementsOnChange();
-    });
-    showElementsOnChange();
-    
-    $("#updateForm").change(function() {
-        $("#updateForm").valid();
-    });
+function UpdateItem() {
+    event.preventDefault();
 
-    $("#updateForm").validate({
-       
-        errorElement: 'span',
-        rules: {
-            nom: {
-                required: true
-            },
-            price: {
-                required: true,
-                number: true,
-                min: 0
-            },
-            quantite: {
-                required: true,
-                number: true,
-                min: 0
-            },
-            efficacite: {
-                required: function(element) { return $('#types').val() == 'AE'; },
-                number: true,
-                min: 0
-            },
-            genres: {
-                required: function(element) { return $('#types').val() == 'AE'; }
-            },
-            description: {
-                required: function(element) { return $('#types').val() == 'AE'; },
-                maxlength: 280
-            },
+    let itemId = document.getElementById("idItem");
+    let previousCodeType = document.getElementById("previousCodeType");
+    let codePhoto = document.getElementById("codePhoto");
+    let name = document.getElementById("name");
+    let previousName = document.getElementById("previousName");
+    let types = document.getElementById("types");
+    let quantity = document.getElementById("quantity");
+    let price = document.getElementById("price");
+    let efficiency = document.getElementById("efficiency");
+    let genders = document.getElementById("genders");
+    let weaponDescription = document.getElementById("weaponDescription");
+    let materials = document.getElementById("materials");
+    let weight = document.getElementById("weight");
+    let sizes = document.getElementById("sizes");
+    let effect = document.getElementById("effect");
+    let duration = document.getElementById("duration");
+    let ressourceDescription = document.getElementById("ressourceDescription");
+    let nameValidation =  document.getElementById("nameValidation");
 
-            matieres: {
-                required: function(element) { return $('#types').val() == 'AM'; }
-            },
-            poids: {
-                required: function(element) { return $('#types').val() == 'AM'; },
-                number: true,
-                min: 0
-            },
-            taille: {
-                required: function(element) { return $('#types').val() == 'AM'; }
-            },
+    if (validateItemForm(false)) {
+        NotifyWithPopup("Traitement en cours.", true);
 
-            effet: {
-                required: function(element) { return $('#types').val() == 'PO'; }
-            },
-            duree: {
-                required: function(element) { return $('#types').val() == 'PO'; },
-                number: true,
-                min: 0
-            },
+        nameValidation.innerText = "";
 
-            ressourceDescription: {
-                required: function(element) { return $('#types').val() == 'RS'; },
-                maxlength: 280
-            },
-            picture: {
-                extension: "jpg|jpeg|png"
+        let data = new FormData();
+        data.append('submit', 'updateItemDataBase');
+        data.append('idItem', itemId.value);
+        data.append('previousCodeType', previousCodeType.value);
+        data.append('name', name.value);
+        data.append('previousName', previousName.value);
+        data.append('type', types.value);
+        data.append('quantity', quantity.value);
+        data.append('price', price.value);
+        data.append('codePhoto', codePhoto.value);
+
+        switch (types.value) {
+            case "AE" : //Arme
+                data.append('efficiency', efficiency.value);
+                data.append('gender', genders.value);
+                data.append('description', weaponDescription.value);
+                break;
+            case "AM" : //Armure
+                data.append('material', materials.value);
+                data.append('weight', weight.value);
+                data.append('size', sizes.value);
+                break;
+            case "PO" : //Potion
+                data.append('effect', effect.value);
+                data.append('duration', duration.value);
+                break;
+            case "RS" :
+                data.append('description', ressourceDescription.value);
+                break;
+        }
+
+        let input = document.getElementById("ImageUploader");
+        let file = input.files[0];
+        if (file !== undefined)
+            data.append('ImageUploader', file);
+
+        let requete = new XMLHttpRequest();
+        requete.open('POST', "../server/httpRequestHandler.php", true);
+        requete.send(data);
+        requete.onreadystatechange = function () {
+            if (requete.readyState === 4) {
+                CloseNotifier();
+
+                switch (requete.status) {
+                    case 200:
+                        NotifyWithPopup(requete.responseText, false, "../store/store.php");
+                        break;
+                    case 400:
+                        CloseOverlay();
+                        CloseNotifier();
+                        nameValidation.innerText = requete.responseText;
+                        updateValidation(name, false);
+                        break;
+                }
             }
         }
-      });
-
-    function showElementsOnChange()
-    {
-        var el = $("#types");
-        $(".addItemInfosContainer").removeClass("hidden").hide();
-        if(el.val()=="AE")
-            $("#armeInfos").show();
-        else if(el.val()=="AM")
-            $("#armureInfos").show();  
-        else if(el.val()=="PO")
-            $("#potionInfos").show();   
-        else if(el.val()=="RS")
-            $("#RS_Informations").show();
-
-    }
-});
-
-function ChangeImagePreview() {
-    let imagePreview = document.getElementById("UploadedImage");
-    let input = document.getElementById("picture");
-
-    if (input.files[0] !== undefined) {
-        let fileName = input.files[0].name;
-        let ext = fileName.split('.').pop().toLowerCase();
-
-        if ((ext !== "png") &&
-            (ext !== "jpeg") &&
-            (ext !== "jpg") &&
-            (ext !== "bmp") &&
-            (ext !== "gif")) {
-            alert("Ce n'est pas un fichier d'image de format reconnu. Sélectionnez un autre fichier.");
-        } else {
-            let fReader = new FileReader();
-            fReader.readAsDataURL(input.files[0]);
-            fReader.onloadend = function (event) {
-                imagePreview.src = event.target.result;
-            }
-        }
-    } else {
-        imagePreview.src = "../icons/DefaultIcon.png";
     }
 }

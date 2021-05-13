@@ -50,18 +50,18 @@ function DeleteItemFromStoreById($idItem)
     return count($result) > 0 ? $result[0] : "";
 }
 
-function updateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem)
+function UpdateItemById($idItem, $nomItem, $codeType, $quantiteStock, $prixItem)
 {
     global $conn;
     $statement = $conn->prepare("update Items set nomItem=?, quantiteStock=?, prixItem=?, codeType=? where idItem=?");
     $statement->bindParam(1,$nomItem, PDO::PARAM_STR);
-    $statement->bindParam(2,$quantiteStock, PDO::PARAM_STR);
-    $statement->bindParam(3,$prixItem, PDO::PARAM_STR);
+    $statement->bindParam(2,$quantiteStock, PDO::PARAM_INT);
+    $statement->bindParam(3,$prixItem, PDO::PARAM_INT);
     $statement->bindParam(4,$codeType, PDO::PARAM_STR);
-    $statement->bindParam(5,$idItem, PDO::PARAM_STR);
+    $statement->bindParam(5,$idItem, PDO::PARAM_INT);
     $statement->execute(); 
 }
-function updatePictureItemById($idItem, $codePhoto)
+function UpdatePictureItemById($idItem, $codePhoto)
 {
     global $conn;
     $statement = $conn->prepare("update Items set codePhoto=? where idItem=?");

@@ -19,26 +19,47 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Ajout filtre evaluations">
+    <list default="true" id="14521fb8-1d51-4090-839e-7d95e51c7d36" name="Default Changelist" comment="Modification de l'apparence du site">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluations/evaluations.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/evaluations/evaluationsUpdate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/armorsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/armorsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/itemsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/itemsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/potionsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/potionsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/ressourcesDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/ressourcesDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/weaponsDT.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/weaponsDT.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d304dd82-8857-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766856c-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766865c-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" afterPath="$PROJECT_DIR$/icons/d766865c-8b20-11eb-8dcd-0242ac130003" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668724-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668954-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" afterPath="$PROJECT_DIR$/icons/d7668954-8b20-11eb-8dcd-0242ac130003" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668a1c-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668bde-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668d5a-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668e18-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" afterPath="$PROJECT_DIR$/icons/d7668e18-8b20-11eb-8dcd-0242ac130003" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7668f76-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7669034-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7669228-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d76692e6-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766939a-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766944e-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766950c-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766969c-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d766975a-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7669818-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d76698d6-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/d7669aac-8b20-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/dfb8c944-8857-11eb-8dcd-0242ac130003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/{7CD30371-0968-4C24-8ABA-A9D59CB7AC60}" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/add-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/master/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/master/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administration.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/administrationUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/administrationUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/administration.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/administration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/popups.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/popups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/update-item.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/update-item.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profile/modify-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/modify-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/session/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/session/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/httpRequestHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/server/httpRequestHandler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/add-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/add-item.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/modify-item.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/modify-item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/shopping-cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/shopping-cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/store.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/store.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/storeUpdate.php" beforeDir="false" afterPath="$PROJECT_DIR$/store/storeUpdate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/filterUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/filterUtilities.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utilities/popupUtilities.php" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/popupUtilities.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,11 +98,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\Chevaleresk\icons" />
       <recent name="D:\wamp64\www\Chevaleresk\store" />
       <recent name="D:\wamp64\www\Chevaleresk\db" />
       <recent name="D:\wamp64\www\Chevaleresk\CSS" />
       <recent name="D:\wamp64\www\Chevaleresk\Evaluations" />
-      <recent name="D:\wamp64\www\Chevaleresk\Store" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -134,7 +155,10 @@
       <workItem from="1619902102185" duration="13669000" />
       <workItem from="1620050822863" duration="3714000" />
       <workItem from="1620307446240" duration="1035000" />
-      <workItem from="1620479686074" duration="17910000" />
+      <workItem from="1620479686074" duration="18190000" />
+      <workItem from="1620735131401" duration="6112000" />
+      <workItem from="1620832725249" duration="15731000" />
+      <workItem from="1620911215209" duration="2104000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <created>1614086883895</created>
@@ -388,7 +412,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619923949935</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Modification de l'apparence du site">
+      <created>1620498010682</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1620498010682</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +438,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modifications de plusieurs pages" />
     <MESSAGE value="Commit final avant la remise du sprint 0" />
     <MESSAGE value="Ajout AJAX" />
     <MESSAGE value="Ajout multiples 2" />
@@ -432,7 +462,8 @@
     <MESSAGE value="Modifications multiples2" />
     <MESSAGE value="Ajout suppression evaluations" />
     <MESSAGE value="Ajout filtre evaluations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout filtre evaluations" />
+    <MESSAGE value="Modification de l'apparence du site" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modification de l'apparence du site" />
   </component>
   <component name="WindowStateProjectService">
     <state x="410" y="165" width="998" height="701" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614444760288">
@@ -475,10 +506,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="336" y="77" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614444801399" />
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1619923950452">
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1620498016125">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1619923950452" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1620498016125" />
     <state x="728" y="412" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620307474251">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -487,9 +518,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="532" y="237" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1620487108347" />
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1618847482746">
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1620739759639">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1618847482746" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1620739759639" />
   </component>
 </project>

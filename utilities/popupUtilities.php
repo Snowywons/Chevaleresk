@@ -39,14 +39,17 @@ function CreateItemDetailsContainers($records)
             <div id='" . $idItem . "_itemDetailsContainer' class='popupContainer itemDetailsContainer'>
                 <div class='popupHeaderContainer'>
                     <span>$nomItem</span>
-                    <button class='popupExitButton' onclick='ClosePopup(\"" . $idItem . "_itemDetailsContainer\")'>x</button>
+                    <button class='popupExitButton' onclick='
+                    ClosePopup(\"" . $idItem . "_itemDetailsContainer\");
+                    CloseNotifier();
+                    CloseOverlay();'>x</button>
                 </div>
                 <div class='popupBodyContainer'>";
 
         if ($isAdmin) {
             $content .= "
                 <div class='adminButtonsContainer'>
-                    <button type='button' class='modifyButton' onclick='Redirect(\"../store/modify-item\",\"idItem=" .$idItem."\")'>
+                    <button type='button' class='modifyButton' onclick='Redirect(\"../store/modify-item\",\"idItem=" . $idItem . "\")'>
                         <img src='" . $root . "/icons/EditIcon.png'/>
                     </button>
                     <button type='button' class='deleteButton' onclick='DeleteItem($idItem)'>
@@ -85,7 +88,7 @@ function CreateItemDetailsContainers($records)
                     $content .= "
                         <span>Matière</span><span>$newData[1]</span>
                         <span>Poids</span><span>$newData[2]</span>
-                        <span>Taille</span><span>$newData[3]</span>";   
+                        <span>Taille</span><span>$newData[3]</span>";
                 }
                 break;
 
@@ -135,7 +138,7 @@ function CreateItemDetailsContainers($records)
                 <div class='itemStarbarContainer'>$starBar</div>
                 <div id='" . $idItem . "_showEvaluations' 
                     class='mediumButton itemDetailsContainerEvaluationButton'
-                    onClick='Redirect(\"../evaluations/evaluations\",\"idItem=" .$idItem."\")'>
+                    onClick='Redirect(\"../evaluations/evaluations\",\"idItem=" . $idItem . "\")'>
                     <span>Voir les évaluations</span>
                 </div>
             </div>
@@ -156,14 +159,23 @@ function CreateNotificationContainer()
         <div id='notificationContainer' class='popupContainer notificationContainer'>
             <div class='popupHeaderContainer'>
                 <span>Notification</span>
-                <button class='popupExitButton' onclick='ClosePopupAndNotifier(\"notificationContainer\")'>x</button>
+                <button id='notificationExitButton' class='popupExitButton' onclick='
+                ClosePopup(\"notificationContainer\");
+                CloseNotifier();
+                CloseOverlay();'>x</button>
             </div>
             <div class='popupBodyContainer'>
                 <br>
                 <div id='notificationMessageContainer'></div>
                 <br>
+                <div id='confirmationButtonsContainer' class='confirmationButtonsContainer'>
+                    <button id='notificationContinueButton' class='confirmButton'
+                        onclick='{ ClosePopup(\"notificationContainer\"); CloseNotifier(); CloseOverlay(); }'>
+                        Continuer</button>
+                </div>
             </div>
-            <div class='popupFooterContainer'></div>
+            <div class='popupFooterContainer'>
+            </div>
         </div>";
 }
 
@@ -175,7 +187,10 @@ function CreatePopup($title, $body, $onConfirm)
         <!-- Popup Header -->
         <div class='popupHeaderContainer'>
             <span>$title</span>
-            <button class='popupExitButton' onclick='ClosePopup(\"popupContainer\")'>x</button>
+            <button class='popupExitButton' onclick='
+            ClosePopup(\"popupContainer\");
+            CloseNotifier();
+            CloseOverlay();'>x</button>
         </div>
         
         <!-- Popup Body -->
@@ -186,12 +201,19 @@ function CreatePopup($title, $body, $onConfirm)
         <!-- Popup Footer -->
         <div class='popupFooterContainer'>
             <div class='confirmationButtonsContainer'>
-                <button class='popupCancelConfirmButton cancelButton' onclick='ClosePopup(\"popupContainer\")'>Annuler</button>";
+                <button class='popupCancelConfirmButton cancelButton' onclick='
+                ClosePopup(\"popupContainer\");
+                CloseNotifier();
+                CloseOverlay();'>Annuler</button>";
 
     $content .= <<<HTML
                 <button id='' 
                         class='popupQuantityConfirmButton confirmButton'
-                        onclick='{ ClosePopup("popupContainer"); $onConfirm; }'>Confirmer</button>
+                        onclick='{ 
+                    ClosePopup("popupContainer"); 
+                    $onConfirm;
+                    CloseNotifier();
+                    CloseOverlay();}'>Confirmer</button>
 HTML;
 
     $content .= "

@@ -38,7 +38,7 @@ function AddPotionStore($name, $quantity, $price, $pictureCode, $type, $effect, 
     $statement->execute();                                                    
 }
 
-function updatePotionById($idItem, $effet, $duree)
+function UpdatePotionById($idItem, $effet, $duree)
 {
     global $conn;
     $potion = GetPotionById($idItem);
@@ -52,5 +52,15 @@ function updatePotionById($idItem, $effet, $duree)
     $statement->bindParam(1,$effet, PDO::PARAM_STR);
     $statement->bindParam(2,$duree, PDO::PARAM_STR);
     $statement->bindParam(3,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+function DeletePotionById($idItem)
+{
+    global $conn;
+    $query = "DELETE FROM Potions WHERE idItem=?";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$idItem, PDO::PARAM_INT);
     $statement->execute();
 }

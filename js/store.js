@@ -102,20 +102,6 @@ function DeleteItemConfirm(idItem, alias, sender) {
         });
 }
 
-function ModifyItem(id) {
-    let targetAlias = GetUrlParamVal("alias");
-    let sender = GetPageName();
-    let request = "submit=createModifyItemPopup" + "&idItem=" + id + "&alias=" + targetAlias + "&sender=" + sender;
-    ServerRequest("POST", "../server/httpRequestHandler.php", request,
-        (requete) => {
-            CloseAllPopups();
-            CloseNotifier();
-            InsertHtmlTo(JSON.parse(requete.responseText), "popupReference");
-        }, () => {
-        });
-}
-
-
 //Demande d'ajout d'item dans le panier du joueur
 function AddItemToCart(id) {
     let itemQuantityInput = document.getElementById(GetSiblingContainerId(id, "itemQuantity"));

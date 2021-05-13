@@ -53,7 +53,7 @@ if (count($records) > 0) {
 }
 
 echo "
-        <form action='modify-profile.php' method='POST'>
+        <form>
             <fieldset>
                 <input type='text' id='alias' value='$alias' hidden disabled>
                 
@@ -83,7 +83,11 @@ echo "
                 </label>
                 <input type='password' id='passwordConfirm' name='passwordConfirm' value='$password' onblur='validatePassword()'>
                 <div id='passwordConfirmValidation' style='color:red'></div>
-                <input type='submit' name='submit' value='Enregistrer'>
+                
+                <!-- Modifier -->
+                <div style='grid-column-start: 1; grid-column-end: 3; text-align: right; margin-top: 10px'>
+                    <button class='addToStore' onclick='UpdateProfile()'>Modifier</button>
+                </div>
             </fieldset>
         </form>
     </main>";

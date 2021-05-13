@@ -37,7 +37,7 @@ function AddRessourceStore($name, $quantity, $price, $pictureCode, $type, $descr
     $statement->execute();
 }
 
-function updateRessourceById($idItem, $ressourceDescription)
+function UpdateRessourceById($idItem, $ressourceDescription)
 {
     global $conn;
     $ressource = GetRessourceById($idItem);
@@ -50,5 +50,15 @@ function updateRessourceById($idItem, $ressourceDescription)
     $statement = $conn->prepare($query);
     $statement->bindParam(1,$ressourceDescription, PDO::PARAM_STR);
     $statement->bindParam(2,$idItem, PDO::PARAM_STR);
+    $statement->execute();
+}
+
+function DeleteRessourceById($idItem)
+{
+    global $conn;
+    $query = "DELETE FROM Ressources WHERE idItem=?";
+
+    $statement = $conn->prepare($query);
+    $statement->bindParam(1,$idItem, PDO::PARAM_INT);
     $statement->execute();
 }
